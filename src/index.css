@@ -39,20 +39,25 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* NICE brand tokens */
+    --brand-primary: 146 95% 26%;
+    --brand-primary-muted: 146 35% 92%;
+    --brand-on-primary: 0 0% 100%;
+    --brand-yellow: 57 99% 50%;
+    --brand-on-yellow: 222.2 47.4% 11.2%;
+
+    /* Gradients & shadows */
+    --gradient-brand: linear-gradient(135deg, hsl(var(--brand-primary)), hsl(146 95% 20%));
+    --shadow-elevate: 0 10px 30px -10px hsl(var(--brand-primary) / 0.25);
+    --shadow-glow-brand: 0 0 40px hsl(var(--brand-primary) / 0.35);
   }
 
   .dark {
@@ -100,6 +105,39 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-brand {
+    background-image: var(--gradient-brand);
+  }
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+  .story-link {
+    position: relative;
+    display: inline-block;
+  }
+  .story-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: hsl(var(--brand-primary));
+    transform-origin: bottom right;
+    transform: scaleX(0);
+    transition: transform 300ms ease;
+  }
+  .story-link:hover::after {
+    transform-origin: bottom left;
+    transform: scaleX(1);
   }
 }
