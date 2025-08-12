@@ -6,6 +6,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import MainLayout from "./layouts/MainLayout";
+import Program from "./pages/Program";
+import Speakers from "./pages/Speakers";
+import Location from "./pages/Location";
+import HotelsTravel from "./pages/HotelsTravel";
+import About from "./pages/About";
+import Sponsorships from "./pages/Sponsorships";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +25,16 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Index />} />
+              <Route path="/program" element={<Program />} />
+              <Route path="/speakers" element={<Speakers />} />
+              <Route path="/location" element={<Location />} />
+              <Route path="/hotels-travel" element={<HotelsTravel />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/sponsorships" element={<Sponsorships />} />
+              <Route path="/contact" element={<Contact />} />
+            </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

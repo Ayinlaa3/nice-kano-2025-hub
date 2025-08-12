@@ -8,18 +8,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/nice-logo.svg";
 import heroBridge from "@/assets/hero-bridge.jpg";
 import heroGreen from "@/assets/hero-green-building.jpg";
@@ -81,13 +69,7 @@ const Index = () => {
     []
   );
 
-  function handleContactSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    toast({
-      title: "Message sent",
-      description: "Thanks for reaching out. We will get back to you shortly.",
-    });
-  }
+// Contact form moved to dedicated page
 
   return (
     <>
@@ -104,39 +86,7 @@ const Index = () => {
         <script type="application/ld+json">{JSON.stringify(eventJsonLd)}</script>
       </Helmet>
 
-      {/* Header */}
-      <header className="sticky top-0 z-40 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
-        <div className="container mx-auto flex items-center justify-between py-3">
-          <a href="#top" className="flex items-center gap-3">
-            <img src={logo} alt="NICE logo" className="h-10 w-auto" />
-            <div className="hidden sm:block">
-              <p className="text-sm uppercase tracking-widest text-muted-foreground">
-                Nigerian Institution of Civil Engineers
-              </p>
-              <p className="font-semibold">Kano 2025 Conference & AGM</p>
-            </div>
-          </a>
-          <nav className="hidden md:flex items-center gap-6 text-sm">
-            <a href="#about" className="story-link">About</a>
-            <a href="#theme" className="story-link">Theme</a>
-            <a href="#programs" className="story-link">Programs</a>
-            <a href="#fees" className="story-link">Fees</a>
-            <a href="#sponsors" className="story-link">Sponsors</a>
-            <a href="#travel" className="story-link">Travel</a>
-            <a href="#contact" className="story-link">Contact</a>
-          </nav>
-          <div className="flex items-center gap-3">
-            <Button asChild variant="brand" size="sm" className="hover-scale">
-              <a href={REG_FORM} target="_blank" rel="noreferrer">
-                Register Now
-              </a>
-            </Button>
-            <Button asChild variant="brandSecondary" size="sm" className="hidden md:inline-flex hover-scale">
-              <a href="#sponsors">Sponsor Us</a>
-            </Button>
-          </div>
-        </div>
-      </header>
+{/* Header moved to MainLayout */}
 
       {/* Hero */}
       <section id="top" className="relative">
@@ -250,74 +200,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Fees */}
-        <section id="fees" className="py-16 md:py-20 bg-muted/40">
-          <div className="container mx-auto">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold">Categories of Payment & Fees</h2>
-                <p className="text-muted-foreground mt-2">
-                  Early bird closes <span className="font-semibold">15th September 2025</span>.
-                </p>
-              </div>
-              <div className="rounded-full bg-brandYellow/20 text-brandYellow-foreground px-4 py-2 text-sm ring-1 ring-brandYellow/30 inline-flex items-center gap-2">
-                <CalendarDays className="h-4 w-4" /> Secure your spot early
-              </div>
-            </div>
-
-            <div className="mt-8 overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Category</TableHead>
-                    <TableHead>Early Bird</TableHead>
-                    <TableHead>Late Registration</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {[
-                    { c: "Corporate (Exhibitors & Partners)", e: "TBA", l: "TBA" },
-                    { c: "NICE Members", e: "TBA", l: "TBA" },
-                    { c: "Non-Members", e: "TBA", l: "TBA" },
-                    { c: "Students", e: "TBA", l: "TBA" },
-                  ].map((row) => (
-                    <TableRow key={row.c}>
-                      <TableCell className="font-medium">{row.c}</TableCell>
-                      <TableCell>{row.e}</TableCell>
-                      <TableCell>{row.l}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-
-            <div className="mt-6 grid md:grid-cols-2 gap-6">
-              <Card className="p-6">
-                <h3 className="font-semibold">Payment Details</h3>
-                <div className="mt-3 text-sm">
-                  <p>
-                    <span className="font-medium">Account No:</span> 3482017475
-                  </p>
-                  <p>
-                    <span className="font-medium">Bank:</span> Ecobank Plc
-                  </p>
-                  <p>
-                    <span className="font-medium">Payable to:</span> The Nigerian Institution of Civil Engineers
-                  </p>
-                </div>
-              </Card>
-              <Card className="p-6">
-                <h3 className="font-semibold">Need an Invoice?</h3>
-                <p className="text-sm text-muted-foreground mt-2">
-                  For corporate or group registrations, request an invoice and our team will assist you.
-                </p>
-                <Button asChild variant="brand" className="mt-4 w-max">
-                  <a href="#contact">Contact Finance</a>
-                </Button>
-              </Card>
-            </div>
-          </div>
-        </section>
+{/* Fees moved to dedicated page */}
 
         {/* Sponsors CTA */}
         <section id="sponsors" className="py-16 md:py-20">
@@ -346,114 +229,26 @@ const Index = () => {
               </p>
             </Card>
           </div>
-        </section>
-
-        {/* Accommodation & Travel */}
-        <section id="travel" className="py-16 md:py-20 bg-muted/40">
-          <div className="container mx-auto grid md:grid-cols-2 gap-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Accommodation</h2>
-              <ul className="mt-4 grid gap-3">
-                <li>
-                  <span className="font-medium">Bristol Palace Hotel Kano</span> — High-end, centrally located.
-                </li>
-                <li>
-                  <span className="font-medium">Tahir Guest Palace</span> — Business-friendly with great amenities.
-                </li>
-                <li>
-                  <span className="font-medium">Grand Central Hotel</span> — Comfortable and accessible.
-                </li>
-                <li>
-                  <span className="font-medium">Royal Tropicana Hotel</span> — Convenient and budget-friendly.
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Travel & Venue</h2>
-              <p className="mt-4">
-                Venue: <span className="font-medium">Coronation Hall, Kano Government House</span>.
-              </p>
-              <ul className="mt-3 grid gap-2 list-disc pl-5">
-                <li>Fly into Mallam Aminu Kano International Airport (KAN).</li>
-                <li>Use registered taxis or hotel shuttles for transfers.</li>
-                <li>Allow extra time due to city traffic around peak hours.</li>
-              </ul>
-            </div>
+          {/* Sponsors logo carousel */}
+          <div className="container mx-auto mt-10">
+            <Carousel>
+              <CarouselContent className="items-center">
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <CarouselItem key={i} className="basis-1/2 sm:basis-1/4 lg:basis-1/6">
+                    <img src="/placeholder.svg" alt={`Sponsor logo ${i+1}`} className="h-12 w-auto mx-auto opacity-80" loading="lazy" />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
           </div>
         </section>
 
-        {/* Contact */}
-        <section id="contact" className="container mx-auto py-16 md:py-20">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Contact & Support</h2>
-              <p className="mt-3 text-muted-foreground">
-                We’re here to help with registration, sponsorship, and general inquiries.
-              </p>
-              <div className="mt-6 grid gap-3 text-sm">
-                <p className="flex items-center gap-2"><Mail className="h-4 w-4" /> conference@nicehq.org</p>
-                <p className="flex items-center gap-2"><Phone className="h-4 w-4" /> +234 800 000 0000</p>
-                <p className="flex items-center gap-2"><ExternalLink className="h-4 w-4" /> <a className="story-link" href={REG_FORM} target="_blank" rel="noreferrer">Registration Form</a></p>
-              </div>
-            </div>
-            <Card className="p-6">
-              <form onSubmit={handleContactSubmit} className="grid gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="name">Full Name</Label>
-                  <Input id="name" name="name" placeholder="Your name" required />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" name="email" placeholder="you@example.com" required />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" name="message" placeholder="How can we assist you?" rows={5} required />
-                </div>
-                <div className="flex justify-end gap-3">
-                  <Button type="reset" variant="outline">Reset</Button>
-                  <Button type="submit" variant="brand">Send Message</Button>
-                </div>
-              </form>
-            </Card>
-          </div>
-        </section>
+{/* Travel moved to dedicated page */}
+
+{/* Contact moved to dedicated page */}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t py-10 bg-background">
-        <div className="container mx-auto grid md:grid-cols-4 gap-8">
-          <div>
-            <img src={logo} alt="NICE logo" className="h-10 w-auto" />
-            <p className="text-sm text-muted-foreground mt-3">
-              Sustaining the world’s infrastructure through excellence in civil engineering.
-            </p>
-          </div>
-          <div>
-            <h4 className="font-semibold">Quick Links</h4>
-            <ul className="mt-3 grid gap-2 text-sm">
-              <li><a href="#about" className="story-link">About</a></li>
-              <li><a href="#theme" className="story-link">Theme</a></li>
-              <li><a href="#programs" className="story-link">Programs</a></li>
-              <li><a href="#fees" className="story-link">Fees</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold">Get Involved</h4>
-            <ul className="mt-3 grid gap-2 text-sm">
-              <li><a href="#sponsors" className="story-link">Sponsorship</a></li>
-              <li><a href={REG_FORM} target="_blank" rel="noreferrer" className="story-link">Register</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold">Legal</h4>
-            <ul className="mt-3 grid gap-2 text-sm text-muted-foreground">
-              <li>© {new Date().getFullYear()} NICE</li>
-              <li>All rights reserved.</li>
-            </ul>
-          </div>
-        </div>
-      </footer>
+{/* Footer moved to MainLayout */}
     </>
   );
 };
