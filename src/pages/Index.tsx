@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
 import {
   Carousel,
   CarouselContent,
@@ -35,8 +34,6 @@ const activities = [
 ];
 
 const Index = () => {
-  const { toast } = useToast();
-
   const eventJsonLd = useMemo(
     () => ({
       "@context": "https://schema.org",
