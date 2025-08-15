@@ -12,28 +12,110 @@ import logo from "@/assets/nice-logo.svg";
 import heroBridge from "@/assets/hero-bridge.jpg";
 import heroGreen from "@/assets/hero-green-building.jpg";
 import heroHighway from "@/assets/hero-highway.jpg";
-import { CalendarDays, MapPin, Building2, HardHat, Users, Briefcase, Award, GraduationCap, Handshake, Landmark, Beer, Presentation, PartyPopper, Phone, Mail, ExternalLink } from "lucide-react";
-import { useMemo } from "react";
+import heroConstruction from "@/assets/hero-construction.jpg";
+import heroSustainable from "@/assets/hero-sustainable.jpg";
+import { CalendarDays, MapPin, Building2, HardHat, Users, Briefcase, Award, GraduationCap, Handshake, Landmark, Beer, Presentation, ChevronDown, Mic, Star } from "lucide-react";
+import { useMemo, useState } from "react";
 
 const REG_FORM = "https://forms.gle/HXocP4aGn5Pb1HmR6";
 
 const activities = [
-  { title: "Technical Project Site Visit", icon: Landmark },
-  { title: "Construction Tech Expo", icon: Building2 },
-  { title: "Career Clinic for Graduates", icon: GraduationCap },
-  { title: "National Chairman’s Cocktail", icon: Beer },
-  { title: "Engineering Business Roundtable", icon: Briefcase },
-  { title: "Technical Sessions", icon: Presentation },
-  { title: "Fellowship Conferment & Fellows Roundtable", icon: Award },
-  { title: "Exhibitions", icon: Handshake },
-  { title: "Celebration of Achievers", icon: PartyPopper },
-  { title: "Students and Graduates Programs", icon: Users },
-  { title: "Spouses Programs", icon: Users },
-  { title: "Annual General Meeting", icon: HardHat },
-  { title: "Dinner, Awards, and Cultural Gala", icon: Award },
+  { 
+    title: "Technical Project Site Visit", 
+    icon: Landmark,
+    description: "Guided tours of major civil engineering projects in Kano, showcasing innovative construction techniques and sustainable infrastructure development."
+  },
+  { 
+    title: "Construction Tech Expo", 
+    icon: Building2,
+    description: "Exhibition of cutting-edge construction technologies, materials, and equipment from leading industry players."
+  },
+  { 
+    title: "Career Clinic for Graduates", 
+    icon: GraduationCap,
+    description: "Professional development sessions, CV reviews, and career guidance for young engineers and recent graduates."
+  },
+  { 
+    title: "National Chairman's Cocktail", 
+    icon: Beer,
+    description: "Exclusive networking event hosted by the NICE National Chairman for distinguished members and special guests."
+  },
+  { 
+    title: "Engineering Business Roundtable", 
+    icon: Briefcase,
+    description: "Strategic discussions on business opportunities, partnerships, and economic growth in the civil engineering sector."
+  },
+  { 
+    title: "Technical Sessions", 
+    icon: Presentation,
+    description: "Paper presentations and research findings on innovative construction methods and sustainable infrastructure solutions."
+  },
+  { 
+    title: "Fellowship Conferment & Fellows Roundtable", 
+    icon: Award,
+    description: "Recognition ceremony for new Fellows and strategic discussions among senior engineering professionals."
+  },
+  { 
+    title: "Exhibitions", 
+    icon: Handshake,
+    description: "Trade exhibitions featuring construction companies, consulting firms, and technology providers showcasing their services."
+  },
+  { 
+    title: "Students and Graduates Programs", 
+    icon: Users,
+    description: "Special programs designed for engineering students including competitions, mentorship sessions, and skill development workshops."
+  },
+  { 
+    title: "Spouses Programs", 
+    icon: Users,
+    description: "Cultural tours, craft workshops, and social activities designed for accompanying spouses and family members."
+  },
+  { 
+    title: "Annual General Meeting", 
+    icon: HardHat,
+    description: "Official NICE AGM covering institutional governance, financial reports, and strategic planning for the coming year."
+  },
+  { 
+    title: "Dinner, Awards, and Cultural Gala", 
+    icon: Award,
+    description: "Grand closing ceremony featuring awards presentation, cultural performances, and celebration of engineering excellence."
+  },
+];
+
+const speakers = [
+  {
+    name: "Prof. Adebayo Ogundimu",
+    title: "Keynote Speaker",
+    position: "Director General, Nigerian Building and Road Research Institute",
+    topic: "Sustainable Infrastructure for Nigeria's Future",
+    image: "/placeholder.svg"
+  },
+  {
+    name: "Engr. Dr. Fatima Hassan",
+    title: "Special Guest Speaker",
+    position: "Federal Ministry of Works and Housing",
+    topic: "Policy Framework for Infrastructure Development",
+    image: "/placeholder.svg"
+  },
+  {
+    name: "Prof. Michael Adeyemi",
+    title: "Technical Speaker",
+    position: "University of Lagos",
+    topic: "Innovation in Construction Technology",
+    image: "/placeholder.svg"
+  },
+  {
+    name: "Engr. Sarah Abdullahi",
+    title: "Industry Expert",
+    position: "Managing Director, Northern Construction Ltd",
+    topic: "Public-Private Partnerships in Infrastructure",
+    image: "/placeholder.svg"
+  }
 ];
 
 const Index = () => {
+  const [expandedActivity, setExpandedActivity] = useState<number | null>(null);
+  
   const eventJsonLd = useMemo(
     () => ({
       "@context": "https://schema.org",
@@ -60,7 +142,7 @@ const Index = () => {
         url: "https://nicehq.org",
       },
       url: typeof window !== "undefined" ? window.location.href : undefined,
-      image: [heroBridge, heroGreen, heroHighway],
+      image: [heroBridge, heroGreen, heroHighway, heroConstruction, heroSustainable],
       description:
         "Theme: Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development.",
     }),
@@ -75,7 +157,7 @@ const Index = () => {
         <title>NICE Kano 2025 Conference & AGM | 21–23 Oct 2025</title>
         <meta
           name="description"
-          content="Nigeria’s premier civil engineering conference by NICE. 21–23 Oct 2025, Coronation Hall, Kano. Register and explore sponsorship opportunities."
+          content="Nigeria's premier civil engineering conference by NICE. 21–23 Oct 2025, Coronation Hall, Kano. Register and explore sponsorship opportunities."
         />
         <link
           rel="canonical"
@@ -88,38 +170,38 @@ const Index = () => {
 
       {/* Hero */}
       <section id="top" className="relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/0 to-background/80 pointer-events-none" />
-        <Carousel className="w-full" opts={{ loop: true }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/0 to-background/80 pointer-events-none z-10" />
+        <Carousel className="w-full" opts={{ loop: true, align: "start" }}>
           <CarouselContent>
-            {[heroBridge, heroGreen, heroHighway].map((src, idx) => (
+            {[heroBridge, heroGreen, heroHighway, heroConstruction, heroSustainable].map((src, idx) => (
               <CarouselItem key={idx}>
-                <div className="relative h-[60vh] min-h-[420px] w-full overflow-hidden">
+                <div className="relative h-screen min-h-[600px] w-full overflow-hidden">
                   <img
                     src={src}
                     alt="NICE Kano 2025 hero visual"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                     loading="eager"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 md:p-14 text-left max-w-6xl mx-auto">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 md:p-14 text-left max-w-6xl mx-auto z-20">
                     <div className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand ring-1 ring-brand/20 mb-4">
                       <CalendarDays className="h-4 w-4" /> 21–23 Oct 2025
                       <span className="mx-2">•</span>
                       <MapPin className="h-4 w-4" /> Coronation Hall, Kano Government House
                     </div>
-                    <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold leading-tight animate-enter">
+                    <h1 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in">
                       Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development
                     </h1>
-                    <p className="mt-3 text-muted-foreground max-w-3xl">
+                    <p className="mt-4 text-muted-foreground max-w-3xl text-lg sm:text-xl animate-fade-in delay-150">
                       The 23rd International Civil Engineering Conference and Annual General Meeting of the Nigerian Institution of Civil Engineers (NICE).
                     </p>
-                    <div className="mt-6 flex flex-wrap gap-3">
-                      <Button asChild variant="brand" size="xl" className="hover-scale">
+                    <div className="mt-8 flex flex-wrap gap-4 animate-fade-in delay-300">
+                      <Button asChild variant="brand" size="xl" className="hover-scale transition-all duration-300 hover:shadow-2xl">
                         <a href={REG_FORM} target="_blank" rel="noreferrer">
                           Register Now
                         </a>
                       </Button>
-                      <Button asChild variant="brandSecondary" size="xl" className="hover-scale">
+                      <Button asChild variant="brandSecondary" size="xl" className="hover-scale transition-all duration-300 hover:shadow-lg">
                         <a href="#sponsors">Sponsor Us</a>
                       </Button>
                     </div>
@@ -135,11 +217,11 @@ const Index = () => {
 
       {/* About */}
       <main>
-        <section id="about" className="container mx-auto py-16 md:py-20">
+        <section id="about" className="container mx-auto py-16 md:py-20 animate-fade-in">
           <div className="grid md:grid-cols-12 gap-8 items-start">
             <div className="md:col-span-5">
-              <div className="rounded-xl bg-brand/5 ring-1 ring-brand/10 p-6">
-                <img src={logo} alt="NICE logo" className="h-14 w-auto" />
+              <div className="rounded-xl bg-brand/5 ring-1 ring-brand/10 p-6 transition-all duration-300 hover:shadow-lg hover:bg-brand/10">
+                <img src={logo} alt="NICE logo" className="h-14 w-auto transition-transform duration-300 hover:scale-110" />
                 <p className="mt-4 text-sm text-muted-foreground">
                   The Nigerian Institution of Civil Engineers (NICE) is the premier body for civil engineers in Nigeria, fostering excellence across construction, structural, highway, geotechnics, and water resources engineering.
                 </p>
@@ -148,7 +230,7 @@ const Index = () => {
             <article className="md:col-span-7">
               <h2 className="text-2xl md:text-3xl font-bold">About the Conference</h2>
               <p className="mt-4 leading-relaxed">
-                The NICE 23rd International Civil Engineering Conference & AGM brings together engineers, industry experts, academics, students, and corporate partners for three days of knowledge sharing, innovation, and networking. As Nigeria’s premier civil engineering gathering, the conference catalyzes professional growth and showcases transformative solutions for resilient infrastructure.
+                The NICE 23rd International Civil Engineering Conference & AGM brings together engineers, industry experts, academics, students, and corporate partners for three days of knowledge sharing, innovation, and networking. As Nigeria's premier civil engineering gathering, the conference catalyzes professional growth and showcases transformative solutions for resilient infrastructure.
               </p>
             </article>
           </div>
@@ -160,17 +242,17 @@ const Index = () => {
             <div className="md:col-span-6">
               <h2 className="text-2xl md:text-3xl font-bold">Conference Theme</h2>
               <p className="mt-4">
-                “Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development” speaks to Nigeria’s future—where modern methods, digital tools, and sustainable practices converge to deliver durable, cost-effective, and climate-resilient infrastructure.
+                "Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development" speaks to Nigeria's future—where modern methods, digital tools, and sustainable practices converge to deliver durable, cost-effective, and climate-resilient infrastructure.
               </p>
             </div>
-            <aside className="md:col-span-6">
+            <aside className="md:col-span-6 mt-8 md:mt-0">
               <h3 className="font-semibold">Objectives</h3>
               <ul className="mt-4 grid gap-3 list-disc pl-5">
-                <li>Showcase cutting-edge construction technologies and sustainable practices.</li>
-                <li>Facilitate collaboration among engineers, policymakers, academia, and industry.</li>
-                <li>Highlight case studies and standards for resilient infrastructure delivery.</li>
-                <li>Support career advancement and mentorship for young engineers and students.</li>
-                <li>Strengthen partnerships with sponsors and exhibitors shaping Nigeria’s infrastructure.</li>
+                <li className="transition-colors duration-300 hover:text-brand">Showcase cutting-edge construction technologies and sustainable practices.</li>
+                <li className="transition-colors duration-300 hover:text-brand">Facilitate collaboration among engineers, policymakers, academia, and industry.</li>
+                <li className="transition-colors duration-300 hover:text-brand">Highlight case studies and standards for resilient infrastructure delivery.</li>
+                <li className="transition-colors duration-300 hover:text-brand">Support career advancement and mentorship for young engineers and students.</li>
+                <li className="transition-colors duration-300 hover:text-brand">Strengthen partnerships with sponsors and exhibitors shaping Nigeria's infrastructure.</li>
               </ul>
             </aside>
           </div>
@@ -183,18 +265,73 @@ const Index = () => {
             A rich, multi-track experience designed for learning, collaboration, and celebration.
           </p>
           <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {activities.map(({ title, icon: Icon }) => (
-              <Card key={title} className="p-5 hover:shadow-lg transition-shadow">
+            {activities.map(({ title, icon: Icon, description }, idx) => (
+              <Card 
+                key={title} 
+                className="p-5 hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105 hover:border-brand/20"
+                onClick={() => setExpandedActivity(expandedActivity === idx ? null : idx)}
+              >
                 <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-lg bg-brand/10 ring-1 ring-brand/15 flex items-center justify-center">
+                  <div className="h-10 w-10 rounded-lg bg-brand/10 ring-1 ring-brand/15 flex items-center justify-center transition-colors duration-300 hover:bg-brand/20">
                     <Icon className="h-5 w-5 text-brand" />
                   </div>
-                  <div>
-                    <h4 className="font-medium">{title}</h4>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <h4 className="font-medium">{title}</h4>
+                      <ChevronDown 
+                        className={`h-4 w-4 text-muted-foreground transition-transform duration-300 ${
+                          expandedActivity === idx ? 'rotate-180' : ''
+                        }`} 
+                      />
+                    </div>
+                    <div className={`overflow-hidden transition-all duration-300 ${
+                      expandedActivity === idx ? 'max-h-96 mt-3' : 'max-h-0'
+                    }`}>
+                      <p className="text-sm text-muted-foreground">{description}</p>
+                    </div>
                   </div>
                 </div>
               </Card>
             ))}
+          </div>
+        </section>
+
+        {/* Conference Speakers */}
+        <section id="speakers" className="py-16 md:py-20 bg-muted/40">
+          <div className="container mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold">Conference Speakers</h2>
+              <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
+                Learn from industry leaders, renowned academics, and policy makers shaping Nigeria's infrastructure future.
+              </p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {speakers.map((speaker, idx) => (
+                <Card key={idx} className="p-6 text-center hover:shadow-lg transition-all duration-300 hover:scale-105 group">
+                  <div className="relative mb-4">
+                    <img 
+                      src={speaker.image} 
+                      alt={speaker.name}
+                      className="h-24 w-24 rounded-full mx-auto object-cover ring-2 ring-brand/20 group-hover:ring-brand/40 transition-all duration-300"
+                    />
+                    <div className="absolute -top-2 -right-2 h-8 w-8 rounded-full bg-brand/10 ring-1 ring-brand/20 flex items-center justify-center">
+                      <Mic className="h-4 w-4 text-brand" />
+                    </div>
+                  </div>
+                  <h4 className="font-semibold text-sm mb-1">{speaker.name}</h4>
+                  <p className="text-xs text-brand font-medium mb-2">{speaker.title}</p>
+                  <p className="text-xs text-muted-foreground mb-3">{speaker.position}</p>
+                  <div className="pt-3 border-t border-border">
+                    <p className="text-xs font-medium">{speaker.topic}</p>
+                  </div>
+                </Card>
+              ))}
+            </div>
+            <div className="text-center mt-8">
+              <Button asChild variant="outline" className="hover-scale">
+                <a href="/speakers">View All Speakers</a>
+              </Button>
+            </div>
           </div>
         </section>
 
@@ -206,34 +343,49 @@ const Index = () => {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold">Call for Sponsors & Partners</h2>
               <p className="mt-4">
-                Showcase your brand to Nigeria’s leading civil engineering professionals. Sponsorship unlocks visibility across sessions, exhibition spaces, media, and curated networking opportunities.
+                Showcase your brand to Nigeria's leading civil engineering professionals. Sponsorship unlocks visibility across sessions, exhibition spaces, media, and curated networking opportunities.
               </p>
               <ul className="mt-4 grid gap-2 list-disc pl-5">
-                <li>Premium exposure at the Construction Tech Expo and exhibitions.</li>
-                <li>Speaking and panel opportunities for thought leadership.</li>
-                <li>Branded experiences at high-profile networking events.</li>
+                <li className="transition-colors duration-300 hover:text-brand">Premium exposure at the Construction Tech Expo and exhibitions.</li>
+                <li className="transition-colors duration-300 hover:text-brand">Speaking and panel opportunities for thought leadership.</li>
+                <li className="transition-colors duration-300 hover:text-brand">Branded experiences at high-profile networking events.</li>
               </ul>
               <div className="mt-6 flex gap-3">
-                <Button variant="brand" size="lg">Become a Sponsor</Button>
-                <Button asChild variant="outline" size="lg">
+                <Button variant="brand" size="lg" className="hover-scale transition-all duration-300">Become a Sponsor</Button>
+                <Button asChild variant="outline" size="lg" className="hover-scale transition-all duration-300">
                   <a href="#contact">Request Media Kit</a>
                 </Button>
               </div>
             </div>
-            <Card className="p-6 bg-brand/5 ring-1 ring-brand/10">
-              <h3 className="font-semibold">Who should sponsor?</h3>
-              <p className="text-sm text-muted-foreground mt-2">
-                Construction firms, materials manufacturers, equipment suppliers, tech companies, educational institutions, and development partners.
+            <Card className="p-6 bg-brand/5 ring-1 ring-brand/10 transition-all duration-300 hover:shadow-lg hover:bg-brand/10">
+              <h3 className="font-semibold flex items-center gap-2">
+                <Star className="h-5 w-5 text-brand" />
+                Why Sponsor KANO 2025?
+              </h3>
+              <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+                Sponsoring this premier event offers unmatched visibility and brand positioning before an influential audience of over <span className="font-semibold text-brand">800+ professionals</span>, including:
               </p>
+              <ul className="text-sm text-muted-foreground mt-3 grid gap-1 list-disc pl-4">
+                <li>Top-tier engineers and consultants</li>
+                <li>Federal and state government delegates</li>
+                <li>Private sector construction and consulting firms</li>
+                <li>International partners and NGOs</li>
+                <li>Engineering students and graduates</li>
+              </ul>
             </Card>
           </div>
           {/* Sponsors logo carousel */}
           <div className="container mx-auto mt-10">
-            <Carousel>
+            <Carousel opts={{ loop: true }}>
               <CarouselContent className="items-center">
                 {Array.from({ length: 8 }).map((_, i) => (
                   <CarouselItem key={i} className="basis-1/2 sm:basis-1/4 lg:basis-1/6">
-                    <img src="/placeholder.svg" alt={`Sponsor logo ${i+1}`} className="h-12 w-auto mx-auto opacity-80" loading="lazy" />
+                    <img 
+                      src="/placeholder.svg" 
+                      alt={`Sponsor logo ${i+1}`} 
+                      className="h-12 w-auto mx-auto opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-110" 
+                      loading="lazy" 
+                    />
                   </CarouselItem>
                 ))}
               </CarouselContent>
