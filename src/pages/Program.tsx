@@ -5,16 +5,31 @@ import { Badge } from "@/components/ui/badge";
 
 const schedule = {
   day1: [
-    { time: "09:00 - 10:00", title: "Opening Ceremony", venue: "Coronation Hall", tags: ["Plenary"], desc: "Welcome remarks and keynote." },
-    { time: "10:30 - 12:00", title: "Technical Session I", venue: "Main Auditorium", tags: ["Technical Session"], desc: "Innovations in sustainable construction." },
+    { time: "All Day", title: "Delegates Arrival and On-site Registration", venue: "Coronation Hall", tags: ["Registration"], desc: "Welcome and registration for all conference delegates." },
+    { time: "9:00 AM - 2:00 PM", title: "Technical Project Site Visit and Technical Presentation", venue: "Designated Project Site", tags: ["Site Visit"], desc: "Field visit with technical presentations on project implementation." },
+    { time: "All Day", title: "Kano City Tour", venue: "Various Locations", tags: ["Tourism"], desc: "Paid tour of attractive and iconic places in Kano." },
+    { time: "All Day", title: "Courtesy Visits to Royal Fathers and Senior Civil Engineers", venue: "Various Locations", tags: ["Courtesy"], desc: "Official visits to traditional rulers and senior engineers in Kano." },
+    { time: "3:00 PM - 5:00 PM", title: "ConTech Innovation Hub & NICESA Innovation Clinic", venue: "Coronation Hall Exterior", tags: ["Innovation"], desc: "Technology innovation showcase and clinic sessions." },
+    { time: "6:00 PM", title: "Chairman's Cocktail & Engineering Business Roundtable", venue: "Tahir Guest Palace", tags: ["Networking"], desc: "Evening networking with business discussions." },
   ],
   day2: [
-    { time: "09:00 - 10:30", title: "Workshop: BIM in Practice", venue: "Workshop Room A", tags: ["Workshop"], desc: "Hands-on demonstrations." },
-    { time: "11:00 - 12:30", title: "Networking Brunch", venue: "Exhibition Foyer", tags: ["Networking"], desc: "Industry meet-and-greet." },
+    { time: "8:00 AM", title: "Arrival, Registration & Welcome Tea", venue: "Coronation Hall", tags: ["Registration"], desc: "Morning registration and welcome refreshments." },
+    { time: "All Day", title: "Construction Expo Africa (CEA)", venue: "Coronation Hall Exterior", tags: ["Exhibition"], desc: "Ongoing construction industry exhibition and trade show." },
+    { time: "10:00 AM", title: "Opening Ceremony", venue: "Coronation Hall", tags: ["Ceremony"], desc: "Official conference opening with keynote addresses." },
+    { time: "12:00 NOON", title: "Special Plenary I & II", venue: "Coronation Hall", tags: ["Plenary"], desc: "Key plenary sessions with distinguished speakers." },
+    { time: "1:00 PM", title: "Panel Discussion 1 and Live TV Broadcast", venue: "Coronation Hall", tags: ["Panel", "Media"], desc: "Televised panel discussion on key industry topics." },
+    { time: "2:30 PM - 5:00 PM", title: "ConTech Innovation Hub & NICESA Parallel Workshops", venue: "Coronation Hall", tags: ["Workshop"], desc: "Parallel workshops on construction technology and innovation." },
+    { time: "3:00 PM - 5:00 PM", title: "Young Engineers Career Clinic", venue: "Tahir Guest Palace", tags: ["Career"], desc: "Career guidance and mentorship for young engineers." },
+    { time: "2:30 PM - 5:00 PM", title: "Concurrent Technical Sessions", venue: "Tahir Guest Palace", tags: ["Technical Session"], desc: "Multiple technical sessions running concurrently." },
+    { time: "5:30 PM - 8:00 PM", title: "Fellows Roundtable & Fellowship Conferment", venue: "Tahir Guest Palace", tags: ["Fellowship"], desc: "Fellowship discussions and conferment ceremony." },
   ],
   day3: [
-    { time: "09:00 - 11:00", title: "Fellows Roundtable", venue: "Council Chamber", tags: ["Roundtable"], desc: "Leadership discussions." },
-    { time: "18:00 - 21:00", title: "Dinner, Awards, Cultural Gala", venue: "Banquet Hall", tags: ["Gala"], desc: "Celebration of achievers." },
+    { time: "9:00 AM", title: "Special Plenary Session III & IV", venue: "Coronation Hall", tags: ["Plenary"], desc: "Continuation of special plenary sessions." },
+    { time: "10:00 AM", title: "Panel Discussion 2", venue: "Coronation Hall", tags: ["Panel"], desc: "Second major panel discussion of the conference." },
+    { time: "Ongoing", title: "ConTech Innovation Hub & NICESA Parallel Workshops", venue: "Coronation Hall", tags: ["Workshop"], desc: "Continued innovation workshops and clinics." },
+    { time: "11:30 AM - 2:00 PM", title: "Annual General Meeting (AGM)", venue: "Coronation Hall", tags: ["AGM"], desc: "NICE Annual General Meeting for members." },
+    { time: "2:30 PM - 5:00 PM", title: "Concurrent Technical Sessions Continue", venue: "Tahir Guest Palace", tags: ["Technical Session"], desc: "Final technical sessions of the conference." },
+    { time: "6:00 PM - 9:00 PM", title: "AGM Dinner, Awards & Honours Night, and Cultural Gala", venue: "Tahir Guest Palace", tags: ["Gala", "Awards"], desc: "Closing dinner with awards ceremony and cultural performances." },
   ],
 };
 
