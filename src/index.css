@@ -47,17 +47,35 @@ All colors MUST be HSL.
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* NICE brand tokens */
+    /* NICE brand tokens - Kano Cultural Heritage Colors */
     --brand-primary: 146 95% 26%;
+    --brand-primary-light: 146 85% 35%;
     --brand-primary-muted: 146 35% 92%;
     --brand-on-primary: 0 0% 100%;
-    --brand-yellow: 57 99% 50%;
+    --brand-yellow: 45 100% 50%;
     --brand-on-yellow: 222.2 47.4% 11.2%;
-
-    /* Gradients & shadows */
-    --gradient-brand: linear-gradient(135deg, hsl(var(--brand-primary)), hsl(146 95% 20%));
-    --shadow-elevate: 0 10px 30px -10px hsl(var(--brand-primary) / 0.25);
-    --shadow-glow-brand: 0 0 40px hsl(var(--brand-primary) / 0.35);
+    
+    /* Kano Cultural Colors */
+    --kano-earth: 25 85% 45%;
+    --kano-indigo: 240 100% 30%;
+    --kano-copper: 20 95% 48%;
+    --kano-desert: 35 75% 65%;
+    --kano-heritage: 280 60% 50%;
+    
+    /* Interactive accent colors */
+    --accent-vibrant: 315 100% 60%;
+    --accent-warm: 15 100% 55%;
+    --accent-cool: 190 100% 45%;
+    
+    /* Enhanced gradients & shadows */
+    --gradient-brand: linear-gradient(135deg, hsl(var(--brand-primary)), hsl(var(--brand-primary-light)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--kano-heritage)), hsl(var(--accent-vibrant)));
+    --gradient-cultural: linear-gradient(120deg, hsl(var(--kano-earth)), hsl(var(--kano-copper)));
+    --gradient-professional: linear-gradient(135deg, hsl(var(--kano-indigo)), hsl(var(--brand-primary)));
+    --shadow-elevate: 0 15px 40px -15px hsl(var(--brand-primary) / 0.3);
+    --shadow-glow-brand: 0 0 50px hsl(var(--brand-primary) / 0.4);
+    --shadow-cultural: 0 10px 30px -10px hsl(var(--kano-heritage) / 0.3);
+    --shadow-warm: 0 8px 25px -8px hsl(var(--accent-warm) / 0.35);
   }
 
   .dark {
@@ -117,9 +135,42 @@ All colors MUST be HSL.
   .bg-gradient-brand {
     background-image: var(--gradient-brand);
   }
-  .hover-scale {
-    @apply transition-transform duration-200 hover:scale-105;
+  .bg-gradient-hero {
+    background-image: var(--gradient-hero);
   }
+  .bg-gradient-cultural {
+    background-image: var(--gradient-cultural);
+  }
+  .bg-gradient-professional {
+    background-image: var(--gradient-professional);
+  }
+  
+  .hover-scale {
+    @apply transition-all duration-300 hover:scale-105;
+  }
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--brand-primary)/0.4)];
+  }
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  .cultural-card {
+    @apply transition-all duration-500 hover:scale-105;
+    box-shadow: var(--shadow-cultural);
+  }
+  .cultural-card:hover {
+    box-shadow: var(--shadow-warm);
+  }
+  
+  .interactive-button {
+    @apply transition-all duration-300 hover:scale-110 active:scale-95;
+    box-shadow: var(--shadow-elevate);
+  }
+  .interactive-button:hover {
+    box-shadow: var(--shadow-glow-brand);
+  }
+  
   .story-link {
     position: relative;
     display: inline-block;
@@ -130,14 +181,37 @@ All colors MUST be HSL.
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 2px;
-    background: hsl(var(--brand-primary));
+    height: 3px;
+    background: linear-gradient(90deg, hsl(var(--brand-primary)), hsl(var(--accent-vibrant)));
     transform-origin: bottom right;
     transform: scaleX(0);
-    transition: transform 300ms ease;
+    transition: transform 400ms ease;
   }
   .story-link:hover::after {
     transform-origin: bottom left;
     transform: scaleX(1);
+  }
+  
+  .countdown-glow {
+    background: linear-gradient(135deg, hsl(var(--brand-yellow)), hsl(var(--accent-warm)));
+    box-shadow: 0 0 25px hsl(var(--brand-yellow) / 0.5);
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(var(--brand-primary) / 0.3);
+    }
+    50% { 
+      box-shadow: 0 0 35px hsl(var(--brand-primary) / 0.6);
+    }
+  }
+  
+  .floating-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
   }
 }

@@ -18,15 +18,15 @@ const navItems = [
 export default function MainLayout() {
   return (
     <div className="min-h-dvh flex flex-col">
-      <header className="sticky top-0 z-40 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
+      <header className="sticky top-0 z-40 bg-gradient-to-r from-background/95 via-kano-heritage/5 to-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-brand/20">
         <div className="container mx-auto flex items-center justify-between py-3">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="NICE logo" className="h-10 w-auto" />
+          <Link to="/" className="flex items-center gap-3 hover-scale">
+            <img src={logo} alt="NICE logo" className="h-10 w-auto floating-animation" />
             <div className="hidden sm:block">
               <p className="text-xs uppercase tracking-widest text-muted-foreground">
                 Nigerian Institution of Civil Engineers
               </p>
-              <p className="font-semibold">Kano 2025 Conference & AGM</p>
+              <p className="font-semibold bg-gradient-to-r from-brand to-kano-heritage bg-clip-text text-transparent">Kano 2025 Conference & AGM</p>
             </div>
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -35,7 +35,7 @@ export default function MainLayout() {
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  `story-link ${isActive ? "text-brand font-medium" : ""}`
+                  `story-link transition-colors duration-300 hover:text-vibrant ${isActive ? "text-brand font-medium" : ""}`
                 }
               >
                 {item.label}
@@ -43,12 +43,12 @@ export default function MainLayout() {
             ))}
           </nav>
           <div className="flex items-center gap-3">
-            <Button asChild variant="brand" size="sm" className="hover-scale">
+            <Button asChild variant="vibrant" size="sm" className="pulse-glow">
               <a href={REG_FORM} target="_blank" rel="noreferrer">
                 Register Now
               </a>
             </Button>
-            <Button asChild variant="brandSecondary" size="sm" className="hidden md:inline-flex hover-scale">
+            <Button asChild variant="cultural" size="sm" className="hidden md:inline-flex hover-glow">
               <Link to="/sponsorships">Sponsor Us</Link>
             </Button>
           </div>

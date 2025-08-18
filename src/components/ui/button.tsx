@@ -18,9 +18,12 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        brand: "bg-brand text-brand-foreground hover:bg-brand/90 shadow-md hover:shadow-lg",
-        brandSecondary: "bg-brandYellow text-brandYellow-foreground hover:bg-brandYellow/90 shadow-md hover:shadow-lg",
-        hero: "bg-gradient-brand text-brand-foreground ring-1 ring-primary-foreground/10 hover:opacity-90 shadow-md hover:shadow-lg",
+        brand: "bg-gradient-brand text-brand-foreground hover:scale-105 hover:shadow-[0_0_25px_hsl(var(--brand-primary)/0.5)] transition-all duration-300 interactive-button",
+        brandSecondary: "border-2 border-brand text-brand bg-transparent hover:bg-gradient-brand hover:text-brand-foreground hover:scale-105 transition-all duration-300",
+        hero: "bg-gradient-hero text-white shadow-xl hover:shadow-[0_0_40px_hsl(var(--kano-heritage)/0.6)] hover:scale-105 transition-all duration-300 font-semibold",
+        cultural: "bg-gradient-cultural text-white hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--kano-copper)/0.5)] transition-all duration-300",
+        professional: "bg-gradient-professional text-white hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--kano-indigo)/0.5)] transition-all duration-300",
+        vibrant: "bg-vibrant text-white hover:scale-110 hover:shadow-[0_0_35px_hsl(var(--accent-vibrant)/0.6)] transition-all duration-300 pulse-glow"
       },
       size: {
         default: "h-10 px-4 py-2",

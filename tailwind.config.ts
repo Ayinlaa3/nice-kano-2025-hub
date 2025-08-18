@@ -64,13 +64,24 @@ export default {
 				},
 				brand: {
 					DEFAULT: 'hsl(var(--brand-primary))',
+					light: 'hsl(var(--brand-primary-light))',
 					foreground: 'hsl(var(--brand-on-primary))',
 					muted: 'hsl(var(--brand-primary-muted))'
 				},
 				brandYellow: {
 					DEFAULT: 'hsl(var(--brand-yellow))',
 					foreground: 'hsl(var(--brand-on-yellow))'
-				}
+				},
+				kano: {
+					earth: 'hsl(var(--kano-earth))',
+					indigo: 'hsl(var(--kano-indigo))',
+					copper: 'hsl(var(--kano-copper))',
+					desert: 'hsl(var(--kano-desert))',
+					heritage: 'hsl(var(--kano-heritage))'
+				},
+				vibrant: 'hsl(var(--accent-vibrant))',
+				warm: 'hsl(var(--accent-warm))',
+				cool: 'hsl(var(--accent-cool))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
