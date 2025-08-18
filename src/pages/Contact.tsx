@@ -71,7 +71,7 @@ export default function Contact() {
             </div>
             <div className="flex justify-end gap-3">
               <Button type="reset" variant="outline">Reset</Button>
-              <Button type="submit" variant="brand">Send Message</Button>
+              <Button type="submit" variant="hero">Send Message</Button>
             </div>
           </form>
         </Card>

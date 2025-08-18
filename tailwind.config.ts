@@ -66,18 +66,13 @@ export default {
 					DEFAULT: 'hsl(var(--brand-primary))',
 					light: 'hsl(var(--brand-primary-light))',
 					foreground: 'hsl(var(--brand-on-primary))',
-					muted: 'hsl(var(--brand-primary-muted))'
+					muted: 'hsl(var(--brand-primary-muted))',
+					red: 'hsl(var(--brand-red))',
+					'red-foreground': 'hsl(var(--brand-on-red))'
 				},
 				brandYellow: {
 					DEFAULT: 'hsl(var(--brand-yellow))',
 					foreground: 'hsl(var(--brand-on-yellow))'
-				},
-				kano: {
-					earth: 'hsl(var(--kano-earth))',
-					indigo: 'hsl(var(--kano-indigo))',
-					copper: 'hsl(var(--kano-copper))',
-					desert: 'hsl(var(--kano-desert))',
-					heritage: 'hsl(var(--kano-heritage))'
 				},
 				vibrant: 'hsl(var(--accent-vibrant))',
 				warm: 'hsl(var(--accent-warm))',

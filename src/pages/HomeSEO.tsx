@@ -19,7 +19,7 @@ export default function HomeSEO() {
 // Placeholder export if needed by future enhancements
 export const CTAButtons = () => (
   <div className="mt-6 flex flex-wrap gap-3">
-    <Button variant="brand">Register Now</Button>
-    <Button variant="brandSecondary">Sponsor Us</Button>
+    <Button variant="hero">Register Now</Button>
+    <Button variant="cultural">Sponsor Us</Button>
   </div>
 );

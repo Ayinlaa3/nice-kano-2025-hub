@@ -43,12 +43,12 @@ export default function MainLayout() {
             ))}
           </nav>
           <div className="flex items-center gap-3">
-            <Button asChild variant="vibrant" size="sm" className="pulse-glow">
+            <Button asChild variant="professional" size="sm">
               <a href={REG_FORM} target="_blank" rel="noreferrer">
                 Register Now
               </a>
             </Button>
-            <Button asChild variant="cultural" size="sm" className="hidden md:inline-flex hover-glow">
+            <Button asChild variant="cultural" size="sm" className="hidden md:inline-flex">
               <Link to="/sponsorships">Sponsor Us</Link>
             </Button>
           </div>

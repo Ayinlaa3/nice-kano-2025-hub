@@ -189,13 +189,13 @@ const Index = () => {
                       <CountdownTimer targetDate="2025-10-21T00:00:00" />
                     </div>
                     
-                    <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand/20 to-kano-heritage/20 backdrop-blur-sm px-4 py-2 text-sm font-medium text-white ring-1 ring-white/20 mb-6 hover-glow">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-brand-red/90 backdrop-blur-sm px-4 py-2 text-sm font-medium text-white ring-1 ring-white/20 mb-6">
                       <CalendarDays className="h-5 w-5" /> 21–23 Oct 2025
                       <span className="mx-2 text-brandYellow">•</span>
                       <MapPin className="h-5 w-5" /> Coronation Hall, Kano Government House
                     </div>
                     
-                    <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in bg-gradient-to-r from-white via-brandYellow to-white bg-clip-text text-transparent">
+                    <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
                       Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development
                     </h1>
                     
@@ -203,13 +203,13 @@ const Index = () => {
                       The 23rd International Civil Engineering Conference and Annual General Meeting of the Nigerian Institution of Civil Engineers (NICE).
                     </p>
                     
-                    <div className="mt-8 flex flex-wrap gap-4 animate-fade-in delay-300">
-                      <Button asChild variant="hero" size="xl" className="floating-animation">
+                    <div className="mt-8 flex flex-wrap gap-4">
+                      <Button asChild variant="hero" size="xl">
                         <a href={REG_FORM} target="_blank" rel="noreferrer">
                           Register Now
                         </a>
                       </Button>
-                      <Button asChild variant="cultural" size="xl" className="hover-glow">
+                      <Button asChild variant="cultural" size="xl">
                         <a href="#sponsors">Sponsor Us</a>
                       </Button>
                     </div>
@@ -245,7 +245,7 @@ const Index = () => {
         </section>
 
         {/* Theme & Objectives */}
-        <section id="theme" className="py-16 md:py-20 bg-gradient-to-br from-kano-desert/10 via-brand/5 to-kano-heritage/10">
+        <section id="theme" className="py-16 md:py-20 bg-brand/5">
           <div className="container mx-auto grid md:grid-cols-12 gap-8">
             <div className="md:col-span-6">
               <h2 className="text-2xl md:text-3xl font-bold">Conference Theme</h2>
@@ -305,7 +305,7 @@ const Index = () => {
         </section>
 
         {/* Conference Speakers */}
-        <section id="speakers" className="py-16 md:py-20 bg-gradient-to-br from-kano-indigo/5 via-brand/10 to-kano-copper/10">
+        <section id="speakers" className="py-16 md:py-20 bg-brandYellow/10">
           <div className="container mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold">Conference Speakers</h2>
@@ -315,14 +315,14 @@ const Index = () => {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {speakers.map((speaker, idx) => (
-                <Card key={idx} className="p-6 text-center cultural-card group border-t-4 border-t-kano-copper">
+                <Card key={idx} className="p-6 text-center cultural-card group border-t-4 border-t-brand-red">
                   <div className="relative mb-4">
                     <img 
                       src={speaker.image} 
                       alt={speaker.name}
-                      className="h-24 w-24 rounded-full mx-auto object-cover ring-4 ring-gradient-to-r ring-from-brand ring-to-vibrant group-hover:ring-from-vibrant group-hover:ring-to-kano-heritage transition-all duration-300"
+                      className="h-24 w-24 rounded-full mx-auto object-cover ring-4 ring-brand group-hover:ring-brandYellow transition-all duration-300"
                     />
-                    <div className="absolute -top-2 -right-2 h-8 w-8 rounded-full bg-gradient-to-br from-brand to-vibrant ring-2 ring-white flex items-center justify-center floating-animation">
+                    <div className="absolute -top-2 -right-2 h-8 w-8 rounded-full bg-brand-red ring-2 ring-white flex items-center justify-center">
                       <Mic className="h-4 w-4 text-white" />
                     </div>
                   </div>
@@ -336,7 +336,7 @@ const Index = () => {
               ))}
             </div>
             <div className="text-center mt-8">
-              <Button asChild variant="outline" className="hover-scale">
+              <Button asChild variant="outline">
                 <a href="/speakers">View All Speakers</a>
               </Button>
             </div>
@@ -359,8 +359,8 @@ const Index = () => {
                 <li className="transition-colors duration-300 hover:text-brand">Branded experiences at high-profile networking events.</li>
               </ul>
               <div className="mt-6 flex gap-3">
-                <Button variant="professional" size="lg" className="hover-glow">Become a Sponsor</Button>
-                <Button asChild variant="cultural" size="lg" className="hover-scale">
+                <Button variant="professional" size="lg">Become a Sponsor</Button>
+                <Button asChild variant="cultural" size="lg">
                   <a href="#contact">Request Media Kit</a>
                 </Button>
               </div>

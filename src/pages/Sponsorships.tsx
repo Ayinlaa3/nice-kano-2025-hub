@@ -212,7 +212,7 @@ export default function Sponsorships() {
                 ))}
               </ul>
               <Button 
-                variant="brand" 
+                variant="hero" 
                 className="w-full"
                 onClick={() => toast({ 
                   title: `${tier.name} Sponsorship`, 
@@ -327,7 +327,7 @@ export default function Sponsorships() {
             </div>
           </div>
           <Button 
-            variant="brand" 
+            variant="hero" 
             className="w-full"
             onClick={() => toast({ 
               title: "Contact Information", 
