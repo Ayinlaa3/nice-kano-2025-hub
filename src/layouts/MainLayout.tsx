@@ -9,6 +9,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const REG_FORM = "https://forms.gle/HXocP4aGn5Pb1HmR6";
 
@@ -30,14 +33,64 @@ const navigationGroups = [
   {
     label: "About",
     items: [
-      { to: "/about", label: "About NICE", description: "Learn about our institution" },
+      { to: "/about", label: "About KANO 2025", description: "Learn about our conference" },
       { to: "/sponsorships", label: "Sponsorships", description: "Partnership opportunities" },
-      { to: "/contact", label: "Contact", description: "Get in touch with us" },
     ]
   }
 ];
 
 export default function MainLayout() {
+  const isMobile = useIsMobile();
+
+  const MobileMenu = () => (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="ghost" size="sm" className="md:hidden">
+          <Menu className="h-5 w-5" />
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="left" className="w-80">
+        <SheetHeader>
+          <SheetTitle className="text-left">Menu</SheetTitle>
+        </SheetHeader>
+        <div className="flex flex-col gap-4 mt-6">
+          <NavLink 
+            to="/" 
+            className={({ isActive }) =>
+              `px-3 py-2 rounded-md transition-colors ${isActive ? "text-brand-primary font-medium bg-brand-primary/5" : "text-foreground hover:text-brand-primary"}`
+            }
+          >
+            Home
+          </NavLink>
+          
+          {navigationGroups.map((group) => (
+            <div key={group.label} className="space-y-2">
+              <h4 className="font-semibold text-brand-primary text-sm uppercase tracking-wide">{group.label}</h4>
+              {group.items.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className="block px-3 py-2 text-sm text-muted-foreground hover:text-brand-primary hover:bg-brand-primary/5 rounded-md transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          ))}
+          
+          <div className="border-t pt-4">
+            <Link
+              to="/contact"
+              className="block px-3 py-2 text-sm text-muted-foreground hover:text-brand-primary hover:bg-brand-primary/5 rounded-md transition-colors"
+            >
+              Contact
+            </Link>
+          </div>
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+
   return (
     <div className="min-h-dvh flex flex-col">
       <header className="sticky top-0 z-40 bg-gradient-to-r from-brand-primary/10 via-brand-yellow/5 to-brand-red/10 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-brand-primary/30 shadow-lg">
@@ -45,9 +98,10 @@ export default function MainLayout() {
           <Link to="/" className="flex items-center gap-3 transition-transform duration-200 hover:scale-105">
             <img src={logo} alt="NICE logo" className="h-10 w-auto" />
             <div className="hidden sm:block">
-              <p className="text-xs uppercase tracking-widest text-muted-foreground">
+              <p className="text-xs font-old-english tracking-wider text-muted-foreground">
                 Nigerian Institution of Civil Engineers
               </p>
+              <p className="text-xs text-brand-gold/80 tracking-wide">23rd International Conference</p>
               <p className="font-semibold bg-gradient-to-r from-brand-primary to-brand-red bg-clip-text text-transparent">Kano 2025 Conference & AGM</p>
             </div>
           </Link>
@@ -88,10 +142,24 @@ export default function MainLayout() {
                     </NavigationMenuContent>
                   </NavigationMenuItem>
                 ))}
+                
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <NavLink 
+                      to="/contact" 
+                      className={({ isActive }) =>
+                        `px-3 py-2 rounded-md transition-all duration-200 hover:bg-brand-primary/10 ${isActive ? "text-brand-primary font-medium bg-brand-primary/5" : "text-foreground hover:text-brand-primary"}`
+                      }
+                    >
+                      Contact
+                    </NavLink>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
           </div>
           <div className="flex items-center gap-3">
+            <MobileMenu />
             <Button asChild variant="professional" size="sm">
               <a href={REG_FORM} target="_blank" rel="noreferrer">
                 Register Now
@@ -108,50 +176,51 @@ export default function MainLayout() {
         <Outlet />
       </main>
 
-      <footer className="border-t border-brand-primary/20 py-12 bg-gradient-to-br from-brand-primary/5 via-background to-brand-yellow/5">
+      <footer className="border-t border-brand-primary/20 py-12 bg-brand-primary text-white">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">
                 <img src={logo} alt="NICE logo" className="h-12 w-auto" />
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                  <p className="text-xs font-old-english tracking-wider text-white/80">
                     Nigerian Institution of Civil Engineers
                   </p>
-                  <p className="font-semibold bg-gradient-to-r from-brand-primary to-brand-red bg-clip-text text-transparent">
+                  <p className="text-xs text-brand-gold tracking-wide">23rd International Conference</p>
+                  <p className="font-semibold text-white">
                     Kano 2025 Conference & AGM
                   </p>
                 </div>
               </div>
-              <p className="text-sm text-muted-foreground max-w-md">
+              <p className="text-sm text-white/70 max-w-md">
                 Sustaining the world's infrastructure through excellence in civil engineering. Join us in Kano for an inspiring conference focused on innovation and sustainability.
               </p>
             </div>
             
             <div>
-              <h4 className="font-semibold text-brand-primary mb-4 border-b border-brand-primary/20 pb-2">Event Information</h4>
+              <h4 className="font-semibold text-white mb-4 border-b border-white/20 pb-2">Event Information</h4>
               <ul className="grid gap-3 text-sm">
                 <li>
-                  <Link to="/program" className="flex items-center gap-2 text-muted-foreground hover:text-brand-primary transition-colors group">
-                    <span className="w-1 h-1 bg-brand-yellow rounded-full group-hover:scale-150 transition-transform"></span>
+                  <Link to="/program" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
+                    <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
                     Program Schedule
                   </Link>
                 </li>
                 <li>
-                  <Link to="/speakers" className="flex items-center gap-2 text-muted-foreground hover:text-brand-primary transition-colors group">
-                    <span className="w-1 h-1 bg-brand-yellow rounded-full group-hover:scale-150 transition-transform"></span>
+                  <Link to="/speakers" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
+                    <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
                     Featured Speakers
                   </Link>
                 </li>
                 <li>
-                  <Link to="/location" className="flex items-center gap-2 text-muted-foreground hover:text-brand-primary transition-colors group">
-                    <span className="w-1 h-1 bg-brand-yellow rounded-full group-hover:scale-150 transition-transform"></span>
+                  <Link to="/location" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
+                    <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
                     Venue & Location
                   </Link>
                 </li>
                 <li>
-                  <Link to="/hotels-travel" className="flex items-center gap-2 text-muted-foreground hover:text-brand-primary transition-colors group">
-                    <span className="w-1 h-1 bg-brand-yellow rounded-full group-hover:scale-150 transition-transform"></span>
+                  <Link to="/hotels-travel" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
+                    <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
                     Hotels & Travel
                   </Link>
                 </li>
@@ -159,29 +228,29 @@ export default function MainLayout() {
             </div>
             
             <div>
-              <h4 className="font-semibold text-brand-primary mb-4 border-b border-brand-primary/20 pb-2">Get Involved</h4>
+              <h4 className="font-semibold text-white mb-4 border-b border-white/20 pb-2">Get Involved</h4>
               <ul className="grid gap-3 text-sm">
                 <li>
-                  <a href={REG_FORM} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-brand-red transition-colors group">
-                    <span className="w-1 h-1 bg-brand-red rounded-full group-hover:scale-150 transition-transform"></span>
+                  <a href={REG_FORM} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
+                    <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
                     Register Now
                   </a>
                 </li>
                 <li>
-                  <Link to="/sponsorships" className="flex items-center gap-2 text-muted-foreground hover:text-brand-red transition-colors group">
-                    <span className="w-1 h-1 bg-brand-red rounded-full group-hover:scale-150 transition-transform"></span>
+                  <Link to="/sponsorships" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
+                    <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
                     Become a Sponsor
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" className="flex items-center gap-2 text-muted-foreground hover:text-brand-red transition-colors group">
-                    <span className="w-1 h-1 bg-brand-red rounded-full group-hover:scale-150 transition-transform"></span>
-                    About NICE
+                  <Link to="/about" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
+                    <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
+                    About KANO 2025
                   </Link>
                 </li>
                 <li>
-                  <Link to="/contact" className="flex items-center gap-2 text-muted-foreground hover:text-brand-red transition-colors group">
-                    <span className="w-1 h-1 bg-brand-red rounded-full group-hover:scale-150 transition-transform"></span>
+                  <Link to="/contact" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
+                    <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
                     Contact Us
                   </Link>
                 </li>
@@ -189,15 +258,15 @@ export default function MainLayout() {
             </div>
           </div>
           
-          <div className="border-t border-brand-primary/20 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-sm text-muted-foreground">
+          <div className="border-t border-white/20 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-sm text-white/70">
               © {new Date().getFullYear()} Nigerian Institution of Civil Engineers. All rights reserved.
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-xs text-muted-foreground">Follow the conference:</span>
+              <span className="text-xs text-white/70">Follow the conference:</span>
               <div className="flex gap-2">
-                <div className="w-2 h-2 bg-brand-primary rounded-full animate-pulse"></div>
-                <div className="w-2 h-2 bg-brand-yellow rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                <div className="w-2 h-2 bg-brand-gold rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-white rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
                 <div className="w-2 h-2 bg-brand-red rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
               </div>
             </div>
