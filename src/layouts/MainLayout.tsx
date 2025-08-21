@@ -1,47 +1,96 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from "@/assets/nice-logo.svg";
 import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const REG_FORM = "https://forms.gle/HXocP4aGn5Pb1HmR6";
 
-const navItems = [
-  { to: "/", label: "Home" },
-  { to: "/program", label: "Program" },
-  { to: "/speakers", label: "Speakers" },
-  { to: "/location", label: "Location" },
-  { to: "/hotels-travel", label: "Hotels & Travel" },
-  { to: "/about", label: "About" },
-  { to: "/sponsorships", label: "Sponsorships" },
-  { to: "/contact", label: "Contact" },
+const navigationGroups = [
+  {
+    label: "Event Info",
+    items: [
+      { to: "/program", label: "Program", description: "Conference schedule and sessions" },
+      { to: "/speakers", label: "Speakers", description: "Featured speakers and presenters" },
+      { to: "/location", label: "Location", description: "Venue details and directions" },
+    ]
+  },
+  {
+    label: "Attendance",
+    items: [
+      { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
+    ]
+  },
+  {
+    label: "About",
+    items: [
+      { to: "/about", label: "About NICE", description: "Learn about our institution" },
+      { to: "/sponsorships", label: "Sponsorships", description: "Partnership opportunities" },
+      { to: "/contact", label: "Contact", description: "Get in touch with us" },
+    ]
+  }
 ];
 
 export default function MainLayout() {
   return (
     <div className="min-h-dvh flex flex-col">
-      <header className="sticky top-0 z-40 bg-gradient-to-r from-background/95 via-kano-heritage/5 to-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-brand/20">
+      <header className="sticky top-0 z-40 bg-gradient-to-r from-brand-primary/10 via-brand-yellow/5 to-brand-red/10 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-brand-primary/30 shadow-lg">
         <div className="container mx-auto flex items-center justify-between py-3">
-          <Link to="/" className="flex items-center gap-3 hover-scale">
-            <img src={logo} alt="NICE logo" className="h-10 w-auto floating-animation" />
+          <Link to="/" className="flex items-center gap-3 transition-transform duration-200 hover:scale-105">
+            <img src={logo} alt="NICE logo" className="h-10 w-auto" />
             <div className="hidden sm:block">
               <p className="text-xs uppercase tracking-widest text-muted-foreground">
                 Nigerian Institution of Civil Engineers
               </p>
-              <p className="font-semibold bg-gradient-to-r from-brand to-kano-heritage bg-clip-text text-transparent">Kano 2025 Conference & AGM</p>
+              <p className="font-semibold bg-gradient-to-r from-brand-primary to-brand-red bg-clip-text text-transparent">Kano 2025 Conference & AGM</p>
             </div>
           </Link>
-          <nav className="hidden md:flex items-center gap-6 text-sm">
-            {navItems.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) =>
-                  `story-link transition-colors duration-300 hover:text-vibrant ${isActive ? "text-brand font-medium" : ""}`
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
-          </nav>
+          
+          <div className="hidden md:flex items-center gap-4">
+            <NavLink 
+              to="/" 
+              className={({ isActive }) =>
+                `relative px-3 py-2 rounded-md transition-all duration-200 hover:bg-brand-primary/10 ${isActive ? "text-brand-primary font-medium bg-brand-primary/5" : "text-foreground hover:text-brand-primary"}`
+              }
+            >
+              Home
+            </NavLink>
+            
+            <NavigationMenu>
+              <NavigationMenuList>
+                {navigationGroups.map((group) => (
+                  <NavigationMenuItem key={group.label}>
+                    <NavigationMenuTrigger className="text-foreground hover:text-brand-primary hover:bg-brand-primary/10 data-[state=open]:bg-brand-primary/10 data-[state=open]:text-brand-primary">
+                      {group.label}
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <div className="grid gap-3 p-4 w-[400px] bg-card border border-brand-primary/20 shadow-xl">
+                        {group.items.map((item) => (
+                          <NavigationMenuLink key={item.to} asChild>
+                            <Link
+                              to={item.to}
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-brand-primary/10 hover:text-brand-primary focus:bg-brand-primary/10 focus:text-brand-primary group"
+                            >
+                              <div className="text-sm font-medium leading-none group-hover:text-brand-primary">{item.label}</div>
+                              <p className="line-clamp-2 text-xs leading-snug text-muted-foreground group-hover:text-brand-primary/70">
+                                {item.description}
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        ))}
+                      </div>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
           <div className="flex items-center gap-3">
             <Button asChild variant="professional" size="sm">
               <a href={REG_FORM} target="_blank" rel="noreferrer">
@@ -59,37 +108,99 @@ export default function MainLayout() {
         <Outlet />
       </main>
 
-      <footer className="border-t py-10 bg-background">
-        <div className="container mx-auto grid md:grid-cols-4 gap-8">
-          <div>
-            <img src={logo} alt="NICE logo" className="h-10 w-auto" />
-            <p className="text-sm text-muted-foreground mt-3">
-              Sustaining the world’s infrastructure through excellence in civil engineering.
-            </p>
+      <footer className="border-t border-brand-primary/20 py-12 bg-gradient-to-br from-brand-primary/5 via-background to-brand-yellow/5">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-3 mb-4">
+                <img src={logo} alt="NICE logo" className="h-12 w-auto" />
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                    Nigerian Institution of Civil Engineers
+                  </p>
+                  <p className="font-semibold bg-gradient-to-r from-brand-primary to-brand-red bg-clip-text text-transparent">
+                    Kano 2025 Conference & AGM
+                  </p>
+                </div>
+              </div>
+              <p className="text-sm text-muted-foreground max-w-md">
+                Sustaining the world's infrastructure through excellence in civil engineering. Join us in Kano for an inspiring conference focused on innovation and sustainability.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold text-brand-primary mb-4 border-b border-brand-primary/20 pb-2">Event Information</h4>
+              <ul className="grid gap-3 text-sm">
+                <li>
+                  <Link to="/program" className="flex items-center gap-2 text-muted-foreground hover:text-brand-primary transition-colors group">
+                    <span className="w-1 h-1 bg-brand-yellow rounded-full group-hover:scale-150 transition-transform"></span>
+                    Program Schedule
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/speakers" className="flex items-center gap-2 text-muted-foreground hover:text-brand-primary transition-colors group">
+                    <span className="w-1 h-1 bg-brand-yellow rounded-full group-hover:scale-150 transition-transform"></span>
+                    Featured Speakers
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/location" className="flex items-center gap-2 text-muted-foreground hover:text-brand-primary transition-colors group">
+                    <span className="w-1 h-1 bg-brand-yellow rounded-full group-hover:scale-150 transition-transform"></span>
+                    Venue & Location
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/hotels-travel" className="flex items-center gap-2 text-muted-foreground hover:text-brand-primary transition-colors group">
+                    <span className="w-1 h-1 bg-brand-yellow rounded-full group-hover:scale-150 transition-transform"></span>
+                    Hotels & Travel
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold text-brand-primary mb-4 border-b border-brand-primary/20 pb-2">Get Involved</h4>
+              <ul className="grid gap-3 text-sm">
+                <li>
+                  <a href={REG_FORM} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-brand-red transition-colors group">
+                    <span className="w-1 h-1 bg-brand-red rounded-full group-hover:scale-150 transition-transform"></span>
+                    Register Now
+                  </a>
+                </li>
+                <li>
+                  <Link to="/sponsorships" className="flex items-center gap-2 text-muted-foreground hover:text-brand-red transition-colors group">
+                    <span className="w-1 h-1 bg-brand-red rounded-full group-hover:scale-150 transition-transform"></span>
+                    Become a Sponsor
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="flex items-center gap-2 text-muted-foreground hover:text-brand-red transition-colors group">
+                    <span className="w-1 h-1 bg-brand-red rounded-full group-hover:scale-150 transition-transform"></span>
+                    About NICE
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="flex items-center gap-2 text-muted-foreground hover:text-brand-red transition-colors group">
+                    <span className="w-1 h-1 bg-brand-red rounded-full group-hover:scale-150 transition-transform"></span>
+                    Contact Us
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h4 className="font-semibold">Quick Links</h4>
-            <ul className="mt-3 grid gap-2 text-sm">
-              <li><Link to="/about" className="story-link">About</Link></li>
-              <li><Link to="/program" className="story-link">Program</Link></li>
-              <li><Link to="/sponsorships" className="story-link">Sponsorships</Link></li>
-              <li><a href={REG_FORM} target="_blank" rel="noreferrer" className="story-link">Register</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold">Location</h4>
-            <ul className="mt-3 grid gap-2 text-sm">
-              <li>
-                <Link to="/location" className="story-link">Coronation Hall, Kano Government House</Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold">Legal</h4>
-            <ul className="mt-3 grid gap-2 text-sm text-muted-foreground">
-              <li>© {new Date().getFullYear()} NICE</li>
-              <li>All rights reserved.</li>
-            </ul>
+          
+          <div className="border-t border-brand-primary/20 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} Nigerian Institution of Civil Engineers. All rights reserved.
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="text-xs text-muted-foreground">Follow the conference:</span>
+              <div className="flex gap-2">
+                <div className="w-2 h-2 bg-brand-primary rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-brand-yellow rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                <div className="w-2 h-2 bg-brand-red rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
