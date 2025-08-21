@@ -86,6 +86,7 @@ export default {
 			fontFamily: {
 				display: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
 				body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				'old-english': ['UnifrakturMaguntia', 'serif'],
 			},
 			keyframes: {
 				'accordion-down': {
