@@ -98,8 +98,8 @@ export default function MainLayout() {
           <Link to="/" className="flex items-center gap-3 transition-transform duration-200 hover:scale-105">
             <img src={logo} alt="NICE logo" className="h-10 w-auto" />
             <div className="hidden sm:block">
-              <p className="text-xs font-old-english tracking-wider text-muted-foreground">
-                Nigerian Institution of Civil Engineers
+              <p className="text-xs font-old-english tracking-wider text-muted-foreground uppercase">
+                NIGERIAN INSTITUTION OF CIVIL ENGINEERS
               </p>
               <p className="text-xs text-brand-gold/80 tracking-wide">23rd International Conference</p>
               <p className="font-semibold bg-gradient-to-r from-brand-primary to-brand-red bg-clip-text text-transparent">Kano 2025 Conference & AGM</p>
@@ -176,15 +176,15 @@ export default function MainLayout() {
         <Outlet />
       </main>
 
-      <footer className="border-t border-brand-primary/20 py-12 bg-brand-primary text-white">
+      <footer className="border-t border-brand-green/20 py-12 bg-brand-green text-white">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">
                 <img src={logo} alt="NICE logo" className="h-12 w-auto" />
                 <div>
-                  <p className="text-xs font-old-english tracking-wider text-white/80">
-                    Nigerian Institution of Civil Engineers
+                  <p className="text-xs font-old-english tracking-wider text-white/80 uppercase">
+                    NIGERIAN INSTITUTION OF CIVIL ENGINEERS
                   </p>
                   <p className="text-xs text-brand-gold tracking-wide">23rd International Conference</p>
                   <p className="font-semibold text-white">

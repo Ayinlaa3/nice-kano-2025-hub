@@ -64,15 +64,16 @@ export default {
 				},
 				brand: {
 					DEFAULT: 'hsl(var(--brand-primary))',
+					primary: 'hsl(var(--brand-primary))',
+					green: 'hsl(var(--brand-primary))',
 					light: 'hsl(var(--brand-primary-light))',
 					foreground: 'hsl(var(--brand-on-primary))',
 					muted: 'hsl(var(--brand-primary-muted))',
 					red: 'hsl(var(--brand-red))',
-					'red-foreground': 'hsl(var(--brand-on-red))'
-				},
-				brandYellow: {
-					DEFAULT: 'hsl(var(--brand-yellow))',
-					foreground: 'hsl(var(--brand-on-yellow))'
+					'red-foreground': 'hsl(var(--brand-on-red))',
+					gold: 'hsl(var(--brand-yellow))',
+					yellow: 'hsl(var(--brand-yellow))',
+					'gold-foreground': 'hsl(var(--brand-on-yellow))'
 				},
 				vibrant: 'hsl(var(--accent-vibrant))',
 				warm: 'hsl(var(--accent-warm))',
