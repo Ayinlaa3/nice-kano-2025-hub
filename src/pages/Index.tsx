@@ -16,7 +16,8 @@ import heroConstruction from "@/assets/hero-construction.jpg";
 import heroSustainable from "@/assets/hero-sustainable.jpg";
 import { CalendarDays, MapPin, Building2, HardHat, Users, Briefcase, Award, GraduationCap, Handshake, Landmark, Beer, Presentation, ChevronDown, Mic, Star } from "lucide-react";
 import { useMemo, useState } from "react";
-import { CountdownTimer } from "@/components/CountdownTimer";
+import Hero from "@/components/Hero";
+
 
 
 
@@ -171,99 +172,7 @@ const Index = () => {
 
 {/* Header moved to MainLayout */}
 
-      {/* Hero */}
-<section id="top" className="relative">
-  <Carousel
-    className="w-full"
-    opts={{ loop: true, align: "start" }}
-    plugins={[
-      // enable autoplay every 6s
-      (slider) => {
-        let timeout: NodeJS.Timeout
-        let run = () => {
-          timeout = setTimeout(() => {
-            slider.next()
-          }, 6000) // 6s interval
-        }
-        slider.on("created", run)
-        slider.on("destroyed", () => clearTimeout(timeout))
-        slider.on("animationEnded", run)
-        slider.on("updated", run)
-      },
-    ]}
-  >
-    <CarouselContent>
-      {[heroBridge, heroGreen, heroHighway, heroConstruction, heroSustainable].map((src, idx) => (
-        <CarouselItem key={idx}>
-          <div className="relative h-screen min-h-[600px] w-full overflow-hidden">
-            {/* Background image */}
-            <img
-              src={src}
-              alt="NICE Kano 2025 hero visual"
-              className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-              loading="eager"
-            />
-
-            {/* Dark overlay BEHIND content */}
-            <div className="absolute inset-0 bg-black/50 z-10" />
-
-            {/* Hero content ABOVE overlay */}
-            <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-8 md:px-14 py-10 text-left max-w-6xl mx-auto z-20">
-              {/* Countdown */}
-              <div className="mb-6 max-w-sm animate-fade-in">
-                <CountdownTimer targetDate="2025-10-21T00:00:00" />
-              </div>
-
-              {/* Date & Venue pill */}
-              <div className="inline-flex items-center gap-2 rounded-full bg-brand-red/95 backdrop-blur-sm px-4 py-2 text-xs sm:text-sm font-semibold text-white ring-1 ring-white/20 mb-6">
-                <CalendarDays className="h-5 w-5" /> 21–23 Oct 2025
-                <span className="mx-2 text-brand-yellow">•</span>
-                <MapPin className="h-5 w-5" /> Coronation Hall, Kano Government House
-              </div>
-
-              {/* Main Heading */}
-              <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white drop-shadow-2xl">
-                Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development
-              </h1>
-
-              {/* Subheading */}
-              <p className="mt-6 text-white/95 max-w-3xl text-base sm:text-lg md:text-xl font-medium animate-fade-in delay-150">
-                The 23rd International Civil Engineering Conference and Annual General Meeting of the Nigerian Institution of Civil Engineers (NICE).
-              </p>
-
-              {/* CTA buttons */}
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Button
-                  asChild
-                  variant="hero"
-                  size="xl"
-                  className="font-bold shadow-lg shadow-black/40"
-                >
-                  <a href={REG_FORM} target="_blank" rel="noreferrer">
-                    Register Now
-                  </a>
-                </Button>
-                <Button
-                  asChild
-                  variant="cultural"
-                  size="xl"
-                  className="font-bold shadow-lg shadow-black/40"
-                >
-                  <a href="#sponsors">Sponsor Us</a>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </CarouselItem>
-      ))}
-    </CarouselContent>
-
-    {/* Nav arrows only on desktop */}
-    <CarouselPrevious className="hidden sm:flex bg-black/50 text-white hover:bg-black/70 z-30" />
-    <CarouselNext className="hidden sm:flex bg-black/50 text-white hover:bg-black/70 z-30" />
-  </Carousel>
-</section>
-
+<Hero />
 
       {/* About */}
       <main>
