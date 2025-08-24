@@ -45,8 +45,8 @@ export default function MainLayout() {
   const MobileMenu = () => (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="sm" className="md:hidden">
-          <Menu className="h-10 w-10" />
+        <Button variant="ghost" className="md:hidden p-2">
+          <Menu className="h-!17 w-!17" />
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-80">
@@ -98,11 +98,11 @@ export default function MainLayout() {
           <Link to="/" className="flex items-center gap-3 transition-transform duration-200 hover:scale-105">
             <img src={logo} alt="NICE logo" className="h-14 w-auto" />
             <div>
-  <h1 className="font-old-english text-brand-primary text-lg sm:text-xl md:text-2xl">
+  <h1 className="font-old-english text-brand-primary text-xl sm:text-xl md:text-2xl">
     Nigerian Institution of Civil Engineers
   </h1>
               <p className="font-semibold bg-gradient-to-l tracking-wide from-brand-yellow to-brand-red bg-clip-text text-transparent">
-  <span className="sm:hidden">KANO 2025</span> 
+  <span className="sm:hidden">- KANO 2025</span> 
   <span className="hidden sm:inline">23rd International Conference - KANO 2025</span>
 </p>
 </div>
