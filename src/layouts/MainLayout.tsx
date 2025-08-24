@@ -46,7 +46,7 @@ export default function MainLayout() {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" className="md:hidden p-2">
-          <Menu className="h-!17 w-!17" />
+          <Menu className="h-7 w-7" />
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-80">
