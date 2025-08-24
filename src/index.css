@@ -1,3 +1,8 @@
+/* Import fonts */
+@import url('https://db.onlinewebfonts.com/c/527ea5851ca62a9a758a44dc39437eae?family=Old+English+Text+MT+V2');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
