@@ -183,9 +183,9 @@ export default function MainLayout() {
               <div className="flex items-center gap-3 mb-4">
                 <img src={logo} alt="NICE logo" className="h-12 w-auto" />
                 <div>
-                  <p className="text-xs font-old-english tracking-wider text-white/80 uppercase">
-                    NIGERIAN INSTITUTION OF CIVIL ENGINEERS
-                  </p>
+                  <h1 className="font-[Old_English_Text_MT_V2] text-brand-primary text-base md:text-2xl leading-tight">
+    Nigerian Institution <br className="hidden md:block" /> of Civil Engineers
+  </h1>
                   <p className="text-xs text-brand-gold tracking-wide">23rd International Conference</p>
                   <p className="font-semibold text-white">
                     Kano 2025 Conference & AGM
