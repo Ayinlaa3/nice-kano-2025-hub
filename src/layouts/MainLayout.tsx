@@ -46,7 +46,7 @@ export default function MainLayout() {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" size="sm" className="md:hidden">
-          <Menu className="h-5 w-5" />
+          <Menu className="h-10 w-10" />
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-80">
@@ -96,15 +96,16 @@ export default function MainLayout() {
       <header className="sticky top-0 z-40 bg-gradient-to-r from-brand-primary/10 via-brand-yellow/5 to-brand-red/10 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-brand-primary/30 shadow-lg">
         <div className="container mx-auto flex items-center justify-between py-3">
           <Link to="/" className="flex items-center gap-3 transition-transform duration-200 hover:scale-105">
-            <img src={logo} alt="NICE logo" className="h-10 w-auto" />
-            <div className="hidden sm:block">
-              <p className="font-old-english text-brand-primary text-xl md:text-3xl">
-  Nigerian Institution <br className="hidden md:block" /> of Civil Engineers
+            <img src={logo} alt="NICE logo" className="h-14 w-auto" />
+            <div>
+  <h1 className="font-old-english text-brand-primary text-lg sm:text-xl md:text-2xl">
+    Nigerian Institution of Civil Engineers
+  </h1>
+              <p className="font-semibold bg-gradient-to-l tracking-wide from-brand-yellow to-brand-red bg-clip-text text-transparent">
+  <span className="sm:hidden">KANO 2025</span> 
+  <span className="hidden sm:inline">23rd International Conference - KANO 2025</span>
 </p>
-
-              <p className="text-xs text-brand-gold/80 tracking-wide">23rd International Conference</p>
-              <p className="font-semibold bg-gradient-to-r from-brand-primary to-brand-red bg-clip-text text-transparent">Kano 2025 Conference & AGM</p>
-            </div>
+</div>
           </Link>
           
           <div className="hidden md:flex items-center gap-4">
@@ -160,16 +161,29 @@ export default function MainLayout() {
             </NavigationMenu>
           </div>
           <div className="flex items-center gap-3">
-            <MobileMenu />
-            <Button asChild variant="professional" size="sm">
-              <a href={REG_FORM} target="_blank" rel="noreferrer">
-                Register Now
-              </a>
-            </Button>
-            <Button asChild variant="cultural" size="sm" className="hidden md:inline-flex">
-              <Link to="/sponsorships">Sponsor Us</Link>
-            </Button>
-          </div>
+  {/* Mobile only: Register above, Menu below */}
+  <div className="flex flex-col-reverse items-end gap-2 md:hidden">
+    <MobileMenu />
+    <Button asChild variant="professional" size="sm">
+      <a href={REG_FORM} target="_blank" rel="noreferrer">
+        Register Now
+      </a>
+    </Button>
+  </div>
+
+  {/* Desktop: Register + Sponsor inline */}
+  <div className="hidden md:flex items-center gap-3">
+    <Button asChild variant="professional" size="sm">
+      <a href={REG_FORM} target="_blank" rel="noreferrer">
+        Register Now
+      </a>
+    </Button>
+    <Button asChild variant="cultural" size="sm">
+      <Link to="/sponsorships">Sponsor Us</Link>
+    </Button>
+  </div>
+</div>
+
         </div>
       </header>
 
@@ -182,18 +196,17 @@ export default function MainLayout() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">
-                <img src={logo} alt="NICE logo" className="h-12 w-auto" />
+                <img src={logo} alt="NICE logo" className="h-14 w-auto" />
                 <div>
-                  <p className="text-xs font-old-english tracking-wider text-white/80 uppercase">
-                    NIGERIAN INSTITUTION OF CIVIL ENGINEERS
+                  <p className="font-old-english text-xl md:text-2xl text-white">
+                    Nigerian Institution of Civil Engineers
                   </p>
-                  <p className="text-xs text-brand-gold tracking-wide">23rd International Conference</p>
                   <p className="font-semibold text-white">
-                    Kano 2025 Conference & AGM
+                    23rd International Conference - KANO 2025
                   </p>
                 </div>
               </div>
-              <p className="text-sm text-white/70 max-w-md">
+              <p className="text-sm text-white/80 max-w-md">
                 Sustaining the world's infrastructure through excellence in civil engineering. Join us in Kano for an inspiring conference focused on innovation and sustainability.
               </p>
             </div>
