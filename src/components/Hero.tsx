@@ -17,7 +17,7 @@ const REG_FORM = "https://forms.gle/HXocP4aGn5Pb1HmR6";
 
 // ✅ Your hero images
 import heroBridge from "@/assets/hero-bridge.jpg";
-import heroGreen from "@/assets/hero-green.jpg";
+import heroGreen from "@/assets/hero-green-building.jpg";
 import heroHighway from "@/assets/hero-highway.jpg";
 import heroConstruction from "@/assets/hero-construction.jpg";
 import heroSustainable from "@/assets/hero-sustainable.jpg";
