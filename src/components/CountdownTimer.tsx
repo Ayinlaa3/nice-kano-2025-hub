@@ -40,39 +40,39 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   }, [targetDate]);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <Card className="countdown-glow p-4 text-center border-0">
-        <div className="text-2xl md:text-3xl font-bold text-kano-heritage">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <Card className="countdown-glow px-3 py-4 text-center border-0 min-w-[70px]">
+        <div className="text-xl md:text-2xl font-bold text-kano-heritage">
           {timeLeft.days}
         </div>
-        <div className="text-xs md:text-sm font-medium text-kano-heritage/80 uppercase tracking-wider">
+        <div className="text-xs font-medium text-kano-heritage/80 uppercase tracking-wider">
           Days
         </div>
       </Card>
       
-      <Card className="countdown-glow p-4 text-center border-0">
-        <div className="text-2xl md:text-3xl font-bold text-kano-heritage">
+      <Card className="countdown-glow px-3 py-4 text-center border-0 min-w-[70px]">
+        <div className="text-xl md:text-2xl font-bold text-kano-heritage">
           {timeLeft.hours}
         </div>
-        <div className="text-xs md:text-sm font-medium text-kano-heritage/80 uppercase tracking-wider">
+        <div className="text-xs font-medium text-kano-heritage/80 uppercase tracking-wider">
           Hours
         </div>
       </Card>
       
-      <Card className="countdown-glow p-4 text-center border-0">
-        <div className="text-2xl md:text-3xl font-bold text-kano-heritage">
+      <Card className="countdown-glow px-4 py-4 text-center border-0 min-w-[80px]">
+        <div className="text-xl md:text-2xl font-bold text-kano-heritage">
           {timeLeft.minutes}
         </div>
-        <div className="text-xs md:text-sm font-medium text-kano-heritage/80 uppercase tracking-wider">
+        <div className="text-xs font-medium text-kano-heritage/80 uppercase tracking-wider">
           Minutes
         </div>
       </Card>
       
-      <Card className="countdown-glow p-4 text-center border-0">
-        <div className="text-2xl md:text-3xl font-bold text-kano-heritage">
+      <Card className="countdown-glow px-4 py-4 text-center border-0 min-w-[80px]">
+        <div className="text-xl md:text-2xl font-bold text-kano-heritage">
           {timeLeft.seconds}
         </div>
-        <div className="text-xs md:text-sm font-medium text-kano-heritage/80 uppercase tracking-wider">
+        <div className="text-xs font-medium text-kano-heritage/80 uppercase tracking-wider">
           Seconds
         </div>
       </Card>
