@@ -1,267 +1,544 @@
 import { Helmet } from "react-helmet-async";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Users, Building, Trophy, Globe } from "lucide-react";
 
 export default function About() {
   return (
-    <div className="container mx-auto py-12 md:py-16">
+    <div className="min-h-screen">
       <Helmet>
         <title>About the Conference | NICE Kano 2025</title>
         <meta name="description" content="Learn about the NICE 23rd International Civil Engineering Conference & AGM, theme, and objectives." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/about"} />
       </Helmet>
 
-      <header className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold">About the Conference</h1>
-        <p className="text-muted-foreground mt-2">Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development.</p>
-      </header>
-
-      <section className="prose prose-neutral dark:prose-invert max-w-none">
-        <p>
-          The NICE 23rd International Civil Engineering Conference & AGM is Nigeria’s premier gathering for civil engineers, industry leaders, academics, and students. Over three days, participants explore cutting-edge solutions that shape sustainable, resilient infrastructure across the nation.
-        </p>
-        <h2>Why You Should Attend</h2>
-        <ul>
-          <li>Discover innovations in sustainable construction and materials</li>
-          <li>Network with leaders across public and private sectors</li>
-          <li>Advance your career through mentorship and knowledge sharing</li>
-          <li>Engage sponsors and exhibitors driving infrastructure change</li>
-        </ul>
+      {/* Hero Section with Gradient Background */}
+      <section className="relative bg-gradient-to-br from-brand-green via-brand-primary to-brand-muted text-brand-foreground py-20 md:py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIxIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center animate-fade-in">
+            <Badge className="mb-4 bg-brand-gold text-brand-foreground hover:bg-brand-gold/90">23rd Edition</Badge>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-brand-gold bg-clip-text text-transparent">
+              About the Conference
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 text-brand-foreground/90 max-w-4xl mx-auto leading-relaxed">
+              Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 text-sm">
+              <Badge variant="outline" className="border-brand-foreground/20 text-brand-foreground hover:bg-brand-foreground/10">
+                3 Days Conference
+              </Badge>
+              <Badge variant="outline" className="border-brand-foreground/20 text-brand-foreground hover:bg-brand-foreground/10">
+                International Speakers
+              </Badge>
+              <Badge variant="outline" className="border-brand-foreground/20 text-brand-foreground hover:bg-brand-foreground/10">
+                Networking Opportunities
+              </Badge>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section className="mt-12">
-        <h2 className="text-2xl md:text-3xl font-semibold mb-6">2025 NICE AGM Conference Planning Committee</h2>
-        
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold mb-4">Sub-Committees</h3>
-          <Accordion type="single" collapsible className="w-full">
-            {/* Publicity/Transportation/Registration */}
-            <AccordionItem value="publicity">
-              <AccordionTrigger className="text-left">
-                <div>
-                  <h4 className="font-semibold">Publicity/Transportation/Registration</h4>
-                  <p className="text-sm text-muted-foreground">Protocols, Media interface, Press briefings, Transportation, Banners & Industrial Visits</p>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="space-y-2">
-                  <p className="font-medium text-primary">ENGR. JOAN NWEKE, FNICE (Head) - 08030480459</p>
-                  <ul className="list-disc pl-6 space-y-1">
-                    <li>ENGR. ALEX A. IFEAGWUZI, FNICE</li>
-                    <li>ENGR. USMAN M. FALALU, FNICE</li>
-                    <li>ENGR. FESTUS IGBOEKWU, FNICE</li>
-                    <li>ENGR. TOPE BOAZ</li>
-                    <li>ENGR. MAGDALENE DEMESI</li>
-                  </ul>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-
-            {/* Venue & Accommodation */}
-            <AccordionItem value="venue">
-              <AccordionTrigger className="text-left">
-                <div>
-                  <h4 className="font-semibold">Venue & Accommodation</h4>
-                  <p className="text-sm text-muted-foreground">Venue, accommodation for National Exco, BOT members, hotel provisions & Exhibitions</p>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="space-y-2">
-                  <p className="font-medium text-primary">ENGR. USMAN TIJANI (Head) - 08039351937</p>
-                  <ul className="list-disc pl-6 space-y-1">
-                    <li>ENGR. O. SHARAFADEEN, FNICE</li>
-                    <li>ENGR. MRS. DEMESI O. MAGDALENE, FNICE</li>
-                    <li>ENGR. ABIOLA BASHIRU</li>
-                    <li>ENGR. FAITH OKO-UKONI</li>
-                    <li>ENGR. MADA ABASS</li>
-                  </ul>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-
-            {/* Technical */}
-            <AccordionItem value="technical">
-              <AccordionTrigger className="text-left">
-                <div>
-                  <h4 className="font-semibold">Technical</h4>
-                  <p className="text-sm text-muted-foreground">Conference sub-themes, technical presentations, paper review & communique production</p>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="space-y-2">
-                  <p className="font-medium text-primary">PROF. ALHASSAN HASHIM MOHAMMED, FNICE (Head) - 08103102219</p>
-                  <ul className="list-disc pl-6 space-y-1">
-                    <li>ENGR. SALISU USMAN</li>
-                    <li>ENGR. MRS. EBIEREN OTUARO</li>
-                    <li>ENGR. DELE FADIPE, MNICE</li>
-                    <li>ENGR. IBRAHIM IDRIS</li>
-                    <li>ENGR. ISMAIL ADEYEMI</li>
-                    <li>ENGR. VEN. SAMUEL OGUNDARE</li>
-                  </ul>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-
-            {/* Spouses Programme */}
-            <AccordionItem value="spouses">
-              <AccordionTrigger className="text-left">
-                <div>
-                  <h4 className="font-semibold">Spouses Programme</h4>
-                  <p className="text-sm text-muted-foreground">Registration package, Tours to places of interests & Talk programmes</p>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="space-y-2">
-                  <p className="font-medium text-primary">ENGR. O. SHARAFADEEN, FNICE (Head) - 08091543346</p>
-                  <ul className="list-disc pl-6 space-y-1">
-                    <li>ENGR. MRS. DEMESI MAGDALENE, FNICE</li>
-                    <li>ENGR. MRS. EBIEREN OTUARO</li>
-                    <li>ENGR. MADA ABASS</li>
-                  </ul>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-
-            {/* Food & Entertainment */}
-            <AccordionItem value="food">
-              <AccordionTrigger className="text-left">
-                <div>
-                  <h4 className="font-semibold">Food & Entertainment</h4>
-                  <p className="text-sm text-muted-foreground">Musical band, DJs, ushers, Cultural troupes & Food provisions</p>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="space-y-2">
-                  <p className="font-medium text-primary">ENGR. ETAGHENE OGHO, FNICE (Head) - 08039535000</p>
-                  <ul className="list-disc pl-6 space-y-1">
-                    <li>ENGR. ELISABETH ABODUNRIN</li>
-                    <li>ENGR. BEEDEE BOTT</li>
-                    <li>ENGR. FAITH OKO-UKONI</li>
-                  </ul>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-
-            {/* Students Programme */}
-            <AccordionItem value="students">
-              <AccordionTrigger className="text-left">
-                <div>
-                  <h4 className="font-semibold">Students' (NICESA) Programmes</h4>
-                  <p className="text-sm text-muted-foreground">Registration package & NICESA group programmes</p>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="space-y-2">
-                  <p className="font-medium text-primary">ENGR. DR. LOLA ADETONA, FNICE (Head) - 07034894522</p>
-                  <ul className="list-disc pl-6 space-y-1">
-                    <li>ENGR. IBRAHIM IDRIS</li>
-                    <li>ENGR. SALISU USMAN</li>
-                    <li>ENGR. DELE FADIPE, MNICE</li>
-                    <li>ENGR. ABIOLA BASHIRU</li>
-                  </ul>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-
-            {/* Fund Raising/Finance */}
-            <AccordionItem value="finance">
-              <AccordionTrigger className="text-left">
-                <div>
-                  <h4 className="font-semibold">Fund Raising/Finance</h4>
-                  <p className="text-sm text-muted-foreground">Conference sponsorship & Fund generation</p>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="space-y-2">
-                  <p className="font-medium text-primary">ENGR. BEMIGHO OFOEYENO, FNICE (Chairman) - 08023318732</p>
-                  <p className="font-medium text-secondary">ENGR. DATTI AHMAD, FNICE (Alternate Chairman)</p>
-                  <p className="font-medium">ENGR. MARYAM ABUBAKAR BALLA (Secretary)</p>
-                  <ul className="list-disc pl-6 space-y-1 mt-2">
-                    <li>ENGR. USMAN TIJANI</li>
-                    <li>ENGR. PROF. HASSIM ALHASSAN</li>
-                    <li>ENGR. MADA ABASS</li>
-                    <li>ENGR. VEN. SAMUEL OGUNDARE</li>
-                    <li>ENGR. ALEX IFEAGWUZI</li>
-                  </ul>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-
-            {/* Coordinating */}
-            <AccordionItem value="coordinating">
-              <AccordionTrigger className="text-left">
-                <div>
-                  <h4 className="font-semibold">Coordinating</h4>
-                  <p className="text-sm text-muted-foreground">General coordination of all CPC activities & Interface between CPC and EXCO</p>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="space-y-2">
-                  <ul className="list-disc pl-6 space-y-1">
-                    <li>ENGR. BEMIGHO OFOEYENO, FNICE</li>
-                    <li>ENGR. DATTI AHMAD, FNICE</li>
-                    <li>ENGR. MARYAM ABUBAKAR BALLA</li>
-                    <li>ENGR. OLUMOH SHARAFADEEN, FNICE</li>
-                    <li>ENGR. DAVID TOPE BOAZ, FNICE</li>
-                    <li>ENGR. USMAN TIJANI</li>
-                  </ul>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
-
-        {/* Local Organizing Committee */}
-        <div className="mt-12">
-          <h3 className="text-xl font-semibold mb-4">Local Organizing Committee (LOC)</h3>
-          <Card>
-            <CardHeader>
-              <CardTitle>Committee Structure</CardTitle>
-              <CardDescription>
-                Coordinates all activities and tasks related to the host venue, organizes industrial visits, 
-                provides travel route advisories, and liaises with local enforcement and safety agencies.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="border-l-4 border-primary pl-4">
-                  <p className="font-semibold text-primary">Engr. Prof. Hassim Alhassan (Chairman) - 08103102219</p>
-                </div>
-                <div className="border-l-4 border-secondary pl-4">
-                  <p className="font-semibold text-secondary">Engr. Datti Ahmed (Alternate Chairman)</p>
-                </div>
-                <div className="border-l-4 border-accent pl-4">
-                  <p className="font-semibold">Engr. Maryam Abubakar Balla (Secretary) - 08038111882</p>
-                </div>
-                
-                <div className="mt-6">
-                  <h4 className="font-medium mb-3">Committee Members</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                    <div>• Engr. Dr. Muttaqa Uba Zango</div>
-                    <div>• Engr. Marwan Ahmad Aminu</div>
-                    <div>• Engr. Murtala Alhaji Garba</div>
-                    <div>• Engr. Auwalu Alhaji Musa</div>
-                    <div>• Engr. Mansur Yakubu</div>
-                    <div>• Engr. Ramatu Ahmad Aminu</div>
-                    <div>• Engr. Muhammad Musa Adamu</div>
-                    <div>• Engr. Mamman Hussaini Jatau</div>
-                    <div>• Engr. Magaji Hussaini</div>
-                    <div>• Engr. Kabiru Yusuf</div>
-                    <div>• Engr. Samuel Gbolahan Olushola</div>
-                    <div>• Engr. Usman Falalu Mohammed</div>
-                    <div>• Engr. Dr. Gambo Haruna Yunusa</div>
-                    <div>• Yusuf Suleiman Yusuf</div>
-                    <div>• Engr. Dr. Samaila Saleh</div>
-                    <div>• Engr. Badayi Ahmad Idris</div>
-                    <div>• Engr. Amana Jaafar</div>
-                    <div>• Saudat Shamsu Ahmad</div>
+      {/* Statistics Section */}
+      <section className="py-16 bg-gradient-to-r from-brand-gold/5 to-brand-red/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-primary">Conference Impact</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Join Nigeria's largest gathering of civil engineering professionals and shape the future of infrastructure development.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="text-center cultural-card hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-green/10 to-brand-green/5">
+              <CardContent className="p-6">
+                <div className="flex justify-center mb-4">
+                  <div className="p-3 rounded-full bg-brand-green/20">
+                    <Users className="h-8 w-8 text-brand-green" />
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+                <h3 className="text-3xl font-bold text-brand-green mb-2">500+</h3>
+                <p className="text-sm text-muted-foreground">Expected Participants</p>
+                <Progress value={85} className="mt-3 h-2" />
+              </CardContent>
+            </Card>
+
+            <Card className="text-center cultural-card hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-gold/10 to-brand-gold/5">
+              <CardContent className="p-6">
+                <div className="flex justify-center mb-4">
+                  <div className="p-3 rounded-full bg-brand-gold/20">
+                    <Building className="h-8 w-8 text-brand-gold" />
+                  </div>
+                </div>
+                <h3 className="text-3xl font-bold text-brand-gold mb-2">50+</h3>
+                <p className="text-sm text-muted-foreground">Industry Exhibitors</p>
+                <Progress value={70} className="mt-3 h-2" />
+              </CardContent>
+            </Card>
+
+            <Card className="text-center cultural-card hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-red/10 to-brand-red/5">
+              <CardContent className="p-6">
+                <div className="flex justify-center mb-4">
+                  <div className="p-3 rounded-full bg-brand-red/20">
+                    <Trophy className="h-8 w-8 text-brand-red" />
+                  </div>
+                </div>
+                <h3 className="text-3xl font-bold text-brand-red mb-2">25+</h3>
+                <p className="text-sm text-muted-foreground">Technical Sessions</p>
+                <Progress value={90} className="mt-3 h-2" />
+              </CardContent>
+            </Card>
+
+            <Card className="text-center cultural-card hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-primary/10 to-primary/5">
+              <CardContent className="p-6">
+                <div className="flex justify-center mb-4">
+                  <div className="p-3 rounded-full bg-primary/20">
+                    <Globe className="h-8 w-8 text-primary" />
+                  </div>
+                </div>
+                <h3 className="text-3xl font-bold text-primary mb-2">10+</h3>
+                <p className="text-sm text-muted-foreground">Countries Represented</p>
+                <Progress value={60} className="mt-3 h-2" />
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
+
+      <div className="container mx-auto px-4 py-16">
+        {/* Conference Overview */}
+        <section className="mb-16">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="animate-fade-in">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-primary">About NICE Kano 2025</h2>
+              <p className="text-lg mb-6 text-muted-foreground leading-relaxed">
+                The NICE 23rd International Civil Engineering Conference & AGM is Nigeria's premier gathering for civil engineers, 
+                industry leaders, academics, and students. Over three transformative days, participants explore cutting-edge solutions 
+                that shape sustainable, resilient infrastructure across the nation and beyond.
+              </p>
+              <p className="text-lg mb-8 text-muted-foreground leading-relaxed">
+                This year's theme focuses on integrating innovative construction methodologies with sustainable practices, 
+                driving the evolution of civil infrastructure development in Africa and globally.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Card className="border-l-4 border-brand-green bg-gradient-to-r from-brand-green/5 to-transparent">
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold text-brand-green mb-2">Innovation Focus</h4>
+                    <p className="text-sm text-muted-foreground">Latest construction technologies and methodologies</p>
+                  </CardContent>
+                </Card>
+                <Card className="border-l-4 border-brand-gold bg-gradient-to-r from-brand-gold/5 to-transparent">
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold text-brand-gold mb-2">Sustainability</h4>
+                    <p className="text-sm text-muted-foreground">Environmental-conscious infrastructure solutions</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+            
+            <div className="animate-scale-in">
+              <Card className="bg-gradient-to-br from-brand-primary to-brand-muted text-brand-foreground border-0 shadow-2xl">
+                <CardHeader>
+                  <CardTitle className="text-2xl text-center">Conference Highlights</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-brand-gold rounded-full"></div>
+                    <span>Keynote speeches by industry leaders</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-brand-gold rounded-full"></div>
+                    <span>Technical paper presentations</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-brand-gold rounded-full"></div>
+                    <span>Industrial site visits</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-brand-gold rounded-full"></div>
+                    <span>Networking sessions & exhibitions</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-brand-gold rounded-full"></div>
+                    <span>Awards & recognition ceremony</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Attend Section */}
+        <section className="mb-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-primary">Why You Should Attend</h2>
+            <p className="text-muted-foreground max-w-3xl mx-auto">
+              Join hundreds of professionals in advancing civil engineering excellence and sustainable infrastructure development.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="text-center cultural-card border-0 bg-gradient-to-b from-brand-green/10 to-brand-green/5 hover:from-brand-green/20 hover:to-brand-green/10">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 mx-auto mb-4 bg-brand-green/20 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🔬</span>
+                </div>
+                <h3 className="font-semibold mb-3 text-brand-green">Innovation Discovery</h3>
+                <p className="text-sm text-muted-foreground">Explore cutting-edge sustainable construction materials and methodologies</p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center cultural-card border-0 bg-gradient-to-b from-brand-gold/10 to-brand-gold/5 hover:from-brand-gold/20 hover:to-brand-gold/10">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 mx-auto mb-4 bg-brand-gold/20 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🤝</span>
+                </div>
+                <h3 className="font-semibold mb-3 text-brand-gold">Professional Network</h3>
+                <p className="text-sm text-muted-foreground">Connect with leaders across public and private sector organizations</p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center cultural-card border-0 bg-gradient-to-b from-brand-red/10 to-brand-red/5 hover:from-brand-red/20 hover:to-brand-red/10">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 mx-auto mb-4 bg-brand-red/20 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">📈</span>
+                </div>
+                <h3 className="font-semibold mb-3 text-brand-red">Career Growth</h3>
+                <p className="text-sm text-muted-foreground">Advance your career through mentorship and knowledge sharing opportunities</p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center cultural-card border-0 bg-gradient-to-b from-primary/10 to-primary/5 hover:from-primary/20 hover:to-primary/10">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 mx-auto mb-4 bg-primary/20 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🏗️</span>
+                </div>
+                <h3 className="font-semibold mb-3 text-primary">Industry Engagement</h3>
+                <p className="text-sm text-muted-foreground">Engage with sponsors and exhibitors driving infrastructure transformation</p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Committee Section */}
+        <section className="mb-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-primary">Conference Organization</h2>
+            <p className="text-muted-foreground max-w-3xl mx-auto">
+              Meet the dedicated professionals working tirelessly to deliver an exceptional conference experience.
+            </p>
+          </div>
+          
+          <div className="mb-12">
+            <h3 className="text-2xl font-semibold mb-6 text-center">Sub-Committees</h3>
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {/* Enhanced Committee Items with Brand Colors */}
+              <AccordionItem value="publicity" className="border rounded-lg bg-gradient-to-r from-brand-green/5 to-transparent">
+                <AccordionTrigger className="text-left px-6 hover:no-underline">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-brand-green/20 rounded-full flex items-center justify-center">
+                      <span className="text-brand-green text-xl">📢</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-brand-green">Publicity/Transportation/Registration</h4>
+                      <p className="text-sm text-muted-foreground">Media interface, Press briefings, Transportation & Industrial Visits</p>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <div className="space-y-3 ml-16">
+                    <div className="p-4 bg-brand-green/10 rounded-lg border-l-4 border-brand-green">
+                      <p className="font-semibold text-brand-green">ENGR. JOAN NWEKE, FNICE (Committee Head)</p>
+                      <p className="text-sm text-muted-foreground">📞 08030480459</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {["ENGR. ALEX A. IFEAGWUZI, FNICE", "ENGR. USMAN M. FALALU, FNICE", "ENGR. FESTUS IGBOEKWU, FNICE", "ENGR. TOPE BOAZ", "ENGR. MAGDALENE DEMESI"].map((member, idx) => (
+                        <div key={idx} className="p-3 bg-card rounded border hover:shadow-md transition-shadow">
+                          <p className="text-sm font-medium">{member}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="venue" className="border rounded-lg bg-gradient-to-r from-brand-gold/5 to-transparent">
+                <AccordionTrigger className="text-left px-6 hover:no-underline">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-brand-gold/20 rounded-full flex items-center justify-center">
+                      <span className="text-brand-gold text-xl">🏨</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-brand-gold">Venue & Accommodation</h4>
+                      <p className="text-sm text-muted-foreground">Venue management, accommodation & exhibitions coordination</p>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <div className="space-y-3 ml-16">
+                    <div className="p-4 bg-brand-gold/10 rounded-lg border-l-4 border-brand-gold">
+                      <p className="font-semibold text-brand-gold">ENGR. USMAN TIJANI (Committee Head)</p>
+                      <p className="text-sm text-muted-foreground">📞 08039351937</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {["ENGR. O. SHARAFADEEN, FNICE", "ENGR. MRS. DEMESI O. MAGDALENE, FNICE", "ENGR. ABIOLA BASHIRU", "ENGR. FAITH OKO-UKONI", "ENGR. MADA ABASS"].map((member, idx) => (
+                        <div key={idx} className="p-3 bg-card rounded border hover:shadow-md transition-shadow">
+                          <p className="text-sm font-medium">{member}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="technical" className="border rounded-lg bg-gradient-to-r from-brand-red/5 to-transparent">
+                <AccordionTrigger className="text-left px-6 hover:no-underline">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-brand-red/20 rounded-full flex items-center justify-center">
+                      <span className="text-brand-red text-xl">🔬</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-brand-red">Technical Committee</h4>
+                      <p className="text-sm text-muted-foreground">Conference themes, paper review & technical sessions</p>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <div className="space-y-3 ml-16">
+                    <div className="p-4 bg-brand-red/10 rounded-lg border-l-4 border-brand-red">
+                      <p className="font-semibold text-brand-red">PROF. ALHASSAN HASHIM MOHAMMED, FNICE (Committee Head)</p>
+                      <p className="text-sm text-muted-foreground">📞 08103102219</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {["ENGR. SALISU USMAN", "ENGR. MRS. EBIEREN OTUARO", "ENGR. DELE FADIPE, MNICE", "ENGR. IBRAHIM IDRIS", "ENGR. ISMAIL ADEYEMI", "ENGR. VEN. SAMUEL OGUNDARE"].map((member, idx) => (
+                        <div key={idx} className="p-3 bg-card rounded border hover:shadow-md transition-shadow">
+                          <p className="text-sm font-medium">{member}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
+              {/* Continue with other committees using similar enhanced styling */}
+              <AccordionItem value="spouses" className="border rounded-lg bg-gradient-to-r from-purple-500/5 to-transparent">
+                <AccordionTrigger className="text-left px-6 hover:no-underline">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center">
+                      <span className="text-purple-500 text-xl">👥</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-purple-500">Spouses Programme</h4>
+                      <p className="text-sm text-muted-foreground">Tours, talks & special programs for spouses</p>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <div className="space-y-3 ml-16">
+                    <div className="p-4 bg-purple-500/10 rounded-lg border-l-4 border-purple-500">
+                      <p className="font-semibold text-purple-500">ENGR. O. SHARAFADEEN, FNICE (Committee Head)</p>
+                      <p className="text-sm text-muted-foreground">📞 08091543346</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {["ENGR. MRS. DEMESI MAGDALENE, FNICE", "ENGR. MRS. EBIEREN OTUARO", "ENGR. MADA ABASS"].map((member, idx) => (
+                        <div key={idx} className="p-3 bg-card rounded border hover:shadow-md transition-shadow">
+                          <p className="text-sm font-medium">{member}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="food" className="border rounded-lg bg-gradient-to-r from-orange-500/5 to-transparent">
+                <AccordionTrigger className="text-left px-6 hover:no-underline">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-orange-500/20 rounded-full flex items-center justify-center">
+                      <span className="text-orange-500 text-xl">🎵</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-orange-500">Food & Entertainment</h4>
+                      <p className="text-sm text-muted-foreground">Catering, music, cultural performances & hospitality</p>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <div className="space-y-3 ml-16">
+                    <div className="p-4 bg-orange-500/10 rounded-lg border-l-4 border-orange-500">
+                      <p className="font-semibold text-orange-500">ENGR. ETAGHENE OGHO, FNICE (Committee Head)</p>
+                      <p className="text-sm text-muted-foreground">📞 08039535000</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {["ENGR. ELISABETH ABODUNRIN", "ENGR. BEEDEE BOTT", "ENGR. FAITH OKO-UKONI"].map((member, idx) => (
+                        <div key={idx} className="p-3 bg-card rounded border hover:shadow-md transition-shadow">
+                          <p className="text-sm font-medium">{member}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="students" className="border rounded-lg bg-gradient-to-r from-blue-500/5 to-transparent">
+                <AccordionTrigger className="text-left px-6 hover:no-underline">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
+                      <span className="text-blue-500 text-xl">🎓</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-blue-500">Students' (NICESA) Programmes</h4>
+                      <p className="text-sm text-muted-foreground">Student competitions, mentorship & career guidance</p>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <div className="space-y-3 ml-16">
+                    <div className="p-4 bg-blue-500/10 rounded-lg border-l-4 border-blue-500">
+                      <p className="font-semibold text-blue-500">ENGR. DR. LOLA ADETONA, FNICE (Committee Head)</p>
+                      <p className="text-sm text-muted-foreground">📞 07034894522</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {["ENGR. IBRAHIM IDRIS", "ENGR. SALISU USMAN", "ENGR. DELE FADIPE, MNICE", "ENGR. ABIOLA BASHIRU"].map((member, idx) => (
+                        <div key={idx} className="p-3 bg-card rounded border hover:shadow-md transition-shadow">
+                          <p className="text-sm font-medium">{member}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="finance" className="border rounded-lg bg-gradient-to-r from-green-600/5 to-transparent">
+                <AccordionTrigger className="text-left px-6 hover:no-underline">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-green-600/20 rounded-full flex items-center justify-center">
+                      <span className="text-green-600 text-xl">💰</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-green-600">Fund Raising/Finance</h4>
+                      <p className="text-sm text-muted-foreground">Sponsorship coordination & financial management</p>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <div className="space-y-3 ml-16">
+                    <div className="grid md:grid-cols-3 gap-4 mb-4">
+                      <div className="p-4 bg-green-600/10 rounded-lg border-l-4 border-green-600">
+                        <p className="font-semibold text-green-600">ENGR. BEMIGHO OFOEYENO, FNICE</p>
+                        <p className="text-xs text-muted-foreground">Chairman • 📞 08023318732</p>
+                      </div>
+                      <div className="p-4 bg-green-500/10 rounded-lg border-l-4 border-green-500">
+                        <p className="font-semibold text-green-500">ENGR. DATTI AHMAD, FNICE</p>
+                        <p className="text-xs text-muted-foreground">Alternate Chairman</p>
+                      </div>
+                      <div className="p-4 bg-green-400/10 rounded-lg border-l-4 border-green-400">
+                        <p className="font-semibold text-green-400">ENGR. MARYAM ABUBAKAR BALLA</p>
+                        <p className="text-xs text-muted-foreground">Secretary</p>
+                      </div>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {["ENGR. USMAN TIJANI", "ENGR. PROF. HASSIM ALHASSAN", "ENGR. MADA ABASS", "ENGR. VEN. SAMUEL OGUNDARE", "ENGR. ALEX IFEAGWUZI"].map((member, idx) => (
+                        <div key={idx} className="p-3 bg-card rounded border hover:shadow-md transition-shadow">
+                          <p className="text-sm font-medium">{member}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="coordinating" className="border rounded-lg bg-gradient-to-r from-indigo-500/5 to-transparent">
+                <AccordionTrigger className="text-left px-6 hover:no-underline">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-indigo-500/20 rounded-full flex items-center justify-center">
+                      <span className="text-indigo-500 text-xl">⚙️</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-indigo-500">Coordinating Committee</h4>
+                      <p className="text-sm text-muted-foreground">Overall coordination & EXCO interface</p>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <div className="space-y-3 ml-16">
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {["ENGR. BEMIGHO OFOEYENO, FNICE", "ENGR. DATTI AHMAD, FNICE", "ENGR. MARYAM ABUBAKAR BALLA", "ENGR. OLUMOH SHARAFADEEN, FNICE", "ENGR. DAVID TOPE BOAZ, FNICE", "ENGR. USMAN TIJANI"].map((member, idx) => (
+                        <div key={idx} className="p-3 bg-card rounded border hover:shadow-md transition-shadow">
+                          <p className="text-sm font-medium">{member}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+
+          {/* Local Organizing Committee */}
+          <div className="mt-16">
+            <h3 className="text-2xl font-semibold mb-6 text-center">Local Organizing Committee (LOC)</h3>
+            <Card className="border-0 shadow-xl bg-gradient-to-br from-brand-primary to-brand-muted text-brand-foreground">
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl text-brand-foreground">Committee Leadership</CardTitle>
+                <CardDescription className="text-brand-foreground/80">
+                  Coordinating all venue activities, industrial visits, travel advisories, and local liaison services
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="text-center p-6 bg-brand-foreground/10 rounded-lg border border-brand-foreground/20">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-brand-gold/30 rounded-full flex items-center justify-center">
+                      <span className="text-2xl">👑</span>
+                    </div>
+                    <h4 className="font-bold text-brand-gold mb-2">Chairman</h4>
+                    <p className="font-semibold">Engr. Prof. Hassim Alhassan</p>
+                    <p className="text-sm text-brand-foreground/70">📞 08103102219</p>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-brand-foreground/10 rounded-lg border border-brand-foreground/20">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-brand-red/30 rounded-full flex items-center justify-center">
+                      <span className="text-2xl">🤝</span>
+                    </div>
+                    <h4 className="font-bold text-brand-red mb-2">Alternate Chairman</h4>
+                    <p className="font-semibold">Engr. Datti Ahmed</p>
+                    <p className="text-sm text-brand-foreground/70">Deputy Leadership</p>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-brand-foreground/10 rounded-lg border border-brand-foreground/20">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-blue-400/30 rounded-full flex items-center justify-center">
+                      <span className="text-2xl">📝</span>
+                    </div>
+                    <h4 className="font-bold text-blue-400 mb-2">Secretary</h4>
+                    <p className="font-semibold">Engr. Maryam Abubakar Balla</p>
+                    <p className="text-sm text-brand-foreground/70">📞 08038111882</p>
+                  </div>
+                </div>
+                
+                <div className="mt-8">
+                  <h4 className="font-semibold mb-4 text-center text-brand-foreground">Committee Members</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {[
+                      "Engr. Dr. Muttaqa Uba Zango", "Engr. Marwan Ahmad Aminu", "Engr. Murtala Alhaji Garba",
+                      "Engr. Auwalu Alhaji Musa", "Engr. Mansur Yakubu", "Engr. Ramatu Ahmad Aminu",
+                      "Engr. Muhammad Musa Adamu", "Engr. Mamman Hussaini Jatau", "Engr. Magaji Hussaini",
+                      "Engr. Kabiru Yusuf", "Engr. Samuel Gbolahan Olushola", "Engr. Usman Falalu Mohammed",
+                      "Engr. Dr. Gambo Haruna Yunusa", "Yusuf Suleiman Yusuf", "Engr. Dr. Samaila Saleh",
+                      "Engr. Badayi Ahmad Idris", "Engr. Amana Jaafar", "Saudat Shamsu Ahmad"
+                    ].map((member, idx) => (
+                      <div key={idx} className="p-3 bg-brand-foreground/10 rounded-lg border border-brand-foreground/20 hover:bg-brand-foreground/20 transition-colors">
+                        <p className="text-sm font-medium text-brand-foreground">{member}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
