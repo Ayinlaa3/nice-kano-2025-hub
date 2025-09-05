@@ -35,6 +35,7 @@ const navigationGroups = [
     items: [
       { to: "/about", label: "About KANO 2025", description: "Learn about our conference" },
       { to: "/sponsorships", label: "Sponsorships", description: "Partnership opportunities" },
+      { to: "/faq", label: "FAQ", description: "Frequently asked questions" },
     ]
   }
 ];
