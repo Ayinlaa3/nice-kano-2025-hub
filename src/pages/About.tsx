@@ -3,7 +3,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Users, Building, Trophy, Globe } from "lucide-react";
+import { Users, Building, Trophy, Globe, Phone, Mail } from "lucide-react";
+
+// Import leadership photos
+import leaderOfoeyeno from "@/assets/leader-ofoeyeno.jpg";
+import leaderBalla from "@/assets/leader-balla.jpg";
+import leaderAlhassan from "@/assets/leader-alhassan.jpg";
+import leaderBoaz from "@/assets/leader-boaz.jpg";
 
 export default function About() {
   return (
@@ -14,26 +20,26 @@ export default function About() {
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/about"} />
       </Helmet>
 
-      {/* Hero Section with Gradient Background */}
-      <section className="relative bg-gradient-to-br from-brand-green via-brand-primary to-brand-muted text-brand-foreground py-20 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIxIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
+      {/* Hero Section with Subtle Background */}
+      <section className="relative bg-gradient-to-br from-brand-primary/20 via-brand-green/10 to-brand-muted/20 text-foreground py-20 md:py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAwMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMSIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center animate-fade-in">
-            <Badge className="mb-4 bg-brand-gold text-brand-foreground hover:bg-brand-gold/90">23rd Edition</Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-brand-gold bg-clip-text text-transparent">
+            <Badge className="mb-4 bg-brand-gold/90 text-brand-foreground hover:bg-brand-gold">23rd Edition</Badge>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-brand-primary to-brand-gold bg-clip-text text-transparent">
               About the Conference
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-brand-foreground/90 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-4xl mx-auto leading-relaxed">
               Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <Badge variant="outline" className="border-brand-foreground/20 text-brand-foreground hover:bg-brand-foreground/10">
+              <Badge variant="outline" className="border-border text-foreground hover:bg-muted">
                 3 Days Conference
               </Badge>
-              <Badge variant="outline" className="border-brand-foreground/20 text-brand-foreground hover:bg-brand-foreground/10">
+              <Badge variant="outline" className="border-border text-foreground hover:bg-muted">
                 International Speakers
               </Badge>
-              <Badge variant="outline" className="border-brand-foreground/20 text-brand-foreground hover:bg-brand-foreground/10">
+              <Badge variant="outline" className="border-border text-foreground hover:bg-muted">
                 Networking Opportunities
               </Badge>
             </div>
@@ -42,7 +48,7 @@ export default function About() {
       </section>
 
       {/* Statistics Section */}
-      <section className="py-16 bg-gradient-to-r from-brand-gold/5 to-brand-red/5">
+      <section className="py-16 bg-gradient-to-r from-brand-gold/10 to-brand-red/10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-primary">Conference Impact</h2>
@@ -52,10 +58,10 @@ export default function About() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="text-center cultural-card hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-green/10 to-brand-green/5">
+            <Card className="text-center cultural-card hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-green/20 to-brand-green/10">
               <CardContent className="p-6">
                 <div className="flex justify-center mb-4">
-                  <div className="p-3 rounded-full bg-brand-green/20">
+                  <div className="p-3 rounded-full bg-brand-green/30">
                     <Users className="h-8 w-8 text-brand-green" />
                   </div>
                 </div>
@@ -65,10 +71,10 @@ export default function About() {
               </CardContent>
             </Card>
 
-            <Card className="text-center cultural-card hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-gold/10 to-brand-gold/5">
+            <Card className="text-center cultural-card hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-gold/20 to-brand-gold/10">
               <CardContent className="p-6">
                 <div className="flex justify-center mb-4">
-                  <div className="p-3 rounded-full bg-brand-gold/20">
+                  <div className="p-3 rounded-full bg-brand-gold/30">
                     <Building className="h-8 w-8 text-brand-gold" />
                   </div>
                 </div>
@@ -78,10 +84,10 @@ export default function About() {
               </CardContent>
             </Card>
 
-            <Card className="text-center cultural-card hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-red/10 to-brand-red/5">
+            <Card className="text-center cultural-card hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-red/20 to-brand-red/10">
               <CardContent className="p-6">
                 <div className="flex justify-center mb-4">
-                  <div className="p-3 rounded-full bg-brand-red/20">
+                  <div className="p-3 rounded-full bg-brand-red/30">
                     <Trophy className="h-8 w-8 text-brand-red" />
                   </div>
                 </div>
@@ -91,10 +97,10 @@ export default function About() {
               </CardContent>
             </Card>
 
-            <Card className="text-center cultural-card hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-primary/10 to-primary/5">
+            <Card className="text-center cultural-card hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-primary/20 to-primary/10">
               <CardContent className="p-6">
                 <div className="flex justify-center mb-4">
-                  <div className="p-3 rounded-full bg-primary/20">
+                  <div className="p-3 rounded-full bg-primary/30">
                     <Globe className="h-8 w-8 text-primary" />
                   </div>
                 </div>
@@ -218,6 +224,98 @@ export default function About() {
                 </div>
                 <h3 className="font-semibold mb-3 text-primary">Industry Engagement</h3>
                 <p className="text-sm text-muted-foreground">Engage with sponsors and exhibitors driving infrastructure transformation</p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Conference Leadership Section */}
+        <section className="mb-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-primary">Conference Leadership</h2>
+            <p className="text-muted-foreground max-w-3xl mx-auto">
+              Meet the distinguished leaders guiding the 2025 NICE Conference & AGM organization.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Chairman of Central Planning Committee */}
+            <Card className="text-center hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-primary/10 to-brand-primary/5">
+              <CardContent className="p-6">
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-muted">
+                  <img 
+                    src={leaderOfoeyeno} 
+                    alt="Engr. Dr. Bemigho Ofoeyeno" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h3 className="font-bold text-lg mb-2 text-brand-primary">Engr. Dr. Bemigho Ofoeyeno</h3>
+                <p className="text-sm text-brand-primary/80 mb-1">FNSE, FNICE</p>
+                <p className="text-sm font-semibold text-muted-foreground mb-3">Chairman, Central Planning Committee</p>
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                  <Phone className="h-4 w-4" />
+                  <span>08023318732</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Secretary of Central Planning Committee */}
+            <Card className="text-center hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-green/10 to-brand-green/5">
+              <CardContent className="p-6">
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-muted">
+                  <img 
+                    src={leaderBalla} 
+                    alt="Engr. Maryam Abubakar Balla" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h3 className="font-bold text-lg mb-2 text-brand-green">Engr. Maryam Abubakar Balla</h3>
+                <p className="text-sm text-brand-green/80 mb-1">FNSE, FNICE</p>
+                <p className="text-sm font-semibold text-muted-foreground mb-3">Secretary, Central Planning Committee</p>
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                  <Phone className="h-4 w-4" />
+                  <span>08038111882</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Chairman of Local Organizing Committee */}
+            <Card className="text-center hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-gold/10 to-brand-gold/5">
+              <CardContent className="p-6">
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-muted">
+                  <img 
+                    src={leaderAlhassan} 
+                    alt="Engr. Prof. Hassim Alhassan" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h3 className="font-bold text-lg mb-2 text-brand-gold">Engr. Prof. Hassim Alhassan</h3>
+                <p className="text-sm text-brand-gold/80 mb-1">FNSE, FNICE</p>
+                <p className="text-sm font-semibold text-muted-foreground mb-3">Chairman, Local Organizing Committee</p>
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                  <Phone className="h-4 w-4" />
+                  <span>08103102219</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* NICE Executive Secretary */}
+            <Card className="text-center hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-brand-red/10 to-brand-red/5">
+              <CardContent className="p-6">
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-muted">
+                  <img 
+                    src={leaderBoaz} 
+                    alt="Engr. David Boaz" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h3 className="font-bold text-lg mb-2 text-brand-red">Engr. David Boaz</h3>
+                <p className="text-sm text-brand-red/80 mb-1">FNSE, FNICE</p>
+                <p className="text-sm font-semibold text-muted-foreground mb-3">NICE Executive Secretary</p>
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                  <Phone className="h-4 w-4" />
+                  <span>Contact via NICE Secretariat</span>
+                </div>
               </CardContent>
             </Card>
           </div>
