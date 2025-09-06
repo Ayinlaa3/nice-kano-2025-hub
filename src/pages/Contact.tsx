@@ -77,12 +77,14 @@ export default function Contact() {
   ];
 
   const subcommitteeContacts = [
-    { department: "Registration", email: "reg@nicehq.org", description: "Conference registration and attendee support" },
-    { department: "Sponsorship", email: "sponsor@nicehq.org", description: "Partnership and sponsorship opportunities" },
-    { department: "Logistics", email: "logistics@nicehq.org", description: "Venue, transportation, and logistics coordination" },
-    { department: "Media", email: "media@nicehq.org", description: "Press coverage and media relations" },
-    { department: "Technical Sessions", email: "technical@nicehq.org", description: "Paper submissions and technical programs" },
-    { department: "Accommodation", email: "stay@nicehq.org", description: "Hotel bookings and accommodation assistance" }
+    { department: "Registration", chairman: "Engr. Sarah Mohammed", phone: "+234 803 456 7890", description: "Conference registration and attendee support" },
+    { department: "Sponsorship", chairman: "Engr. Ibrahim Yusuf", phone: "+234 816 234 5678", description: "Partnership and sponsorship opportunities" },
+    { department: "Logistics", chairman: "Engr. Fatima Aliyu", phone: "+234 807 890 1234", description: "Venue, transportation, and logistics coordination" },
+    { department: "Media", chairman: "Engr. Abdullahi Sani", phone: "+234 809 567 8901", description: "Press coverage and media relations" },
+    { department: "Technical Sessions", chairman: "Engr. Dr. Amina Garba", phone: "+234 812 345 6789", description: "Paper submissions and technical programs" },
+    { department: "Accommodation", chairman: "Engr. Musa Tijjani", phone: "+234 814 678 9012", description: "Hotel bookings and accommodation assistance" },
+    { department: "Transportation", chairman: "Engr. Khadija Ahmad", phone: "+234 805 123 4567", description: "Airport transfers and local transportation" },
+    { department: "Protocol", chairman: "Engr. Yusuf Abdullahi", phone: "+234 813 456 7890", description: "VIP coordination and ceremonial activities" }
   ];
 
   const supportTeam = [
@@ -110,38 +112,6 @@ export default function Contact() {
           </p>
         </header>
 
-        {/* Conference Leadership */}
-        <section className="mb-16">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-4 text-primary">Conference Leadership</h2>
-            <p className="text-muted-foreground">Direct contact with our distinguished conference leaders</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {leadershipContacts.map((leader, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden bg-muted">
-                    <img 
-                      src={leader.image} 
-                      alt={leader.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <h3 className="font-bold text-lg mb-1">{leader.name}</h3>
-                  <p className="text-sm text-primary/80 mb-1">{leader.title}</p>
-                  <p className="text-sm font-medium text-muted-foreground mb-3">{leader.role}</p>
-                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                    <Phone className="h-4 w-4" />
-                    <a href={`tel:${leader.phone}`} className="hover:text-primary transition-colors">
-                      {leader.phone}
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
 
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-3 gap-8">
@@ -156,7 +126,7 @@ export default function Contact() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <Mail className="h-4 w-4 text-muted-foreground" />
                     <div>
@@ -173,6 +143,54 @@ export default function Contact() {
                       <p className="text-sm text-muted-foreground">Complete your registration online</p>
                     </div>
                   </div>
+                  
+                  {/* Key Leadership */}
+                  <div className="border-t pt-4">
+                    <h4 className="font-semibold mb-3">Key Leadership</h4>
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3">
+                        <div className="w-12 h-12 rounded-full overflow-hidden bg-muted flex-shrink-0">
+                          <img src={leaderOfoeyeno} alt="Engr. Dr. Bemigho Ofoeyeno" className="w-full h-full object-cover" />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-medium">Engr. Dr. Bemigho Ofoeyeno</p>
+                          <p className="text-sm text-muted-foreground">CPC Chairman | FNSE, FNICE</p>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                            <Phone className="h-3 w-3" />
+                            <a href="tel:+2348023318732" className="hover:text-primary transition-colors">+234 802 331 8732</a>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start gap-3">
+                        <div className="w-12 h-12 rounded-full overflow-hidden bg-muted flex-shrink-0">
+                          <img src={leaderAlhassan} alt="Engr. Prof. Hassim Alhassan" className="w-full h-full object-cover" />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-medium">Engr. Prof. Hassim Alhassan</p>
+                          <p className="text-sm text-muted-foreground">LOC Chairman | FNSE, FNICE</p>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                            <Phone className="h-3 w-3" />
+                            <a href="tel:+2348103102219" className="hover:text-primary transition-colors">+234 810 310 2219</a>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start gap-3">
+                        <div className="w-12 h-12 rounded-full overflow-hidden bg-muted flex-shrink-0">
+                          <img src={leaderBoaz} alt="Engr. David Boaz" className="w-full h-full object-cover" />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-medium">Engr. David Boaz</p>
+                          <p className="text-sm text-muted-foreground">NICE Executive Secretary | FNSE, FNICE</p>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                            <Phone className="h-3 w-3" />
+                            <a href="tel:+2348037154335" className="hover:text-primary transition-colors">+234 803 715 4335</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -186,16 +204,19 @@ export default function Contact() {
                 <div className="grid gap-4">
                   {subcommitteeContacts.map((committee, index) => (
                     <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
-                      <Mail className="h-4 w-4 text-muted-foreground mt-1" />
+                      <Phone className="h-4 w-4 text-muted-foreground mt-1" />
                       <div className="flex-1">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                           <h4 className="font-medium">{committee.department}</h4>
-                          <a 
-                            href={`mailto:${committee.email}`}
-                            className="text-sm text-primary hover:underline"
-                          >
-                            {committee.email}
-                          </a>
+                          <div className="text-sm">
+                            <p className="font-medium">{committee.chairman}</p>
+                            <a 
+                              href={`tel:${committee.phone}`}
+                              className="text-primary hover:underline"
+                            >
+                              {committee.phone}
+                            </a>
+                          </div>
                         </div>
                         <p className="text-sm text-muted-foreground mt-1">{committee.description}</p>
                       </div>
