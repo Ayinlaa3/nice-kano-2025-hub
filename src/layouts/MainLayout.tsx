@@ -12,6 +12,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import ChatSupport from "@/components/ChatSupport";
 
 const REG_FORM = "https://forms.gle/HXocP4aGn5Pb1HmR6";
 
@@ -191,6 +192,8 @@ export default function MainLayout() {
       <main className="flex-1">
         <Outlet />
       </main>
+
+      <ChatSupport />
 
       <footer className="border-t border-brand-green/20 py-12 bg-brand-green text-white">
         <div className="container mx-auto">
