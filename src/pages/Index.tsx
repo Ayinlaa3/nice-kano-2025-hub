@@ -176,7 +176,7 @@ const Index = () => {
 
       {/* About */}
       <main>
-        <section id="about" className="container mx-auto py-16 md:py-20 animate-fade-in">
+        <section id="about" className="container mx-auto px-6 lg:px-12 xl:px-16 py-16 md:py-20 animate-fade-in">
           <div className="grid md:grid-cols-12 gap-8 items-start">
             <div className="md:col-span-5">
               <div className="rounded-xl bg-gradient-to-br from-brand/5 via-kano-heritage/5 to-vibrant/5 ring-1 ring-brand/20 p-6 cultural-card">
@@ -197,7 +197,7 @@ const Index = () => {
 
         {/* Theme & Objectives */}
         <section id="theme" className="py-16 md:py-20 bg-brand/5">
-          <div className="container mx-auto grid md:grid-cols-12 gap-8">
+          <div className="container mx-auto px-6 lg:px-12 xl:px-16 grid md:grid-cols-12 gap-8">
             <div className="md:col-span-6">
               <h2 className="text-2xl md:text-3xl font-bold">Conference Theme</h2>
               <p className="mt-4">
@@ -218,7 +218,7 @@ const Index = () => {
         </section>
 
         {/* Activities & Programs */}
-        <section id="programs" className="container mx-auto py-16 md:py-20">
+        <section id="programs" className="container mx-auto px-6 lg:px-12 xl:px-16 py-16 md:py-20">
           <h2 className="text-2xl md:text-3xl font-bold text-center">Activities & Programs</h2>
           <p className="text-center text-muted-foreground mt-2 max-w-2xl mx-auto">
             A rich, multi-track experience designed for learning, collaboration, and celebration.
@@ -257,7 +257,7 @@ const Index = () => {
 
         {/* Conference Speakers */}
         <section id="speakers" className="py-16 md:py-20 bg-brandYellow/10">
-          <div className="container mx-auto">
+          <div className="container mx-auto px-6 lg:px-12 xl:px-16">
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold">Conference Speakers</h2>
               <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
@@ -298,7 +298,7 @@ const Index = () => {
 
         {/* Sponsors CTA */}
         <section id="sponsors" className="py-16 md:py-20">
-          <div className="container mx-auto grid lg:grid-cols-2 gap-8 items-center">
+          <div className="container mx-auto px-6 lg:px-12 xl:px-16 grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold">Call for Sponsors & Partners</h2>
               <p className="mt-4">
@@ -334,7 +334,7 @@ const Index = () => {
             </Card>
           </div>
           {/* Sponsors logo carousel */}
-          <div className="container mx-auto mt-10">
+          <div className="container mx-auto px-6 lg:px-12 xl:px-16 mt-10">
             <Carousel opts={{ loop: true }}>
               <CarouselContent className="items-center">
                 {Array.from({ length: 8 }).map((_, i) => (

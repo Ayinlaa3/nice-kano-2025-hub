@@ -96,7 +96,7 @@ export default function MainLayout() {
   return (
     <div className="min-h-dvh flex flex-col">
       <header className="sticky top-0 z-40 bg-gradient-to-r from-brand-primary/10 via-brand-yellow/5 to-brand-red/10 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-brand-primary/30 shadow-lg">
-        <div className="container mx-auto px-6 lg:px-12 xl:px-16 flex items-center justify-between py-3">
+        <div className="container mx-auto flex items-center justify-between py-3">
           <Link to="/" className="flex items-center gap-3 transition-transform duration-200 hover:scale-105">
             <img src={logo} alt="NICE logo" className="h-14 w-auto" />
             <div>
@@ -189,14 +189,14 @@ export default function MainLayout() {
         </div>
       </header>
 
-      <main className="flex-1 px-6 lg:px-12 xl:px-16">
+      <main className="flex-1">
         <Outlet />
       </main>
 
       <ChatSupport />
 
       <footer className="border-t border-brand-green/20 py-12 bg-brand-green text-white">
-        <div className="container mx-auto px-6 lg:px-12 xl:px-16">
+        <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">
