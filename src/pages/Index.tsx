@@ -337,8 +337,8 @@ const Index = () => {
           <div className="container mx-auto px-6 lg:px-12 xl:px-16 mt-10">
             <Carousel opts={{ loop: true }}>
               <CarouselContent className="items-center">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <CarouselItem key={i} className="basis-1/2 sm:basis-1/4 lg:basis-1/6">
+                {Array.from({ length: 10 }).map((_, i) => (
+                  <CarouselItem key={i} className="basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6">
                     <img 
                       src="/placeholder.svg" 
                       alt={`Sponsor logo ${i+1}`} 
