@@ -121,13 +121,15 @@ const ChatSupport = () => {
         {/* Chat Button */}
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-primary/80"
-          size="icon"
+          className="h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-primary/80 px-4 flex items-center gap-2"
         >
           {isOpen ? (
             <X className="h-6 w-6" />
           ) : (
-            <MessageCircle className="h-6 w-6" />
+            <>
+              <MessageCircle className="h-6 w-6" />
+              <span className="text-sm font-medium whitespace-nowrap">Need Help? Chat with us</span>
+            </>
           )}
         </Button>
       </div>
