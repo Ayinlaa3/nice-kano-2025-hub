@@ -21,6 +21,15 @@ import heroGreen from "@/assets/hero-green-building.jpg";
 import heroHighway from "@/assets/hero-highway.jpg";
 import heroConstruction from "@/assets/hero-construction.jpg";
 import heroSustainable from "@/assets/hero-sustainable.jpg";
+import heroEngineer from "@/assets/black-engineer.jpg";
+import heroBalcony from "@/assets/hero-balcony.jpg"
+import heroProject from "@/assets/hero-working-housing-project.jpg"
+import heroConstructionEng from "@/assets/hero-construction-engineer.jpg"
+import heroDrawings from "@/assets/drawings.jpg"
+import heroSky from "@/assets/skyscrapper.jpg"
+import heroArchitecture from "@/assets/architecture.jpg"
+
+
 
 export default function Hero() {
   return (
@@ -37,7 +46,7 @@ export default function Hero() {
         ]}
       >
         <CarouselContent>
-          {[heroBridge, heroGreen, heroHighway, heroConstruction, heroSustainable].map(
+          {[heroBridge, heroGreen, heroHighway, heroConstruction, heroArchitecture, heroSustainable,heroEngineer,heroDrawings, heroBalcony,heroConstructionEng,heroProject,heroSky].map(
             (src, idx) => (
               <CarouselItem key={idx}>
                 <div className="relative h-full w-full">

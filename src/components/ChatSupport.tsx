@@ -37,7 +37,7 @@ const ChatSupport = () => {
 
   const handleWhatsAppContact = (agent: SupportAgent) => {
     const message = encodeURIComponent(
-      `Hello ${agent.name}, I need assistance regarding the ICE KANO 2025 conference. Could you please help me?`
+      `Hello ${agent.name}, I need assistance regarding the NICE KANO 2025 conference. Could you please help me?`
     );
     const whatsappUrl = `https://wa.me/${agent.phone.replace(/[^0-9]/g, '')}?text=${message}`;
     window.open(whatsappUrl, '_blank');

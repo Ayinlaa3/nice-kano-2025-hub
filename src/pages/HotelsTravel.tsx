@@ -11,7 +11,7 @@ const HOTELS = [
     distance: "15 mins drive",
     amenities: ["Wi‑Fi", "VIP Rooms", "Executive Rooms"],
     contact: "08131852222",
-    link: "#",
+    link: "https://maps.app.goo.gl/V57aUVkiFUhNatYR8",
     rooms: ["VIP Danyaya: ₦80,000", "VIP Kano: ₦50,000", "Executive Tarauni: ₦40,000", "Executive Bichi: ₦40,000"]
   },
   {
@@ -21,7 +21,7 @@ const HOTELS = [
     distance: "15 mins drive",
     amenities: ["Wi‑Fi", "Breakfast", "Business Suite", "Kitchen"],
     contact: "08055247274, 08037055158",
-    link: "#",
+    link: "https://maps.app.goo.gl/LXbGTURXqbUh9Rgq9",
     rooms: ["Standard: ₦53,750", "Standard Twin: ₦64,500", "Business Suite: ₦80,625", "Executive Suite: ₦134,375", "Driver's Lodge: ₦21,500"]
   },
   {
@@ -31,7 +31,7 @@ const HOTELS = [
     distance: "15 mins drive",
     amenities: ["Wi‑Fi", "Luxury Suites", "Royal Service"],
     contact: "09160726060, 08028938723",
-    link: "#",
+    link: "https://maps.app.goo.gl/K6uMNG9rKLV6qgGT7#",
     rooms: ["Queen Suites: ₦65,000", "Royal Suites: ₦77,000", "Royal Twins: ₦85,000", "Sultanate Suites: ₦120,000", "Presidential: ₦225,000"]
   },
   {
@@ -41,7 +41,7 @@ const HOTELS = [
     distance: "15 mins drive",
     amenities: ["Wi‑Fi", "Executive Rooms", "VIP Service"],
     contact: "09127727750, 09127727760",
-    link: "#",
+    link: "#https://maps.app.goo.gl/yiX4wTezgkbcqCXw5",
     rooms: ["Mini Standard: ₦39,400", "Deluxe: ₦51,250", "Executive Deluxe: ₦56,400", "Royal Suites: ₦66,900", "Executive VIP: ₦104,000"]
   },
   {
@@ -51,7 +51,7 @@ const HOTELS = [
     distance: "25 mins drive",
     amenities: ["Wi‑Fi", "Restaurant", "Standard to Suite Options"],
     contact: "09038024166, 08039642061",
-    link: "#",
+    link: "https://maps.app.goo.gl/UdM8msPTJmuLNXnC8",
     rooms: ["Standard: ₦33,000", "Executive: ₦35,000", "Luxury: ₦40,000", "VIP: ₦55,000", "Deluxe: ₦60,000", "Royal: ₦70,000", "Suite: ₦96,000"]
   },
   {
@@ -61,7 +61,7 @@ const HOTELS = [
     distance: "25 mins drive",
     amenities: ["Wi‑Fi", "Budget Friendly", "Royal Suites"],
     contact: "064892226",
-    link: "#",
+    link: "https://maps.app.goo.gl/vWQMfk5dkh9FAd6s7",
     rooms: ["Mini Standard: ₦19,000", "Super Standard: ₦21,000", "King Delight: ₦26,000", "Royal Suite: ₦35,000"]
   },
   {
@@ -71,7 +71,7 @@ const HOTELS = [
     distance: "25 mins drive",
     amenities: ["Wi‑Fi", "Standard Rooms", "Executive Suites"],
     contact: "Contact via hotel",
-    link: "#",
+    link: "https://maps.app.goo.gl/hcyxcGoTTGcHavdi6",
     rooms: ["Mini Standard: ₦20,000", "Standard: ₦25,000", "Executive: ₦35,000", "Executive Suite: ₦40,000", "Deluxe: ₦45,000"]
   },
   {
@@ -81,7 +81,7 @@ const HOTELS = [
     distance: "10 mins drive",
     amenities: ["Wi‑Fi", "Presidential Suite", "Ambassador Suite", "Full Service"],
     contact: "08033773923, 08097697979",
-    link: "#",
+    link: "https://maps.app.goo.gl/GvDDPHRDdWi648sa7",
     rooms: ["Standard: ₦60,750", "Executive: ₦72,900", "King Size: ₦85,050", "VIP Suite: ₦121,500", "Presidential: ₦315,900"]
   },
   {
@@ -91,7 +91,7 @@ const HOTELS = [
     distance: "10 mins drive",
     amenities: ["Wi‑Fi", "Deluxe Rooms", "Executive Service"],
     contact: "08152525275",
-    link: "#",
+    link: "https://maps.app.goo.gl/XJum4bAFXLsyeDxx7",
     rooms: ["Deluxe: ₦34,000", "Royal: ₦44,000", "Luxury: ₦54,000", "Executive: ₦64,000", "Diplomate: ₦64,000"]
   },
   {
@@ -101,7 +101,7 @@ const HOTELS = [
     distance: "15 mins drive",
     amenities: ["Wi‑Fi", "Studio Rooms", "Royal Suites"],
     contact: "08100935004",
-    link: "#",
+    link: "https://maps.app.goo.gl/w57kGqBPpvPFTNNG7",
     rooms: ["Single: ₦35,000", "Executive Studio: ₦45,000", "Luxury Suite: ₦55,000", "Executive Suite: ₦66,000", "Royal Suite: ₦120,000"]
   },
   {
@@ -111,7 +111,7 @@ const HOTELS = [
     distance: "15 mins drive",
     amenities: ["Wi‑Fi", "Heritage Suites", "Executive Service"],
     contact: "08106350000, 08024203311",
-    link: "#",
+    link: "https://maps.app.goo.gl/A9CBwr44ubCptg4t8",
     rooms: ["Imperial Suite: ₦30,000", "Heritage Suite: ₦40,000", "Heritage Double: ₦45,000", "Executive Superior: ₦45,000"]
   },
   {
@@ -121,7 +121,7 @@ const HOTELS = [
     distance: "10 mins drive",
     amenities: ["Wi‑Fi", "Business Deluxe", "Economy Options"],
     contact: "08148808800, 07008808800",
-    link: "#",
+    link: "https://maps.app.goo.gl/Ae9mzrCXPuYj9xsM8",
     rooms: ["Economy: ₦26,202", "Standard: ₦28,990", "Deluxe: ₦35,680", "Business Deluxe: ₦43,485", "Alzaeera Suite: ₦57,980"]
   },
   {
@@ -131,7 +131,7 @@ const HOTELS = [
     distance: "10 mins drive",
     amenities: ["Wi‑Fi", "Deluxe Rooms", "Royal Service"],
     contact: "09092888807, 09092888808, 08078884888",
-    link: "#",
+    link: "https://maps.app.goo.gl/2DZE5abmp6h4hNEn6",
     rooms: ["Economic: ₦48,600", "Standard: ₦60,750", "GK Deluxe: ₦72,900", "Royal: ₦79,000", "GK Royal: ₦102,000"]
   },
   {
@@ -141,7 +141,7 @@ const HOTELS = [
     distance: "15 mins drive",
     amenities: ["Wi‑Fi", "Business Suite", "Ambassador Suite"],
     contact: "08024332464",
-    link: "#",
+    link: "https://maps.app.goo.gl/CGtuQsF8FXtzUQEQ7",
     rooms: ["Economy: ₦50,000", "Standard: ₦60,000", "First Class: ₦60,000", "Business Suite: ₦85,000", "Governor's Lodge: ₦120,000"]
   },
   {
@@ -151,7 +151,7 @@ const HOTELS = [
     distance: "15 mins drive",
     amenities: ["Wi‑Fi", "Bed & Breakfast", "VIP Suites", "Conference Venue"],
     contact: "08050298536",
-    link: "#",
+    link: "https://maps.app.goo.gl/Dw9Whwec3tqtFvCT6",
     rooms: ["Deluxe: ₦67,250", "Super Deluxe: ₦88,580", "VIP Suite: ₦90,850", "Executive Royal: ₦108,725", "Executive VIP: ₦132,425"]
   },
   {
@@ -161,7 +161,7 @@ const HOTELS = [
     distance: "15 mins drive",
     amenities: ["Wi‑Fi", "Executive Suites", "Presidential Suite"],
     contact: "064639678, 08034501789",
-    link: "#",
+    link: "https://maps.app.goo.gl/NJBsYhLm7iPDRPRQ7",
     rooms: ["Economy: ₦20,000", "Room A: ₦25,000", "Double: ₦28,000", "Executive Suite: ₦60,000", "Presidential: ₦200,000"]
   },
   {
@@ -171,7 +171,7 @@ const HOTELS = [
     distance: "10 mins drive",
     amenities: ["Wi‑Fi", "Apartment Style", "Presidential Suite"],
     contact: "09064777764",
-    link: "#",
+    link: "https://maps.app.goo.gl/XzmraWUiJ7YtDYtr6",
     rooms: ["Standard Suites: ₦50,000", "Luxury Suites: ₦60,000", "Presidential Suite: ₦150,000"]
   },
   {
@@ -181,7 +181,7 @@ const HOTELS = [
     distance: "20 mins drive",
     amenities: ["Wi‑Fi", "Pool", "Airport Proximity", "Apartments"],
     contact: "09022009040",
-    link: "#",
+    link: "https://maps.app.goo.gl/gbFwxmXgzZZ1SVqu8",
     rooms: ["Standard: ₦37,000", "Deluxe: ₦45,000", "Classic Suite: ₦55,000", "Ambassador: ₦80,000", "3 Bedroom Apt: ₦200,000"]
   },
   {
@@ -191,7 +191,7 @@ const HOTELS = [
     distance: "15 mins drive",
     amenities: ["Wi‑Fi", "Luxury Hotel", "Presidential Suite", "Chalet Options"],
     contact: "09122495109",
-    link: "#",
+    link: "https://maps.app.goo.gl/HXPVHExtvhpwacTm9",
     rooms: ["Classic: ₦78,000", "Deluxe: ₦90,000", "Classic Suite: ₦120,000", "Executive Suite: ₦150,000", "Presidential: ₦390,000"]
   }
 ];

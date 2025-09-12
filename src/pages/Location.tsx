@@ -2,13 +2,39 @@ import { Helmet } from "react-helmet-async";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Star, Camera, Utensils } from "lucide-react";
-import heroBridge from "@/assets/hero-bridge.jpg";
+import dyePits3 from "@/assets/dye-pits3.jpg";
 import heroGreen from "@/assets/hero-green-building.jpg";
-import heroHighway from "@/assets/hero-highway.jpg";
+import gidanMakama from "@/assets/Gidan-Makama.jpg"
 import kanoWalls from "@/assets/kano-city-walls.jpg";
 import emirsPalace from "@/assets/emirs-palace.jpg";
 import dyePits from "@/assets/dye-pits.jpg";
 import kurmiMarket from "@/assets/kurmi-market.jpg";
+import muritalaFlyover from "@/assets/muritala-flyover.jpg"
+import dyePits2 from "@/assets/dye-pits2.jpg";
+import networkRoad from "@/assets/network-road.jpg";
+import gidanMakama2 from "@/assets/Gidan-Makama2.jpg"
+import hotelFront from "@/assets/hotel-front.jpg"
+import dalaHill from "@/assets/dala-hill.jpg"
+import kanoGidinan from "@/assets/kano-gidinan.jpg"
+import kilishi from "@/assets/Kilishi_.jpeg"
+import dambeBoxing from "@/assets/DambeHausa-Boxing.jpg"
+import horseDubara from "@/assets/horse.jpg"
+import kanoMosque from "@/assets/kano-mosque-2.jpeg"
+import kanoState from "@/assets/Kano-state.jpeg"
+import masaFood  from "@/assets/Masa.jpg"
+import dubarFestival  from "@/assets/dubar-festival.jpg" 
+import artisticWork  from "@/assets/artistic-work.jpeg"
+import kunuFood  from "@/assets/Tigernut-drink.jpg"
+import dubarFestival2  from "@/assets/dubar-festival2.jpg" 
+import dubarPrayer  from "@/assets/durbar-prayer.jpg" 
+import dyePits4  from "@/assets/dye-pit4.jpg" 
+import furaNono  from "@/assets/Fura-Da-Nono.jpg" 
+import dubarFestival4  from "@/assets/durbar-festival4.jpg"
+import pottery  from "@/assets/pottery.jpeg"
+import dubarFestival3  from "@/assets/durbar-festival3.jpg"
+import calabash  from "@/assets/Calabashes.jpeg" 
+import suyaFood  from "@/assets/suya.jpeg"
+
 
 export default function Location() {
   const tourHighlights = [
@@ -180,7 +206,7 @@ export default function Location() {
           <div className="grid md:grid-cols-2 gap-6">
             {tourHighlights.map((highlight, index) => (
               <Card key={index} className="group hover:shadow-xl transition-all duration-300 overflow-hidden">
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-80 overflow-hidden">
                   <img 
                     src={highlight.image} 
                     alt={highlight.title}
@@ -265,7 +291,9 @@ export default function Location() {
         <section>
           <h2 className="text-3xl font-bold text-center mb-8">Photo Gallery</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {[heroBridge, heroGreen, heroHighway, kanoWalls, emirsPalace, dyePits, kurmiMarket].map((src, i) => (
+            {[dyePits2, kanoState, kanoWalls, emirsPalace, dyePits, dalaHill, kanoGidinan,hotelFront,gidanMakama,muritalaFlyover,kurmiMarket,dyePits3,gidanMakama2,networkRoad,dambeBoxing, kanoMosque, kilishi,
+              horseDubara,masaFood,dubarFestival,artisticWork,kunuFood,dubarFestival2,dubarPrayer,dyePits4,furaNono,dubarFestival4,pottery,dubarFestival3,calabash,suyaFood
+            ].map((src, i) => (
               <div key={i} className="group relative overflow-hidden rounded-lg aspect-square">
                 <img 
                   src={src} 
