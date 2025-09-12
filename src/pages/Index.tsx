@@ -14,7 +14,7 @@ import heroGreen from "@/assets/hero-green-building.jpg";
 import heroHighway from "@/assets/hero-highway.jpg";
 import heroConstruction from "@/assets/hero-construction.jpg";
 import heroSustainable from "@/assets/hero-sustainable.jpg";
-import { CalendarDays, MapPin, Building2, HardHat, Users, Briefcase, Award, GraduationCap, Handshake, Landmark, Beer, Presentation, ChevronDown, Mic, Star } from "lucide-react";
+import { CalendarDays, MapPin, Building2, HardHat, Users, Briefcase, Award, GraduationCap, Handshake, Landmark, Beer, Presentation, ChevronDown, Mic, Star, Play, Users2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import Hero from "@/components/Hero";
 
@@ -192,6 +192,224 @@ const Index = () => {
                 The NICE 23rd International Civil Engineering Conference & AGM brings together engineers, industry experts, academics, students, and corporate partners for three days of knowledge sharing, innovation, and networking. As Nigeria's premier civil engineering gathering, the conference catalyzes professional growth and showcases transformative solutions for resilient infrastructure.
               </p>
             </article>
+          </div>
+        </section>
+
+        {/* Publicity Section - Video Invitations */}
+        <section className="py-16 md:py-20 bg-gradient-to-br from-kano-heritage/10 via-brand/5 to-vibrant/10">
+          <div className="container mx-auto px-6 lg:px-12 xl:px-16">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold">Conference Spotlight</h2>
+              <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
+                Hear directly from NICE leaders and get a preview of what awaits you at Kano 2025
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Conference Jingle */}
+              <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand-red hover:border-l-vibrant transition-all duration-300">
+                <div className="relative aspect-video bg-gradient-to-br from-brand/20 to-kano-heritage/30 overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
+                  <img 
+                    src={heroBridge} 
+                    alt="NICE Kano 2025 Conference Jingle" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Play className="h-6 w-6 text-brand ml-1" fill="currentColor" />
+                    </div>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <div className="bg-brand-red text-white px-2 py-1 rounded text-xs font-medium">
+                      OFFICIAL JINGLE
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2">NICE Kano 2025 - Official Conference Jingle</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Experience the excitement and vision for Nigeria's premier civil engineering conference
+                  </p>
+                </div>
+              </Card>
+
+              {/* NICE President Invitation */}
+              <Card className="group overflow-hidden cultural-card border-l-4 border-l-vibrant hover:border-l-brand transition-all duration-300">
+                <div className="relative aspect-video bg-gradient-to-br from-vibrant/20 to-brand/30 overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
+                  <img 
+                    src="/src/assets/leader-balla.jpg" 
+                    alt="NICE President Invitation" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Play className="h-6 w-6 text-vibrant ml-1" fill="currentColor" />
+                    </div>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <div className="bg-vibrant text-white px-2 py-1 rounded text-xs font-medium">
+                      PRESIDENT'S MESSAGE
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2">Presidential Welcome</h3>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Engr. Balla A. Shehu, FNSE, FNICE - National President
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    A personal invitation from the National President to join us in Kano
+                  </p>
+                </div>
+              </Card>
+
+              {/* Kano Branch Chairman */}
+              <Card className="group overflow-hidden cultural-card border-l-4 border-l-kano-heritage hover:border-l-brandYellow transition-all duration-300">
+                <div className="relative aspect-video bg-gradient-to-br from-kano-heritage/20 to-brandYellow/30 overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
+                  <img 
+                    src="/src/assets/leader-alhassan.jpg" 
+                    alt="Kano Branch Chairman Welcome" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Play className="h-6 w-6 text-kano-heritage ml-1" fill="currentColor" />
+                    </div>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <div className="bg-kano-heritage text-white px-2 py-1 rounded text-xs font-medium">
+                      HOST WELCOME
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2">Kano Welcomes You</h3>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Engr. Alhassan Ibrahim - Kano Branch Chairman
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Discover the warmth and heritage that awaits you in ancient Kano
+                  </p>
+                </div>
+              </Card>
+
+              {/* Conference Committee Chairman */}
+              <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand hover:border-l-brand-red transition-all duration-300">
+                <div className="relative aspect-video bg-gradient-to-br from-brand/20 to-brand-red/30 overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
+                  <img 
+                    src="/src/assets/leader-boaz.jpg" 
+                    alt="Conference Chairman Message" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Play className="h-6 w-6 text-brand ml-1" fill="currentColor" />
+                    </div>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <div className="bg-brand text-white px-2 py-1 rounded text-xs font-medium">
+                      CHAIRMAN'S VISION
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2">Conference Vision</h3>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Engr. Boaz Emmanuel Adi - Conference Chairman
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Learn about the innovative programs and opportunities at Kano 2025
+                  </p>
+                </div>
+              </Card>
+
+              {/* Young Engineers Group */}
+              <Card className="group overflow-hidden cultural-card border-l-4 border-l-brandYellow hover:border-l-vibrant transition-all duration-300">
+                <div className="relative aspect-video bg-gradient-to-br from-brandYellow/20 to-vibrant/30 overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
+                  <img 
+                    src="/src/assets/leader-ofoeyeno.jpg" 
+                    alt="Young Engineers Message" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Play className="h-6 w-6 text-brandYellow ml-1" fill="currentColor" />
+                    </div>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <div className="bg-brandYellow text-white px-2 py-1 rounded text-xs font-medium">
+                      YOUTH FOCUS
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2">Young Engineers Unite</h3>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Engr. Ofoeyeno Andrew - YEG Representative
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Special programs and opportunities designed for young professionals
+                  </p>
+                </div>
+              </Card>
+
+              {/* Cultural Heritage Showcase */}
+              <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand-red hover:border-l-kano-heritage transition-all duration-300">
+                <div className="relative aspect-video bg-gradient-to-br from-brand-red/20 to-kano-heritage/30 overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
+                  <img 
+                    src="/src/assets/kano-city-walls.jpg" 
+                    alt="Kano Cultural Heritage" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Play className="h-6 w-6 text-brand-red ml-1" fill="currentColor" />
+                    </div>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <div className="bg-brand-red text-white px-2 py-1 rounded text-xs font-medium">
+                      CULTURAL JOURNEY
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2">Discover Kano Heritage</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Explore 1000 years of history, culture, and architectural marvels in ancient Kano
+                  </p>
+                </div>
+              </Card>
+            </div>
+
+            <div className="text-center mt-12">
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Users2 className="h-4 w-4" />
+                  <span>800+ Expected Attendees</span>
+                </div>
+                <div className="h-4 w-px bg-border"></div>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Presentation className="h-4 w-4" />
+                  <span>50+ Technical Sessions</span>
+                </div>
+                <div className="h-4 w-px bg-border"></div>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Award className="h-4 w-4" />
+                  <span>3 Days of Excellence</span>
+                </div>
+              </div>
+              <Button asChild size="lg" className="bg-gradient-to-r from-brand to-vibrant hover:from-brand/90 hover:to-vibrant/90">
+                <a href={REG_FORM} target="_blank" rel="noopener noreferrer">
+                  Join These Leaders - Register Now
+                </a>
+              </Button>
+            </div>
           </div>
         </section>
 
