@@ -17,6 +17,7 @@ import heroSustainable from "@/assets/hero-sustainable.jpg";
 import { CalendarDays, MapPin, Building2, HardHat, Users, Briefcase, Award, GraduationCap, Handshake, Landmark, Beer, Presentation, ChevronDown, Mic, Star, Play, Users2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import Hero from "@/components/Hero";
+import { IllBeThere } from "@/components/IllBeThere";
 
 
 
@@ -412,6 +413,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* I'll Be There Generator */}
+        <IllBeThere />
 
         {/* Theme & Objectives */}
         <section id="theme" className="py-16 md:py-20 bg-brand/5">
