@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Download, Upload, User, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import heroBridge from "@/assets/hero-bridge.jpg";
+import niceLogo from "@/assets/nice-logo.svg";
 
 export const IllBeThere = () => {
   const [name, setName] = useState("");
@@ -56,44 +57,44 @@ export const IllBeThere = () => {
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      // Set canvas dimensions
-      canvas.width = 1200;
-      canvas.height = 630;
+      // Set canvas dimensions (square format)
+      canvas.width = 800;
+      canvas.height = 800;
 
-      // Create gradient background
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, '#0F4C75');
-      gradient.addColorStop(0.3, '#3282B8');
-      gradient.addColorStop(0.7, '#BBE1FA');
-      gradient.addColorStop(1, '#1B262C');
+      // Create elegant gradient background
+      const gradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width/2);
+      gradient.addColorStop(0, '#1e40af');
+      gradient.addColorStop(0.4, '#3b82f6');
+      gradient.addColorStop(0.8, '#1e3a8a');
+      gradient.addColorStop(1, '#0f172a');
       
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Load and draw background pattern
-      const bgImage = new Image();
-      bgImage.crossOrigin = "anonymous";
+      // Load NICE logo
+      const logoImage = new Image();
+      logoImage.crossOrigin = "anonymous";
       
       await new Promise((resolve, reject) => {
-        bgImage.onload = resolve;
-        bgImage.onerror = reject;
-        bgImage.src = heroBridge;
+        logoImage.onload = resolve;
+        logoImage.onerror = reject;
+        logoImage.src = niceLogo;
       });
 
-      // Draw background image with overlay
-      ctx.globalAlpha = 0.2;
-      ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
-      ctx.globalAlpha = 1;
-
-      // Add geometric patterns
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-      ctx.lineWidth = 2;
-      for (let i = 0; i < 10; i++) {
+      // Add subtle pattern overlay
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < 20; i++) {
         ctx.beginPath();
-        ctx.moveTo(i * 120, 0);
-        ctx.lineTo(i * 120 + 200, canvas.height);
+        ctx.moveTo(i * 40, 0);
+        ctx.lineTo(i * 40 + 100, canvas.height);
         ctx.stroke();
       }
+
+      // Add elegant border
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
 
       // Load and draw user photo
       const userImage = new Image();
@@ -103,16 +104,33 @@ export const IllBeThere = () => {
         userImage.src = uploadedImage;
       });
 
-      // Draw circular photo frame
-      const photoSize = 200;
-      const photoX = 100;
-      const photoY = (canvas.height - photoSize) / 2;
+      // Draw user photo with elegant styling
+      const photoSize = 180;
+      const photoX = 60;
+      const photoY = 120;
 
-      // Photo background circle
+      // Photo shadow
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+      ctx.shadowBlur = 20;
+      ctx.shadowOffsetY = 10;
+
+      // Photo background circle with gradient
+      const photoGradient = ctx.createRadialGradient(
+        photoX + photoSize/2, photoY + photoSize/2, 0,
+        photoX + photoSize/2, photoY + photoSize/2, photoSize/2 + 15
+      );
+      photoGradient.addColorStop(0, '#ffffff');
+      photoGradient.addColorStop(1, '#f1f5f9');
+      
       ctx.beginPath();
-      ctx.arc(photoX + photoSize/2, photoY + photoSize/2, photoSize/2 + 10, 0, 2 * Math.PI);
-      ctx.fillStyle = 'white';
+      ctx.arc(photoX + photoSize/2, photoY + photoSize/2, photoSize/2 + 15, 0, 2 * Math.PI);
+      ctx.fillStyle = photoGradient;
       ctx.fill();
+
+      // Reset shadow
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
 
       // Clip and draw user photo
       ctx.save();
@@ -122,43 +140,71 @@ export const IllBeThere = () => {
       ctx.drawImage(userImage, photoX, photoY, photoSize, photoSize);
       ctx.restore();
 
-      // Main text - "I'll be there!"
-      ctx.font = 'bold 72px system-ui, -apple-system, sans-serif';
-      ctx.fillStyle = 'white';
-      ctx.textAlign = 'left';
-      const mainText = "I'll be there!";
-      const mainTextX = photoX + photoSize + 60;
-      ctx.fillText(mainText, mainTextX, 200);
+      // Draw NICE logo at top
+      const logoSize = 80;
+      const logoX = (canvas.width - logoSize) / 2;
+      const logoY = 40;
+      ctx.drawImage(logoImage, logoX, logoY, logoSize, logoSize);
 
-      // User name
-      ctx.font = 'bold 48px system-ui, -apple-system, sans-serif';
-      ctx.fillStyle = '#FFD700';
-      ctx.fillText(name.trim(), mainTextX, 270);
-
-      // Conference details
-      ctx.font = 'bold 36px system-ui, -apple-system, sans-serif';
-      ctx.fillStyle = 'white';
-      ctx.fillText('NICE Kano 2025', mainTextX, 350);
+      // Main text - "I'll be there!" with text shadow
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetY = 2;
       
-      ctx.font = '28px system-ui, -apple-system, sans-serif';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-      ctx.fillText('23rd International Civil Engineering Conference & AGM', mainTextX, 390);
-      ctx.fillText('October 21-23, 2025 • Kano, Nigeria', mainTextX, 430);
+      ctx.font = 'bold 42px "Georgia", serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'center';
+      const mainText = "I'll be there!";
+      ctx.fillText(mainText, canvas.width/2, 370);
+
+      // User name with elegant styling
+      ctx.font = 'bold 36px "Georgia", serif';
+      ctx.fillStyle = '#fbbf24';
+      ctx.fillText(name.trim(), canvas.width/2, 420);
+
+      // Reset shadow
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
+
+      // Conference title
+      ctx.font = 'bold 28px "Arial", sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText('NICE KANO 2025', canvas.width/2, 480);
+      
+      // Conference subtitle
+      ctx.font = '18px "Arial", sans-serif';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+      ctx.fillText('23rd International Civil Engineering Conference & AGM', canvas.width/2, 510);
+      ctx.fillText('October 21-23, 2025 • Kano, Nigeria', canvas.width/2, 535);
 
       // Add decorative elements
-      ctx.fillStyle = '#FFD700';
-      const starSize = 20;
-      for (let i = 0; i < 5; i++) {
-        const x = mainTextX + mainText.length * 35 + 30 + i * 35;
-        const y = 180;
+      ctx.fillStyle = '#fbbf24';
+      const starSize = 12;
+      for (let i = 0; i < 3; i++) {
+        const x = canvas.width/2 - 60 + i * 60;
+        const y = 580;
         drawStar(ctx, x, y, starSize/2, starSize, 5);
       }
 
-      // Bottom branding
-      ctx.font = '18px system-ui, -apple-system, sans-serif';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+      // Add elegant separator line
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(100, 600);
+      ctx.lineTo(canvas.width - 100, 600);
+      ctx.stroke();
+
+      // Bottom branding with proper font
+      ctx.font = 'bold 16px "Times New Roman", serif';
+      ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center';
-      ctx.fillText('Nigerian Institution of Civil Engineers (NICE)', canvas.width/2, canvas.height - 30);
+      ctx.fillText('Nigerian Institution of Civil Engineers (NICE)', canvas.width/2, canvas.height - 60);
+      
+      // Website
+      ctx.font = '14px "Arial", sans-serif';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.fillText('www.niceng.org', canvas.width/2, canvas.height - 35);
 
       toast.success("Design generated successfully! Click download to save.");
     } catch (error) {
@@ -306,10 +352,10 @@ export const IllBeThere = () => {
             {/* Preview Section */}
             <Card className="p-6 cultural-card">
               <h3 className="text-xl font-semibold mb-6">Preview</h3>
-              <div className="bg-muted rounded-lg p-4 min-h-[300px] flex items-center justify-center">
+              <div className="bg-muted rounded-lg p-4 min-h-[400px] flex items-center justify-center">
                 <canvas
                   ref={canvasRef}
-                  className="max-w-full max-h-[300px] w-auto h-auto border border-border rounded"
+                  className="max-w-full max-h-[400px] w-auto h-auto border border-border rounded shadow-lg"
                   style={{ display: uploadedImage && name ? 'block' : 'none' }}
                 />
                 {(!uploadedImage || !name) && (
