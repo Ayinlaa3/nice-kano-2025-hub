@@ -83,9 +83,9 @@ export const IllBeThere = () => {
 
       // Draw user photo in circular placeholder
       // Based on template analysis, the circular area is approximately at these coordinates
-      const photoSize = 280; // Diameter of the circle
-      const photoX = 140; // X position of photo center
-      const photoY = 530; // Y position of photo center
+      const photoSize = 350; // Diameter of the circle - increased size
+      const photoX = 110; // X position of photo center - adjusted for larger size
+      const photoY = 500; // Y position of photo center - adjusted for larger size
       const photoRadius = photoSize / 2;
 
       // Create circular clipping path and draw user photo
@@ -122,8 +122,8 @@ export const IllBeThere = () => {
       const nameY = 590; // Y position for name text (center of green area)
       const maxNameWidth = 420; // Maximum width for name text
 
-      // Set font properties
-      ctx.font = 'bold 14px Arial, sans-serif';
+      // Set font properties - increased font size
+      ctx.font = 'bold 24px Arial, sans-serif';
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -151,7 +151,7 @@ export const IllBeThere = () => {
       }
 
       // Draw text lines centered vertically in the green area
-      const lineHeight = 16;
+      const lineHeight = 28; // Increased line height for larger font
       const totalHeight = lines.length * lineHeight;
       let startY = nameY - (totalHeight / 2) + (lineHeight / 2);
 
