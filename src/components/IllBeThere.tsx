@@ -5,8 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Download, Upload, User, Sparkles } from "lucide-react";
 import { toast } from "sonner";
-import heroBridge from "@/assets/hero-bridge.jpg";
-import niceLogo from "@/assets/nice-logo.svg";
+import niceTemplate from "@/assets/nice-template.png";
 
 export const IllBeThere = () => {
   const [name, setName] = useState("");
@@ -57,44 +56,22 @@ export const IllBeThere = () => {
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      // Set canvas dimensions (square format)
-      canvas.width = 800;
-      canvas.height = 800;
+      // Set canvas dimensions (square format to match template)
+      canvas.width = 1080;
+      canvas.height = 1080;
 
-      // Create elegant gradient background
-      const gradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width/2);
-      gradient.addColorStop(0, '#1e40af');
-      gradient.addColorStop(0.4, '#3b82f6');
-      gradient.addColorStop(0.8, '#1e3a8a');
-      gradient.addColorStop(1, '#0f172a');
-      
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Load NICE logo
-      const logoImage = new Image();
-      logoImage.crossOrigin = "anonymous";
+      // Load template background
+      const templateImage = new Image();
+      templateImage.crossOrigin = "anonymous";
       
       await new Promise((resolve, reject) => {
-        logoImage.onload = resolve;
-        logoImage.onerror = reject;
-        logoImage.src = niceLogo;
+        templateImage.onload = resolve;
+        templateImage.onerror = reject;
+        templateImage.src = niceTemplate;
       });
 
-      // Add subtle pattern overlay
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-      ctx.lineWidth = 1;
-      for (let i = 0; i < 20; i++) {
-        ctx.beginPath();
-        ctx.moveTo(i * 40, 0);
-        ctx.lineTo(i * 40 + 100, canvas.height);
-        ctx.stroke();
-      }
-
-      // Add elegant border
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-      ctx.lineWidth = 4;
-      ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+      // Draw template as background
+      ctx.drawImage(templateImage, 0, 0, canvas.width, canvas.height);
 
       // Load and draw user photo
       const userImage = new Image();
@@ -104,107 +81,83 @@ export const IllBeThere = () => {
         userImage.src = uploadedImage;
       });
 
-      // Draw user photo with elegant styling
-      const photoSize = 180;
-      const photoX = 60;
-      const photoY = 120;
+      // Draw user photo in circular placeholder
+      // Based on template analysis, the circular area is approximately at these coordinates
+      const photoSize = 280; // Diameter of the circle
+      const photoX = 140; // X position of photo center
+      const photoY = 530; // Y position of photo center
+      const photoRadius = photoSize / 2;
 
-      // Photo shadow
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-      ctx.shadowBlur = 20;
-      ctx.shadowOffsetY = 10;
-
-      // Photo background circle with gradient
-      const photoGradient = ctx.createRadialGradient(
-        photoX + photoSize/2, photoY + photoSize/2, 0,
-        photoX + photoSize/2, photoY + photoSize/2, photoSize/2 + 15
-      );
-      photoGradient.addColorStop(0, '#ffffff');
-      photoGradient.addColorStop(1, '#f1f5f9');
-      
-      ctx.beginPath();
-      ctx.arc(photoX + photoSize/2, photoY + photoSize/2, photoSize/2 + 15, 0, 2 * Math.PI);
-      ctx.fillStyle = photoGradient;
-      ctx.fill();
-
-      // Reset shadow
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetY = 0;
-
-      // Clip and draw user photo
+      // Create circular clipping path and draw user photo
       ctx.save();
       ctx.beginPath();
-      ctx.arc(photoX + photoSize/2, photoY + photoSize/2, photoSize/2, 0, 2 * Math.PI);
+      ctx.arc(photoX + photoRadius, photoY + photoRadius, photoRadius, 0, 2 * Math.PI);
       ctx.clip();
-      ctx.drawImage(userImage, photoX, photoY, photoSize, photoSize);
+      
+      // Calculate aspect ratio and draw photo to fill circle completely
+      const imgAspect = userImage.width / userImage.height;
+      let drawWidth = photoSize;
+      let drawHeight = photoSize;
+      let drawX = photoX;
+      let drawY = photoY;
+      
+      if (imgAspect > 1) {
+        // Image is wider than tall
+        drawHeight = photoSize;
+        drawWidth = photoSize * imgAspect;
+        drawX = photoX - (drawWidth - photoSize) / 2;
+      } else {
+        // Image is taller than wide
+        drawWidth = photoSize;
+        drawHeight = photoSize / imgAspect;
+        drawY = photoY - (drawHeight - photoSize) / 2;
+      }
+      
+      ctx.drawImage(userImage, drawX, drawY, drawWidth, drawHeight);
       ctx.restore();
 
-      // Draw NICE logo at top
-      const logoSize = 80;
-      const logoX = (canvas.width - logoSize) / 2;
-      const logoY = 40;
-      ctx.drawImage(logoImage, logoX, logoY, logoSize, logoSize);
+      // Add user name in the green rectangular area
+      // Based on template, the green area is to the right of the photo
+      const nameX = 580; // X position for name text
+      const nameY = 590; // Y position for name text (center of green area)
+      const maxNameWidth = 420; // Maximum width for name text
 
-      // Main text - "I'll be there!" with text shadow
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-      ctx.shadowBlur = 10;
-      ctx.shadowOffsetY = 2;
-      
-      ctx.font = 'bold 42px "Georgia", serif';
+      // Set font properties
+      ctx.font = 'bold 14px Arial, sans-serif';
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center';
-      const mainText = "I'll be there!";
-      ctx.fillText(mainText, canvas.width/2, 370);
+      ctx.textBaseline = 'middle';
 
-      // User name with elegant styling
-      ctx.font = 'bold 36px "Georgia", serif';
-      ctx.fillStyle = '#fbbf24';
-      ctx.fillText(name.trim(), canvas.width/2, 420);
+      // Handle text wrapping if name is too long
+      const userName = name.trim();
+      const words = userName.split(' ');
+      let lines = [];
+      let currentLine = '';
 
-      // Reset shadow
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetY = 0;
-
-      // Conference title
-      ctx.font = 'bold 28px "Arial", sans-serif';
-      ctx.fillStyle = '#ffffff';
-      ctx.fillText('NICE KANO 2025', canvas.width/2, 480);
+      for (const word of words) {
+        const testLine = currentLine + (currentLine ? ' ' : '') + word;
+        const metrics = ctx.measureText(testLine);
+        
+        if (metrics.width > maxNameWidth && currentLine) {
+          lines.push(currentLine);
+          currentLine = word;
+        } else {
+          currentLine = testLine;
+        }
+      }
       
-      // Conference subtitle
-      ctx.font = '18px "Arial", sans-serif';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-      ctx.fillText('23rd International Civil Engineering Conference & AGM', canvas.width/2, 510);
-      ctx.fillText('October 21-23, 2025 • Kano, Nigeria', canvas.width/2, 535);
-
-      // Add decorative elements
-      ctx.fillStyle = '#fbbf24';
-      const starSize = 12;
-      for (let i = 0; i < 3; i++) {
-        const x = canvas.width/2 - 60 + i * 60;
-        const y = 580;
-        drawStar(ctx, x, y, starSize/2, starSize, 5);
+      if (currentLine) {
+        lines.push(currentLine);
       }
 
-      // Add elegant separator line
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(100, 600);
-      ctx.lineTo(canvas.width - 100, 600);
-      ctx.stroke();
+      // Draw text lines centered vertically in the green area
+      const lineHeight = 16;
+      const totalHeight = lines.length * lineHeight;
+      let startY = nameY - (totalHeight / 2) + (lineHeight / 2);
 
-      // Bottom branding with proper font
-      ctx.font = 'bold 16px "Times New Roman", serif';
-      ctx.fillStyle = '#ffffff';
-      ctx.textAlign = 'center';
-      ctx.fillText('Nigerian Institution of Civil Engineers (NICE)', canvas.width/2, canvas.height - 60);
-      
-      // Website
-      ctx.font = '14px "Arial", sans-serif';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-      ctx.fillText('www.niceng.org', canvas.width/2, canvas.height - 35);
+      for (let i = 0; i < lines.length; i++) {
+        ctx.fillText(lines[i], nameX, startY + (i * lineHeight));
+      }
 
       toast.success("Design generated successfully! Click download to save.");
     } catch (error) {
@@ -226,30 +179,6 @@ export const IllBeThere = () => {
     
     toast.success("Design downloaded successfully!");
   }, [name]);
-
-  // Helper function to draw star
-  const drawStar = (ctx: CanvasRenderingContext2D, x: number, y: number, innerRadius: number, outerRadius: number, points: number) => {
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.beginPath();
-    
-    for (let i = 0; i < points * 2; i++) {
-      const radius = i % 2 === 0 ? outerRadius : innerRadius;
-      const angle = (i * Math.PI) / points;
-      const pointX = Math.cos(angle) * radius;
-      const pointY = Math.sin(angle) * radius;
-      
-      if (i === 0) {
-        ctx.moveTo(pointX, pointY);
-      } else {
-        ctx.lineTo(pointX, pointY);
-      }
-    }
-    
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-  };
 
   return (
     <section className="py-16 md:py-20 bg-gradient-to-br from-brand/5 via-vibrant/5 to-kano-heritage/5">
