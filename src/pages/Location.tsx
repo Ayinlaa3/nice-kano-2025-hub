@@ -34,6 +34,7 @@ import pottery  from "@/assets/pottery.jpeg"
 import dubarFestival3  from "@/assets/durbar-festival3.jpg"
 import calabash  from "@/assets/Calabashes.jpeg" 
 import suyaFood  from "@/assets/suya.jpeg"
+import { link } from "fs";
 
 
 export default function Location() {
@@ -69,19 +70,23 @@ export default function Location() {
       name: "Bristol Palace Hotel Restaurant",
       cuisine: "Local & Continental",
       description: "Offers a fusion of local and continental cuisine in a luxurious setting. The suya platters and grilled fish are highly recommended.",
-      specialty: "Suya Platters & Grilled Fish"
+      specialty: "Suya Platters & Grilled Fish",
+      link:"https://maps.app.goo.gl/J8cjiBj8MMK8r5RN8",
+
     },
     {
       name: "Cilantro Restaurant",
       cuisine: "Indian, Chinese & Nigerian",
       description: "A favorite among locals and visitors alike, serving Indian, Chinese, and Nigerian delicacies.",
-      specialty: "Butter Chicken & Tandoori Grill"
+      specialty: "Butter Chicken & Tandoori Grill",
+      link:"https://maps.app.goo.gl/uYSMsryRA3rqJWAj6",
     },
     {
-      name: "Tony's Restaurant",
+      name: "Amala Plus",
       cuisine: "Traditional Nigerian",
       description: "Famous for affordable and delicious Nigerian classics like jollof rice, efo riro, and pounded yam with egusi soup.",
-      specialty: "Jollof Rice & Egusi Soup"
+      specialty: "Jollof Rice & Egusi Soup",
+      link:"https://maps.app.goo.gl/AAzDuuw83zCtamUb7",
     }
   ];
 
@@ -234,14 +239,16 @@ export default function Location() {
           <div className="grid md:grid-cols-3 gap-6">
             {restaurants.map((restaurant, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">
+                  <a href={restaurant.link} target="_blank" rel="noreferrer">
                 <CardHeader>
-                  <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-2">
                     <Utensils className="w-5 h-5 text-primary" />
                     <Badge variant="outline">{restaurant.cuisine}</Badge>
                   </div>
                   <CardTitle className="text-lg">{restaurant.name}</CardTitle>
                   <CardDescription className="text-sm">{restaurant.description}</CardDescription>
                 </CardHeader>
+                    </a>
                 <CardContent>
                   <div className="bg-accent/50 rounded-lg p-3">
                     <p className="text-sm font-medium">Must Try: {restaurant.specialty}</p>

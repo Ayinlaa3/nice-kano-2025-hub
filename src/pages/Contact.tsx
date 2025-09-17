@@ -77,12 +77,12 @@ export default function Contact() {
   ];
 
   const subcommitteeContacts = [
-    { department: "Registration", chairman: "Engr. Sarah Mohammed", phone: "+234 803 456 7890", description: "Conference registration and attendee support" },
-    { department: "Sponsorship", chairman: "Engr. Ibrahim Yusuf", phone: "+234 816 234 5678", description: "Partnership and sponsorship opportunities" },
+    { department: "Registration", chairman: "ENGR. JOAN NWEKE, FNICE", phone: "+234 803 048 0459", description: "Conference registration and attendee support" },
+    { department: "Sponsorship", chairman: "ENGR. BEMIGHO OFOEYENO, FNICE", phone: "+234 802 331 8732", description: "Partnership and sponsorship opportunities" },
     { department: "Logistics", chairman: "Engr. Fatima Aliyu", phone: "+234 807 890 1234", description: "Venue, transportation, and logistics coordination" },
     { department: "Media", chairman: "Engr. Abdullahi Sani", phone: "+234 809 567 8901", description: "Press coverage and media relations" },
-    { department: "Technical Sessions", chairman: "Engr. Dr. Amina Garba", phone: "+234 812 345 6789", description: "Paper submissions and technical programs" },
-    { department: "Accommodation", chairman: "Engr. Musa Tijjani", phone: "+234 814 678 9012", description: "Hotel bookings and accommodation assistance" },
+    { department: "Technical Sessions", chairman: "PROF. ALHASSAN HASHIM MOHAMMED, FNICE", phone: "+234 810 310 2219", description: "Paper submissions and technical programs" },
+    { department: "Accommodation", chairman: ">ENGR. USMAN TIJANI ", phone: "+234 803 935 1937", description: "Hotel bookings and accommodation assistance" },
     { department: "Transportation", chairman: "Engr. Khadija Ahmad", phone: "+234 805 123 4567", description: "Airport transfers and local transportation" },
     { department: "Protocol", chairman: "Engr. Yusuf Abdullahi", phone: "+234 813 456 7890", description: "VIP coordination and ceremonial activities" }
   ];
