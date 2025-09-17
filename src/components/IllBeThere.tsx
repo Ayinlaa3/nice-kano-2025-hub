@@ -83,9 +83,9 @@ export const IllBeThere = () => {
 
       // Draw user photo in circular placeholder
       // Based on template analysis, the circular area is approximately at these coordinates
-      const photoSize = 350; // Diameter of the circle - increased size
-      const photoX = 110; // X position of photo center - adjusted for larger size
-      const photoY = 500; // Y position of photo center - adjusted for larger size
+      const photoSize = 450; // Diameter of the circle - increased size
+      const photoX = 72; // X position of photo center - adjusted for larger size
+      const photoY = 330; // Y position of photo center - adjusted for larger size
       const photoRadius = photoSize / 2;
 
       // Create circular clipping path and draw user photo
@@ -118,12 +118,12 @@ export const IllBeThere = () => {
 
       // Add user name in the green rectangular area
       // Based on template, the green area is to the right of the photo
-      const nameX = 580; // X position for name text
-      const nameY = 590; // Y position for name text (center of green area)
+      const nameX = 760; // X position for name text
+      const nameY = 550; // Y position for name text (center of green area)
       const maxNameWidth = 420; // Maximum width for name text
 
       // Set font properties - increased font size
-      ctx.font = 'bold 24px Arial, sans-serif';
+      ctx.font = 'bold 30px Arial, sans-serif';
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
