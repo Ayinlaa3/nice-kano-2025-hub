@@ -19,6 +19,18 @@ import { useMemo, useState } from "react";
 import Hero from "@/components/Hero";
 import { IllBeThere } from "@/components/IllBeThere";
 
+// Import sponsor logos
+import sponsor1 from "@/assets/sponsors/sponsor1.png";
+import sponsor2 from "@/assets/sponsors/sponsor2.png";
+import sponsor3 from "@/assets/sponsors/sponsor3.png";
+import sponsor4 from "@/assets/sponsors/sponsor4.png";
+import sponsor5 from "@/assets/sponsors/sponsor5.png";
+import sponsor6 from "@/assets/sponsors/sponsor6.png";
+import sponsor7 from "@/assets/sponsors/sponsor7.png";
+import sponsor8 from "@/assets/sponsors/sponsor8.png";
+import sponsor9 from "@/assets/sponsors/sponsor9.png";
+import sponsor10 from "@/assets/sponsors/sponsor10.png";
+
 
 
 
@@ -559,16 +571,30 @@ const Index = () => {
           </div>
           {/* Sponsors logo carousel */}
           <div className="container mx-auto px-6 lg:px-12 xl:px-16 mt-10">
-            <Carousel opts={{ loop: true }}>
+            <h3 className="text-center text-lg font-semibold mb-6 text-muted-foreground">Our Trusted Partners</h3>
+            <Carousel opts={{ loop: true }} className="w-full">
               <CarouselContent className="items-center">
-                {Array.from({ length: 10 }).map((_, i) => (
+                {[
+                  { name: "BuildCore Engineering", logo: sponsor1 },
+                  { name: "TechBuild Solutions", logo: sponsor2 },
+                  { name: "Sterling Infrastructure Ltd", logo: sponsor3 },
+                  { name: "Pinnacle Engineering Group", logo: sponsor4 },
+                  { name: "Nexus Construction Technologies", logo: sponsor5 },
+                  { name: "Atlas Civil Works", logo: sponsor6 },
+                  { name: "Meridian Engineering Services", logo: sponsor7 },
+                  { name: "Vertex Structural Solutions", logo: sponsor8 },
+                  { name: "Quantum Infrastructure Partners", logo: sponsor9 },
+                  { name: "Apex Engineering Consortium", logo: sponsor10 },
+                ].map((sponsor, i) => (
                   <CarouselItem key={i} className="basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6">
-                    <img 
-                      src="/placeholder.svg" 
-                      alt={`Sponsor logo ${i+1}`} 
-                      className="h-12 w-auto mx-auto opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-110" 
-                      loading="lazy" 
-                    />
+                    <div className="p-4">
+                      <img 
+                        src={sponsor.logo} 
+                        alt={sponsor.name} 
+                        className="h-16 w-auto mx-auto opacity-70 transition-all duration-300 hover:opacity-100 hover:scale-110 object-contain" 
+                        loading="lazy" 
+                      />
+                    </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
