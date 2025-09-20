@@ -101,31 +101,31 @@ const activities = [
 
 const speakers = [
   {
-    name: "Prof. Adebayo Ogundimu",
+    name: "T.B.D",
     title: "Keynote Speaker",
-    position: "Director General, Nigerian Building and Road Research Institute",
-    topic: "Sustainable Infrastructure for Nigeria's Future",
+    position: " ",
+    topic: " ",
     image: "/placeholder.svg"
   },
   {
-    name: "Engr. Dr. Fatima Hassan",
-    title: "Special Guest Speaker",
-    position: "Federal Ministry of Works and Housing",
-    topic: "Policy Framework for Infrastructure Development",
+    name: "T.B.D",
+    title: "Engineering Roundtable Speaker",
+    position: " ",
+    topic: "Unlocking the Potentials of SMEs in the Nigerian Construction Industry:Opportunities, Partnerships, and Policy Support",
     image: "/placeholder.svg"
   },
   {
-    name: "Prof. Michael Adeyemi",
-    title: "Technical Speaker",
-    position: "University of Lagos",
-    topic: "Innovation in Construction Technology",
+    name: "T.B.D",
+    title: "Fellows Roundtable Speaker",
+    position: " ",
+    topic: "The Future of Civil Engineering Leadership in Nigeria: Charting Pathways for Innovation, Mentorship, and Sustainable Impact",
     image: "/placeholder.svg"
   },
   {
-    name: "Engr. Sarah Abdullahi",
-    title: "Industry Expert",
-    position: "Managing Director, Northern Construction Ltd",
-    topic: "Public-Private Partnerships in Infrastructure",
+    name: "T.B.D",
+    title: "Special Guest of Honour",
+    position: " ",
+    topic: " ",
     image: "/placeholder.svg"
   }
 ];
@@ -252,8 +252,8 @@ const Index = () => {
                 <div className="relative aspect-video bg-gradient-to-br from-vibrant/20 to-brand/30 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   <img 
-                    src="/src/assets/leader-balla.jpg" 
-                    alt="NICE President Invitation" 
+                    src="/src/assets/leader-tokunbo.jpg" 
+                    alt="NICE NATIONAL CHAIRMAN Invitation" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -262,15 +262,15 @@ const Index = () => {
                     </div>
                   </div>
                   <div className="absolute top-4 left-4">
-                    <div className="bg-vibrant text-white px-2 py-1 rounded text-xs font-medium">
-                      PRESIDENT'S MESSAGE
+                    <div className="bg-vibrant text-black px-2 py-1 rounded text-xs font-medium">
+                      NATIONAL CHAIRMAN MESSAGE
                     </div>
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">Presidential Welcome</h3>
+                  <h3 className="font-semibold text-lg mb-2">National Chairman Welcome</h3>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Engr. Balla A. Shehu, FNSE, FNICE - National President
+                    Engr. Tokunbo Ajanaku, FNSE, FNICE, PMP - National Chairman
                   </p>
                   <p className="text-sm text-muted-foreground">
                     A personal invitation from the National President to join us in Kano
@@ -283,7 +283,7 @@ const Index = () => {
                 <div className="relative aspect-video bg-gradient-to-br from-kano-heritage/20 to-brandYellow/30 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   <img 
-                    src="/src/assets/leader-alhassan.jpg" 
+                    src="/src/assets/leader-balla.jpg" 
                     alt="Kano Branch Chairman Welcome" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -301,10 +301,12 @@ const Index = () => {
                 <div className="p-4">
                   <h3 className="font-semibold text-lg mb-2">Kano Welcomes You</h3>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Engr. Alhassan Ibrahim - Kano Branch Chairman
+                      Engr. Maryam Abubakar-Balla - Kano Branch Chairman
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Discover the warmth and heritage that awaits you in ancient Kano
+                    The LOC Chairman of Kano Branch Engr. Prof. Hassim Alhassan
+                    FNSE, FNICE and Kano Branch Chairman Engr. Maryam Abubakar Balla
+                    FNSE, FNICE welcomes you the warmth and heritage that awaits you in ancient Kano
                   </p>
                 </div>
               </Card>
@@ -325,14 +327,14 @@ const Index = () => {
                   </div>
                   <div className="absolute top-4 left-4">
                     <div className="bg-brand text-white px-2 py-1 rounded text-xs font-medium">
-                      CHAIRMAN'S VISION
+                      BOT CHAIRMAN
                     </div>
                   </div>
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-lg mb-2">Conference Vision</h3>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Engr. Boaz Emmanuel Adi - Conference Chairman
+                    Engr. Sen. Adefemi Kila Emmanuel- Board of Trustees Chairman
                   </p>
                   <p className="text-sm text-muted-foreground">
                     Learn about the innovative programs and opportunities at Kano 2025
@@ -363,10 +365,10 @@ const Index = () => {
                 <div className="p-4">
                   <h3 className="font-semibold text-lg mb-2">Young Engineers Unite</h3>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Engr. Ofoeyeno Andrew - YEG Representative
+                    Engr. Dr. Bemigho Ofoeyeno - CPC Chairman
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Special programs and opportunities designed for young professionals
+                    The Central Planning Committee Chairman welcme you to the 23rd Annual Conference and General Meeting 
                   </p>
                 </div>
               </Card>

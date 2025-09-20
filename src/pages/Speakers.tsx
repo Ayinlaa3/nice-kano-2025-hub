@@ -9,13 +9,24 @@ type Speaker = {
   org: string;
   topic: string;
   day: "day1" | "day2" | "day3";
-  session: "Technical Session" | "Workshop" | "Plenary" | "Gala" | "Roundtable" | "Networking";
+  session: "Fellows Roundtable"| "Plenary" | "Panel Session" | "Engr. Roundtable" | "Networking";
 };
 
 const DATA: Speaker[] = [
-  { sn: 1, name: "Dr. A. Bello", org: "ABC Engineering – Director", topic: "Resilient Roads", day: "day1", session: "Technical Session" },
-  { sn: 2, name: "Engr. C. Nwosu", org: "InfraTech – CTO", topic: "Innovative Materials", day: "day2", session: "Workshop" },
-  { sn: 3, name: "Prof. H. Musa", org: "UNILAG – Professor", topic: "BIM & Sustainability", day: "day1", session: "Plenary" },
+  { sn: 1, name: "SMEDAN DG", org: "T.B.D", topic: "Unlocking the Potentials of SMEs in the Nigerian Construction Industry", day: "day1", session: "Engr. Roundtable" },
+  { sn: 2, name: " Dr. Zulfikar Adamu", org: "T.B.D", topic: " Smart Technologies in Infrastructure Development", day: "day2", session: "Plenary" },
+  { sn: 3, name: "Dr. Sunday Popo-Ola ", org: "T.B.D", topic: "Economic Approaches through Modern Construction Methods", day: "day2", session: "Plenary" },
+  { sn: 4, name: " Dr. Prisca Ndu ", org: "T.B.D", topic: "Modern Infrastructure Financing", day: "day2", session: "Plenary"},
+  { sn: 5, name: "Dr. Zulfikar Adamu", org: "T.B.D", topic: "Panel", day: "day2", session: "Panel Session" },
+  { sn: 6, name: "Dr. Sunday Popo-Ola", org: "T.B.D", topic: " ", day: "day2", session: "Panel Session" },
+  { sn: 7, name: "Dr. Prisca Ndu", org: "T.B.D", topic: " ", day: "day2", session: "Panel Session" },
+  { sn: 8, name: "Engr. Igbuan Okaisabor", org: "T.B.D", topic: "The Future of Civil Engineering Leadership in Nigeria: Charting Pathways for Innovation, Mentorship, and Sustainable Impact", day: "day2", session: "Fellows Roundtable", },
+  { sn: 9, name: "Dr. Danjuma Waniko (President, GBCN)", org: "T.B.D", topic: "Resilient and Climate-Adaptive Infrastructure ", day: "day3", session: "Plenary" },
+  { sn: 10, name: " Bo Asmus Kjeldgaard", org: "T.B.D", topic: " Policy, Governance, and Education for Innovation Adoption", day: "day3", session: "Plenary" },
+  { sn: 11, name: " Engr. Okoronkwo Ndukalu", org: "T.B.D", topic: " ", day: "day3", session: "Panel Session" },
+  { sn: 12, name: "Dr. Danjuma Waniko (President, GBCN)", org: "T.B.D", topic: " ", day: "day3", session: "Panel Session" },
+  { sn: 13, name: " Bo Asmus Kjeldgaard", org: "T.B.D", topic: " ", day: "day3", session: "Panel Session" },
+
 ];
 
 export default function Speakers() {
@@ -54,12 +65,11 @@ export default function Speakers() {
           <SelectTrigger className="w-[220px]"><SelectValue placeholder="Session" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Sessions</SelectItem>
+            <SelectItem value="Fellows Roundtable">Fellows Roundtable</SelectItem>
             <SelectItem value="Plenary">Plenary</SelectItem>
-            <SelectItem value="Technical Session">Technical Session</SelectItem>
-            <SelectItem value="Workshop">Workshop</SelectItem>
+            <SelectItem value="Panel Session">Panel Session</SelectItem>
             <SelectItem value="Networking">Networking</SelectItem>
-            <SelectItem value="Roundtable">Roundtable</SelectItem>
-            <SelectItem value="Gala">Gala</SelectItem>
+            <SelectItem value="Engr. Roundtable">Engr. Roundtable</SelectItem>
           </SelectContent>
         </Select>
       </div>
