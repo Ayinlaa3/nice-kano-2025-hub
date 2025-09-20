@@ -569,7 +569,7 @@ const Index = () => {
           </div>
           {/* Sponsors logo carousel */}
           <div className="container mx-auto px-6 lg:px-12 xl:px-16 mt-10">
-            <h3 className="text-center text-lg font-semibold mb-6 text-muted-foreground">Our Trusted Partners</h3>
+            <h3 className="text-center text-lg font-semibold mb-6 text-muted-foreground">Our Valued Partners and Sponsors</h3>
             <Carousel opts={{ loop: true }} className="w-full">
               <CarouselContent className="items-center">
                 {[
