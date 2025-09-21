@@ -1,4 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import logo from "@/assets/nice-logo.svg";
 import { Button } from "@/components/ui/button";
 import {
@@ -191,6 +192,7 @@ export default function MainLayout() {
 
       <main className="flex-1">
         <Outlet />
+        <SpeedInsights/>
       </main>
 
       <ChatSupport />
