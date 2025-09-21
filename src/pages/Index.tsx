@@ -25,7 +25,7 @@ import leaderTokunbo from "@/assets/leader-tokunbo.jpg";
 import leaderBalla from "@/assets/leader-balla.jpg";
 import senkila from "@/assets/senkila.png";
 import leaderOfoeyeno from "@/assets/leader-ofoeyeno.jpg";
-import citywall from "@assets/kano-city-walls.png";
+import citywall from "@/assets/kano-city-walls.png";
 
 // Import sponsor logos
 import sponsor1 from "@/assets/sponsors/sponsor01.png";
