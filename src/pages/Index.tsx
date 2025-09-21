@@ -20,6 +20,12 @@ import { useMemo, useState } from "react";
 import Hero from "@/components/Hero";
 import { IllBeThere } from "@/components/IllBeThere";
 
+// Import Leader photos
+import leaderTokunbo from "@/assets/leader-tokunbo.jpg";
+import leaderBalla from "@/assets/leader-balla.jpg";
+import senkila from "@/assets/senkila.png";
+import leaderOfoeyeno from "@/assets/leader-ofoeyeno.jpg";
+
 // Import sponsor logos
 import sponsor1 from "@/assets/sponsors/sponsor01.png";
 import sponsor2 from "@/assets/sponsors/sponsor02.png";
@@ -221,7 +227,7 @@ const Index = () => {
                 <div className="relative aspect-video bg-gradient-to-br from-brand/20 to-kano-heritage/30 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   <img 
-                    src={heroBridge} 
+                    src={heroBridge}
                     alt="NICE Kano 2025 Conference Jingle" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -249,7 +255,7 @@ const Index = () => {
                 <div className="relative aspect-video bg-gradient-to-br from-vibrant/20 to-brand/30 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   <img 
-                    src="/src/assets/leader-tokunbo.jpg" 
+                    src={leaderTokunbo} 
                     alt="NICE NATIONAL CHAIRMAN Invitation" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -280,7 +286,7 @@ const Index = () => {
                 <div className="relative aspect-video bg-gradient-to-br from-kano-heritage/20 to-brandYellow/30 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   <img 
-                    src="/src/assets/leader-balla.jpg" 
+                    src={leaderBalla} 
                     alt="Kano Branch Chairman Welcome" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -311,7 +317,7 @@ const Index = () => {
                 <div className="relative aspect-video bg-gradient-to-br from-brand/20 to-brand-red/30 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   <img 
-                    src="/src/assets/senkila.png" 
+                    src={senkila} 
                     alt="Conference Chairman Message" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -342,7 +348,7 @@ const Index = () => {
                 <div className="relative aspect-video bg-gradient-to-br from-brandYellow/20 to-vibrant/30 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   <img 
-                    src="/src/assets/leader-ofoeyeno.jpg" 
+                    src={leaderOfoeyeno} 
                     alt="Young Engineers Message" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
