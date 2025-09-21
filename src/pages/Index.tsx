@@ -25,6 +25,7 @@ import leaderTokunbo from "@/assets/leader-tokunbo.jpg";
 import leaderBalla from "@/assets/leader-balla.jpg";
 import senkila from "@/assets/senkila.png";
 import leaderOfoeyeno from "@/assets/leader-ofoeyeno.jpg";
+import citywall from "@assets/kano-city-walls.jpg";
 
 // Import sponsor logos
 import sponsor1 from "@/assets/sponsors/sponsor01.png";
@@ -379,7 +380,7 @@ const Index = () => {
                 <div className="relative aspect-video bg-gradient-to-br from-brand-red/20 to-kano-heritage/30 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   <img 
-                    src="/src/assets/kano-city-walls.jpg" 
+                    src={citywall} 
                     alt="Kano Cultural Heritage" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
