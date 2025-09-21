@@ -202,10 +202,10 @@ export default function Location() {
         {/* City Tour */}
         <section>
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-4">Kano City Tour</h2>
+            <h2 className="text-3xl font-bold mb-4">Proposed Kano City Tour</h2>
             <Badge variant="secondary" className="text-sm">Exclusive for Conference Attendees</Badge>
             <p className="mt-4 text-muted-foreground max-w-3xl mx-auto">
-              As part of the conference, we are pleased to offer delegates a guided Kano City Tour designed to immerse you in the city's cultural richness, architectural marvels, and everyday life.
+              As part of the conference, we are proposing to offer delegates a paid guided Kano City Tour designed to immerse you in the city's cultural richness, architectural marvels, and everyday life.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-6">

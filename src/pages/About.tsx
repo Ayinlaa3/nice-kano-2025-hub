@@ -25,21 +25,21 @@ export default function About() {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAwMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMSIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center animate-fade-in">
-            <Badge className="mb-4 bg-brand-gold/90 text-brand-foreground hover:bg-brand-gold">23rd Edition</Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-brand-primary to-brand-gold bg-clip-text text-transparent">
+            <Badge className="mb-4 bg-brand-gold/90 text-secondary-foreground text-md hover:bg-brand-gold">23rd Edition</Badge>
+            <h1 className="text-4xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-brand-primary to-brand-gold bg-clip-text text-transparent">
               About the Conference
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-xl mb-8 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <Badge variant="outline" className="border-border text-foreground hover:bg-muted">
+              <Badge variant="outline" className="border-border text-foreground hover:bg-muted text-md">
                 3 Days Conference
               </Badge>
-              <Badge variant="outline" className="border-border text-foreground hover:bg-muted">
+              <Badge variant="outline" className="border-border text-foreground hover:bg-muted text-md">
                 International Speakers
               </Badge>
-              <Badge variant="outline" className="border-border text-foreground hover:bg-muted">
+              <Badge variant="outline" className="border-border text-foreground hover:bg-muted text-md">
                 Networking Opportunities
               </Badge>
             </div>
@@ -53,7 +53,7 @@ export default function About() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-primary">Conference Impact</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Join Nigeria's largest gathering of civil engineering professionals and shape the future of infrastructure development.
+              Join Africa's largest gathering of civil engineering professionals and shape the future of infrastructure development.
             </p>
           </div>
           
@@ -65,7 +65,7 @@ export default function About() {
                     <Users className="h-8 w-8 text-brand-green" />
                   </div>
                 </div>
-                <h3 className="text-3xl font-bold text-brand-green mb-2">500+</h3>
+                <h3 className="text-3xl font-bold text-brand-green mb-2">800+</h3>
                 <p className="text-sm text-muted-foreground">Expected Participants</p>
                 <Progress value={85} className="mt-3 h-2" />
               </CardContent>
@@ -78,8 +78,8 @@ export default function About() {
                     <Building className="h-8 w-8 text-brand-gold" />
                   </div>
                 </div>
-                <h3 className="text-3xl font-bold text-brand-gold mb-2">50+</h3>
-                <p className="text-sm text-muted-foreground">Industry Exhibitors</p>
+                <h3 className="text-3xl font-bold text-brand-yellow mb-2">50+</h3>
+                <p className="text-sm text-muted-foreground">Industry CEA Exhibitors</p>
                 <Progress value={70} className="mt-3 h-2" />
               </CardContent>
             </Card>
@@ -122,7 +122,7 @@ export default function About() {
               <p className="text-lg mb-6 text-muted-foreground leading-relaxed">
                 The NICE 23rd International Civil Engineering Conference & AGM is Nigeria's premier gathering for civil engineers, 
                 industry leaders, academics, and students. Over three transformative days, participants explore cutting-edge solutions 
-                that shape sustainable, resilient infrastructure across the nation and beyond.
+                that shape sustainable, resilient infrastructure across the nation and beyond, live in Kano.
               </p>
               <p className="text-lg mb-8 text-muted-foreground leading-relaxed">
                 This year's theme focuses on integrating innovative construction methodologies with sustainable practices, 
@@ -153,7 +153,7 @@ export default function About() {
                 <CardContent className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-brand-gold rounded-full"></div>
-                    <span>Keynote speeches by industry leaders</span>
+                    <span>Keynote & Plenary speeches by industry leaders</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-brand-gold rounded-full"></div>
@@ -162,6 +162,10 @@ export default function About() {
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-brand-gold rounded-full"></div>
                     <span>Industrial site visits</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-brand-gold rounded-full"></div>
+                    <span>Business Roundtables</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-brand-gold rounded-full"></div>
@@ -314,7 +318,7 @@ export default function About() {
                 <p className="text-sm font-semibold text-muted-foreground mb-3">NICE Executive Secretary</p>
                 <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                   <Phone className="h-4 w-4" />
-                  <span>Contact via NICE Secretariat</span>
+                  <span>08037154335</span>
                 </div>
               </CardContent>
             </Card>
@@ -411,7 +415,7 @@ export default function About() {
                       <p className="text-sm text-muted-foreground">📞 08103102219</p>
                     </div>
                     <div className="grid md:grid-cols-2 gap-3">
-                      {["ENGR. SALISU USMAN", "ENGR. MRS. EBIEREN OTUARO", "ENGR. DELE FADIPE, MNICE", "ENGR. IBRAHIM IDRIS", "ENGR. ISMAIL ADEYEMI", "ENGR. VEN. SAMUEL OGUNDARE"].map((member, idx) => (
+                      {["ENGR. PROF. TAIYE E. ADEJUMO", "ENGR. MRS. EBIEREN OTUARO", "ENGR. DELE FADIPE, MNICE", "ENGR. IBRAHIM IDRIS", "ENGR. ISMAIL ADEYEMI", "ENGR. VEN. SAMUEL OGUNDARE"].map((member, idx) => (
                         <div key={idx} className="p-3 bg-card rounded border hover:shadow-md transition-shadow">
                           <p className="text-sm font-medium">{member}</p>
                         </div>
@@ -499,7 +503,7 @@ export default function About() {
                       <p className="text-sm text-muted-foreground">📞 07034894522</p>
                     </div>
                     <div className="grid md:grid-cols-2 gap-3">
-                      {["ENGR. IBRAHIM IDRIS", "ENGR. SALISU USMAN", "ENGR. DELE FADIPE, MNICE", "ENGR. ABIOLA BASHIRU"].map((member, idx) => (
+                      {["ENGR. PROF. TAIYE E. ADEJUMO", "ENGR. IBRAHIM IDRIS", "ENGR. SALISU USMAN", "ENGR. DELE FADIPE, MNICE", "ENGR. ABIOLA BASHIRU"].map((member, idx) => (
                         <div key={idx} className="p-3 bg-card rounded border hover:shadow-md transition-shadow">
                           <p className="text-sm font-medium">{member}</p>
                         </div>
@@ -582,7 +586,7 @@ export default function About() {
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl text-brand-foreground">Committee Leadership</CardTitle>
                 <CardDescription className="text-brand-foreground/80">
-                  Coordinating all venue activities, industrial visits, travel advisories, and local liaison services
+                  Coordinating all venue activities, industrial visits, travel advisories, and local liaison liason with the Central Planning Committee.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">

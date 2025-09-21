@@ -33,7 +33,7 @@ import heroArchitecture from "@/assets/architecture.jpg"
 
 export default function Hero() {
   return (
-    <section id="top" className="relative h-[80vh] min-h-[500px] max-h-[700px] overflow-hidden">
+    <section id="top" className="relative h-[80vh] min-h-[650px] max-h-[800px] overflow-hidden">
       {/* Background Image Carousel */}
       <Carousel
         className="absolute inset-0 w-full h-full"
@@ -103,7 +103,7 @@ export default function Hero() {
             </a>
           </Button>
           <Button asChild variant="cultural" size="xl">
-            <a href="#sponsors">Sponsor Us</a>
+            <a href="/sponsorships">Sponsor Us</a>
           </Button>
         </div>
       </div>

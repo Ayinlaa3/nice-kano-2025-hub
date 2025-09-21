@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
+import Autoplay from "embla-carousel-autoplay"
 import {
   Carousel,
   CarouselContent,
@@ -20,16 +21,12 @@ import Hero from "@/components/Hero";
 import { IllBeThere } from "@/components/IllBeThere";
 
 // Import sponsor logos
-import sponsor1 from "@/assets/sponsors/sponsor1.png";
-import sponsor2 from "@/assets/sponsors/sponsor2.png";
-import sponsor3 from "@/assets/sponsors/sponsor3.png";
-import sponsor4 from "@/assets/sponsors/sponsor4.png";
-import sponsor5 from "@/assets/sponsors/sponsor5.png";
-import sponsor6 from "@/assets/sponsors/sponsor6.png";
-import sponsor7 from "@/assets/sponsors/sponsor7.png";
-import sponsor8 from "@/assets/sponsors/sponsor8.png";
-import sponsor9 from "@/assets/sponsors/sponsor9.png";
-import sponsor10 from "@/assets/sponsors/sponsor10.png";
+import sponsor1 from "@/assets/sponsors/sponsor01.png";
+import sponsor2 from "@/assets/sponsors/sponsor02.png";
+import sponsor3 from "@/assets/sponsors/sponsor03.png";
+import sponsor4 from "@/assets/sponsors/sponsor04.png";
+import sponsor5 from "@/assets/sponsors/sponsor05.png";
+import sponsor6 from "@/assets/sponsors/sponsor06.png";
 
 
 
@@ -235,19 +232,19 @@ const Index = () => {
                   </div>
                   <div className="absolute top-4 left-4">
                     <div className="bg-brand-red text-white px-2 py-1 rounded text-xs font-medium">
-                      OFFICIAL JINGLE
+                      OFFICIAL VIDEO JINGLE
                     </div>
                   </div>
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-lg mb-2">NICE Kano 2025 - Official Conference Jingle</h3>
                   <p className="text-sm text-muted-foreground">
-                    Experience the excitement and vision for Nigeria's premier civil engineering conference
+                    Experience the excitement and vision for Nigeria's premier civil engineering conference, holding live in the city of Kano
                   </p>
                 </div>
               </Card>
 
-              {/* NICE President Invitation */}
+              {/* NICE Chairman Invitation */}
               <Card className="group overflow-hidden cultural-card border-l-4 border-l-vibrant hover:border-l-brand transition-all duration-300">
                 <div className="relative aspect-video bg-gradient-to-br from-vibrant/20 to-brand/30 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
@@ -263,17 +260,17 @@ const Index = () => {
                   </div>
                   <div className="absolute top-4 left-4">
                     <div className="bg-vibrant text-black px-2 py-1 rounded text-xs font-medium">
-                      NATIONAL CHAIRMAN MESSAGE
+                      NATIONAL CHAIRMAN
                     </div>
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">National Chairman Welcome</h3>
+                  <h3 className="font-semibold text-lg mb-2">National Chairman's Welcome</h3>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Engr. Tokunbo Ajanaku, FNSE, FNICE, PMP - National Chairman
+                    
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    A personal invitation from the National President to join us in Kano
+                    A personal invitation from the National Chairman of the Nigerian Institution of Civil Engineers, Engr. Tokunbo Ajanaku, FNSE, FNICE, PMP to join us in Kano for a 3-day powerpacked.
                   </p>
                 </div>
               </Card>
@@ -301,22 +298,20 @@ const Index = () => {
                 <div className="p-4">
                   <h3 className="font-semibold text-lg mb-2">Kano Welcomes You</h3>
                   <p className="text-sm text-muted-foreground mb-2">
-                      Engr. Maryam Abubakar-Balla - Kano Branch Chairman
+                      
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    The LOC Chairman of Kano Branch Engr. Prof. Hassim Alhassan
-                    FNSE, FNICE and Kano Branch Chairman Engr. Maryam Abubakar Balla
-                    FNSE, FNICE welcomes you the warmth and heritage that awaits you in ancient Kano
-                  </p>
+                    Welcome message from Kano, led by the Branch Chairman Engr. Maryam Abubakar-Balla, FNSE, FNICE and the Conference LOC Chairman Prof. Hassim Alhassan, FNSE, FNICE welcomes you the warmth and heritage that awaits you in ancient Kano.
+                    </p>
                 </div>
               </Card>
 
-              {/* Conference Committee Chairman */}
+              {/* Board of Trustees Chairman */}
               <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand hover:border-l-brand-red transition-all duration-300">
                 <div className="relative aspect-video bg-gradient-to-br from-brand/20 to-brand-red/30 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   <img 
-                    src="/src/assets/leader-boaz.jpg" 
+                    src="/src/assets/senkila.png" 
                     alt="Conference Chairman Message" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -334,15 +329,15 @@ const Index = () => {
                 <div className="p-4">
                   <h3 className="font-semibold text-lg mb-2">Conference Vision</h3>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Engr. Sen. Adefemi Kila Emmanuel- Board of Trustees Chairman
+                    Engr. Sen. Adefemi Kila, FNSE, FNICE - Board of Trustees Chairman
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Learn about the innovative programs and opportunities at Kano 2025
+                    Hear from the Chairman of the Board of Trustees on the innovative programs and opportunities at Kano 2025
                   </p>
                 </div>
               </Card>
 
-              {/* Young Engineers Group */}
+              {/* Conference CPC Chairman */}
               <Card className="group overflow-hidden cultural-card border-l-4 border-l-brandYellow hover:border-l-vibrant transition-all duration-300">
                 <div className="relative aspect-video bg-gradient-to-br from-brandYellow/20 to-vibrant/30 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
@@ -368,7 +363,7 @@ const Index = () => {
                     Engr. Dr. Bemigho Ofoeyeno - CPC Chairman
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    The Central Planning Committee Chairman welcme you to the 23rd Annual Conference and General Meeting 
+                    The Central Planning Committee Chairman warmly invites you to the 23rd Annual International Conference and General Meeting 
                   </p>
                 </div>
               </Card>
@@ -389,7 +384,7 @@ const Index = () => {
                   </div>
                   <div className="absolute top-4 left-4">
                     <div className="bg-brand-red text-white px-2 py-1 rounded text-xs font-medium">
-                      CULTURAL JOURNEY
+                      CULTURAL HERITAGE
                     </div>
                   </div>
                 </div>
@@ -546,9 +541,11 @@ const Index = () => {
                 <li className="transition-colors duration-300 hover:text-brand">Branded experiences at high-profile networking events.</li>
               </ul>
               <div className="mt-6 flex gap-3">
-                <Button variant="professional" size="lg">Become a Sponsor</Button>
+                <Button variant="professional" size="lg">
+                  <a href="/sponsorships">Become a Sponsor</a>
+                  </Button>
                 <Button asChild variant="cultural" size="lg">
-                  <a href="#contact">Request Media Kit</a>
+                  <a href="/contact">Request Media Kit</a>
                 </Button>
               </div>
             </div>
@@ -570,36 +567,43 @@ const Index = () => {
             </Card>
           </div>
           {/* Sponsors logo carousel */}
-          <div className="container mx-auto px-6 lg:px-12 xl:px-16 mt-10">
-            <h3 className="text-center text-lg font-semibold mb-6 text-muted-foreground">Our Valued Partners and Sponsors</h3>
-            <Carousel opts={{ loop: true }} className="w-full">
-              <CarouselContent className="items-center">
-                {[
-                  { name: "BuildCore Engineering", logo: sponsor1 },
-                  { name: "TechBuild Solutions", logo: sponsor2 },
-                  { name: "Sterling Infrastructure Ltd", logo: sponsor3 },
-                  { name: "Pinnacle Engineering Group", logo: sponsor4 },
-                  { name: "Nexus Construction Technologies", logo: sponsor5 },
-                  { name: "Atlas Civil Works", logo: sponsor6 },
-                  { name: "Meridian Engineering Services", logo: sponsor7 },
-                  { name: "Vertex Structural Solutions", logo: sponsor8 },
-                  { name: "Quantum Infrastructure Partners", logo: sponsor9 },
-                  { name: "Apex Engineering Consortium", logo: sponsor10 },
-                ].map((sponsor, i) => (
-                  <CarouselItem key={i} className="basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6">
-                    <div className="p-4">
-                      <img 
-                        src={sponsor.logo} 
-                        alt={sponsor.name} 
-                        className="h-16 w-auto mx-auto opacity-70 transition-all duration-300 hover:opacity-100 hover:scale-110 object-contain" 
-                        loading="lazy" 
-                      />
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
+<div className="container mx-auto px-6 lg:px-12 xl:px-16 mt-10">
+  <h3 className="text-center text-lg font-semibold mb-6 text-muted-foreground">
+    Our Valued Partners and Sponsors
+  </h3>
+  <Carousel
+    opts={{ loop: true }}
+    plugins={[
+      Autoplay({ delay: 2500, stopOnInteraction: false })
+    ]}
+    className="w-full"
+  >
+    <CarouselContent className="items-center">
+      {[
+        { name: "BuildCore Engineering", logo: sponsor1 },
+        { name: "TechBuild Solutions", logo: sponsor2 },
+        { name: "Sterling Infrastructure Ltd", logo: sponsor3 },
+        { name: "Pinnacle Engineering Group", logo: sponsor4 },
+        { name: "Nexus Construction Technologies", logo: sponsor5 },
+        { name: "Atlas Civil Works", logo: sponsor6 },
+      ].map((sponsor, i) => (
+        <CarouselItem
+          key={i}
+          className="basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6"
+        >
+          <div className="p-4">
+            <img
+              src={sponsor.logo}
+              alt={sponsor.name}
+              className="h-16 w-auto mx-auto opacity-70 transition-all duration-300 hover:opacity-100 hover:scale-110 object-contain"
+              loading="lazy"
+            />
           </div>
+        </CarouselItem>
+      ))}
+    </CarouselContent>
+  </Carousel>
+</div>
         </section>
 
 {/* Travel moved to dedicated page */}

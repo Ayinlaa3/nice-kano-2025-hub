@@ -111,8 +111,8 @@ export default function Sponsorships() {
       </header>
 
       {/* About the Conference */}
-      <section>
-        <Card className="p-6">
+      {/* <section>
+        <Card className="p-6 justify-items-center">
           <h2 className="text-2xl font-bold mb-4">About the Conference</h2>
           <div className="space-y-4">
             <p className="text-muted-foreground">
@@ -127,7 +127,7 @@ export default function Sponsorships() {
             </p>
           </div>
         </Card>
-      </section>
+      </section> */}
 
       {/* Conference Objectives */}
       <section>

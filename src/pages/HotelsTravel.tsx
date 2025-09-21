@@ -260,7 +260,7 @@ export default function HotelsTravel() {
               <li className="flex items-start">
                 <span className="text-primary mr-2">🚗</span>
                 <div>
-                  <strong>By Road:</strong> Kano is well-connected by road. The journey from Abuja takes approximately 6-7 hours via A1 highway.
+                  <strong>By Road:</strong> Kano is well-connected by road. The journey from Abuja takes approximately 6-7 hours via A1 (Abuja - Kaduna - Kano) Highway.
                 </div>
               </li>
               <li className="flex items-start">
@@ -278,7 +278,7 @@ export default function HotelsTravel() {
               <li className="flex items-start">
                 <span className="text-primary mr-2">🚖</span>
                 <div>
-                  <strong>Taxis:</strong> Use reputable taxi services or ride-hailing apps. Always negotiate fares beforehand for regular taxis.
+                  <strong>Taxis:</strong> Use reputable taxi services or ride-hailing apps like Bolt or Uber. Always negotiate fares beforehand for regular taxis.
                 </div>
               </li>
               <li className="flex items-start">
@@ -290,7 +290,7 @@ export default function HotelsTravel() {
               <li className="flex items-start">
                 <span className="text-primary mr-2">🏨</span>
                 <div>
-                  <strong>Conference Transport:</strong> Organized shuttle services will be available between major hotels and the conference venue.
+                  <strong>Conference Transport:</strong> Organized shuttle services may be available between major hotels and the conference venue.
                 </div>
               </li>
             </ul>
@@ -302,7 +302,7 @@ export default function HotelsTravel() {
               <li className="flex items-start">
                 <span className="text-primary mr-2">🆔</span>
                 <div>
-                  <strong>Documentation:</strong> Always carry valid government-issued ID and your conference badge.
+                  <strong>Documentation:</strong> Always carry valid government-issued ID and your conference tag.
                 </div>
               </li>
               <li className="flex items-start">
@@ -350,13 +350,13 @@ export default function HotelsTravel() {
               <li className="flex items-start">
                 <span className="text-primary mr-2">💰</span>
                 <div>
-                  <strong>Currency:</strong> Nigerian Naira (₦). Most hotels and restaurants accept major credit cards.
+                  <strong>Currency:</strong> Nigerian Naira (₦). Most hotels and restaurants accept major debit cards.
                 </div>
               </li>
               <li className="flex items-start">
                 <span className="text-primary mr-2">🏧</span>
                 <div>
-                  <strong>ATMs:</strong> Widely available throughout the city. Banks typically operate Monday-Friday, 8AM-4PM.
+                  <strong>ATMs:</strong> Widely available throughout the city. Banks typically operate Monday-Friday, 8AM-4PM. You can also find POS operators in many shops.
                 </div>
               </li>
               <li className="flex items-start">

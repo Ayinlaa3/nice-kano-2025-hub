@@ -154,7 +154,7 @@ export default function Contact() {
                         </div>
                         <div className="flex-1">
                           <p className="font-medium">Engr. Dr. Bemigho Ofoeyeno</p>
-                          <p className="text-sm text-muted-foreground">CPC Chairman | FNSE, FNICE</p>
+                          <p className="text-sm text-muted-foreground">FNSE, FNICE | CPC Chairman</p>
                           <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
                             <Phone className="h-3 w-3" />
                             <a href="tel:+2348023318732" className="hover:text-primary transition-colors">+234 802 331 8732</a>
@@ -168,7 +168,7 @@ export default function Contact() {
                         </div>
                         <div className="flex-1">
                           <p className="font-medium">Engr. Prof. Hassim Alhassan</p>
-                          <p className="text-sm text-muted-foreground">LOC Chairman | FNSE, FNICE</p>
+                          <p className="text-sm text-muted-foreground">FNSE, FNICE | LOC Chairman</p>
                           <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
                             <Phone className="h-3 w-3" />
                             <a href="tel:+2348103102219" className="hover:text-primary transition-colors">+234 810 310 2219</a>
@@ -182,7 +182,7 @@ export default function Contact() {
                         </div>
                         <div className="flex-1">
                           <p className="font-medium">Engr. David Boaz</p>
-                          <p className="text-sm text-muted-foreground">NICE Executive Secretary | FNSE, FNICE</p>
+                          <p className="text-sm text-muted-foreground">FNSE, FNICE | NICE Executive Secretary</p>
                           <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
                             <Phone className="h-3 w-3" />
                             <a href="tel:+2348037154335" className="hover:text-primary transition-colors">+234 803 715 4335</a>
@@ -196,7 +196,7 @@ export default function Contact() {
             </Card>
 
             {/* Subcommittee Contacts */}
-            <Card>
+            {/* <Card>
               <CardHeader>
                 <CardTitle>Subcommittee Contacts</CardTitle>
               </CardHeader>
@@ -224,7 +224,7 @@ export default function Contact() {
                   ))}
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
 
             {/* Support Team */}
             <Card>

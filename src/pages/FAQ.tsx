@@ -17,19 +17,19 @@ const faqCategories = [
     questions: [
       {
         question: "How do I register for NICE Kano 2025?",
-        answer: "Register online through our Google Forms link: https://forms.gle/HXocP4aGn5Pb1HmR6. You can also register on-site during the conference days (October 21-23, 2025), though online pre-registration is strongly recommended for guaranteed admission."
+        answer: "Register online through our Google Forms link: https://forms.gle/HXocP4aGn5Pb1HmR6. You can also register on-site during the conference days (October 21-23, 2025), though online pre-registration is strongly recommended for guaranteed conference materials."
       },
       {
         question: "What are the registration fees?",
-        answer: "Registration fees vary by membership status. NICE members receive discounted rates compared to non-members. NICESA (student) members also have special rates with valid student ID. Early bird registration offers additional savings - contact info@nicekano2025.org for current pricing."
+        answer: "Registration fees vary by membership status. NICE members receive discounted rates compared to non-members. Young Engineers and Spouses also have special rates. Early bird registration offers additional savings - contact conference@nicehq.org for current pricing."
       },
       {
         question: "Are there group discounts available?",
-        answer: "Yes, organizations registering 5 or more participants receive group discounts. Contact our registration team at info@nicekano2025.org for special group rates and flexible payment arrangements."
+        answer: "Yes, organizations registering 5 or more participants receive group discounts. Contact our registration team at info@nicehq.org for special group rates and flexible payment arrangements."
       },
       {
         question: "What payment methods are accepted?",
-        answer: "We accept bank transfers and online payments. Nigerian Naira (₦) is the primary currency. Payment details and bank account information are provided during the online registration process."
+        answer: "We accept bank transfers and online transfer payments. Nigerian Naira (₦) is the primary currency for local delegates. Payment details and bank account information are provided during the online registration process."
       }
     ]
   },
@@ -40,11 +40,11 @@ const faqCategories = [
     questions: [
       {
         question: "When is NICE Kano 2025 taking place?",
-        answer: "The conference runs from October 21-23, 2025 (3 days). Day 1 includes site visits and Chairman's cocktail, Day 2 features the opening ceremony and main sessions, Day 3 concludes with the AGM and awards gala."
+        answer: "The conference runs from October 21-23, 2025 (3 days). Day 1 includes site visits and Chairman's cocktail, Day 2 features the opening ceremony and main sessions, Day 3 concludes with the AGM and Awards gala."
       },
       {
         question: "What is included in the conference program?",
-        answer: "The program includes: Technical Project Site Visits, Construction Tech Expo, Opening Ceremony, Special Plenary Sessions, Panel Discussions, Technical Paper Sessions, Fellowship Conferment, Career Clinic for Graduates, Spouse Programs, NICESA Activities, Chairman's Cocktail, and the Awards & Cultural Gala."
+        answer: "The program includes: Technical Project Site Visits, Construction Tech Expo, Engineering Business Roundtable, Opening Ceremony, Special Plenary Sessions, Panel Discussions, Fellows Roundtable, Technical Paper Sessions, Fellowship Conferment, Career Clinic for Graduates, Spouse Programs, NICESA Activities, Chairman's Cocktail, and the Awards & Cultural Gala."
       },
       {
         question: "Are technical papers required for attendance?",
@@ -52,7 +52,7 @@ const faqCategories = [
       },
       {
         question: "Will there be continuing professional development (CPD) credits?",
-        answer: "Yes, attendance at NICE Kano 2025 qualifies for CPD credits from the Council for the Regulation of Engineering in Nigeria (COREN). Certificates will be issued to all registered participants who attend the required sessions."
+        answer: "Yes, attendance at NICE Kano 2025 qualifies for CPD credits from the Institution. Electronic Certificates will be issued to all registered participants who attend the required sessions."
       }
     ]
   },
@@ -63,19 +63,19 @@ const faqCategories = [
     questions: [
       {
         question: "Where is the conference venue located?",
-        answer: "The main venue is Coronation Hall at Kano Government House, centrally located with secure access. Additional sessions will be held at Tahir Guest Palace. Both venues offer modern conference facilities, A/V equipment, Wi-Fi, and ample parking."
+        answer: "The main venue is the Coronation Hall at Kano Government House, centrally located with secure access. Additional sessions will be held at Tahir Guest Palace. Both venues offer modern conference facilities, A/V equipment, Wi-Fi, and ample parking."
       },
       {
         question: "Are there recommended hotels for accommodation?",
-        answer: "Yes, we've curated 19 hotel options ranging from ₦19,000-₦390,000/night. Popular choices include Dan Yaya Guest Palace (₦40,000-₦80,000), Prince Hotel (₦50,000-₦315,900), and Bon Hotel Kano (₦78,000-₦390,000). Most are within 10-25 minutes of the venue."
+        answer: "Yes, we've curated 35+ hotel options ranging from ₦19,000-₦390,000/night. Popular choices include Dan Yaya Guest Palace (₦40,000-₦80,000), Prince Hotel (₦50,000-₦315,900), and Bon Hotel Kano (₦78,000-₦390,000). Most are within 10-25 minutes of the venue."
       },
       {
         question: "Is transportation provided to/from the airport?",
-        answer: "Many recommended hotels offer complimentary airport pickup services. Additionally, organized shuttle services will operate between major hotels and conference venues. Mallam Aminu Kano International Airport (KAN) is approximately 20-30 minutes from most hotels."
+        answer: "Many recommended hotels offer complimentary airport pickup services. Additionally, commercial shuttle services and ride hauling apps like Uber and Bolt operates between major hotels and conference venues. Mallam Aminu Kano International Airport (KAN) is approximately 20-30 minutes from most hotels."
       },
       {
         question: "What facilities are available at the venue?",
-        answer: "Coronation Hall features modern conference facilities, exhibition spaces for the Construction Expo Africa, networking areas, professional A/V equipment, reliable Wi-Fi, catering services, secure parking, and full accessibility features."
+        answer: "Coronation Hall features modern conference facilities, exhibition spaces for the Construction Expo Africa, networking areas, professional A/V equipment, reliable Wi-Fi will be provided by NICE, catering services, secure parking, and full accessibility features."
       }
     ]
   },
@@ -86,7 +86,7 @@ const faqCategories = [
     questions: [
       {
         question: "Who are the keynote speakers?",
-        answer: "Our distinguished speakers include Prof. Adebayo Ogundimu (Director General, Nigerian Building and Road Research Institute), Engr. Dr. Fatima Hassan (Federal Ministry of Works and Housing), Prof. Michael Adeyemi (University of Lagos), and Engr. Sarah Abdullahi (Managing Director, Northern Construction Ltd)."
+        answer: "Our distinguished speakers include highly reputable resource persons drawn from the Government, Academia and the Private Sector."
       },
       {
         question: "Can I submit a technical paper for presentation?",
@@ -94,7 +94,7 @@ const faqCategories = [
       },
       {
         question: "Are presentation materials available after the conference?",
-        answer: "Selected presentation materials and conference proceedings will be made available to registered participants post-conference. This includes keynote presentations, technical papers, panel discussion summaries, and the final conference communique."
+        answer: "Selected presentation materials and conference proceedings will be made available to registered participants post-conference. This includes keynote presentations, technical papers, panel discussion summaries, and the final conference communique. Check back our website after the event."
       }
     ]
   },
@@ -109,11 +109,11 @@ const faqCategories = [
       },
       {
         question: "Is there a spouse program?",
-        answer: "Yes, we offer a comprehensive spouse program featuring guided tours of Kano's historic sites (Ancient City Walls, Emir's Palace, Kurmi Market, Dye Pits), cultural workshops, career talks, and social activities. Registration is included with main conference registration."
+        answer: "Yes, we offer a comprehensive spouses program featuring guided tours of Kano's historic sites (Ancient City Walls, Emir's Palace, Kurmi Market, Dye Pits), cultural workshops, career talks, and social activities. Registration is included with main conference registration."
       },
       {
-        question: "Are there activities for students (NICESA)?",
-        answer: "NICESA participants enjoy dedicated programs including the Innovation Clinic, Career Clinic for Graduates, mentorship sessions with senior engineers, competitions, technical presentations, and special networking opportunities designed for students and young professionals."
+        question: "Are there activities for students (NICESA) and Graduates?",
+        answer: "NICESA and Graduate participants enjoy dedicated programs including the Innovation Challenge and Innovation Hub, Career Clinic for Graduates, mentorship sessions with senior engineers, competitions, parallel workshops, technical presentations, and special networking opportunities designed for students and young professionals."
       }
     ]
   },
@@ -124,7 +124,7 @@ const faqCategories = [
     questions: [
       {
         question: "Do I need a visa to attend?",
-        answer: "International participants may require a visa to enter Nigeria. We can provide official invitation letters to assist with visa applications. Contact our secretariat at info@nicekano2025.org for visa support documentation and processing guidance."
+        answer: "International participants may require a visa to enter Nigeria. We can provide official invitation letters to assist with visa applications. Contact our secretariat at info@nicehq.org for visa support documentation and processing guidance."
       },
       {
         question: "What should I pack for the conference?",
@@ -136,7 +136,7 @@ const faqCategories = [
       },
       {
         question: "Is local transport assistance available?",
-        answer: "Yes, we provide shuttle services between major hotels and conference venues. Local transportation options include reputable taxis, ride-hailing apps, and hotel shuttles. Airport transfers are available through most recommended hotels."
+        answer: "No, but there are local transportation options available which includes reputable taxis, ride-hailing apps, and hotel shuttles. Airport transfers are available through most recommended hotels."
       }
     ]
   }
@@ -187,11 +187,11 @@ export default function FAQ() {
               <CardContent className="text-center space-y-2">
                 <p className="flex items-center justify-center gap-2">
                   <Mail className="h-4 w-4" />
-                  <span>Email: info@nicekano2025.org</span>
+                  <span>Email: info@nicehq.org</span>
                 </p>
                 <p className="flex items-center justify-center gap-2">
                   <Phone className="h-4 w-4" />
-                  <span>Phone: +234 XXX XXX XXXX</span>
+                  <span>Phone: 08023318732, 08103102219</span>
                 </p>
               </CardContent>
             </Card>
