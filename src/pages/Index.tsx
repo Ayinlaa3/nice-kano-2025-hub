@@ -265,7 +265,7 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">National Chairman's Welcome</h3>
+                  <h3 className="font-semibold text-lg mb-2">National Chairman's Invite</h3>
                   <p className="text-sm text-muted-foreground mb-2">
                     
                   </p>
@@ -327,7 +327,7 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">Conference Vision</h3>
+                  <h3 className="font-semibold text-lg mb-2">BOT Confirmation</h3>
                   <p className="text-sm text-muted-foreground mb-2">
                     Engr. Sen. Adefemi Kila, FNSE, FNICE - Board of Trustees Chairman
                   </p>
@@ -353,14 +353,14 @@ const Index = () => {
                   </div>
                   <div className="absolute top-4 left-4">
                     <div className="bg-brandYellow text-white px-2 py-1 rounded text-xs font-medium">
-                      YOUTH FOCUS
+                      CPC CHAIRMAN's INVITE
                     </div>
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">Young Engineers Unite</h3>
+                  <h3 className="font-semibold text-lg mb-2">Mega Planning from the CPC</h3>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Engr. Dr. Bemigho Ofoeyeno - CPC Chairman
+                    Engr. Dr. Bemigho Ofoeyeno, FNSE, FNICE - CPC Chairman
                   </p>
                   <p className="text-sm text-muted-foreground">
                     The Central Planning Committee Chairman warmly invites you to the 23rd Annual International Conference and General Meeting 
@@ -610,6 +610,8 @@ const Index = () => {
 
 {/* Contact moved to dedicated page */}
       </main>
+      <script defer src="https://vercel.com/analytics/script.js"></script>
+
 
 {/* Footer moved to MainLayout */}
     </>
