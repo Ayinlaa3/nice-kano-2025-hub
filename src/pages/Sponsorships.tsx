@@ -91,7 +91,7 @@ const ADD_ONS = [
 const BOOTH_OPTIONS = [
   { name: "Regular Booth (3m x 3m - 9m2)", earlyBird: "₦300,000", standard: "₦350,000" },
   { name: "Premium Booth (3m x 6m - 18m2)", earlyBird: "₦500,000", standard: "₦600,000" },
-  { name: "Vendors' Option (Outside the Hall)", flat: "₦600,000" },
+  { name: "Vendors' Option (Outside the Hall)", standard: "₦70,000" },
 ];
 
 export default function Sponsorships() {
@@ -264,7 +264,6 @@ export default function Sponsorships() {
                     <div className="flex gap-4 mt-2">
                       <Badge variant="secondary">Early Bird: {booth.earlyBird}</Badge>
                       <Badge variant="outline">Standard: {booth.standard}</Badge>
-                      <Badge variant="secondary">Flat Rate: {booth.flat}</Badge>
                     </div>
                   </div>
                 ))}
