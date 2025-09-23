@@ -89,8 +89,8 @@ const ADD_ONS = [
 ];
 
 const BOOTH_OPTIONS = [
-  { name: "Standard Booth (3 x 3)(9m²)", earlyBird: "₦300,000", standard: "₦350,000"},
-  { name: "Premium Booth (3 x 6)(18m²)", earlyBird: "₦500,000", standard: "₦600,000" },
+  { name: "Standard Booth (10' x 10')", earlyBird: "₦500,000", standard: "₦600,000" },
+  { name: "Premium Booth (10' x 20')", earlyBird: "₦900,000", standard: "₦1,000,000" },
 ];
 
 export default function Sponsorships() {
