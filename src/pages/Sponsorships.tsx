@@ -91,7 +91,7 @@ const ADD_ONS = [
 const BOOTH_OPTIONS = [
   { name: "Standard Booth (3m x 3m)=(9m²)", earlyBird: "₦300,000", standard: "₦350,000" },
   { name: "Premium Booth (3m x 6m)=(18m²)", earlyBird: "₦500,000", standard: "₦600,000" },
-  { name: "Vendor's Option (Outside The Hall)", standard: "₦70,000"},
+  { name: "Vendor's Option (Outside The Hall)",standard: "₦70,000"},
 ];
 
 export default function Sponsorships() {
