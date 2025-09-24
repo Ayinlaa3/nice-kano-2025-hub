@@ -329,11 +329,7 @@ export default function Sponsorships() {
           <Button 
             variant="hero" 
             className="w-full"
-            onClick={() => toast({ 
-              title: "Contact Information", 
-              description: "Email: sponsorship@nicehq.org | Phone: +234 802 331 8732 |https://docs.google.com/forms/d/e/1FAIpQLScY_NOWjJiU9cf4SxS9aluUB5URYb1CJxGemFIxBVKCF_jNWg/viewform", 
-            
-            })}
+            onClick={() => window.open("https://docs.google.com/forms/d/e/1FAIpQLScY_NOWjJiU9cf4SxS9aluUB5URYb1CJxGemFIxBVKCF_jNWg/viewform", "_blank")}
           >
             Secure Your Spot Now
           </Button>
