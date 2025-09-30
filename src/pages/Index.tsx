@@ -26,7 +26,7 @@ import leaderBalla from "@/assets/leader-balla.jpg";
 import senkila from "@/assets/senkila.png";
 import leaderOfoeyeno from "@/assets/leader-ofoeyeno.jpg";
 import citywall from "@/assets/kano-city-walls.png";
-import jingleVideo from "@/assets/NIGERIAN INSTITUTE OF CIVIL ENGINEERS.mp4"
+
 
 // Import sponsor logos
 import sponsor1 from "@/assets/sponsors/sponsor01.png";
@@ -225,11 +225,11 @@ const Index = () => {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Conference Jingle */}
-              <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand-red hover:border-l-vibrant transition-all duration-300">
+              {/* <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand-red hover:border-l-vibrant transition-all duration-300">
                 <div className="relative aspect-video bg-gradient-to-br from-brand/20 to-kano-heritage/30 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   <img 
-                    src={jingleVideo}
+                    src={heroGreen}
                     alt="NICE Kano 2025 Conference Jingle" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -250,7 +250,38 @@ const Index = () => {
                     Experience the excitement and vision for Nigeria's premier civil engineering conference, holding live in the city of Kano
                   </p>
                 </div>
-              </Card>
+              </Card> */}
+
+
+              <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand-red hover:border-l-vibrant transition-all duration-300">
+                <div className="relative aspect-video bg-gradient-to-br from-brand/20 to-kano-heritage/30 overflow-hidden">
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/G9U_HEmKBX4"
+                    title="NICE Kano 2025 Conference Jingle"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                  <div className="absolute top-4 left-4">
+                    <div className="bg-brand-red text-white px-2 py-1 rounded text-xs font-medium">
+                      OFFICIAL VIDEO JINGLE
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2">
+                    NICE Kano 2025 - Official Conference Jingle
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Experience the excitement and vision for Nigeria's premier civil
+                    engineering conference, holding live in the city of Kano
+                  </p>
+                </div>
+        </Card>
+
+
+
 
               {/* NICE Chairman Invitation */}
               <Card className="group overflow-hidden cultural-card border-l-4 border-l-vibrant hover:border-l-brand transition-all duration-300">
@@ -377,19 +408,17 @@ const Index = () => {
               </Card>
 
               {/* Cultural Heritage Showcase */}
-              <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand-red hover:border-l-kano-heritage transition-all duration-300">
-                <div className="relative aspect-video bg-gradient-to-br from-brand-red/20 to-kano-heritage/30 overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
-                  <img 
-                    src={citywall} 
-                    alt="Kano Cultural Heritage" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+               
+              <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand-red hover:border-l-vibrant transition-all duration-300">
+                <div className="relative aspect-video bg-gradient-to-br from-brand/20 to-kano-heritage/30 overflow-hidden">
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/OpByiCz1asw?autoplay=1&rel=0"
+                    title="Discover Kano Heritage"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <Play className="h-6 w-6 text-brand-red ml-1" fill="currentColor" />
-                    </div>
-                  </div>
                   <div className="absolute top-4 left-4">
                     <div className="bg-brand-red text-white px-2 py-1 rounded text-xs font-medium">
                       CULTURAL HERITAGE
@@ -397,12 +426,14 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">Discover Kano Heritage</h3>
+                  <h3 className="font-semibold text-lg mb-2">
+                    Discover Kano Heritage
+                  </h3>
                   <p className="text-sm text-muted-foreground">
                     Explore 1000 years of history, culture, and architectural marvels in ancient Kano
                   </p>
                 </div>
-              </Card>
+              </Card> 
             </div>
 
             <div className="text-center mt-12">
