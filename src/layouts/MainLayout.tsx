@@ -23,6 +23,7 @@ const navigationGroups = [
       { to: "/program", label: "Program", description: "Conference schedule and sessions" },
       { to: "/speakers", label: "Speakers", description: "Featured speakers and presenters" },
       { to: "/location", label: "Location", description: "Venue details and directions" },
+      { to: "/innovationchallenge", label: "Innovation Challenge", description: "Young Engineers Competition" },
     ]
   },
   {
@@ -240,6 +241,12 @@ export default function MainLayout() {
                   <Link to="/hotels-travel" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
                     <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
                     Hotels & Travel
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/innovationchallenge" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
+                    <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
+                    Innovation Challenge
                   </Link>
                 </li>
               </ul>
