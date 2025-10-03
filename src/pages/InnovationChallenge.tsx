@@ -2,34 +2,40 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Lightbulb, Users, Target, Trophy, CheckCircle2, Rocket } from "lucide-react";
+import { Lightbulb, Users, Target, Trophy, CheckCircle2, Rocket, Activity, Calculator, Recycle, Shield, Truck, Car, Medal, Award } from "lucide-react";
 
 const APPLICATION_FORM = "https://forms.gle/oFkeTT6pGJWEoQsw9";
 
 const themes = [
   {
     title: "Infrastructure Monitoring",
-    description: "Develop tech solutions to monitor the health and performance of critical infrastructure like bridges, roads, and buildings to ensure their longevity and safety."
+    description: "Develop tech solutions to monitor the health and performance of critical infrastructure like bridges, roads, and buildings to ensure their longevity and safety.",
+    icon: Activity
   },
   {
     title: "Project & Cost Management",
-    description: "Propose innovative solutions, AI models, or BIM applications that streamline construction workflows, reduce project delays, and provide accurate cost control from start to finish."
+    description: "Propose innovative solutions, AI models, or BIM applications that streamline construction workflows, reduce project delays, and provide accurate cost control from start to finish.",
+    icon: Calculator
   },
   {
     title: "Waste & Sustainability",
-    description: "Design circular economy models, new technologies for recycling construction waste into valuable materials, or digital tools to track and minimize the carbon footprint of projects."
+    description: "Design circular economy models, new technologies for recycling construction waste into valuable materials, or digital tools to track and minimize the carbon footprint of projects.",
+    icon: Recycle
   },
   {
     title: "Safety",
-    description: "Create technology-based solutions to make construction sites safer. This could include smart wearables for workers, AI-powered video surveillance to detect hazards, or VR safety training modules."
+    description: "Create technology-based solutions to make construction sites safer. This could include smart wearables for workers, AI-powered video surveillance to detect hazards, or VR safety training modules.",
+    icon: Shield
   },
   {
     title: "Supply Chain & Logistics",
-    description: "Build a concept for a smarter construction supply chain. Think 'track-and-trace' platforms for materials, logistics optimization apps, or a digital marketplace for certified local suppliers."
+    description: "Build a concept for a smarter construction supply chain. Think 'track-and-trace' platforms for materials, logistics optimization apps, or a digital marketplace for certified local suppliers.",
+    icon: Truck
   },
   {
     title: "Traffic Solutions",
-    description: "Propose innovative infrastructure designs or smart city technologies to ease urban traffic congestion. This could involve data analytics for traffic flow, smart signaling systems, or new road interchange concepts."
+    description: "Propose innovative infrastructure designs or smart city technologies to ease urban traffic congestion. This could involve data analytics for traffic flow, smart signaling systems, or new road interchange concepts.",
+    icon: Car
   }
 ];
 
@@ -49,7 +55,7 @@ const prizes = [
     place: "2nd Place",
     title: "First Runner-Up",
     prize: "₦500,000",
-    icon: Trophy,
+    icon: Medal,
     benefits: [
       "Mentorship Program with a distinguished NICE Fellow",
       "Featured mention in post-conference communications"
@@ -59,7 +65,7 @@ const prizes = [
     place: "3rd Place",
     title: "Second Runner-Up",
     prize: "₦300,000",
-    icon: Trophy,
+    icon: Award,
     benefits: [
       "Mentorship Program with a distinguished NICE Fellow",
       "Special recognition during the awards ceremony"
@@ -152,6 +158,7 @@ export default function InnovationChallenge() {
           {themes.map((theme, idx) => (
             <Card key={idx} className="border-brand-green/20 hover:border-brand-primary/40 transition-all duration-300 hover:shadow-lg">
               <CardHeader>
+                <theme.icon className="w-10 h-10 mb-3 text-brand-primary" />
                 <CardTitle className="text-xl text-brand-primary">{theme.title}</CardTitle>
               </CardHeader>
               <CardContent>
