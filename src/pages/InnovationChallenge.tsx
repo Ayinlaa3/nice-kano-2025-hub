@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Lightbulb, Users, Target, Trophy, CheckCircle2, Rocket, Activity, Calculator, Recycle, Shield, Truck, Car, Medal, Award } from "lucide-react";
+import contechLogo from "@/assets/contech-logo.png";
+import niceLogo from "@/assets/nice-logo.svg";
 
 const APPLICATION_FORM = "https://forms.gle/oFkeTT6pGJWEoQsw9";
 
@@ -129,6 +131,20 @@ export default function InnovationChallenge() {
             Apply Now
           </a>
         </Button>
+      </section>
+
+      {/* Powered By Section */}
+      <section className="mb-16 max-w-4xl mx-auto">
+        <Card className="border-brand-primary/20 bg-gradient-to-br from-brand-primary/5 to-brand-green/5">
+          <CardContent className="pt-6">
+            <p className="text-center text-sm text-muted-foreground mb-4">Powered by</p>
+            <div className="flex items-center justify-center gap-8 flex-wrap">
+              <img src={niceLogo} alt="Nigerian Institution of Civil Engineers" className="h-16 object-contain" />
+              <span className="text-2xl text-muted-foreground">×</span>
+              <img src={contechLogo} alt="Contech" className="h-16 object-contain" />
+            </div>
+          </CardContent>
+        </Card>
       </section>
 
       {/* Introduction */}
