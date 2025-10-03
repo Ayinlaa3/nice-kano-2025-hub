@@ -139,9 +139,14 @@ export default function InnovationChallenge() {
           <CardContent className="pt-6">
             <p className="text-center text-sm text-muted-foreground mb-4">Powered by</p>
             <div className="flex items-center justify-center gap-8 flex-wrap">
-              <img src={niceLogo} alt="Nigerian Institution of Civil Engineers" className="h-16 object-contain" />
+              <div className="flex flex-col items-center gap-2">
+                <img src={niceLogo} alt="Nigerian Institution of Civil Engineers" className="h-16 object-contain" />
+                <p className="text-xs text-center text-muted-foreground max-w-[150px]">Nigerian Institution of Civil Engineers</p>
+              </div>
               <span className="text-2xl text-muted-foreground">×</span>
-              <img src={contechLogo} alt="Contech" className="h-16 object-contain" />
+              <div className="flex flex-col items-center gap-2">
+                <img src={contechLogo} alt="Contech" className="h-16 object-contain" />
+              </div>
             </div>
           </CardContent>
         </Card>
