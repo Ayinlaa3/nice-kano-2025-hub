@@ -110,7 +110,7 @@ const speakers = [
     title: "Keynote Speaker",
     position: "Former Governor of Kano State, Nigeria",
     topic: " ",
-    image: "/Rabiu-Musa-Kwankwaso.jpg"
+    image: "@/assets/Rabiu-Musa-Kwankwaso.jpg"
   },
   {
     name: "T.B.D",
