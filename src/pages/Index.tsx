@@ -106,9 +106,9 @@ const activities = [
 
 const speakers = [
   {
-    name: "T.B.D",
+    name: "Sen. Rabiu Musa Kwankwaso",
     title: "Keynote Speaker",
-    position: " ",
+    position: "Former Governor of Kano State, Nigeria",
     topic: " ",
     image: "/placeholder.svg"
   },
@@ -127,9 +127,9 @@ const speakers = [
     image: "/placeholder.svg"
   },
   {
-    name: "T.B.D",
+    name: "H.E. Engr. Abba Kabir Yusuf",
     title: "Special Guest of Honour",
-    position: " ",
+    position: "Executive Governor of Kano State, Nigeria",
     topic: " ",
     image: "/placeholder.svg"
   }
