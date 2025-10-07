@@ -25,7 +25,8 @@ import leaderTokunbo from "@/assets/leader-tokunbo.jpg";
 import leaderBalla from "@/assets/leader-balla.jpg";
 import senkila from "@/assets/senkila.png";
 import leaderOfoeyeno from "@/assets/leader-ofoeyeno.jpg";
-import citywall from "@/assets/kano-city-walls.png";
+import rabiuKwankwaso from "@/assets/Rabiu-Musa-Kwankwaso.jpg";
+import kanoGovernor from "@/assets/kano-governor.jpg";
 
 
 // Import sponsor logos
@@ -110,7 +111,7 @@ const speakers = [
     title: "Keynote Speaker",
     position: "Former Governor of Kano State, Nigeria",
     topic: " ",
-    image: "@/assets/Rabiu-Musa-Kwankwaso.jpg"
+    image: rabiuKwankwaso,
   },
   {
     name: "T.B.D",
@@ -131,7 +132,7 @@ const speakers = [
     title: "Special Guest of Honour",
     position: "Executive Governor of Kano State, Nigeria",
     topic: " ",
-    image: "/placeholder.svg"
+    image: kanoGovernor,
   }
 ];
 
