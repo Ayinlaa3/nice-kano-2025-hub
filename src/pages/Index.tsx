@@ -379,34 +379,33 @@ const Index = () => {
 
               {/* Conference CPC Chairman */}
               <Card className="group overflow-hidden cultural-card border-l-4 border-l-brandYellow hover:border-l-vibrant transition-all duration-300">
-                <div className="relative aspect-video bg-gradient-to-br from-brandYellow/20 to-vibrant/30 overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
-                  <img 
-                    src={leaderOfoeyeno} 
-                    alt="Young Engineers Message" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                <div className="relative aspect-video bg-gradient-to-br from-brandYellow/20 to-vibrant/30 overflow-hidden rounded-t-xl">
+                  <iframe
+                    className="absolute top-0 left-0 w-full h-full"
+                    src="https://www.youtube.com/embed/0hvds4EjRVE"
+                    title="CPC Chairman’s Invite"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <Play className="h-6 w-6 text-brandYellow ml-1" fill="currentColor" />
-                    </div>
-                  </div>
                   <div className="absolute top-4 left-4">
                     <div className="bg-brandYellow text-white px-2 py-1 rounded text-xs font-medium">
                       CPC CHAIRMAN's INVITE
                     </div>
                   </div>
                 </div>
+
                 <div className="p-4">
                   <h3 className="font-semibold text-lg mb-2">Mega Planning from the CPC</h3>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Engr. Dr. Bemigho Ofoeyeno, FNSE, FNICE - CPC Chairman
+                    Engr. Dr. Bemigho Ofoeyeno, FNSE, FNICE — CPC Chairman
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    The Central Planning Committee Chairman warmly invites you to the 23rd Annual International Conference and General Meeting 
+                    The Central Planning Committee Chairman warmly invites you to the 23rd Annual International Conference and General Meeting.
                   </p>
                 </div>
               </Card>
+
 
               {/* Cultural Heritage Showcase */}
                
