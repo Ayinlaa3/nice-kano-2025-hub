@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../Jumoke's Portfolio Website"
+		},
+		{
+			"path": "../../../NICE-Website"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Jumoke's Portfolio Website"
+	}
+}
