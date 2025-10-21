@@ -203,163 +203,183 @@ export default function Location() {
           </div>
         </section>
 
-        {/* Kano City Tour Section */}
-        <section className="bg-gradient-to-br from-brandYellow/10 to-vibrant/5 rounded-2xl p-8">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-4">Kano City Tour</h2>
-            <p className="text-xl text-muted-foreground mb-2">Experience Kano's Cultural Heritage</p>
-            <Badge variant="secondary" className="text-sm">Tuesday, 21st October 2025</Badge>
-          </div>
+       
 
-          <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
-            <div className="rounded-xl overflow-hidden shadow-lg">
-              <img 
-                src={kanoCityTour} 
-                alt="Kano City Tour destinations including National Museum, Kano Emirate Palace, Gidan Dan Hausa, Goron Dutse Hill, and Dala Hill"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            <div className="space-y-6">
-              <p className="text-muted-foreground leading-relaxed">
-                Join other conference delegates for an unforgettable cultural experience through Kano's most iconic landmarks. Explore the city's rich history, traditional architecture, and scenic views that reflect its deep cultural roots.
-              </p>
+{/* Kano City Tour Section */}
+<section className="bg-gradient-to-br from-brandYellow/10 to-vibrant/5 rounded-2xl p-8">
+  <div className="text-center mb-8">
+    <h2 className="text-3xl font-bold mb-4">Kano City Tour</h2>
+    <p className="text-xl text-muted-foreground mb-2">Experience Kano's Cultural Heritage</p>
+    <Badge variant="secondary" className="text-sm">Tuesday, 21st October 2025</Badge>
+  </div>
 
-              <div className="grid gap-4">
-                <Card>
-                  <CardContent className="pt-6">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Clock className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-semibold">Departure Time</p>
-                        <p className="text-sm text-muted-foreground">11:00 AM</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 mb-3">
-                      <MapPin className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-semibold">Departure Point</p>
-                        <p className="text-sm text-muted-foreground">Coronation Hall, Kano Government House</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Star className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-semibold">Registration Fee</p>
-                        <p className="text-sm text-muted-foreground">₦10,000</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+  <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
+    <div className="rounded-xl overflow-hidden shadow-lg">
+      <img 
+        src={kanoCityTour} 
+        alt="Kano City Tour destinations including National Museum, Kano Emirate Palace, Gidan Dan Hausa, Goron Dutse Hill, and Dala Hill"
+        className="w-full h-full object-cover"
+      />
+    </div>
+    
+    <div className="space-y-6">
+      <p className="text-muted-foreground leading-relaxed">
+        Join other conference delegates for an unforgettable cultural experience through Kano's most iconic landmarks. Explore the city's rich history, traditional architecture, and scenic views that reflect its deep cultural roots.
+      </p>
 
-                <div className="bg-card rounded-lg p-6 border">
-                  <h3 className="font-semibold text-lg mb-4">Tour Destinations</h3>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-brandYellow" />
-                      National Museum Kano
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-brandYellow" />
-                      Kano Emirate Palace
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-brandYellow" />
-                      Gidan Dan Hausa
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-brandYellow" />
-                      Goron Dutse Hill
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-brandYellow" />
-                      Dala Hill
-                    </li>
-                  </ul>
-                </div>
+      <div className="grid gap-4">
+        <Card>
+          <CardContent className="pt-6">
+            <div className="flex items-center gap-3 mb-3">
+              <Clock className="w-5 h-5 text-primary" />
+              <div>
+                <p className="font-semibold">Departure Time</p>
+                <p className="text-sm text-muted-foreground">11:00 AM</p>
               </div>
-
-              <Button className="w-full bg-brandYellow hover:bg-brandYellow/90 text-white">
-                Register for Kano City Tour (₦10,000)
-              </Button>
             </div>
-          </div>
-        </section>
-
-        {/* Technical Tour Section */}
-        <section className="bg-gradient-to-br from-vibrant/10 to-primary/5 rounded-2xl p-8">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-4">2025 Technical Tour</h2>
-            <p className="text-xl text-muted-foreground mb-2">Explore Kano's Engineering Marvels</p>
-            <Badge variant="secondary" className="text-sm">Tuesday, 21st October 2025</Badge>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
-            <div className="rounded-xl overflow-hidden shadow-lg">
-              <img 
-                src={technicalTour} 
-                alt="2025 Technical Tour sites including Dan Agundi Flyover, Tal'udu Junction Flyover, and Dala Inland Dry Port"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            <div className="space-y-6">
-              <p className="text-muted-foreground leading-relaxed">
-                Take a guided tour of Kano's major infrastructure projects and witness engineering excellence in action. The Technical Tour provides delegates with hands-on exposure to modern civil engineering achievements that are transforming the state's landscape.
-              </p>
-
-              <div className="grid gap-4">
-                <Card>
-                  <CardContent className="pt-6">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Clock className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-semibold">Departure Time</p>
-                        <p className="text-sm text-muted-foreground">11:00 AM</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 mb-3">
-                      <MapPin className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-semibold">Departure Point</p>
-                        <p className="text-sm text-muted-foreground">Coronation Hall, Kano Government House</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Star className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-semibold">Registration Fee</p>
-                        <p className="text-sm text-muted-foreground">Free for Interested Delegates</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <div className="bg-card rounded-lg p-6 border">
-                  <h3 className="font-semibold text-lg mb-4">Tour Sites</h3>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-vibrant" />
-                      Dan Agundi Flyover
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-vibrant" />
-                      Tal'udu Junction Flyover
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-vibrant" />
-                      Dala Inland Dry Port
-                    </li>
-                  </ul>
-                </div>
+            <div className="flex items-center gap-3 mb-3">
+              <MapPin className="w-5 h-5 text-primary" />
+              <div>
+                <p className="font-semibold">Departure Point</p>
+                <p className="text-sm text-muted-foreground">Coronation Hall, Kano Government House</p>
               </div>
-
-              <Button variant="outline" className="w-full">
-                Register for Technical Tour (Free)
-              </Button>
             </div>
-          </div>
-        </section>
+            <div className="flex items-center gap-3">
+              <Star className="w-5 h-5 text-primary" />
+              <div>
+                <p className="font-semibold">Registration Fee</p>
+                <p className="text-sm text-muted-foreground">₦10,000</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="bg-card rounded-lg p-6 border">
+          <h3 className="font-semibold text-lg mb-4">Tour Destinations</h3>
+          <ul className="space-y-2 text-lg font-medium text-foreground">
+            <li className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-brandYellow" />
+              National Museum Kano
+            </li>
+            <li className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-brandYellow" />
+              Kano Emirate Palace
+            </li>
+            <li className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-brandYellow" />
+              Gidan Dan Hausa
+            </li>
+            <li className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-brandYellow" />
+              Goron Dutse Hill
+            </li>
+            <li className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-brandYellow" />
+              Dala Hill
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSebhK4kKffHkgcxUhUHxGFl-q_dhGXYHVcje3V6RMyPMyXCow/viewform?usp=dialog"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+          Register for Kano City Tour (₦10,000) <span className="text-sm font-normal">(Registration is compulsory)</span>
+        </Button>
+      </a>
+    </div>
+  </div>
+</section>
+
+{/* Technical Tour Section */}
+<section className="bg-gradient-to-br from-vibrant/10 to-primary/5 rounded-2xl p-8">
+  <div className="text-center mb-8">
+    <h2 className="text-3xl font-bold mb-4">2025 Technical Tour</h2>
+    <p className="text-xl text-muted-foreground mb-2">Explore Kano's Engineering Marvels</p>
+    <Badge variant="secondary" className="text-sm">Tuesday, 21st October 2025</Badge>
+  </div>
+
+  <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
+    <div className="rounded-xl overflow-hidden shadow-lg">
+      <img 
+        src={technicalTour} 
+        alt="2025 Technical Tour sites including Dan Agundi Flyover, Tal'udu Junction Flyover, and Dala Inland Dry Port"
+        className="w-full h-full object-cover"
+      />
+    </div>
+    
+    <div className="space-y-6">
+      <p className="text-muted-foreground leading-relaxed">
+        Take a guided tour of Kano's major infrastructure projects and witness engineering excellence in action. The Technical Tour provides delegates with hands-on exposure to modern civil engineering achievements that are transforming the state's landscape.
+      </p>
+
+      <div className="grid gap-4">
+        <Card>
+          <CardContent className="pt-6">
+            <div className="flex items-center gap-3 mb-3">
+              <Clock className="w-5 h-5 text-primary" />
+              <div>
+                <p className="font-semibold">Departure Time</p>
+                <p className="text-sm text-muted-foreground">11:00 AM</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 mb-3">
+              <MapPin className="w-5 h-5 text-primary" />
+              <div>
+                <p className="font-semibold">Departure Point</p>
+                <p className="text-sm text-muted-foreground">Coronation Hall, Kano Government House</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Star className="w-5 h-5 text-primary" />
+              <div>
+                <p className="font-semibold">Registration Fee</p>
+                <p className="text-sm text-muted-foreground">Free for Interested Delegates</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="bg-card rounded-lg p-6 border">
+          <h3 className="font-semibold text-lg mb-4">Tour Sites</h3>
+          <ul className="space-y-2 text-lg font-medium text-foreground">
+            <li className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-brandYellow" />
+              Dan Agundi Flyover
+            </li>
+            <li className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-brandYellow" />
+              Tal'udu Junction Flyover
+            </li>
+            <li className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-brandYellow" />
+              Dala Inland Dry Port
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSexkpEYCsGxMWu3kpbDKo-0CDG-SQ-SjA5M0VjQAFPTsBmB5w/viewform?usp=dialog"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+          Register for Technical Tour (Free) <span className="text-sm font-normal">(Registration is compulsory)</span>
+        </Button>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
 
         {/* Contact Information Section */}
         <section className="bg-card rounded-xl p-8 border text-center">

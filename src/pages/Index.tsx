@@ -27,7 +27,15 @@ import senkila from "@/assets/senkila.png";
 import leaderOfoeyeno from "@/assets/leader-ofoeyeno.jpg";
 import rabiuKwankwaso from "@/assets/Rabiu-Musa-Kwankwaso.jpg";
 import kanoGovernor from "@/assets/kano-governor.jpg";
-
+import jigawaGovernor from "@/assets/umar-namadi.jpg";
+import royalFather from "@/assets/hrh-muhammadu.jpg";
+import housingMinister from "@/assets/arc-musa-ahmed.jpg";
+import nsePresident from "@/assets/engr-margaret.jpg";
+import speakerKano from "@/assets/jibril-ismail.jpg";
+import jigawaDeputyGov from "@/assets/aminu-usman.jpg";
+import kanoWorksComm from "@/assets/marwan-aminu.jpg";
+import waterMinister from "@/assets/prof-joseph.jpg";
+import bichiRep from "@/assets/engr-abubakar.jpg";
 
 // Import sponsor logos
 import sponsor1 from "@/assets/sponsors/sponsor01.png";
@@ -107,33 +115,88 @@ const activities = [
 
 const speakers = [
   {
-    name: "Sen. Rabiu Musa Kwankwaso",
-    title: "Keynote Speaker",
+    name: "Engr. Sen. Rabiu Musa Kwankwaso, FNSE",
+    title: "Keynote Speaker/Distinguished Guest of Honour",
     position: "Former Governor of Kano State, Nigeria",
     topic: " ",
     image: rabiuKwankwaso,
   },
+  // {
+  //   name: "T.B.D",
+  //   title: "Engineering Roundtable Speaker",
+  //   position: " ",
+  //   topic: "Unlocking the Potentials of SMEs in the Nigerian Construction Industry:Opportunities, Partnerships, and Policy Support",
+  //   image: "/placeholder.svg"
+  // },
+  // {
+  //   name: "T.B.D",
+  //   title: "Fellows Roundtable Speaker",
+  //   position: " ",
+  //   topic: "The Future of Civil Engineering Leadership in Nigeria: Charting Pathways for Innovation, Mentorship, and Sustainable Impact",
+  //   image: "/placeholder.svg"
+  // },
   {
-    name: "T.B.D",
-    title: "Engineering Roundtable Speaker",
-    position: " ",
-    topic: "Unlocking the Potentials of SMEs in the Nigerian Construction Industry:Opportunities, Partnerships, and Policy Support",
-    image: "/placeholder.svg"
-  },
-  {
-    name: "T.B.D",
-    title: "Fellows Roundtable Speaker",
-    position: " ",
-    topic: "The Future of Civil Engineering Leadership in Nigeria: Charting Pathways for Innovation, Mentorship, and Sustainable Impact",
-    image: "/placeholder.svg"
-  },
-  {
-    name: "H.E. Engr. Abba Kabir Yusuf",
-    title: "Special Guest of Honour",
+    name: "H.E. Abba Kabir Yusuf",
+    title: "Distinguished Guest of Honour",
     position: "Executive Governor of Kano State, Nigeria",
     topic: " ",
     image: kanoGovernor,
-  }
+  },
+  {
+    name: "H. E ALH. UMAR NAMADI",
+    title: "Special Guest of Honour",
+    position: "Executive Governor of Jigawa State.D",
+    image: jigawaGovernor,
+  },
+  {
+    name: "HRH. MUHAMMADU SANUSI II,CON. PHD.",
+    title: "Royal Father Of The Day",
+    position: "Emir of Kano",
+    image: royalFather,
+  },
+  {
+    name: "ARC. MUSA AHMED DANGIWA",
+    title: "Special Guest",
+    position: "Hon. Minister For Housing And Urban Development",
+    image: housingMinister,
+  },
+  {
+    name: "ENGR. MARGARET A. OGUNTALA,FNSE",
+    title: "Chairman of the Occasion",
+    position: "President, Nigerian Society of Engineers",
+    image: nsePresident,
+  },
+  {
+    name: "RT. HON. JIBRIL ISMA’IL FALGORE",
+    title: "Special Guest",
+    position:"Speaker, Kano State House of Assembly",
+    image: speakerKano,
+  },
+  {
+    name: "ENGR. AMINU USMAN, FNSE",
+    title: "Special Guest",
+    position: "Deputy Governor of Jigawa State",
+    image: jigawaDeputyGov,
+  },
+  {
+    name: "ENGR. MARWAN AMINU AHMAD, FNSE,FNICE",
+    title: "Special Guest",
+    position: "Hon. Commissioner Minister of works, Kano state",
+    image: kanoWorksComm,
+  },
+  {
+    name: "ENGR. PROF. JOSEPH TERLSUMAN UTS",
+    title: "Special Guest",
+    position: "Hon. Minister for Water Resources and Sanitation",
+    image: waterMinister,
+  },
+  {
+    name: "ENGR. ABUBAKAR KABIR ABUBAKAR",
+    title: "Special Guest",
+    position: "Reps. Member Bichi Federal Constituency and Chairman House of Committee on Appropriation.",
+    image: bichiRep,
+  },
+
 ];
 
 const Index = () => {
@@ -529,9 +592,9 @@ const Index = () => {
         <section id="speakers" className="py-16 md:py-20 bg-brandYellow/10">
           <div className="container mx-auto px-6 lg:px-12 xl:px-16">
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold">Conference Speakers</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">Invited Dignitaries</h2>
               <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-                Learn from industry leaders, renowned academics, and policy makers shaping Nigeria's infrastructure future.
+                Honoring distinguished leaders, esteemed public servants, and visionary policymakers whose dedication continues to shape Nigeria’s engineering and infrastructural advancement.
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -554,6 +617,7 @@ const Index = () => {
                     <p className="text-xs font-medium">{speaker.topic}</p>
                   </div>
                 </Card>
+                
               ))}
             </div>
             <div className="text-center mt-8">
