@@ -14,18 +14,6 @@ const schedule = {
     { time: "3:00pm  – 5:00pm", title: "Construction Tech Innovation  Showcase/ Challenge", venue: "Coronation Hall", tags: ["Showcase"], desc: "Showcasing innovative construction technologies and solutions." },
     { time: "6:00 PM -8:00PM", title: "Chairman's Cocktail & Engineering Business Roundtable", venue: "Coronation Hall", tags: ["Networking"], desc: "Evening of networking and business discussions, connecting engineers and business owners to investors and business opportunities." },
   ],
-  // day2: [
-  //   { time: "8:00 AM", title: "Arrival, Registration & Welcome Tea", venue: "Coronation Hall", tags: ["Registration"], desc: "Morning registration and welcome refreshments." },
-  //   { time: "All Day", title: "Construction Expo Africa (CEA)", venue: "Coronation Hall Exterior", tags: ["Exhibition"], desc: "Ongoing construction industry exhibition and trade show." },
-  //   { time: "10:00 AM", title: "Opening Ceremony", venue: "Coronation Hall", tags: ["Ceremony"], desc: "Official conference opening with keynote addresses." },
-  //   { time: "12:00 NOON", title: "Special Plenary I, II & III", venue: "Coronation Hall", tags: ["Plenary"], desc: "Key plenary sessions with distinguished speakers." },
-  //   { time: "1:00 PM", title: "Panel Discussion 1 and Live TV Broadcast", venue: "Coronation Hall", tags: ["Panel", "Media"], desc: "Televised panel discussion on key industry topics." },
-  //   { time: "2:30 PM - 5:00 PM", title: "NICESA Innovation Hub & Parallel Workshops", venue: "Coronation Hall", tags: ["Workshop"], desc: "Parallel workshops on construction technology and innovation." },
-  //   { time: "3:00 PM - 5:00 PM", title: "Young Engineers Career Clinic", venue: "Tahir Guest Palace", tags: ["Career"], desc: "Career guidance and mentorship for graduate and young engineers, with job placement opportunities." },
-  //   { time: "2:30 PM - 5:00 PM", title: "Concurrent Technical Sessions", venue: "Tahir Guest Palace", tags: ["Technical Session"], desc: "Multiple technical sessions running concurrently." },
-  //   { time: "5:30 PM - 8:00 PM", title: "Fellows Roundtable & Fellowship Conferment", venue: "Tahir Guest Palace", tags: ["Fellowship"], desc: "Fellowship discussions and conferment ceremony." },
-  // ],
-
 
   day2: [
   { time: "9:00 AM – 5:00 PM", title: "Registration of Delegates", tags: ["Registration"], desc: "On-site registration for delegates." },
@@ -62,13 +50,6 @@ const schedule = {
   { time: "7:00 PM – 9:00 PM", title: "Students’ Dinner", tags: ["Social"], desc: "Dinner event for student participants." }
 ],
 
-  // day3: [
-  //   { time: "9:00 AM", title: "Special Plenary Session IV & V", venue: "Coronation Hall", tags: ["Plenary"], desc: "Continuation of special plenary sessions." },
-  //   { time: "10:00 AM", title: "Panel Discussion 2", venue: "Coronation Hall", tags: ["Panel"], desc: "Second major panel discussion of the conference." },
-  //   { time: "Ongoing", title: "NICESA Innovation Hub & Parallel Workshops", venue: "Coronation Hall", tags: ["Workshop"], desc: "Continued innovation workshops and clinics." },
-  //   { time: "11:30 AM - 2:00 PM", title: "Annual General Meeting (AGM)", venue: "Coronation Hall", tags: ["AGM"], desc: "NICE Annual General Meeting for members." },
-  //   { time: "6:00 PM - 9:00 PM", title: "AGM Dinner, Awards & Honours Night, and Cultural Gala", venue: "Tahir Guest Palace", tags: ["Gala", "Awards"], desc: "Closing dinner with awards ceremony and cultural performances." },
-  // ],
 
 day3: [
   { time: "9:00 AM – 6:00 PM", title: "Registration of Delegates", tags: ["Registration"], desc: "On-site registration continues for all delegates." },
