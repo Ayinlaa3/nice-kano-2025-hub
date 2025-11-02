@@ -22,7 +22,7 @@ const Certificate = () => {
   const checkEmailInCSV = async (email: string): Promise<boolean> => {
     try {
       // Load the CSV file from assets
-      const response = await fetch('/src/assets/ConferenceRegistration.csv');
+      const response = await fetch('/public/ConferenceRegistration.csv');
       if (!response.ok) {
         throw new Error('Registration data not found');
       }
@@ -79,7 +79,7 @@ const Certificate = () => {
       await new Promise((resolve, reject) => {
         img.onload = resolve;
         img.onerror = () => reject(new Error('Failed to load certificate template'));
-        img.src = '/src/assets/certificate-template.png';
+        img.src = '/certificate-template.png';
       });
 
       // Create canvas
