@@ -22,7 +22,7 @@ const Certificate = () => {
   const checkEmailInCSV = async (email: string): Promise<boolean> => {
     try {
       // Load the CSV file from assets
-      const response = await fetch('/src/assets/ConferenceRegistration.csv');
+      const response = await fetch('/public/ConferenceRegistration.csv');
       if (!response.ok) {
         throw new Error('Registration data not found');
       }
