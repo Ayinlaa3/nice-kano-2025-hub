@@ -22,7 +22,7 @@ const Certificate = () => {
   const checkEmailInCSV = async (email: string): Promise<boolean> => {
     try {
       // Load the CSV file from assets
-      const response = await fetch('/public/ConferenceRegistration.csv');
+      const response = await fetch('/ConferenceRegistration.csv');
       if (!response.ok) {
         throw new Error('Registration data not found');
       }
@@ -67,7 +67,7 @@ const Certificate = () => {
       const isRegistered = await checkEmailInCSV(email);
 
       if (!isRegistered) {
-        setError("❌ Sorry, this email is not found in our conference registration records. Please check and try again.");
+        setError("❌ Sorry, this email is not found in our conference registration records. Please enter the email you used during conference registration.");
         setIsGenerating(false);
         return;
       }
@@ -97,13 +97,13 @@ const Certificate = () => {
 
       // Configure text styling
       ctx.font = 'bold 60px Montserrat, sans-serif';
-      ctx.fillStyle = '#FFFFFF';
+      ctx.fillStyle = '#b01016';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
       // Calculate name position (centered horizontally, positioned in the green area)
       const centerX = canvas.width / 2;
-      const nameY = canvas.height * 0.52; // Adjust this value based on template
+      const nameY = canvas.height * 0.43; // Adjust this value based on template
 
       // Add shadow for better visibility
       ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
@@ -261,10 +261,10 @@ const Certificate = () => {
           <div className="text-center mt-8 text-sm text-muted-foreground">
             For support, contact{" "}
             <a 
-              href="mailto:conference@nicengineers.com" 
+              href="mailto:conference@nicehq.org" 
               className="underline hover:text-foreground transition-colors"
             >
-              conference@nicengineers.com
+              conference@nicehq.org
             </a>
           </div>
         </div>
