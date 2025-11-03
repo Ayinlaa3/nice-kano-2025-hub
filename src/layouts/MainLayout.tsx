@@ -26,12 +26,20 @@ const navigationGroups = [
       { to: "/innovationchallenge", label: "Innovation Challenge", description: "Young Engineers Competition" },
     ]
   },
-  {
-    label: "Attendance",
-    items: [
-      { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
-    ]
-  },
+  // {
+  //   label: "Attendance",
+  //   items: [
+  //     { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
+  //   ]
+  // },
+{
+  label: "Attendance",
+  items: [
+    { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
+    { to: "/certificate", label: "Certificate Generator", description: "Download your participation certificate" },
+  ]
+},
+
   {
     label: "About",
     items: [
