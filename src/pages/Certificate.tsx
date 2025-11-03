@@ -21,8 +21,8 @@ const Certificate = () => {
 
   const checkEmailInCSV = async (email: string): Promise<boolean> => {
     try {
-      // Load the CSV file from assets
-      const response = await fetch('/ConferenceRegistration.csv');
+      // Load the CSV file from assets 
+      const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSTDPh4E0xn62YJcBgK2w3VHEvQKQZL493Qc_pupDW9o2JU-bZmtfTzU6FGTGDvuGWKJHx9XAjD6oBa/pub?output=csv');
       if (!response.ok) {
         throw new Error('Registration data not found');
       }
