@@ -26,12 +26,7 @@ const navigationGroups = [
       { to: "/innovationchallenge", label: "Innovation Challenge", description: "Young Engineers Competition" },
     ]
   },
-  // {
-  //   label: "Attendance",
-  //   items: [
-  //     { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
-  //   ]
-  // },
+
 {
   label: "Attendance",
   items: [
@@ -39,6 +34,14 @@ const navigationGroups = [
     { to: "/certificate", label: "Certificate Generator", description: "Download your participation certificate" },
   ]
 },
+
+{
+  label: "Media",
+  items: [
+    { to: "/media-gallery", label: "Conference Media Gallery", description: "Photos and videos from the 2025 conference" },
+  ]
+},
+
 
   {
     label: "About",
