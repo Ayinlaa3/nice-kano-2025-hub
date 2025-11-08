@@ -17,6 +17,7 @@ import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import InnovationChallenge from "./pages/InnovationChallenge";
 import Certificate from "./pages/Certificate";
+import MediaGallery from "./pages/MediaGallery";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => (
               <Route path="/faq" element={<FAQ />} />
               <Route path="/innovationchallenge" element={<InnovationChallenge />} />
               <Route path="/certificate" element={<Certificate />} />
+              <Route path="/media-gallery" element={<MediaGallery />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
