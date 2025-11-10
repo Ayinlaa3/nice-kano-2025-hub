@@ -98,25 +98,44 @@ const MediaGallery = () => {
         throw new Error("No subfolders found in the specified Google Drive folder. Please check your folder structure.");
       }
 
-      // Fetch media from each subfolder
+      // Fetch media from each subfolder (going one level deeper to get event folders)
       const folderDataPromises = subfolders.map(async (folder: any) => {
-        const filesResponse = await fetch(
-          `https://www.googleapis.com/drive/v3/files?q='${folder.id}'+in+parents&key=${API_KEY}&fields=files(id,name,mimeType,thumbnailLink,webViewLink,webContentLink)`
+        // First, get subfolders (event folders) within each day folder
+        const eventFoldersResponse = await fetch(
+          `https://www.googleapis.com/drive/v3/files?q='${folder.id}'+in+parents&key=${API_KEY}&fields=files(id,name,mimeType)`
         );
 
-        if (!filesResponse.ok) return { id: folder.id, name: folder.name, photos: [], videos: [] };
+        if (!eventFoldersResponse.ok) return { id: folder.id, name: folder.name, photos: [], videos: [] };
 
-        const filesData = await filesResponse.json();
-        const files: MediaFile[] = filesData.files || [];
+        const eventFoldersData = await eventFoldersResponse.json();
+        const eventFolders = eventFoldersData.files || [];
 
-        const photos = files.filter(file => file.mimeType.startsWith("image/"));
-        const videos = files.filter(file => file.mimeType.startsWith("video/"));
+        // Now fetch all files from all event folders
+        const allPhotos: MediaFile[] = [];
+        const allVideos: MediaFile[] = [];
+
+        for (const eventFolder of eventFolders) {
+          // Skip if not a folder
+          if (eventFolder.mimeType !== "application/vnd.google-apps.folder") continue;
+
+          const filesResponse = await fetch(
+            `https://www.googleapis.com/drive/v3/files?q='${eventFolder.id}'+in+parents&key=${API_KEY}&fields=files(id,name,mimeType,thumbnailLink,webViewLink,webContentLink)`
+          );
+
+          if (filesResponse.ok) {
+            const filesData = await filesResponse.json();
+            const files: MediaFile[] = filesData.files || [];
+
+            allPhotos.push(...files.filter(file => file.mimeType.startsWith("image/")));
+            allVideos.push(...files.filter(file => file.mimeType.startsWith("video/")));
+          }
+        }
 
         return {
           id: folder.id,
           name: folder.name,
-          photos,
-          videos,
+          photos: allPhotos,
+          videos: allVideos,
         };
       });
 
