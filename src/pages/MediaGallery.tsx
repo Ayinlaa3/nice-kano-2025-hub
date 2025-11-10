@@ -1,12 +1,36 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Download, X, ChevronLeft, ChevronRight, ArrowUp, RefreshCw, AlertCircle } from "lucide-react";
+import { Download, X, ChevronLeft, ChevronRight, ArrowUp, RefreshCw, AlertCircle, Folder } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
+
+// 📁 Folder IDs - Replace these with actual Google Drive folder IDs
+const FOLDER_IDS = {
+  PHOTOS: {
+    DAY1: {
+      TECH_TOUR: "FOLDER_ID_DAY1_TECH_TOUR",
+      CITY_TOUR: "FOLDER_ID_DAY1_CITY_TOUR",
+      COCKTAIL: "FOLDER_ID_DAY1_COCKTAIL",
+    },
+    DAY2: {
+      OPENING: "FOLDER_ID_DAY2_OPENING",
+      SESSION1: "FOLDER_ID_DAY2_SESSION1",
+      DINNER: "FOLDER_ID_DAY2_DINNER",
+    },
+    DAY3: {
+      SESSION2: "FOLDER_ID_DAY3_SESSION2",
+      AGM: "FOLDER_ID_DAY3_AGM",
+      GOV_VISIT: "FOLDER_ID_DAY3_GOV_VISIT",
+      GENERAL_DINNER: "FOLDER_ID_DAY3_GENERAL_DINNER",
+    },
+  },
+  VIDEOS: "FOLDER_ID_VIDEOS_MAIN",
+};
 
 interface MediaFile {
   id: string;
@@ -17,33 +41,28 @@ interface MediaFile {
   webContentLink?: string;
 }
 
-interface FolderData {
-  id: string;
-  name: string;
-  photos: MediaFile[];
-  videos: MediaFile[];
+interface FolderContent {
+  folderId: string;
+  folderName: string;
+  files: MediaFile[];
+  loading: boolean;
+  error: string;
 }
 
-const CACHE_KEY = "nice_gallery_cache";
-const CACHE_DURATION = 1000 * 60 * 30; // 30 minutes
-
 const MediaGallery = () => {
-  const [folders, setFolders] = useState<FolderData[]>([]);
-  const [activeFolder, setActiveFolder] = useState<string>("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string>("");
+  const [photoSections, setPhotoSections] = useState<Record<string, FolderContent>>({});
+  const [videoFiles, setVideoFiles] = useState<MediaFile[]>([]);
+  const [videosLoading, setVideosLoading] = useState(false);
+  const [videosError, setVideosError] = useState("");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentMedia, setCurrentMedia] = useState<MediaFile | null>(null);
+  const [currentMediaList, setCurrentMediaList] = useState<MediaFile[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
 
-  // Environment variables with fallback to hardcoded values
-  const FOLDER_ID = import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_ID || "1RKZdynHHCnssvHARScv9SS0Z591tiubv";
   const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY || "AIzaSyB2kSfQ8znBMnGOAax0T14fVLe6VnklGF8";
 
   useEffect(() => {
-    loadGallery();
-
     const handleScroll = () => {
       setShowBackToTop(window.scrollY > 500);
     };
@@ -52,132 +71,76 @@ const MediaGallery = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Load from cache or fetch fresh data
-  const loadGallery = async () => {
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      try {
-        const { data, timestamp } = JSON.parse(cached);
-        if (Date.now() - timestamp < CACHE_DURATION) {
-          setFolders(data);
-          setActiveFolder(data[0]?.name || "");
-          setLoading(false);
-          return;
-        }
-      } catch (e) {
-        console.error("Cache parse error:", e);
-      }
+  // Helper function to fetch files from a Google Drive folder
+  const fetchDriveFiles = async (folderId: string): Promise<MediaFile[]> => {
+    if (!API_KEY) {
+      throw new Error("Missing Google API key. Please set VITE_GOOGLE_API_KEY.");
     }
-    fetchGallery();
+
+    const response = await fetch(
+      `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${API_KEY}&fields=files(id,name,mimeType,thumbnailLink,webViewLink,webContentLink)`
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error?.message || "Failed to fetch files from Google Drive.");
+    }
+
+    const data = await response.json();
+    return data.files || [];
   };
 
-  // Fetch all folders and their media
-  const fetchGallery = async () => {
+  // Load files for a specific folder
+  const loadFolderFiles = async (folderId: string, folderName: string, sectionKey: string) => {
+    setPhotoSections((prev) => ({
+      ...prev,
+      [sectionKey]: { folderId, folderName, files: [], loading: true, error: "" },
+    }));
+
     try {
-      setLoading(true);
-      setError("");
+      const files = await fetchDriveFiles(folderId);
+      const images = files.filter((file) => file.mimeType.startsWith("image/"));
 
-      if (!FOLDER_ID || !API_KEY) {
-        throw new Error("Missing Google Drive configuration. Please set VITE_GOOGLE_DRIVE_FOLDER_ID and VITE_GOOGLE_API_KEY in your environment.");
-      }
-
-      // Get all subfolders
-      const foldersResponse = await fetch(
-        `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType='application/vnd.google-apps.folder'&key=${API_KEY}&fields=files(id,name)`
-      );
-
-      if (!foldersResponse.ok) {
-        const errorData = await foldersResponse.json();
-        throw new Error(errorData.error?.message || "Failed to fetch folders from Google Drive.");
-      }
-
-      const foldersData = await foldersResponse.json();
-      const subfolders = foldersData.files || [];
-
-      if (subfolders.length === 0) {
-        throw new Error("No subfolders found in the specified Google Drive folder. Please check your folder structure.");
-      }
-
-      // Fetch media from each subfolder (going one level deeper to get event folders)
-      const folderDataPromises = subfolders.map(async (folder: any) => {
-        // First, get subfolders (event folders) within each day folder
-        const eventFoldersResponse = await fetch(
-          `https://www.googleapis.com/drive/v3/files?q='${folder.id}'+in+parents&key=${API_KEY}&fields=files(id,name,mimeType)`
-        );
-
-        if (!eventFoldersResponse.ok) return { id: folder.id, name: folder.name, photos: [], videos: [] };
-
-        const eventFoldersData = await eventFoldersResponse.json();
-        const eventFolders = eventFoldersData.files || [];
-
-        // Now fetch all files from all event folders
-        const allPhotos: MediaFile[] = [];
-        const allVideos: MediaFile[] = [];
-
-        for (const eventFolder of eventFolders) {
-          // Skip if not a folder
-          if (eventFolder.mimeType !== "application/vnd.google-apps.folder") continue;
-
-          const filesResponse = await fetch(
-            `https://www.googleapis.com/drive/v3/files?q='${eventFolder.id}'+in+parents&key=${API_KEY}&fields=files(id,name,mimeType,thumbnailLink,webViewLink,webContentLink)`
-          );
-
-          if (filesResponse.ok) {
-            const filesData = await filesResponse.json();
-            const files: MediaFile[] = filesData.files || [];
-
-            allPhotos.push(...files.filter(file => file.mimeType.startsWith("image/")));
-            allVideos.push(...files.filter(file => file.mimeType.startsWith("video/")));
-          }
-        }
-
-        return {
-          id: folder.id,
-          name: folder.name,
-          photos: allPhotos,
-          videos: allVideos,
-        };
-      });
-
-      const allFolders = await Promise.all(folderDataPromises);
-
-      // Sort folders by name (Day 1, Day 2, Day 3, etc.)
-      const sortedFolders = allFolders.sort((a, b) => {
-        const dayA = a.name.match(/\d+/)?.[0] || "999";
-        const dayB = b.name.match(/\d+/)?.[0] || "999";
-        return parseInt(dayA) - parseInt(dayB);
-      });
-
-      setFolders(sortedFolders);
-      setActiveFolder(sortedFolders[0]?.name || "");
-
-      // Cache the results
-      localStorage.setItem(
-        CACHE_KEY,
-        JSON.stringify({ data: sortedFolders, timestamp: Date.now() })
-      );
-
-      setLoading(false);
+      setPhotoSections((prev) => ({
+        ...prev,
+        [sectionKey]: { folderId, folderName, files: images, loading: false, error: "" },
+      }));
     } catch (err: any) {
-      console.error("Error fetching gallery:", err);
-      setError(err.message || "Failed to load gallery. Please check your API configuration.");
-      setLoading(false);
+      console.error(`Error loading ${folderName}:`, err);
+      setPhotoSections((prev) => ({
+        ...prev,
+        [sectionKey]: {
+          folderId,
+          folderName,
+          files: [],
+          loading: false,
+          error: err.message || "Failed to load images.",
+        },
+      }));
     }
   };
 
-  const getSubtitleForFolder = (folderName: string): string => {
-    const name = folderName.toLowerCase();
-    if (name.includes("day 1") || name.includes("day1"))
-      return "Technical Tour, City Tour, Chairman's Cocktail";
-    if (name.includes("day 2") || name.includes("day2"))
-      return "Opening Ceremony, Technical Session 1, Fellows Dinner";
-    if (name.includes("day 3") || name.includes("day3"))
-      return "Technical Session 2, AGM, Governor's Visit, General Dinner";
-    return "Conference Highlights";
+  // Load videos
+  const loadVideos = async () => {
+    setVideosLoading(true);
+    setVideosError("");
+
+    try {
+      const files = await fetchDriveFiles(FOLDER_IDS.VIDEOS);
+      const videos = files.filter((file) => file.mimeType.startsWith("video/"));
+      setVideoFiles(videos);
+      setVideosLoading(false);
+    } catch (err: any) {
+      console.error("Error loading videos:", err);
+      setVideosError(err.message || "Failed to load videos.");
+      setVideosLoading(false);
+    }
   };
 
-  const openLightbox = (media: MediaFile, allMedia: MediaFile[], index: number) => {
+  // Open lightbox
+  const openLightbox = (media: MediaFile, mediaList: MediaFile[], index: number) => {
     setCurrentMedia(media);
+    setCurrentMediaList(mediaList);
     setCurrentIndex(index);
     setLightboxOpen(true);
   };
@@ -187,21 +150,18 @@ const MediaGallery = () => {
     setCurrentMedia(null);
   };
 
-  const activeData = folders.find(f => f.name === activeFolder);
-  const allPhotos = activeData?.photos || [];
-
   const goToNext = () => {
-    if (allPhotos.length === 0) return;
-    const nextIndex = (currentIndex + 1) % allPhotos.length;
+    if (currentMediaList.length === 0) return;
+    const nextIndex = (currentIndex + 1) % currentMediaList.length;
     setCurrentIndex(nextIndex);
-    setCurrentMedia(allPhotos[nextIndex]);
+    setCurrentMedia(currentMediaList[nextIndex]);
   };
 
   const goToPrevious = () => {
-    if (allPhotos.length === 0) return;
-    const prevIndex = currentIndex === 0 ? allPhotos.length - 1 : currentIndex - 1;
+    if (currentMediaList.length === 0) return;
+    const prevIndex = currentIndex === 0 ? currentMediaList.length - 1 : currentIndex - 1;
     setCurrentIndex(prevIndex);
-    setCurrentMedia(allPhotos[prevIndex]);
+    setCurrentMedia(currentMediaList[prevIndex]);
   };
 
   const downloadMedia = (media: MediaFile) => {
@@ -216,13 +176,46 @@ const MediaGallery = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const openDriveFolder = (folderId: string) => {
+    window.open(`https://drive.google.com/drive/folders/${folderId}`, "_blank");
+  };
+
+  // Photo sections configuration
+  const photoSectionsConfig = [
+    {
+      day: "Day 1",
+      sections: [
+        { key: "day1_tech_tour", name: "Technical Tour", folderId: FOLDER_IDS.PHOTOS.DAY1.TECH_TOUR },
+        { key: "day1_city_tour", name: "City Tour", folderId: FOLDER_IDS.PHOTOS.DAY1.CITY_TOUR },
+        { key: "day1_cocktail", name: "Chairman's Cocktail", folderId: FOLDER_IDS.PHOTOS.DAY1.COCKTAIL },
+      ],
+    },
+    {
+      day: "Day 2",
+      sections: [
+        { key: "day2_opening", name: "Opening Ceremony", folderId: FOLDER_IDS.PHOTOS.DAY2.OPENING },
+        { key: "day2_session1", name: "Technical Session 1", folderId: FOLDER_IDS.PHOTOS.DAY2.SESSION1 },
+        { key: "day2_dinner", name: "Fellows Dinner", folderId: FOLDER_IDS.PHOTOS.DAY2.DINNER },
+      ],
+    },
+    {
+      day: "Day 3",
+      sections: [
+        { key: "day3_session2", name: "Technical Session 2", folderId: FOLDER_IDS.PHOTOS.DAY3.SESSION2 },
+        { key: "day3_agm", name: "Annual General Meeting", folderId: FOLDER_IDS.PHOTOS.DAY3.AGM },
+        { key: "day3_gov_visit", name: "Governor's Visit", folderId: FOLDER_IDS.PHOTOS.DAY3.GOV_VISIT },
+        { key: "day3_general_dinner", name: "General Dinner", folderId: FOLDER_IDS.PHOTOS.DAY3.GENERAL_DINNER },
+      ],
+    },
+  ];
+
   return (
     <>
       <Helmet>
-        <title>Conference Media Gallery | NICE National Conference 2025</title>
+        <title>Media Gallery | NICE Kano 2025 Conference</title>
         <meta
           name="description"
-          content="Explore photos and videos from the 2025 National Conference in Kano. Relive each moment — from the tours to the plenary sessions and dinner nights."
+          content="Browse official photos and videos from the NICE Kano 2025 National Conference — grouped by day and activity."
         />
       </Helmet>
 
@@ -231,182 +224,209 @@ const MediaGallery = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-4">
-              📸 Conference Media Gallery
+              📸 NICE Kano 2025 Media Gallery
             </h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Explore photos and videos from the 2025 National Conference in Kano. Relive each moment — from the tours to the plenary sessions and dinner nights.
+              Browse official photos and videos from the National Conference — grouped by day and activity.
             </p>
           </div>
 
-          {/* Error State */}
-          {error && !loading && (
-            <Alert variant="destructive" className="mb-8">
-              <AlertCircle className="h-4 w-4" />
-              <AlertDescription className="flex items-center justify-between">
-                <span>{error}</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={fetchGallery}
-                  className="ml-4"
-                >
-                  <RefreshCw className="w-4 h-4 mr-2" />
-                  Retry
-                </Button>
-              </AlertDescription>
-            </Alert>
-          )}
+          {/* Tabs for Photos and Videos */}
+          <Tabs defaultValue="photos" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 mb-8">
+              <TabsTrigger value="photos">📸 Photos</TabsTrigger>
+              <TabsTrigger value="videos" onClick={() => !videoFiles.length && !videosLoading && loadVideos()}>
+                🎥 Videos
+              </TabsTrigger>
+            </TabsList>
 
-          {/* Loading State */}
-          {loading && (
-            <div className="space-y-8">
-              <Skeleton className="h-12 w-full" />
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                  <Skeleton key={i} className="aspect-square rounded-lg" />
-                ))}
-              </div>
-            </div>
-          )}
+            {/* Photos Tab */}
+            <TabsContent value="photos" className="space-y-6">
+              <Accordion type="multiple" className="w-full space-y-4">
+                {photoSectionsConfig.map((dayConfig) => (
+                  <AccordionItem key={dayConfig.day} value={dayConfig.day} className="border rounded-lg">
+                    <AccordionTrigger className="px-6 hover:no-underline">
+                      <span className="text-xl font-semibold">{dayConfig.day}</span>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-6 space-y-8">
+                      {dayConfig.sections.map((section) => {
+                        const content = photoSections[section.key];
+                        const hasLoaded = !!content;
 
-          {/* Gallery Content */}
-          {!loading && !error && folders.length > 0 && (
-            <>
-              {/* Download All Button */}
-              <div className="flex justify-end mb-6">
-                <Button
-                  onClick={() =>
-                    window.open(`https://drive.google.com/drive/folders/${FOLDER_ID}`, "_blank")
-                  }
-                  style={{ backgroundColor: "hsl(var(--brand-primary))", color: "hsl(var(--brand-on-primary))" }}
-                  className="hover:opacity-90"
-                >
-                  <Download className="w-4 h-4 mr-2" />
-                  Download All Photos
-                </Button>
-              </div>
-
-              {/* Tabs for Different Days/Folders */}
-              <Tabs value={activeFolder} onValueChange={setActiveFolder} className="w-full">
-                <TabsList className="grid w-full mb-8" style={{ gridTemplateColumns: `repeat(${folders.length}, minmax(0, 1fr))` }}>
-                  {folders.map((folder) => (
-                    <TabsTrigger key={folder.id} value={folder.name}>
-                      {folder.name}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-
-                {folders.map((folder) => (
-                  <TabsContent key={folder.id} value={folder.name} className="space-y-12">
-                    {/* Photos Section */}
-                    {folder.photos.length > 0 && (
-                      <section>
-                        <div className="mb-6">
-                          <h2 className="text-2xl font-bold text-foreground mb-2">
-                            📸 {folder.name} - Photos
-                          </h2>
-                          <p className="text-muted-foreground">{getSubtitleForFolder(folder.name)}</p>
-                        </div>
-
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                          {folder.photos.map((photo, index) => (
-                            <Card
-                              key={photo.id}
-                              className="group overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105"
-                              onClick={() => openLightbox(photo, folder.photos, index)}
-                            >
-                              <div className="aspect-square relative overflow-hidden">
-                                <img
-                                  src={photo.thumbnailLink || `https://drive.google.com/thumbnail?id=${photo.id}&sz=w500`}
-                                  alt={photo.name}
-                                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                  loading="lazy"
-                                />
-                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-                                  <Download
-                                    className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      downloadMedia(photo);
-                                    }}
-                                  />
-                                </div>
-                              </div>
-                            </Card>
-                          ))}
-                        </div>
-                      </section>
-                    )}
-
-                    {/* Videos Section */}
-                    {folder.videos.length > 0 && (
-                      <section>
-                        <div className="mb-6">
-                          <h2 className="text-2xl font-bold text-foreground mb-2">
-                            🎥 {folder.name} - Videos
-                          </h2>
-                          <p className="text-muted-foreground">Watch video highlights</p>
-                        </div>
-
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                          {folder.videos.map((video) => (
-                            <Card
-                              key={video.id}
-                              className="overflow-hidden hover:shadow-lg transition-shadow duration-300"
-                            >
-                              <div className="aspect-video relative overflow-hidden bg-muted">
-                                <iframe
-                                  src={`https://drive.google.com/file/d/${video.id}/preview`}
-                                  className="w-full h-full"
-                                  allow="autoplay"
-                                  allowFullScreen
-                                  title={video.name}
-                                ></iframe>
-                              </div>
-                              <div className="p-4 flex items-center justify-between">
-                                <h3 className="text-sm font-semibold text-foreground truncate flex-1">
-                                  {video.name}
-                                </h3>
+                        return (
+                          <div key={section.key} className="space-y-4">
+                            <div className="flex items-center justify-between">
+                              <h3 className="text-lg font-semibold text-foreground">{section.name}</h3>
+                              <div className="flex gap-2">
+                                {!hasLoaded && (
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={() => loadFolderFiles(section.folderId, section.name, section.key)}
+                                  >
+                                    Load Photos
+                                  </Button>
+                                )}
                                 <Button
                                   size="sm"
                                   variant="ghost"
-                                  onClick={() => downloadMedia(video)}
+                                  onClick={() => openDriveFolder(section.folderId)}
                                 >
-                                  <Download className="w-4 h-4" />
+                                  <Folder className="w-4 h-4 mr-2" />
+                                  Open Folder
                                 </Button>
                               </div>
-                            </Card>
-                          ))}
-                        </div>
-                      </section>
-                    )}
+                            </div>
 
-                    {/* Empty State */}
-                    {folder.photos.length === 0 && folder.videos.length === 0 && (
-                      <div className="text-center py-12">
-                        <p className="text-muted-foreground">No media files found in this folder yet.</p>
-                      </div>
-                    )}
-                  </TabsContent>
+                            {hasLoaded && (
+                              <>
+                                {content.loading && (
+                                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    {[1, 2, 3, 4].map((i) => (
+                                      <Skeleton key={i} className="aspect-square rounded-lg" />
+                                    ))}
+                                  </div>
+                                )}
+
+                                {content.error && (
+                                  <Alert variant="destructive">
+                                    <AlertCircle className="h-4 w-4" />
+                                    <AlertDescription className="flex items-center justify-between">
+                                      <span>⚠️ {content.error}</span>
+                                      <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => loadFolderFiles(section.folderId, section.name, section.key)}
+                                        className="ml-4"
+                                      >
+                                        <RefreshCw className="w-4 h-4 mr-2" />
+                                        Retry
+                                      </Button>
+                                    </AlertDescription>
+                                  </Alert>
+                                )}
+
+                                {!content.loading && !content.error && content.files.length > 0 && (
+                                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    {content.files.map((photo, index) => (
+                                      <Card
+                                        key={photo.id}
+                                        className="group overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105"
+                                        onClick={() => openLightbox(photo, content.files, index)}
+                                      >
+                                        <div className="aspect-square relative overflow-hidden">
+                                          <img
+                                            src={
+                                              photo.thumbnailLink ||
+                                              `https://drive.google.com/thumbnail?id=${photo.id}&sz=w500`
+                                            }
+                                            alt={photo.name}
+                                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                            loading="lazy"
+                                          />
+                                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                                            <Download
+                                              className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                downloadMedia(photo);
+                                              }}
+                                            />
+                                          </div>
+                                        </div>
+                                      </Card>
+                                    ))}
+                                  </div>
+                                )}
+
+                                {!content.loading && !content.error && content.files.length === 0 && (
+                                  <p className="text-center text-muted-foreground py-8">
+                                    No photos found in this folder.
+                                  </p>
+                                )}
+                              </>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </AccordionContent>
+                  </AccordionItem>
                 ))}
-              </Tabs>
-            </>
-          )}
+              </Accordion>
+            </TabsContent>
 
-          {/* Empty State - No Folders */}
-          {!loading && !error && folders.length === 0 && (
-            <div className="text-center py-12">
-              <AlertCircle className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-xl font-semibold text-foreground mb-2">No Media Found</h3>
-              <p className="text-muted-foreground mb-6">
-                No folders were found in the specified Google Drive location.
-              </p>
-              <Button onClick={fetchGallery}>
-                <RefreshCw className="w-4 h-4 mr-2" />
-                Try Again
-              </Button>
-            </div>
-          )}
+            {/* Videos Tab */}
+            <TabsContent value="videos" className="space-y-6">
+              {videosLoading && (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[1, 2, 3].map((i) => (
+                    <Skeleton key={i} className="aspect-video rounded-lg" />
+                  ))}
+                </div>
+              )}
+
+              {videosError && (
+                <Alert variant="destructive">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertDescription className="flex items-center justify-between">
+                    <span>⚠️ {videosError}</span>
+                    <Button variant="outline" size="sm" onClick={loadVideos} className="ml-4">
+                      <RefreshCw className="w-4 h-4 mr-2" />
+                      Retry
+                    </Button>
+                  </AlertDescription>
+                </Alert>
+              )}
+
+              {!videosLoading && !videosError && videoFiles.length > 0 && (
+                <>
+                  <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-2xl font-bold text-foreground">Conference Videos</h2>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => openDriveFolder(FOLDER_IDS.VIDEOS)}
+                    >
+                      <Folder className="w-4 h-4 mr-2" />
+                      Open Folder
+                    </Button>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {videoFiles.map((video) => (
+                      <Card key={video.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                        <div className="aspect-video relative overflow-hidden bg-muted">
+                          <iframe
+                            src={`https://drive.google.com/file/d/${video.id}/preview`}
+                            className="w-full h-full"
+                            allow="autoplay"
+                            allowFullScreen
+                            title={video.name}
+                          ></iframe>
+                        </div>
+                        <div className="p-4 flex items-center justify-between">
+                          <h3 className="text-sm font-semibold text-foreground truncate flex-1">{video.name}</h3>
+                          <Button size="sm" variant="ghost" onClick={() => downloadMedia(video)}>
+                            <Download className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {!videosLoading && !videosError && videoFiles.length === 0 && (
+                <div className="text-center py-12">
+                  <p className="text-muted-foreground">No videos found in this folder.</p>
+                  <Button onClick={loadVideos} className="mt-4">
+                    <RefreshCw className="w-4 h-4 mr-2" />
+                    Try Again
+                  </Button>
+                </div>
+              )}
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
 
@@ -437,12 +457,15 @@ const MediaGallery = () => {
             />
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full flex items-center gap-4">
               <span className="text-sm">
-                {currentIndex + 1} / {allPhotos.length}
+                {currentIndex + 1} / {currentMediaList.length}
               </span>
               <Button
                 size="sm"
                 onClick={() => downloadMedia(currentMedia)}
-                style={{ backgroundColor: "hsl(var(--brand-primary))", color: "hsl(var(--brand-on-primary))" }}
+                style={{
+                  backgroundColor: "hsl(var(--brand-primary))",
+                  color: "hsl(var(--brand-on-primary))",
+                }}
                 className="hover:opacity-90"
               >
                 <Download className="w-4 h-4 mr-1" />
@@ -465,7 +488,10 @@ const MediaGallery = () => {
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          style={{ backgroundColor: "hsl(var(--brand-primary))", color: "hsl(var(--brand-on-primary))" }}
+          style={{
+            backgroundColor: "hsl(var(--brand-primary))",
+            color: "hsl(var(--brand-on-primary))",
+          }}
           className="fixed bottom-8 right-8 p-3 rounded-full shadow-lg hover:opacity-90 transition-all duration-300 hover:scale-110 z-40"
           aria-label="Back to top"
         >
