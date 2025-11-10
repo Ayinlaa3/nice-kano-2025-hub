@@ -227,7 +227,7 @@ const MediaGallery = () => {
               📸 NICE Kano 2025 Media Gallery
             </h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Browse official photos and videos from the National Conference — grouped by day and activity.
+              Browse official photos and videos from the International Civil Engineering Conference and AGM — grouped by day and activity.
             </p>
           </div>
 
