@@ -164,6 +164,20 @@ const MediaGallery = () => {
     setCurrentMedia(currentMediaList[prevIndex]);
   };
 
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    if (!lightboxOpen) return;
+
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") goToNext();
+      if (e.key === "ArrowLeft") goToPrevious();
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [lightboxOpen, currentIndex, currentMediaList]);
+
   const downloadMedia = (media: MediaFile) => {
     const link = document.createElement("a");
     link.href = media.webContentLink || `https://drive.google.com/uc?export=download&id=${media.id}`;
@@ -307,31 +321,32 @@ const MediaGallery = () => {
                                 )}
 
                                 {!content.loading && !content.error && content.files.length > 0 && (
-                                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                     {content.files.map((photo, index) => (
                                       <Card
                                         key={photo.id}
-                                        className="group overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105"
+                                        className="group overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2 border-2 border-transparent hover:border-primary/50 bg-card"
                                         onClick={() => openLightbox(photo, content.files, index)}
                                       >
-                                        <div className="aspect-square relative overflow-hidden">
+                                        <div className="aspect-square relative overflow-hidden bg-muted">
                                           <img
                                             src={
                                               photo.thumbnailLink ||
                                               `https://drive.google.com/thumbnail?id=${photo.id}&sz=w500`
                                             }
                                             alt={photo.name}
-                                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                            className="w-full h-full object-cover transition-all duration-500 group-hover:scale-125 group-hover:rotate-2"
                                             loading="lazy"
                                           />
-                                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-                                            <Download
-                                              className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                              onClick={(e) => {
-                                                e.stopPropagation();
-                                                downloadMedia(photo);
-                                              }}
-                                            />
+                                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                                            <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                              <div className="bg-primary text-primary-foreground rounded-full p-4 shadow-lg">
+                                                <Download className="w-6 h-6" />
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div className="absolute top-2 right-2 bg-primary/90 text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            Click to preview
                                           </div>
                                         </div>
                                       </Card>
@@ -430,56 +445,67 @@ const MediaGallery = () => {
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* Enhanced Lightbox */}
       {lightboxOpen && currentMedia && (
-        <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-black/98 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+            className="absolute top-6 right-6 text-white/80 hover:text-white transition-all duration-300 z-20 bg-white/10 hover:bg-white/20 rounded-full p-3 backdrop-blur-sm hover:scale-110"
             aria-label="Close lightbox"
           >
-            <X className="w-8 h-8" />
+            <X className="w-6 h-6" />
           </button>
 
           <button
             onClick={goToPrevious}
-            className="absolute left-4 text-white hover:text-gray-300 transition-colors z-10"
+            className="absolute left-6 text-white/80 hover:text-white transition-all duration-300 z-20 bg-white/10 hover:bg-white/20 rounded-full p-4 backdrop-blur-sm hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Previous image"
+            disabled={currentMediaList.length <= 1}
           >
-            <ChevronLeft className="w-12 h-12" />
+            <ChevronLeft className="w-8 h-8" />
           </button>
 
-          <div className="max-w-5xl max-h-[90vh] relative">
+          <div className="max-w-6xl max-h-[85vh] relative animate-scale-in">
             <img
               src={`https://drive.google.com/uc?export=view&id=${currentMedia.id}`}
               alt={currentMedia.name}
-              className="max-w-full max-h-[90vh] object-contain rounded-lg"
+              className="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl"
             />
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full flex items-center gap-4">
-              <span className="text-sm">
+            
+            {/* Image info overlay */}
+            <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md text-white px-4 py-2 rounded-lg">
+              <p className="text-sm font-medium truncate max-w-xs">{currentMedia.name}</p>
+            </div>
+
+            {/* Controls overlay */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/80 backdrop-blur-md text-white px-6 py-3 rounded-full flex items-center gap-6 shadow-xl">
+              <span className="text-sm font-semibold">
                 {currentIndex + 1} / {currentMediaList.length}
               </span>
+              <div className="w-px h-6 bg-white/30"></div>
               <Button
                 size="sm"
                 onClick={() => downloadMedia(currentMedia)}
-                style={{
-                  backgroundColor: "hsl(var(--brand-primary))",
-                  color: "hsl(var(--brand-on-primary))",
-                }}
-                className="hover:opacity-90"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-4 py-2 transition-all duration-300 hover:scale-105 shadow-lg"
               >
-                <Download className="w-4 h-4 mr-1" />
+                <Download className="w-4 h-4 mr-2" />
                 Download
               </Button>
+            </div>
+
+            {/* Keyboard hint */}
+            <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-white/50 text-xs">
+              Use ← → arrow keys to navigate
             </div>
           </div>
 
           <button
             onClick={goToNext}
-            className="absolute right-4 text-white hover:text-gray-300 transition-colors z-10"
+            className="absolute right-6 text-white/80 hover:text-white transition-all duration-300 z-20 bg-white/10 hover:bg-white/20 rounded-full p-4 backdrop-blur-sm hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Next image"
+            disabled={currentMediaList.length <= 1}
           >
-            <ChevronRight className="w-12 h-12" />
+            <ChevronRight className="w-8 h-8" />
           </button>
         </div>
       )}
