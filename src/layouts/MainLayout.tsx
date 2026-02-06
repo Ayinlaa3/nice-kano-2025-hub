@@ -291,6 +291,9 @@ export default function MainLayout() {
                   </Link>
                 </li>
               </ul>
+              <p className="text-muted-white text-sm mt-9">
+              Developed by: <span className="text-white">AIS Designs</span>
+              </p>
             </div>
           </div>
           
