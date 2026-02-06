@@ -23,12 +23,6 @@ const supportAgents: SupportAgent[] = [
     phone: '+234 818 209 7622',
     role: 'Technical Support',
     availability: 'online'
-  },
-  {
-    name: 'Bright',
-    phone: '+234 706 207 0193',
-    role: 'Registration Support',
-    availability: 'online'
   }
 ];
 

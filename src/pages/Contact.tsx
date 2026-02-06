@@ -89,8 +89,7 @@ export default function Contact() {
 
   const supportTeam = [
     { name: "Boaz", phone: "+234 803 715 4335", role: "General Support" },
-    { name: "Ahmed", phone: "+234 818 209 7622", role: "Technical Support" },
-    { name: "Bright", phone: "+234 706 207 0193", role: "Registration Support" }
+    { name: "Ahmed", phone: "+234 818 209 7622", role: "Technical Support" }
   ];
 
   return (
