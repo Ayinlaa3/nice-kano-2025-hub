@@ -18,6 +18,9 @@ import FAQ from "./pages/FAQ";
 import InnovationChallenge from "./pages/InnovationChallenge";
 import Certificate from "./pages/Certificate";
 import MediaGallery from "./pages/MediaGallery";
+import Registration from "./pages/Registration";
+import PastConferences from "./pages/PastConferences";
+import PastConferenceDetail from "./pages/PastConferenceDetail";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +45,9 @@ const App = () => (
               <Route path="/innovationchallenge" element={<InnovationChallenge />} />
               <Route path="/certificate" element={<Certificate />} />
               <Route path="/media-gallery" element={<MediaGallery />} />
+              <Route path="/registration" element={<Registration />} />
+              <Route path="/past-conferences" element={<PastConferences />} />
+              <Route path="/past-conferences/:slug" element={<PastConferenceDetail />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
