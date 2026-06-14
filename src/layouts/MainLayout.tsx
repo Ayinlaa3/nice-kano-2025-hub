@@ -113,8 +113,8 @@ export default function MainLayout() {
     Nigerian Institution of Civil Engineers
   </h1>
               <p className="font-semibold bg-gradient-to-l tracking-wide from-brand-yellow to-brand-red bg-clip-text text-transparent">
-  <span className="sm:hidden">- KANO 2025</span> 
-  <span className="hidden sm:inline">23rd International Conference - KANO 2025</span>
+  <span className="sm:hidden">- {CONFERENCE.shortName}</span> 
+  <span className="hidden sm:inline">{CONFERENCE.edition} - {CONFERENCE.shortName}</span>
 </p>
 </div>
           </Link>
@@ -176,18 +176,14 @@ export default function MainLayout() {
   <div className="flex flex-col-reverse items-end gap-2 md:hidden">
     <MobileMenu />
     <Button asChild variant="professional" size="sm">
-      <a href={REG_FORM} target="_blank" rel="noreferrer">
-        Register Now
-      </a>
+      <Link to="/registration">Register Now</Link>
     </Button>
   </div>
 
   {/* Desktop: Register + Sponsor inline */}
   <div className="hidden md:flex items-center gap-3">
     <Button asChild variant="professional" size="sm">
-      <a href={REG_FORM} target="_blank" rel="noreferrer">
-        Register Now
-      </a>
+      <Link to="/registration">Register Now</Link>
     </Button>
     <Button asChild variant="cultural" size="sm">
       <Link to="/sponsorships">Sponsor Us</Link>
@@ -215,12 +211,12 @@ export default function MainLayout() {
                     Nigerian Institution of Civil Engineers
                   </p>
                   <p className="font-semibold text-white">
-                    23rd International Conference - KANO 2025
+                    {CONFERENCE.edition} - {CONFERENCE.shortName}
                   </p>
                 </div>
               </div>
               <p className="text-sm text-white/80 max-w-md">
-                Sustaining the world's infrastructure through excellence in civil engineering. Join us in Kano for an inspiring conference focused on innovation and sustainability.
+                Sustaining the world's infrastructure through excellence in civil engineering. Join us in Lagos for an inspiring conference focused on sustainable and resilient infrastructure for economic growth.
               </p>
             </div>
             
@@ -264,10 +260,10 @@ export default function MainLayout() {
               <h4 className="font-semibold text-white mb-4 border-b border-white/20 pb-2">Get Involved</h4>
               <ul className="grid gap-3 text-sm">
                 <li>
-                  <a href={REG_FORM} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
+                  <Link to="/registration" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
                     <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
                     Register Now
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <Link to="/sponsorships" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
