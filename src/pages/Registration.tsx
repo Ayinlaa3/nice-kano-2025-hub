@@ -127,7 +127,7 @@ export default function Registration() {
     return (
       <div className="container mx-auto py-12 md:py-16 max-w-3xl">
         <Helmet>
-          <title>Registration Received | NICE {CONFERENCE.shortName}</title>
+          <title>{`Registration Received | NICE ${CONFERENCE.shortName}`}</title>
         </Helmet>
         <Card className="border-t-4 border-t-brand-primary">
           <CardHeader className="text-center">
