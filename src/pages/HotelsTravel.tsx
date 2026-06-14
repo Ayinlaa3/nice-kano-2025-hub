@@ -196,24 +196,53 @@ const HOTELS = [
   }
 ];
 
+// Hotels confirmed/verified by the NICE conference logistics team.
+// Update this list as verification is completed.
+const VERIFIED_HOTELS = new Set<string>([
+  "Prince Hotel",
+  "Bon Hotel Kano",
+  "City King Hotel & Towers",
+  "Central Hotel Limited Kano",
+  "Tahir Guest Palace",
+]);
+
 export default function HotelsTravel() {
   return (
     <div className="container mx-auto py-12 md:py-16">
       <Helmet>
-        <title>Hotels & Travel | NICE Kano 2025</title>
-        <meta name="description" content="Recommended hotels near the venue and travel tips for attendees visiting Kano for NICE 2025." />
+        <title>Hotels & Travel | NICE Lagos 2026</title>
+        <meta name="description" content="Recommended hotels and travel tips for attendees visiting Lagos for NICE 2026 at HiPoint Event Centre, Ikeja." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/hotels-travel"} />
       </Helmet>
 
       <header className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold">Hotels & Travel</h1>
-        <p className="text-muted-foreground mt-2">Plan your stay with curated hotel options and essential travel tips.</p>
+        <p className="text-muted-foreground mt-2">Plan your stay around HiPoint Event Centre, Ikeja, Lagos with curated hotel options and essential travel tips.</p>
+        <div className="mt-4 flex flex-wrap gap-4 text-sm">
+          <span className="inline-flex items-center gap-2">
+            <Badge className="bg-brand-primary/10 text-brand-primary">Verified</Badge>
+            Confirmed by the NICE logistics team
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <Badge variant="secondary">Not Verified</Badge>
+            Listing pending confirmation
+          </span>
+        </div>
       </header>
 
       <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {HOTELS.map((h) => (
+        {HOTELS.map((h) => {
+          const verified = VERIFIED_HOTELS.has(h.name);
+          return (
           <Card key={h.name} className="p-5 hover:shadow-lg transition-shadow">
-            <h3 className="font-semibold text-lg">{h.name}</h3>
+            <div className="flex items-start justify-between gap-2">
+              <h3 className="font-semibold text-lg">{h.name}</h3>
+              {verified ? (
+                <Badge className="bg-brand-primary/10 text-brand-primary shrink-0">Verified</Badge>
+              ) : (
+                <Badge variant="secondary" className="shrink-0">Not Verified</Badge>
+              )}
+            </div>
             <p className="text-sm text-muted-foreground mt-1">{h.address}</p>
             <p className="text-sm text-muted-foreground">{h.distance} from venue</p>
             <p className="mt-2"><span className="font-medium text-primary">{h.priceRange}</span></p>
@@ -241,7 +270,8 @@ export default function HotelsTravel() {
               <a href={h.link} target="_blank" rel="noreferrer">View Details & Book</a>
             </Button>
           </Card>
-        ))}
+          );
+        })}
       </section>
 
       <section className="mt-16">
@@ -249,48 +279,48 @@ export default function HotelsTravel() {
         
         <div className="grid md:grid-cols-2 gap-8">
           <Card className="p-6">
-            <h3 className="text-xl font-semibold mb-4">Getting to Kano</h3>
+            <h3 className="text-xl font-semibold mb-4">Getting to Lagos</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <span className="text-primary mr-2">✈️</span>
                 <div>
-                  <strong>By Air:</strong> Fly into Mallam Aminu Kano International Airport (KAN). Major airlines include Arik Air, Air Peace, and Azman Air with direct flights from Lagos, Abuja, and Port Harcourt.
+                  <strong>By Air:</strong> Fly into Murtala Muhammed International Airport (LOS), Ikeja. The venue, HiPoint Event Centre in Alausa, Ikeja, is a short drive from the airport.
                 </div>
               </li>
               <li className="flex items-start">
                 <span className="text-primary mr-2">🚗</span>
                 <div>
-                  <strong>By Road:</strong> Kano is well-connected by road. The journey from Abuja takes approximately 6-7 hours via A1 (Abuja - Kaduna - Kano) Highway.
+                  <strong>By Road:</strong> Lagos is well-connected by road. Alausa, Ikeja sits within the Central Business District and is accessible from all parts of the city.
                 </div>
               </li>
               <li className="flex items-start">
-                <span className="text-primary mr-2">🚂</span>
+                <span className="text-primary mr-2">🚆</span>
                 <div>
-                  <strong>By Rail:</strong> Nigerian Railway Corporation operates services from Lagos to Kano (though schedules may vary).
+                  <strong>By Rail:</strong> The Lagos Blue and Red Line rail services connect key parts of the metropolis, with onward connections to Ikeja.
                 </div>
               </li>
             </ul>
           </Card>
 
           <Card className="p-6">
-            <h3 className="text-xl font-semibold mb-4">Getting Around Kano</h3>
+            <h3 className="text-xl font-semibold mb-4">Getting Around Lagos</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <span className="text-primary mr-2">🚖</span>
                 <div>
-                  <strong>Taxis:</strong> Use reputable taxi services or ride-hailing apps like Bolt or Uber. Always negotiate fares beforehand for regular taxis.
+                  <strong>Ride-hailing:</strong> Bolt, Uber and inDrive operate widely across Lagos. Confirm pickup points and fares in-app before travelling.
                 </div>
               </li>
               <li className="flex items-start">
                 <span className="text-primary mr-2">🚌</span>
                 <div>
-                  <strong>Hotel Shuttles:</strong> Many hotels offer complimentary airport pickup and conference venue transfers.
+                  <strong>Hotel Shuttles:</strong> Many hotels offer airport pickup and conference venue transfers on request.
                 </div>
               </li>
               <li className="flex items-start">
                 <span className="text-primary mr-2">🏨</span>
                 <div>
-                  <strong>Conference Transport:</strong> Organized shuttle services may be available between major hotels and the conference venue.
+                  <strong>Conference Transport:</strong> Organized shuttle services may be available between partner hotels and HiPoint Event Centre.
                 </div>
               </li>
             </ul>

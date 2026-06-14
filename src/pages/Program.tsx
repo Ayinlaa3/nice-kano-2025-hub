@@ -2,17 +2,17 @@ import { Helmet } from "react-helmet-async";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { time } from "console";
+
 
 const schedule = {
   day1: [
-    { time: "All Day", title: "Delegates Arrival and On-site Registration", venue: "Coronation Hall", tags: ["Registration"], desc: "Welcome and registration for all conference delegates." },
-    { time: "9:00 AM - 5:00 PM", title: "Arrival/Registration of Delegates", venue: "Coronation Hall", tags: [""], desc: "" },
-    { time: "9:00 AM - 6:00 PM", title: "Exhibition", venue: "Coronation Hall Exterior", tags: ["Exhibition"], desc: "" },
+    { time: "All Day", title: "Delegates Arrival and On-site Registration", venue: "HiPoint Event Centre", tags: ["Registration"], desc: "Welcome and registration for all conference delegates." },
+    { time: "9:00 AM - 5:00 PM", title: "Arrival/Registration of Delegates", venue: "HiPoint Event Centre", tags: [""], desc: "" },
+    { time: "9:00 AM - 6:00 PM", title: "Exhibition", venue: "HiPoint Event Centre Exterior", tags: ["Exhibition"], desc: "" },
     {time:	"11:00am – 2:00pm",	title:"Technical Tour", venue:"Site Event",	tags:["Tour"], desc:	"Guided technical tours to local engineering sites of interest."},
-    { time: "11:00am – 2:00pm", title: "Kano Tour", venue: " Kano City Tour", tags: ["Tour"], desc: "Explore the city's rich history, traditional architecture, and scenic views that reflect its deep cultural roots."},
-    { time: "3:00pm  – 5:00pm", title: "Construction Tech Innovation  Showcase/ Challenge", venue: "Coronation Hall", tags: ["Showcase"], desc: "Showcasing innovative construction technologies and solutions." },
-    { time: "6:00 PM -8:00PM", title: "Chairman's Cocktail & Engineering Business Roundtable", venue: "Coronation Hall", tags: ["Networking"], desc: "Evening of networking and business discussions, connecting engineers and business owners to investors and business opportunities." },
+    { time: "11:00am – 2:00pm", title: "Lagos Tour", venue: " Lagos City Tour", tags: ["Tour"], desc: "Explore Lagos — its vibrant culture, landmarks, and scenic views."},
+    { time: "3:00pm  – 5:00pm", title: "Construction Tech Innovation  Showcase/ Challenge", venue: "HiPoint Event Centre", tags: ["Showcase"], desc: "Showcasing innovative construction technologies and solutions." },
+    { time: "6:00 PM -8:00PM", title: "Chairman's Cocktail & Engineering Business Roundtable", venue: "HiPoint Event Centre", tags: ["Networking"], desc: "Evening of networking and business discussions, connecting engineers and business owners to investors and business opportunities." },
   ],
 
   day2: [
@@ -78,14 +78,14 @@ export default function Program() {
   return (
     <div className="container mx-auto py-12 md:py-16">
       <Helmet>
-        <title>Program Schedule | NICE Kano 2025</title>
-        <meta name="description" content="Explore the 3-day program schedule for NICE Kano 2025: sessions, workshops, networking, and gala." />
+        <title>Programme / Schedule | NICE Lagos 2026</title>
+        <meta name="description" content="Explore the provisional 3-day programme for NICE Lagos 2026: sessions, workshops, networking, and gala." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/program"} />
       </Helmet>
 
       <header className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold">Program Schedule</h1>
-        <p className="text-muted-foreground mt-2">Review sessions by day. Times and venues are subject to updates.</p>
+        <h1 className="text-3xl md:text-4xl font-bold">Programme / Schedule</h1>
+        <p className="text-muted-foreground mt-2">Provisional schedule for 20–22 October 2026. Sessions, times and venues are in draft and subject to updates.</p>
       </header>
 
       <Tabs defaultValue="day1" className="w-full">

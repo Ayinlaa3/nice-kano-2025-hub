@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Phone, Mail, Users, MessageSquare } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Import leadership photos
 import leaderOfoeyeno from "@/assets/leader-ofoeyeno.jpg";
@@ -13,7 +14,6 @@ import leaderBalla from "@/assets/leader-balla.jpg";
 import leaderAlhassan from "@/assets/leader-alhassan.jpg";
 import leaderBoaz from "@/assets/leader-boaz.jpg";
 
-const REG_FORM = "https://forms.gle/HXocP4aGn5Pb1HmR6";
 
 export default function Contact() {
   const { toast } = useToast();
@@ -136,9 +136,9 @@ export default function Contact() {
                   <div className="flex items-center gap-3">
                     <Users className="h-4 w-4 text-muted-foreground" />
                     <div>
-                      <a href={REG_FORM} target="_blank" rel="noreferrer" className="font-medium text-primary hover:underline">
-                        Conference Registration Form
-                      </a>
+                      <Link to="/registration" className="font-medium text-primary hover:underline">
+                        Conference Registration
+                      </Link>
                       <p className="text-sm text-muted-foreground">Complete your registration online</p>
                     </div>
                   </div>

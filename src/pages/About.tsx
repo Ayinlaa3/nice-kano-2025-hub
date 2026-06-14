@@ -15,8 +15,8 @@ export default function About() {
   return (
     <div className="min-h-screen">
       <Helmet>
-        <title>About the Conference | NICE Kano 2025</title>
-        <meta name="description" content="Learn about the NICE 23rd International Civil Engineering Conference & AGM, theme, and objectives." />
+        <title>About the Conference | NICE Lagos 2026</title>
+        <meta name="description" content="Learn about the NICE 24th International Civil Engineering Conference & AGM, theme, and objectives, holding in Lagos." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/about"} />
       </Helmet>
 
@@ -25,12 +25,12 @@ export default function About() {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAwMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMSIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center animate-fade-in">
-            <Badge className="mb-4 bg-brand-gold/90 text-secondary-foreground text-md hover:bg-brand-gold">23rd Edition</Badge>
+            <Badge className="mb-4 bg-brand-gold/90 text-secondary-foreground text-md hover:bg-brand-gold">24th Edition</Badge>
             <h1 className="text-4xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-brand-primary to-brand-gold bg-clip-text text-transparent">
               About the Conference
             </h1>
             <p className="text-xl md:text-xl mb-8 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development
+              Civil Engineering: Sustainable and Resilient Infrastructure for Economic Growth
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <Badge variant="outline" className="border-border text-foreground hover:bg-muted text-md">
@@ -118,15 +118,15 @@ export default function About() {
         <section className="mb-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-primary">About NICE Kano 2025</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-primary">About NICE Lagos 2026</h2>
               <p className="text-lg mb-6 text-muted-foreground leading-relaxed">
-                The NICE 23rd International Civil Engineering Conference & AGM is Nigeria's premier gathering for civil engineers, 
+                The NICE 24th International Civil Engineering Conference & AGM is Nigeria's premier gathering for civil engineers, 
                 industry leaders, academics, and students. Over three transformative days, participants explore cutting-edge solutions 
-                that shape sustainable, resilient infrastructure across the nation and beyond, live in Kano.
+                that shape sustainable, resilient infrastructure across the nation and beyond, live in Lagos.
               </p>
               <p className="text-lg mb-8 text-muted-foreground leading-relaxed">
-                This year's theme focuses on integrating innovative construction methodologies with sustainable practices, 
-                driving the evolution of civil infrastructure development in Africa and globally.
+                This year's theme focuses on delivering sustainable and resilient infrastructure that drives economic growth, 
+                advancing the evolution of civil infrastructure development in Africa and globally.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -238,7 +238,7 @@ export default function About() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-primary">Conference Leadership</h2>
             <p className="text-muted-foreground max-w-3xl mx-auto">
-              Meet the distinguished leaders guiding the 2025 NICE Conference & AGM organization.
+              Meet the distinguished leaders guiding the 2026 NICE Conference & AGM organization.
             </p>
           </div>
 

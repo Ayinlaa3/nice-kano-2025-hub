@@ -13,45 +13,42 @@ import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/co
 import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ChatSupport from "@/components/ChatSupport";
-
-const REG_FORM = "https://forms.gle/HXocP4aGn5Pb1HmR6";
+import { CONFERENCE } from "@/config/conference";
 
 const navigationGroups = [
   {
-    label: "Event Info",
+    label: "Conference",
     items: [
-      { to: "/program", label: "Program", description: "Conference schedule and sessions" },
+      { to: "/about", label: "About Conference", description: "Theme, objectives and overview" },
+      { to: "/program", label: "Programme / Schedule", description: "3-day conference schedule" },
       { to: "/speakers", label: "Speakers", description: "Featured speakers and presenters" },
-      { to: "/location", label: "Location", description: "Venue details and directions" },
+      { to: "/location", label: "Venue & Location", description: "Venue details and directions" },
       { to: "/innovationchallenge", label: "Innovation Challenge", description: "Young Engineers Competition" },
     ]
   },
-
-{
-  label: "Attendance",
-  items: [
-    { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
-    { to: "/certificate", label: "Certificate Generator", description: "Download your participation certificate" },
-  ]
-},
-
-{
-  label: "Media",
-  items: [
-    { to: "/media-gallery", label: "Conference Media Gallery", description: "Photos and videos from the 2025 conference" },
-  ]
-},
-
-
   {
-    label: "About",
+    label: "Attend",
     items: [
-      { to: "/about", label: "About KANO 2025", description: "Learn about our conference" },
-      { to: "/sponsorships", label: "Sponsorships", description: "Partnership opportunities" },
+      { to: "/registration", label: "Registration", description: "Register and view conference fees" },
+      { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
+      { to: "/certificate", label: "Certificate Generator", description: "Download your participation certificate" },
+    ]
+  },
+  {
+    label: "Partners",
+    items: [
+      { to: "/sponsorships", label: "Sponsors & Exhibitions", description: "Partnership and exhibition opportunities" },
+    ]
+  },
+  {
+    label: "Archive",
+    items: [
+      { to: "/past-conferences", label: "Past Conferences", description: "Reports and highlights from previous editions" },
       { to: "/faq", label: "FAQ", description: "Frequently asked questions" },
     ]
   }
 ];
+
 
 export default function MainLayout() {
   const isMobile = useIsMobile();
@@ -116,8 +113,8 @@ export default function MainLayout() {
     Nigerian Institution of Civil Engineers
   </h1>
               <p className="font-semibold bg-gradient-to-l tracking-wide from-brand-yellow to-brand-red bg-clip-text text-transparent">
-  <span className="sm:hidden">- KANO 2025</span> 
-  <span className="hidden sm:inline">23rd International Conference - KANO 2025</span>
+  <span className="sm:hidden">- {CONFERENCE.shortName}</span> 
+  <span className="hidden sm:inline">{CONFERENCE.edition} - {CONFERENCE.shortName}</span>
 </p>
 </div>
           </Link>
@@ -179,18 +176,14 @@ export default function MainLayout() {
   <div className="flex flex-col-reverse items-end gap-2 md:hidden">
     <MobileMenu />
     <Button asChild variant="professional" size="sm">
-      <a href={REG_FORM} target="_blank" rel="noreferrer">
-        Register Now
-      </a>
+      <Link to="/registration">Register Now</Link>
     </Button>
   </div>
 
   {/* Desktop: Register + Sponsor inline */}
   <div className="hidden md:flex items-center gap-3">
     <Button asChild variant="professional" size="sm">
-      <a href={REG_FORM} target="_blank" rel="noreferrer">
-        Register Now
-      </a>
+      <Link to="/registration">Register Now</Link>
     </Button>
     <Button asChild variant="cultural" size="sm">
       <Link to="/sponsorships">Sponsor Us</Link>
@@ -218,12 +211,12 @@ export default function MainLayout() {
                     Nigerian Institution of Civil Engineers
                   </p>
                   <p className="font-semibold text-white">
-                    23rd International Conference - KANO 2025
+                    {CONFERENCE.edition} - {CONFERENCE.shortName}
                   </p>
                 </div>
               </div>
               <p className="text-sm text-white/80 max-w-md">
-                Sustaining the world's infrastructure through excellence in civil engineering. Join us in Kano for an inspiring conference focused on innovation and sustainability.
+                Sustaining the world's infrastructure through excellence in civil engineering. Join us in Lagos for an inspiring conference focused on sustainable and resilient infrastructure for economic growth.
               </p>
             </div>
             
@@ -267,10 +260,10 @@ export default function MainLayout() {
               <h4 className="font-semibold text-white mb-4 border-b border-white/20 pb-2">Get Involved</h4>
               <ul className="grid gap-3 text-sm">
                 <li>
-                  <a href={REG_FORM} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
+                  <Link to="/registration" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
                     <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
                     Register Now
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <Link to="/sponsorships" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
@@ -281,7 +274,7 @@ export default function MainLayout() {
                 <li>
                   <Link to="/about" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
                     <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
-                    About KANO 2025
+                    About the Conference
                   </Link>
                 </li>
                 <li>

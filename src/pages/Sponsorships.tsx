@@ -100,15 +100,15 @@ export default function Sponsorships() {
   return (
     <div className="container mx-auto py-12 md:py-16 space-y-12">
       <Helmet>
-        <title>Sponsorships & Exhibitions | NICE Kano 2025</title>
-        <meta name="description" content="Partner with NICE Kano 2025 - Explore sponsorship tiers and exhibition opportunities at Nigeria's premier civil engineering conference." />
+        <title>Sponsors & Exhibitions | NICE Lagos 2026</title>
+        <meta name="description" content="Partner with NICE Lagos 2026 - Explore sponsorship tiers and exhibition opportunities at Nigeria's premier civil engineering conference." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/sponsorships"} />
       </Helmet>
 
       <header className="text-center">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">NICE 2025 International Conference & AGM</h1>
-        <h2 className="text-xl md:text-2xl text-brand-primary font-semibold mb-2">Sponsorship Proposal</h2>
-        <p className="text-muted-foreground max-w-3xl mx-auto">Partner with NICE to reach Nigeria's leading civil engineering community and showcase your brand at Africa's premier infrastructure development conference.</p>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">NICE 2026 International Conference & AGM</h1>
+        <h2 className="text-xl md:text-2xl text-brand-primary font-semibold mb-2">Sponsors &amp; Exhibitions</h2>
+        <p className="text-muted-foreground max-w-3xl mx-auto">Partner with NICE to reach Nigeria's leading civil engineering community and showcase your brand at Africa's premier infrastructure development conference, live in Lagos.</p>
       </header>
 
       {/* About the Conference */}
@@ -154,7 +154,7 @@ export default function Sponsorships() {
       {/* Why Sponsor */}
       <section>
         <Card className="p-6">
-          <h2 className="text-2xl font-bold mb-4">Why Sponsor KANO 2025?</h2>
+          <h2 className="text-2xl font-bold mb-4">Why Sponsor NICE Lagos 2026?</h2>
           <p className="text-muted-foreground mb-4">
             Sponsoring this premier event offers unmatched visibility and brand positioning before an influential audience of over <strong>800+ professionals</strong>, including:
           </p>

@@ -17,8 +17,10 @@ import heroConstruction from "@/assets/hero-construction.jpg";
 import heroSustainable from "@/assets/hero-sustainable.jpg";
 import { CalendarDays, MapPin, Building2, HardHat, Users, Briefcase, Award, GraduationCap, Handshake, Landmark, Beer, Presentation, ChevronDown, Mic, Star, Play, Users2 } from "lucide-react";
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import Hero from "@/components/Hero";
 import { IllBeThere } from "@/components/IllBeThere";
+import { CONFERENCE } from "@/config/conference";
 
 // Import Leader photos
 import leaderTokunbo from "@/assets/leader-tokunbo.jpg";
@@ -48,7 +50,7 @@ import sponsor6 from "@/assets/sponsors/sponsor06.png";
 
 
 
-const REG_FORM = "https://forms.gle/HXocP4aGn5Pb1HmR6";
+
 
 const activities = [
   { 
@@ -207,30 +209,30 @@ const Index = () => {
       "@context": "https://schema.org",
       "@type": "Event",
       name:
-        "NICE 23rd International Civil Engineering Conference & AGM — Kano 2025",
-      startDate: "2025-10-21",
-      endDate: "2025-10-23",
+        "NICE 24th International Civil Engineering Conference & AGM — Lagos 2026",
+      startDate: CONFERENCE.dates.startISO,
+      endDate: CONFERENCE.dates.endISO,
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       eventStatus: "https://schema.org/EventScheduled",
       location: {
         "@type": "Place",
-        name: "Coronation Hall, Kano Government House",
+        name: CONFERENCE.venue.name,
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Kano",
-          addressRegion: "Kano State",
-          addressCountry: "NG",
+          streetAddress: CONFERENCE.venue.address,
+          addressLocality: CONFERENCE.venue.city,
+          addressRegion: CONFERENCE.venue.region,
+          addressCountry: CONFERENCE.venue.country,
         },
       },
       organizer: {
         "@type": "Organization",
         name: "Nigerian Institution of Civil Engineers (NICE)",
-        url: "https://nicehq.org",
+        url: CONFERENCE.organiserUrl,
       },
       url: typeof window !== "undefined" ? window.location.href : undefined,
       image: [heroBridge, heroGreen, heroHighway, heroConstruction, heroSustainable],
-      description:
-        "Theme: Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development.",
+      description: `Theme: ${CONFERENCE.theme}.`,
     }),
     []
   );
@@ -240,10 +242,10 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>NICE Kano 2025 Conference & AGM | 21–23 Oct 2025</title>
+        <title>NICE Lagos 2026 Conference & AGM | 20–22 Oct 2026</title>
         <meta
           name="description"
-          content="Nigeria's premier civil engineering conference by NICE. 21–23 Oct 2025, Coronation Hall, Kano. Register and explore sponsorship opportunities."
+          content="Nigeria's premier civil engineering conference by NICE. 20–22 Oct 2026, HiPoint Event Centre, Ikeja, Lagos. Register and explore sponsorship opportunities."
         />
         <link
           rel="canonical"
@@ -271,7 +273,7 @@ const Index = () => {
             <article className="md:col-span-7">
               <h2 className="text-2xl md:text-3xl font-bold">About the Conference</h2>
               <p className="mt-4 leading-relaxed">
-                The NICE 23rd International Civil Engineering Conference & AGM brings together engineers, industry experts, academics, students, and corporate partners for three days of knowledge sharing, innovation, and networking. As Nigeria's premier civil engineering gathering, the conference catalyzes professional growth and showcases transformative solutions for resilient infrastructure.
+                The NICE 24th International Civil Engineering Conference & AGM brings together engineers, industry experts, academics, students, and corporate partners for three days of knowledge sharing, innovation, and networking. As Nigeria's premier civil engineering gathering, the conference catalyzes professional growth and showcases transformative solutions for sustainable and resilient infrastructure that drives economic growth.
               </p>
             </article>
           </div>
@@ -283,7 +285,7 @@ const Index = () => {
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold">Conference Spotlight</h2>
               <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-                Hear directly from NICE leaders and get a preview of what awaits you at Kano 2025
+                Relive the moments — messages and highlights from our last edition, NICE Kano 2025.
               </p>
             </div>
             
@@ -517,9 +519,7 @@ const Index = () => {
                 </div>
               </div>
               <Button asChild size="lg" className="bg-gradient-to-r from-brand to-vibrant hover:from-brand/90 hover:to-vibrant/90">
-                <a href={REG_FORM} target="_blank" rel="noopener noreferrer">
-                  Join These Leaders - Register Now
-                </a>
+                <Link to="/registration">Join Us in Lagos - Register Now</Link>
               </Button>
             </div>
           </div>
@@ -534,7 +534,7 @@ const Index = () => {
             <div className="md:col-span-6">
               <h2 className="text-2xl md:text-3xl font-bold">Conference Theme</h2>
               <p className="mt-4">
-                "Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development" speaks to Nigeria's future—where modern methods, digital tools, and sustainable practices converge to deliver durable, cost-effective, and climate-resilient infrastructure.
+                "{CONFERENCE.theme}" speaks to Nigeria's future—where modern methods, digital tools, and sustainable practices converge to deliver durable, cost-effective, and climate-resilient infrastructure that powers economic growth.
               </p>
             </div>
             <aside className="md:col-span-6 mt-8 md:mt-0">
@@ -592,9 +592,9 @@ const Index = () => {
         <section id="speakers" className="py-16 md:py-20 bg-brandYellow/10">
           <div className="container mx-auto px-6 lg:px-12 xl:px-16">
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold">Invited Dignitaries</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">Invited Dignitaries — Kano 2025</h2>
               <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-                Honoring distinguished leaders, esteemed public servants, and visionary policymakers whose dedication continues to shape Nigeria’s engineering and infrastructural advancement.
+                A look back at the distinguished leaders, esteemed public servants, and visionary policymakers who honoured our last edition. The Lagos 2026 line-up will be announced soon.
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -655,7 +655,7 @@ const Index = () => {
             <Card className="p-6 bg-brand/5 ring-1 ring-brand/10 transition-all duration-300 hover:shadow-lg hover:bg-brand/10">
               <h3 className="font-semibold flex items-center gap-2">
                 <Star className="h-5 w-5 text-brand" />
-                Why Sponsor KANO 2025?
+                Why Sponsor NICE Lagos 2026?
               </h3>
               <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
                 Sponsoring this premier event offers unmatched visibility and brand positioning before an influential audience of over <span className="font-semibold text-brand">800+ professionals</span>, including:
