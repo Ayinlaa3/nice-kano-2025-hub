@@ -519,9 +519,7 @@ const Index = () => {
                 </div>
               </div>
               <Button asChild size="lg" className="bg-gradient-to-r from-brand to-vibrant hover:from-brand/90 hover:to-vibrant/90">
-                <a href={REG_FORM} target="_blank" rel="noopener noreferrer">
-                  Join These Leaders - Register Now
-                </a>
+                <Link to="/registration">Join Us in Lagos - Register Now</Link>
               </Button>
             </div>
           </div>
@@ -657,7 +655,7 @@ const Index = () => {
             <Card className="p-6 bg-brand/5 ring-1 ring-brand/10 transition-all duration-300 hover:shadow-lg hover:bg-brand/10">
               <h3 className="font-semibold flex items-center gap-2">
                 <Star className="h-5 w-5 text-brand" />
-                Why Sponsor KANO 2025?
+                Why Sponsor NICE Lagos 2026?
               </h3>
               <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
                 Sponsoring this premier event offers unmatched visibility and brand positioning before an influential audience of over <span className="font-semibold text-brand">800+ professionals</span>, including:
