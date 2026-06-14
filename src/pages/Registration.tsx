@@ -396,8 +396,9 @@ export default function Registration() {
                 <Checkbox
                   id="consent"
                   onCheckedChange={(v) =>
-                    setValue("consent", v === true, { shouldValidate: true })
+                    setValue("consent", (v === true) as true, { shouldValidate: true })
                   }
+
                 />
                 <Label htmlFor="consent" className="text-sm font-normal leading-snug">
                   I confirm the information provided is accurate and I consent to
