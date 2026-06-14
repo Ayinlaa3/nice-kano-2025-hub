@@ -38,7 +38,7 @@ import kanoCityTour from "@/assets/kano-city-tour.jpg"
 import technicalTour from "@/assets/technical-tour.jpg"
 import { Button } from "@/components/ui/button"
 import { Phone } from "lucide-react"
-import { link } from "fs";
+
 
 
 export default function Location() {
