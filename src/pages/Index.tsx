@@ -536,7 +536,7 @@ const Index = () => {
             <div className="md:col-span-6">
               <h2 className="text-2xl md:text-3xl font-bold">Conference Theme</h2>
               <p className="mt-4">
-                "Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development" speaks to Nigeria's future—where modern methods, digital tools, and sustainable practices converge to deliver durable, cost-effective, and climate-resilient infrastructure.
+                "{CONFERENCE.theme}" speaks to Nigeria's future—where modern methods, digital tools, and sustainable practices converge to deliver durable, cost-effective, and climate-resilient infrastructure that powers economic growth.
               </p>
             </div>
             <aside className="md:col-span-6 mt-8 md:mt-0">
@@ -594,9 +594,9 @@ const Index = () => {
         <section id="speakers" className="py-16 md:py-20 bg-brandYellow/10">
           <div className="container mx-auto px-6 lg:px-12 xl:px-16">
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold">Invited Dignitaries</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">Invited Dignitaries — Kano 2025</h2>
               <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-                Honoring distinguished leaders, esteemed public servants, and visionary policymakers whose dedication continues to shape Nigeria’s engineering and infrastructural advancement.
+                A look back at the distinguished leaders, esteemed public servants, and visionary policymakers who honoured our last edition. The Lagos 2026 line-up will be announced soon.
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
