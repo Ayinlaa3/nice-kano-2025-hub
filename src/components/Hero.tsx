@@ -1,6 +1,7 @@
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { CalendarDays, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -11,9 +12,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { CountdownTimer } from "@/components/CountdownTimer";
+import { CONFERENCE } from "@/config/conference";
 
-// ✅ Registration form link defined here directly
-const REG_FORM = "https://forms.gle/HXocP4aGn5Pb1HmR6";
 
 // ✅ Your hero images
 import heroBridge from "@/assets/hero-bridge.jpg";
@@ -75,35 +75,33 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 md:p-14 text-left max-w-6xl mx-auto z-20">
         {/* Countdown */}
         <div className="mb-6 max-w-md animate-fade-in">
-          <CountdownTimer targetDate="2025-10-21T00:00:00" />
+          <CountdownTimer targetDate={CONFERENCE.dates.countdownTarget} />
         </div>
 
         {/* Date & Venue */}
         <div className="inline-flex items-center gap-2 rounded-full bg-brand-red/90 backdrop-blur-sm px-4 py-2 text-sm font-medium text-white ring-1 ring-white/20 mb-6">
-          <CalendarDays className="h-5 w-5" /> 21–23 Oct 2025
+          <CalendarDays className="h-5 w-5" /> {CONFERENCE.dates.display}
           <span className="mx-2 text-brandYellow">•</span>
-          <MapPin className="h-5 w-5" /> Coronation Hall, Kano Government House
+          <MapPin className="h-5 w-5" /> {CONFERENCE.venue.name}
         </div>
 
-        {/* Title - Reduced font sizes */}
+        {/* Title */}
         <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white drop-shadow-lg">
-          Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development
+          {CONFERENCE.theme}
         </h1>
 
         {/* Subtitle */}
         <p className="mt-4 text-white/90 max-w-3xl text-base sm:text-lg animate-fade-in delay-150 font-medium">
-          The 23rd International Civil Engineering Conference and Annual General Meeting of the Nigerian Institution of Civil Engineers (NICE).
+          {CONFERENCE.subtitle}
         </p>
 
         {/* CTA Buttons */}
         <div className="mt-6 flex flex-wrap gap-4">
           <Button asChild variant="hero" size="xl">
-            <a href={REG_FORM} target="_blank" rel="noreferrer">
-              Register Now
-            </a>
+            <Link to="/registration">Register Now</Link>
           </Button>
           <Button asChild variant="cultural" size="xl">
-            <a href="/sponsorships">Sponsor Us</a>
+            <Link to="/sponsorships">Sponsor Us</Link>
           </Button>
         </div>
       </div>
