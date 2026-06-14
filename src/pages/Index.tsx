@@ -242,10 +242,10 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>NICE Kano 2025 Conference & AGM | 21–23 Oct 2025</title>
+        <title>NICE Lagos 2026 Conference & AGM | 20–22 Oct 2026</title>
         <meta
           name="description"
-          content="Nigeria's premier civil engineering conference by NICE. 21–23 Oct 2025, Coronation Hall, Kano. Register and explore sponsorship opportunities."
+          content="Nigeria's premier civil engineering conference by NICE. 20–22 Oct 2026, HiPoint Event Centre, Ikeja, Lagos. Register and explore sponsorship opportunities."
         />
         <link
           rel="canonical"
@@ -273,7 +273,7 @@ const Index = () => {
             <article className="md:col-span-7">
               <h2 className="text-2xl md:text-3xl font-bold">About the Conference</h2>
               <p className="mt-4 leading-relaxed">
-                The NICE 23rd International Civil Engineering Conference & AGM brings together engineers, industry experts, academics, students, and corporate partners for three days of knowledge sharing, innovation, and networking. As Nigeria's premier civil engineering gathering, the conference catalyzes professional growth and showcases transformative solutions for resilient infrastructure.
+                The NICE 24th International Civil Engineering Conference & AGM brings together engineers, industry experts, academics, students, and corporate partners for three days of knowledge sharing, innovation, and networking. As Nigeria's premier civil engineering gathering, the conference catalyzes professional growth and showcases transformative solutions for sustainable and resilient infrastructure that drives economic growth.
               </p>
             </article>
           </div>
@@ -285,7 +285,7 @@ const Index = () => {
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold">Conference Spotlight</h2>
               <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-                Hear directly from NICE leaders and get a preview of what awaits you at Kano 2025
+                Relive the moments — messages and highlights from our last edition, NICE Kano 2025.
               </p>
             </div>
             
