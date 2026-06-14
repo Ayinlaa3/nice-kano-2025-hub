@@ -6,13 +6,13 @@ import { Badge } from "@/components/ui/badge";
 
 const schedule = {
   day1: [
-    { time: "All Day", title: "Delegates Arrival and On-site Registration", venue: "Coronation Hall", tags: ["Registration"], desc: "Welcome and registration for all conference delegates." },
-    { time: "9:00 AM - 5:00 PM", title: "Arrival/Registration of Delegates", venue: "Coronation Hall", tags: [""], desc: "" },
-    { time: "9:00 AM - 6:00 PM", title: "Exhibition", venue: "Coronation Hall Exterior", tags: ["Exhibition"], desc: "" },
+    { time: "All Day", title: "Delegates Arrival and On-site Registration", venue: "HiPoint Event Centre", tags: ["Registration"], desc: "Welcome and registration for all conference delegates." },
+    { time: "9:00 AM - 5:00 PM", title: "Arrival/Registration of Delegates", venue: "HiPoint Event Centre", tags: [""], desc: "" },
+    { time: "9:00 AM - 6:00 PM", title: "Exhibition", venue: "HiPoint Event Centre Exterior", tags: ["Exhibition"], desc: "" },
     {time:	"11:00am – 2:00pm",	title:"Technical Tour", venue:"Site Event",	tags:["Tour"], desc:	"Guided technical tours to local engineering sites of interest."},
-    { time: "11:00am – 2:00pm", title: "Kano Tour", venue: " Kano City Tour", tags: ["Tour"], desc: "Explore the city's rich history, traditional architecture, and scenic views that reflect its deep cultural roots."},
-    { time: "3:00pm  – 5:00pm", title: "Construction Tech Innovation  Showcase/ Challenge", venue: "Coronation Hall", tags: ["Showcase"], desc: "Showcasing innovative construction technologies and solutions." },
-    { time: "6:00 PM -8:00PM", title: "Chairman's Cocktail & Engineering Business Roundtable", venue: "Coronation Hall", tags: ["Networking"], desc: "Evening of networking and business discussions, connecting engineers and business owners to investors and business opportunities." },
+    { time: "11:00am – 2:00pm", title: "Lagos Tour", venue: " Lagos City Tour", tags: ["Tour"], desc: "Explore Lagos — its vibrant culture, landmarks, and scenic views."},
+    { time: "3:00pm  – 5:00pm", title: "Construction Tech Innovation  Showcase/ Challenge", venue: "HiPoint Event Centre", tags: ["Showcase"], desc: "Showcasing innovative construction technologies and solutions." },
+    { time: "6:00 PM -8:00PM", title: "Chairman's Cocktail & Engineering Business Roundtable", venue: "HiPoint Event Centre", tags: ["Networking"], desc: "Evening of networking and business discussions, connecting engineers and business owners to investors and business opportunities." },
   ],
 
   day2: [
