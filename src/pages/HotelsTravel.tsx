@@ -279,48 +279,48 @@ export default function HotelsTravel() {
         
         <div className="grid md:grid-cols-2 gap-8">
           <Card className="p-6">
-            <h3 className="text-xl font-semibold mb-4">Getting to Kano</h3>
+            <h3 className="text-xl font-semibold mb-4">Getting to Lagos</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <span className="text-primary mr-2">✈️</span>
                 <div>
-                  <strong>By Air:</strong> Fly into Mallam Aminu Kano International Airport (KAN). Major airlines include Arik Air, Air Peace, and Azman Air with direct flights from Lagos, Abuja, and Port Harcourt.
+                  <strong>By Air:</strong> Fly into Murtala Muhammed International Airport (LOS), Ikeja. The venue, HiPoint Event Centre in Alausa, Ikeja, is a short drive from the airport.
                 </div>
               </li>
               <li className="flex items-start">
                 <span className="text-primary mr-2">🚗</span>
                 <div>
-                  <strong>By Road:</strong> Kano is well-connected by road. The journey from Abuja takes approximately 6-7 hours via A1 (Abuja - Kaduna - Kano) Highway.
+                  <strong>By Road:</strong> Lagos is well-connected by road. Alausa, Ikeja sits within the Central Business District and is accessible from all parts of the city.
                 </div>
               </li>
               <li className="flex items-start">
-                <span className="text-primary mr-2">🚂</span>
+                <span className="text-primary mr-2">🚆</span>
                 <div>
-                  <strong>By Rail:</strong> Nigerian Railway Corporation operates services from Lagos to Kano (though schedules may vary).
+                  <strong>By Rail:</strong> The Lagos Blue and Red Line rail services connect key parts of the metropolis, with onward connections to Ikeja.
                 </div>
               </li>
             </ul>
           </Card>
 
           <Card className="p-6">
-            <h3 className="text-xl font-semibold mb-4">Getting Around Kano</h3>
+            <h3 className="text-xl font-semibold mb-4">Getting Around Lagos</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <span className="text-primary mr-2">🚖</span>
                 <div>
-                  <strong>Taxis:</strong> Use reputable taxi services or ride-hailing apps like Bolt or Uber. Always negotiate fares beforehand for regular taxis.
+                  <strong>Ride-hailing:</strong> Bolt, Uber and inDrive operate widely across Lagos. Confirm pickup points and fares in-app before travelling.
                 </div>
               </li>
               <li className="flex items-start">
                 <span className="text-primary mr-2">🚌</span>
                 <div>
-                  <strong>Hotel Shuttles:</strong> Many hotels offer complimentary airport pickup and conference venue transfers.
+                  <strong>Hotel Shuttles:</strong> Many hotels offer airport pickup and conference venue transfers on request.
                 </div>
               </li>
               <li className="flex items-start">
                 <span className="text-primary mr-2">🏨</span>
                 <div>
-                  <strong>Conference Transport:</strong> Organized shuttle services may be available between major hotels and the conference venue.
+                  <strong>Conference Transport:</strong> Organized shuttle services may be available between partner hotels and HiPoint Event Centre.
                 </div>
               </li>
             </ul>
