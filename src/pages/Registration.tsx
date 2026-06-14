@@ -212,9 +212,7 @@ export default function Registration() {
   return (
     <div className="container mx-auto py-12 md:py-16">
       <Helmet>
-        <title>
-          Register | NICE {CONFERENCE.shortName} Conference {CONFERENCE.year}
-        </title>
+        <title>{`Register | NICE ${CONFERENCE.shortName} Conference ${CONFERENCE.year}`}</title>
         <meta
           name="description"
           content={`Register for the NICE ${CONFERENCE.edition} & AGM, ${CONFERENCE.dates.displayLong}, ${CONFERENCE.venue.name}. Choose your category and view conference fees.`}
