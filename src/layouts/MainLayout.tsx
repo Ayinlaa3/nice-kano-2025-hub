@@ -13,45 +13,42 @@ import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/co
 import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ChatSupport from "@/components/ChatSupport";
-
-const REG_FORM = "https://forms.gle/HXocP4aGn5Pb1HmR6";
+import { CONFERENCE } from "@/config/conference";
 
 const navigationGroups = [
   {
-    label: "Event Info",
+    label: "Conference",
     items: [
-      { to: "/program", label: "Program", description: "Conference schedule and sessions" },
+      { to: "/about", label: "About Conference", description: "Theme, objectives and overview" },
+      { to: "/program", label: "Programme / Schedule", description: "3-day conference schedule" },
       { to: "/speakers", label: "Speakers", description: "Featured speakers and presenters" },
-      { to: "/location", label: "Location", description: "Venue details and directions" },
+      { to: "/location", label: "Venue & Location", description: "Venue details and directions" },
       { to: "/innovationchallenge", label: "Innovation Challenge", description: "Young Engineers Competition" },
     ]
   },
-
-{
-  label: "Attendance",
-  items: [
-    { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
-    { to: "/certificate", label: "Certificate Generator", description: "Download your participation certificate" },
-  ]
-},
-
-{
-  label: "Media",
-  items: [
-    { to: "/media-gallery", label: "Conference Media Gallery", description: "Photos and videos from the 2025 conference" },
-  ]
-},
-
-
   {
-    label: "About",
+    label: "Attend",
     items: [
-      { to: "/about", label: "About KANO 2025", description: "Learn about our conference" },
-      { to: "/sponsorships", label: "Sponsorships", description: "Partnership opportunities" },
+      { to: "/registration", label: "Registration", description: "Register and view conference fees" },
+      { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
+      { to: "/certificate", label: "Certificate Generator", description: "Download your participation certificate" },
+    ]
+  },
+  {
+    label: "Partners",
+    items: [
+      { to: "/sponsorships", label: "Sponsors & Exhibitions", description: "Partnership and exhibition opportunities" },
+    ]
+  },
+  {
+    label: "Archive",
+    items: [
+      { to: "/past-conferences", label: "Past Conferences", description: "Reports and highlights from previous editions" },
       { to: "/faq", label: "FAQ", description: "Frequently asked questions" },
     ]
   }
 ];
+
 
 export default function MainLayout() {
   const isMobile = useIsMobile();
