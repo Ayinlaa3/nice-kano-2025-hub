@@ -17,8 +17,10 @@ import heroConstruction from "@/assets/hero-construction.jpg";
 import heroSustainable from "@/assets/hero-sustainable.jpg";
 import { CalendarDays, MapPin, Building2, HardHat, Users, Briefcase, Award, GraduationCap, Handshake, Landmark, Beer, Presentation, ChevronDown, Mic, Star, Play, Users2 } from "lucide-react";
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import Hero from "@/components/Hero";
 import { IllBeThere } from "@/components/IllBeThere";
+import { CONFERENCE } from "@/config/conference";
 
 // Import Leader photos
 import leaderTokunbo from "@/assets/leader-tokunbo.jpg";
@@ -207,30 +209,30 @@ const Index = () => {
       "@context": "https://schema.org",
       "@type": "Event",
       name:
-        "NICE 23rd International Civil Engineering Conference & AGM — Kano 2025",
-      startDate: "2025-10-21",
-      endDate: "2025-10-23",
+        "NICE 24th International Civil Engineering Conference & AGM — Lagos 2026",
+      startDate: CONFERENCE.dates.startISO,
+      endDate: CONFERENCE.dates.endISO,
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       eventStatus: "https://schema.org/EventScheduled",
       location: {
         "@type": "Place",
-        name: "Coronation Hall, Kano Government House",
+        name: CONFERENCE.venue.name,
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Kano",
-          addressRegion: "Kano State",
-          addressCountry: "NG",
+          streetAddress: CONFERENCE.venue.address,
+          addressLocality: CONFERENCE.venue.city,
+          addressRegion: CONFERENCE.venue.region,
+          addressCountry: CONFERENCE.venue.country,
         },
       },
       organizer: {
         "@type": "Organization",
         name: "Nigerian Institution of Civil Engineers (NICE)",
-        url: "https://nicehq.org",
+        url: CONFERENCE.organiserUrl,
       },
       url: typeof window !== "undefined" ? window.location.href : undefined,
       image: [heroBridge, heroGreen, heroHighway, heroConstruction, heroSustainable],
-      description:
-        "Theme: Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development.",
+      description: `Theme: ${CONFERENCE.theme}.`,
     }),
     []
   );
