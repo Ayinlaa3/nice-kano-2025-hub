@@ -50,7 +50,7 @@ import sponsor6 from "@/assets/sponsors/sponsor06.png";
 
 
 
-const REG_FORM = "https://forms.gle/HXocP4aGn5Pb1HmR6";
+
 
 const activities = [
   { 
