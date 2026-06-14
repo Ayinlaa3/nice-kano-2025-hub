@@ -274,7 +274,7 @@ export default function MainLayout() {
                 <li>
                   <Link to="/about" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
                     <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
-                    About KANO 2025
+                    About the Conference
                   </Link>
                 </li>
                 <li>
