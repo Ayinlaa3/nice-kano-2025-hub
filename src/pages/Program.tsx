@@ -78,14 +78,14 @@ export default function Program() {
   return (
     <div className="container mx-auto py-12 md:py-16">
       <Helmet>
-        <title>Program Schedule | NICE Kano 2025</title>
-        <meta name="description" content="Explore the 3-day program schedule for NICE Kano 2025: sessions, workshops, networking, and gala." />
+        <title>Programme / Schedule | NICE Lagos 2026</title>
+        <meta name="description" content="Explore the provisional 3-day programme for NICE Lagos 2026: sessions, workshops, networking, and gala." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/program"} />
       </Helmet>
 
       <header className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold">Program Schedule</h1>
-        <p className="text-muted-foreground mt-2">Review sessions by day. Times and venues are subject to updates.</p>
+        <h1 className="text-3xl md:text-4xl font-bold">Programme / Schedule</h1>
+        <p className="text-muted-foreground mt-2">Provisional schedule for 20–22 October 2026. Sessions, times and venues are in draft and subject to updates.</p>
       </header>
 
       <Tabs defaultValue="day1" className="w-full">
