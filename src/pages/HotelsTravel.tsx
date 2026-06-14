@@ -196,24 +196,53 @@ const HOTELS = [
   }
 ];
 
+// Hotels confirmed/verified by the NICE conference logistics team.
+// Update this list as verification is completed.
+const VERIFIED_HOTELS = new Set<string>([
+  "Prince Hotel",
+  "Bon Hotel Kano",
+  "City King Hotel & Towers",
+  "Central Hotel Limited Kano",
+  "Tahir Guest Palace",
+]);
+
 export default function HotelsTravel() {
   return (
     <div className="container mx-auto py-12 md:py-16">
       <Helmet>
-        <title>Hotels & Travel | NICE Kano 2025</title>
-        <meta name="description" content="Recommended hotels near the venue and travel tips for attendees visiting Kano for NICE 2025." />
+        <title>Hotels & Travel | NICE Lagos 2026</title>
+        <meta name="description" content="Recommended hotels and travel tips for attendees visiting Lagos for NICE 2026 at HiPoint Event Centre, Ikeja." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/hotels-travel"} />
       </Helmet>
 
       <header className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold">Hotels & Travel</h1>
-        <p className="text-muted-foreground mt-2">Plan your stay with curated hotel options and essential travel tips.</p>
+        <p className="text-muted-foreground mt-2">Plan your stay around HiPoint Event Centre, Ikeja, Lagos with curated hotel options and essential travel tips.</p>
+        <div className="mt-4 flex flex-wrap gap-4 text-sm">
+          <span className="inline-flex items-center gap-2">
+            <Badge className="bg-brand-primary/10 text-brand-primary">Verified</Badge>
+            Confirmed by the NICE logistics team
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <Badge variant="secondary">Not Verified</Badge>
+            Listing pending confirmation
+          </span>
+        </div>
       </header>
 
       <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {HOTELS.map((h) => (
+        {HOTELS.map((h) => {
+          const verified = VERIFIED_HOTELS.has(h.name);
+          return (
           <Card key={h.name} className="p-5 hover:shadow-lg transition-shadow">
-            <h3 className="font-semibold text-lg">{h.name}</h3>
+            <div className="flex items-start justify-between gap-2">
+              <h3 className="font-semibold text-lg">{h.name}</h3>
+              {verified ? (
+                <Badge className="bg-brand-primary/10 text-brand-primary shrink-0">Verified</Badge>
+              ) : (
+                <Badge variant="secondary" className="shrink-0">Not Verified</Badge>
+              )}
+            </div>
             <p className="text-sm text-muted-foreground mt-1">{h.address}</p>
             <p className="text-sm text-muted-foreground">{h.distance} from venue</p>
             <p className="mt-2"><span className="font-medium text-primary">{h.priceRange}</span></p>
@@ -241,7 +270,8 @@ export default function HotelsTravel() {
               <a href={h.link} target="_blank" rel="noreferrer">View Details & Book</a>
             </Button>
           </Card>
-        ))}
+          );
+        })}
       </section>
 
       <section className="mt-16">
