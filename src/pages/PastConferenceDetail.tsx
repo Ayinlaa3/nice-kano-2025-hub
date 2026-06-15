@@ -41,9 +41,7 @@ export default function PastConferenceDetail() {
   return (
     <div className="container mx-auto py-12 md:py-16">
       <Helmet>
-        <title>
-          {conference.year} — {conference.edition} | NICE Archive
-        </title>
+        <title>{`${conference.year} — ${conference.edition} | NICE Archive`}</title>
         <meta
           name="description"
           content={
