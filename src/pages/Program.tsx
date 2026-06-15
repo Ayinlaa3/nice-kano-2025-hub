@@ -77,8 +77,7 @@ day3: [
 export default function Program() {
   return (
     <div className="container mx-auto py-12 md:py-16">
-      <Helmet>
-        <title>Programme / Schedule | NICE Lagos 2026</title>
+      <Helmet title="Programme / Schedule | NICE Lagos 2026">
         <meta name="description" content="Explore the provisional 3-day programme for NICE Lagos 2026: sessions, workshops, networking, and gala." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/program"} />
       </Helmet>

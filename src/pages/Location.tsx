@@ -96,8 +96,7 @@ export default function Location() {
 
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>Location: Kano, Nigeria | NICE Kano 2025</title>
+      <Helmet title="Location: Kano, Nigeria | NICE Kano 2025">
         <meta name="description" content="Welcome to Kano – The Jewel of Northern Nigeria. Discover the cultural capital's rich history, heritage sites, and conference venue details." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/location"} />
       </Helmet>

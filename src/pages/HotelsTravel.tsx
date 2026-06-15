@@ -209,8 +209,7 @@ const VERIFIED_HOTELS = new Set<string>([
 export default function HotelsTravel() {
   return (
     <div className="container mx-auto py-12 md:py-16">
-      <Helmet>
-        <title>Hotels & Travel | NICE Lagos 2026</title>
+      <Helmet title="Hotels & Travel | NICE Lagos 2026">
         <meta name="description" content="Recommended hotels and travel tips for attendees visiting Lagos for NICE 2026 at HiPoint Event Centre, Ikeja." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/hotels-travel"} />
       </Helmet>

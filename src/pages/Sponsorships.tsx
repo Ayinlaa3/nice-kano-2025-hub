@@ -99,8 +99,7 @@ export default function Sponsorships() {
 
   return (
     <div className="container mx-auto py-12 md:py-16 space-y-12">
-      <Helmet>
-        <title>Sponsors & Exhibitions | NICE Lagos 2026</title>
+      <Helmet title="Sponsors & Exhibitions | NICE Lagos 2026">
         <meta name="description" content="Partner with NICE Lagos 2026 - Explore sponsorship tiers and exhibition opportunities at Nigeria's premier civil engineering conference." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/sponsorships"} />
       </Helmet>
