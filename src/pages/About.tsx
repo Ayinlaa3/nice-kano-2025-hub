@@ -14,8 +14,7 @@ import leaderBoaz from "@/assets/leader-boaz.jpg";
 export default function About() {
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>About the Conference | NICE Lagos 2026</title>
+      <Helmet title="About the Conference | NICE Lagos 2026">
         <meta name="description" content="Learn about the NICE 24th International Civil Engineering Conference & AGM, theme, and objectives, holding in Lagos." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/about"} />
       </Helmet>

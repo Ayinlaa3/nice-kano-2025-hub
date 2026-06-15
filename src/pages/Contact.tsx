@@ -94,8 +94,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background">
-      <Helmet>
-        <title>Contact Us | NICE Kano 2025</title>
+      <Helmet title="Contact Us | NICE Kano 2025">
         <meta name="description" content="Contact the NICE Kano 2025 organizing committee, conference leadership, subcommittee chairmen, and support team." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/contact"} />
       </Helmet>
