@@ -108,8 +108,7 @@ const criteria = [
 export default function InnovationChallenge() {
   return (
     <div className="container mx-auto py-12 md:py-16">
-      <Helmet>
-        <title>Young Engineers Innovation Challenge | NICE Kano 2025</title>
+      <Helmet title="Young Engineers Innovation Challenge | NICE Kano 2025">
         <meta name="description" content="Join the NICE Innovation Challenge at Kano 2025. Showcase your visionary solutions to Nigeria's construction industry challenges and win up to ₦1,000,000." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/innovationchallenge"} />
       </Helmet>
