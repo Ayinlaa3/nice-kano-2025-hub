@@ -225,8 +225,7 @@ const MediaGallery = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Media Gallery | NICE Kano 2025 Conference</title>
+      <Helmet title="Media Gallery | NICE Kano 2025 Conference">
         <meta
           name="description"
           content="Browse official photos and videos from the NICE Kano 2025 National Conference — grouped by day and activity."

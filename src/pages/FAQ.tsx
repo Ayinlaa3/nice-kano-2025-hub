@@ -145,8 +145,7 @@ const faqCategories = [
 export default function FAQ() {
   return (
     <>
-      <Helmet>
-        <title>Frequently Asked Questions - NICE Kano 2025</title>
+      <Helmet title="Frequently Asked Questions - NICE Kano 2025">
         <meta 
           name="description" 
           content="Find answers to common questions about NICE Kano 2025 International Conference and Annual General Meeting. Registration, venue, accommodation, and program details." 
