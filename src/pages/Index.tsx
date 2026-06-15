@@ -241,8 +241,7 @@ const Index = () => {
 
   return (
     <>
-      <Helmet>
-        <title>NICE Lagos 2026 Conference & AGM | 20–22 Oct 2026</title>
+      <Helmet title="NICE Lagos 2026 Conference & AGM | 20–22 Oct 2026">
         <meta
           name="description"
           content="Nigeria's premier civil engineering conference by NICE. 20–22 Oct 2026, HiPoint Event Centre, Ikeja, Lagos. Register and explore sponsorship opportunities."

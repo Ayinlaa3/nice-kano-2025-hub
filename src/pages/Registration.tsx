@@ -126,9 +126,7 @@ export default function Registration() {
     )?.label;
     return (
       <div className="container mx-auto py-12 md:py-16 max-w-3xl">
-        <Helmet>
-          <title>{`Registration Received | NICE ${CONFERENCE.shortName}`}</title>
-        </Helmet>
+        <Helmet title={`Registration Received | NICE ${CONFERENCE.shortName}`} />
         <Card className="border-t-4 border-t-brand-primary">
           <CardHeader className="text-center">
             <div className="mx-auto mb-3 h-14 w-14 rounded-full bg-brand-primary/10 flex items-center justify-center">
@@ -211,8 +209,7 @@ export default function Registration() {
 
   return (
     <div className="container mx-auto py-12 md:py-16">
-      <Helmet>
-        <title>{`Register | NICE ${CONFERENCE.shortName} Conference ${CONFERENCE.year}`}</title>
+      <Helmet title={`Register | NICE ${CONFERENCE.shortName} Conference ${CONFERENCE.year}`}>
         <meta
           name="description"
           content={`Register for the NICE ${CONFERENCE.edition} & AGM, ${CONFERENCE.dates.displayLong}, ${CONFERENCE.venue.name}. Choose your category and view conference fees.`}
