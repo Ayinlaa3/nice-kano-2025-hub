@@ -8,8 +8,7 @@ import { CONFERENCE } from "@/config/conference";
 export default function Speakers() {
   return (
     <div className="container mx-auto py-12 md:py-16">
-      <Helmet>
-        <title>{`Conference Speakers | NICE ${CONFERENCE.shortName}`}</title>
+      <Helmet title={`Conference Speakers | NICE ${CONFERENCE.shortName}`}>
         <meta
           name="description"
           content={`Speakers for the NICE ${CONFERENCE.edition} & AGM in Lagos will be announced soon. Stay tuned for keynote speakers, plenary sessions and panellists.`}

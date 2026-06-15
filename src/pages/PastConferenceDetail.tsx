@@ -22,9 +22,7 @@ export default function PastConferenceDetail() {
   if (!conference) {
     return (
       <div className="container mx-auto py-20 text-center">
-        <Helmet>
-          <title>Edition Not Found | NICE Conference Archive</title>
-        </Helmet>
+        <Helmet title="Edition Not Found | NICE Conference Archive" />
         <h1 className="text-2xl font-bold">Edition not found</h1>
         <p className="text-muted-foreground mt-2">
           We couldn't find that conference edition.
@@ -40,8 +38,7 @@ export default function PastConferenceDetail() {
 
   return (
     <div className="container mx-auto py-12 md:py-16">
-      <Helmet>
-        <title>{`${conference.year} — ${conference.edition} | NICE Archive`}</title>
+      <Helmet title={`${conference.year} — ${conference.edition} | NICE Archive`}>
         <meta
           name="description"
           content={

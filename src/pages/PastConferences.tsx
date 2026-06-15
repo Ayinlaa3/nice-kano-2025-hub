@@ -8,8 +8,7 @@ import { PAST_CONFERENCES } from "@/config/pastConferences";
 export default function PastConferences() {
   return (
     <div className="container mx-auto py-12 md:py-16">
-      <Helmet>
-        <title>Past Conferences | NICE Conference Archive</title>
+      <Helmet title="Past Conferences | NICE Conference Archive">
         <meta
           name="description"
           content="Browse the archive of past NICE International Civil Engineering Conferences, including reports, themes, and highlights from previous editions."
