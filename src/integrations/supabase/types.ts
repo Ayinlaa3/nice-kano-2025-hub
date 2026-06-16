@@ -529,6 +529,87 @@ export type Database = {
         }
         Relationships: []
       }
+      conference_registrations: {
+        Row: {
+          address: string | null
+          admin_note: string | null
+          amount: number
+          category: string
+          chapter: string | null
+          comments: string | null
+          created_at: string
+          dietary: string | null
+          early_bird_applied: boolean
+          email: string
+          full_name: string
+          id: string
+          institution: string | null
+          membership_status: string | null
+          payment_method: Database["public"]["Enums"]["conf_payment_method"]
+          payment_status: Database["public"]["Enums"]["conf_payment_status"]
+          phone: string
+          position: string | null
+          receipt_path: string | null
+          remita_reference: string | null
+          remita_rrr: string | null
+          updated_at: string
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          address?: string | null
+          admin_note?: string | null
+          amount?: number
+          category: string
+          chapter?: string | null
+          comments?: string | null
+          created_at?: string
+          dietary?: string | null
+          early_bird_applied?: boolean
+          email: string
+          full_name: string
+          id?: string
+          institution?: string | null
+          membership_status?: string | null
+          payment_method: Database["public"]["Enums"]["conf_payment_method"]
+          payment_status?: Database["public"]["Enums"]["conf_payment_status"]
+          phone: string
+          position?: string | null
+          receipt_path?: string | null
+          remita_reference?: string | null
+          remita_rrr?: string | null
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          address?: string | null
+          admin_note?: string | null
+          amount?: number
+          category?: string
+          chapter?: string | null
+          comments?: string | null
+          created_at?: string
+          dietary?: string | null
+          early_bird_applied?: boolean
+          email?: string
+          full_name?: string
+          id?: string
+          institution?: string | null
+          membership_status?: string | null
+          payment_method?: Database["public"]["Enums"]["conf_payment_method"]
+          payment_status?: Database["public"]["Enums"]["conf_payment_status"]
+          phone?: string
+          position?: string | null
+          receipt_path?: string | null
+          remita_reference?: string | null
+          remita_rrr?: string | null
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string | null
@@ -2141,6 +2222,16 @@ export type Database = {
         | "training_manager"
         | "chapter_chairman"
         | "anniversary_steward"
+      conf_payment_method:
+        | "nice_portal_receipt"
+        | "bank_transfer_receipt"
+        | "remita"
+      conf_payment_status:
+        | "pending"
+        | "submitted"
+        | "verified"
+        | "rejected"
+        | "paid"
       content_type: "news" | "blog" | "journal" | "newsletter"
     }
     CompositeTypes: {
@@ -2282,6 +2373,18 @@ export const Constants = {
         "training_manager",
         "chapter_chairman",
         "anniversary_steward",
+      ],
+      conf_payment_method: [
+        "nice_portal_receipt",
+        "bank_transfer_receipt",
+        "remita",
+      ],
+      conf_payment_status: [
+        "pending",
+        "submitted",
+        "verified",
+        "rejected",
+        "paid",
       ],
       content_type: ["news", "blog", "journal", "newsletter"],
     },
