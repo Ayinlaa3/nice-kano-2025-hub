@@ -1,8 +1,10 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -17,10 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@/components/ui/radio-group";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   CalendarDays,
@@ -29,6 +28,9 @@ import {
   Info,
   Landmark,
   CreditCard,
+  Building2,
+  UploadCloud,
+  Loader2,
 } from "lucide-react";
 import {
   CONFERENCE,
@@ -58,7 +60,7 @@ const formSchema = z.object({
   category: z.enum(categoryIds, {
     errorMap: () => ({ message: "Select a registration category" }),
   }),
-  paymentMethod: z.enum(["bank_transfer", "remita"], {
+  paymentMethod: z.enum(["nice_portal_receipt", "bank_transfer_receipt", "remita"], {
     errorMap: () => ({ message: "Select a payment method" }),
   }),
   dietary: z.string().trim().max(300).optional().or(z.literal("")),
@@ -79,8 +81,40 @@ const MEMBERSHIP_OPTIONS = [
   "Non-Member",
 ];
 
+interface BankAccount {
+  bank: string;
+  accountName: string;
+  accountNumber: string;
+}
+
+interface Confirmation {
+  reference: string;
+  fullName: string;
+  email: string;
+  category: string;
+  amount: number;
+  paymentMethod: FormValues["paymentMethod"];
+}
+
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      resolve(result.includes(",") ? result.split(",")[1] : result);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 export default function Registration() {
-  const [submitted, setSubmitted] = useState<FormValues | null>(null);
+  const [confirmation, setConfirmation] = useState<Confirmation | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [receiptFile, setReceiptFile] = useState<File | null>(null);
+  const [receiptError, setReceiptError] = useState<string | null>(null);
+  const [banks, setBanks] = useState<BankAccount[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const {
     register,
@@ -99,7 +133,7 @@ export default function Registration() {
       position: "",
       chapter: "",
       membershipStatus: "",
-      paymentMethod: "bank_transfer",
+      paymentMethod: "nice_portal_receipt",
       dietary: "",
       comments: "",
     },
@@ -108,21 +142,124 @@ export default function Registration() {
   const selectedCategory = watch("category");
   const selectedPayment = watch("paymentMethod");
   const earlyBird = isEarlyBird();
+  const isReceiptMethod =
+    selectedPayment === "nice_portal_receipt" || selectedPayment === "bank_transfer_receipt";
 
   const fee = useMemo(
     () => getCategoryFee(selectedCategory ?? ""),
     [selectedCategory]
   );
 
-  const onSubmit = (values: FormValues) => {
-    setSubmitted(values);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  useEffect(() => {
+    supabase.functions
+      .invoke("conference-bank-details")
+      .then(({ data }) => {
+        if (data?.banks) setBanks(data.banks as BankAccount[]);
+      })
+      .catch(() => {});
+  }, []);
+
+  const onReceiptChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] ?? null;
+    setReceiptError(null);
+    if (file && file.size > 8 * 1024 * 1024) {
+      setReceiptError("File is too large (max 8MB).");
+      setReceiptFile(null);
+      return;
+    }
+    setReceiptFile(file);
   };
 
-  if (submitted) {
-    const submittedFee = getCategoryFee(submitted.category);
+  const onSubmit = async (values: FormValues) => {
+    const feeInfo = getCategoryFee(values.category);
+    if (!feeInfo) {
+      toast({ title: "Please select a valid category", variant: "destructive" });
+      return;
+    }
+
+    const payload = {
+      fullName: values.fullName,
+      email: values.email,
+      phone: values.phone,
+      address: values.address,
+      institution: values.institution,
+      position: values.position || null,
+      chapter: values.chapter || null,
+      membershipStatus: values.membershipStatus,
+      dietary: values.dietary || null,
+      comments: values.comments || null,
+      category: values.category,
+      amount: feeInfo.amount,
+      earlyBird: feeInfo.isEarly,
+    };
+
+    setSubmitting(true);
+    try {
+      if (isReceiptMethod) {
+        if (!receiptFile) {
+          setReceiptError("Please upload your payment receipt.");
+          setSubmitting(false);
+          return;
+        }
+        const base64 = await fileToBase64(receiptFile);
+        const { data, error } = await supabase.functions.invoke("submit-registration", {
+          body: {
+            ...payload,
+            paymentMethod: values.paymentMethod,
+            receipt: {
+              filename: receiptFile.name,
+              contentType: receiptFile.type || "application/octet-stream",
+              data: base64,
+            },
+          },
+        });
+        if (error || !data?.success) {
+          throw new Error(data?.error || error?.message || "Submission failed");
+        }
+        setConfirmation({
+          reference: data.reference,
+          fullName: values.fullName,
+          email: values.email,
+          category: values.category,
+          amount: feeInfo.amount,
+          paymentMethod: values.paymentMethod,
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        // Remita
+        const { data, error } = await supabase.functions.invoke("remita-initiate", {
+          body: { ...payload, origin: window.location.origin },
+        });
+        if (error || !data?.success) {
+          throw new Error(data?.error || error?.message || "Could not start Remita payment");
+        }
+        // Auto-submit a form to the Remita gateway
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = data.gatewayUrl;
+        Object.entries(data.fields as Record<string, string>).forEach(([k, v]) => {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = k;
+          input.value = v;
+          form.appendChild(input);
+        });
+        document.body.appendChild(form);
+        form.submit();
+      }
+    } catch (err) {
+      toast({
+        title: "Registration failed",
+        description: err instanceof Error ? err.message : "Please try again.",
+        variant: "destructive",
+      });
+      setSubmitting(false);
+    }
+  };
+
+  if (confirmation) {
     const categoryLabel = REGISTRATION_CATEGORIES.find(
-      (c) => c.id === submitted.category
+      (c) => c.id === confirmation.category
     )?.label;
     return (
       <div className="container mx-auto py-12 md:py-16 max-w-3xl">
@@ -132,73 +269,42 @@ export default function Registration() {
             <div className="mx-auto mb-3 h-14 w-14 rounded-full bg-brand-primary/10 flex items-center justify-center">
               <CheckCircle2 className="h-8 w-8 text-brand-primary" />
             </div>
-            <CardTitle className="text-2xl">Registration Summary</CardTitle>
+            <CardTitle className="text-2xl">Registration Submitted</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <Alert>
               <Info className="h-4 w-4" />
-              <AlertTitle>Almost there — complete your payment</AlertTitle>
+              <AlertTitle>We've received your registration</AlertTitle>
               <AlertDescription>
-                Your details are summarised below. Online booking storage and
-                automated payment confirmation are being finalised. For now,
-                please complete payment using the instructions below and present
-                your receipt at the on-site registration desk.
+                Your payment receipt has been submitted for verification. Our team
+                will review it and confirm your registration by email. Please keep
+                your reference number for any enquiries.
               </AlertDescription>
             </Alert>
 
-            <div className="grid sm:grid-cols-2 gap-4 text-sm">
-              <Detail label="Full Name" value={submitted.fullName} />
-              <Detail label="Email" value={submitted.email} />
-              <Detail label="Phone" value={submitted.phone} />
-              <Detail label="Institution" value={submitted.institution} />
-              {submitted.chapter && (
-                <Detail label="Chapter" value={submitted.chapter} />
-              )}
-              <Detail label="Membership" value={submitted.membershipStatus} />
-              <Detail label="Category" value={categoryLabel ?? ""} />
-              <Detail
-                label="Payment Method"
-                value={
-                  submitted.paymentMethod === "bank_transfer"
-                    ? "Bank Transfer"
-                    : "Remita / Online"
-                }
-              />
-            </div>
-
-            <div className="rounded-lg bg-brand-primary/5 ring-1 ring-brand-primary/20 p-5 flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Amount due</p>
-                <p className="text-2xl font-bold text-brand-primary">
-                  {submittedFee ? formatNaira(submittedFee.amount) : "—"}
-                </p>
-              </div>
-              {submittedFee?.isEarly && (
-                <Badge className="bg-brand-yellow text-brand-gold-foreground">
-                  Early Bird Rate
-                </Badge>
-              )}
-            </div>
-
-            <div className="rounded-lg border p-5">
-              <h3 className="font-semibold flex items-center gap-2 mb-2">
-                {submitted.paymentMethod === "bank_transfer" ? (
-                  <Landmark className="h-4 w-4 text-brand-primary" />
-                ) : (
-                  <CreditCard className="h-4 w-4 text-brand-primary" />
-                )}
-                Payment Instructions
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                {submitted.paymentMethod === "bank_transfer"
-                  ? PAYMENT_INFO.bankTransfer.instructions
-                  : PAYMENT_INFO.remita.instructions}
+            <div className="rounded-lg bg-brand-primary/5 ring-1 ring-brand-primary/20 p-5 text-center">
+              <p className="text-sm text-muted-foreground">Your reference number</p>
+              <p className="text-2xl font-bold tracking-widest text-brand-primary">
+                {confirmation.reference}
               </p>
             </div>
 
+            <div className="grid sm:grid-cols-2 gap-4 text-sm">
+              <Detail label="Full Name" value={confirmation.fullName} />
+              <Detail label="Email" value={confirmation.email} />
+              <Detail label="Category" value={categoryLabel ?? confirmation.category} />
+              <Detail label="Amount" value={formatNaira(confirmation.amount)} />
+            </div>
+
             <div className="flex gap-3">
-              <Button onClick={() => setSubmitted(null)} variant="professional">
-                Edit / Register Another
+              <Button
+                onClick={() => {
+                  setConfirmation(null);
+                  setReceiptFile(null);
+                }}
+                variant="professional"
+              >
+                Register Another Delegate
               </Button>
             </div>
           </CardContent>
@@ -212,7 +318,7 @@ export default function Registration() {
       <Helmet title={`Register | NICE ${CONFERENCE.shortName} Conference ${CONFERENCE.year}`}>
         <meta
           name="description"
-          content={`Register for the NICE ${CONFERENCE.edition} & AGM, ${CONFERENCE.dates.displayLong}, ${CONFERENCE.venue.name}. Choose your category and view conference fees.`}
+          content={`Register for the NICE ${CONFERENCE.edition} & AGM, ${CONFERENCE.dates.displayLong}, ${CONFERENCE.venue.name}. Choose your category and pay by receipt upload or Remita.`}
         />
         <link
           rel="canonical"
@@ -318,52 +424,117 @@ export default function Registration() {
             </CardHeader>
             <CardContent className="space-y-4">
               <RadioGroup
-                defaultValue="bank_transfer"
+                value={selectedPayment}
                 onValueChange={(v) =>
                   setValue("paymentMethod", v as FormValues["paymentMethod"], {
                     shouldValidate: true,
                   })
                 }
-                className="grid sm:grid-cols-2 gap-3"
+                className="grid gap-3"
               >
-                <label
-                  htmlFor="pay-bank"
-                  className="flex items-start gap-3 rounded-lg border p-4 cursor-pointer hover:bg-muted/50 [&:has([data-state=checked])]:border-brand-primary"
-                >
-                  <RadioGroupItem value="bank_transfer" id="pay-bank" />
-                  <span>
-                    <span className="font-medium flex items-center gap-2">
-                      <Landmark className="h-4 w-4" /> Bank Transfer
-                    </span>
-                    <span className="block text-xs text-muted-foreground mt-1">
-                      Pay directly to the NICE conference account.
-                    </span>
-                  </span>
-                </label>
-                <label
-                  htmlFor="pay-remita"
-                  className="flex items-start gap-3 rounded-lg border p-4 cursor-pointer hover:bg-muted/50 [&:has([data-state=checked])]:border-brand-primary"
-                >
-                  <RadioGroupItem value="remita" id="pay-remita" />
-                  <span>
-                    <span className="font-medium flex items-center gap-2">
-                      <CreditCard className="h-4 w-4" /> Remita / Online
-                    </span>
-                    <span className="block text-xs text-muted-foreground mt-1">
-                      Card &amp; Remita checkout (coming soon).
-                    </span>
-                  </span>
-                </label>
+                <PaymentOption
+                  id="pay-portal"
+                  value="nice_portal_receipt"
+                  icon={<Building2 className="h-4 w-4" />}
+                  title="NICE Portal Receipt"
+                  desc="Already paid via the NICE member portal — upload your receipt."
+                />
+                <PaymentOption
+                  id="pay-bank"
+                  value="bank_transfer_receipt"
+                  icon={<Landmark className="h-4 w-4" />}
+                  title="Bank Transfer Receipt"
+                  desc="Transfer to the NICE conference account — upload your receipt."
+                />
+                <PaymentOption
+                  id="pay-remita"
+                  value="remita"
+                  icon={<CreditCard className="h-4 w-4" />}
+                  title="Pay with Remita"
+                  desc="Pay online now via card, bank or USSD (instant confirmation)."
+                />
               </RadioGroup>
 
-              <Alert>
-                <Info className="h-4 w-4" />
-                <AlertDescription className="text-sm">
-                  {selectedPayment === "bank_transfer"
-                    ? PAYMENT_INFO.bankTransfer.instructions
-                    : PAYMENT_INFO.remita.instructions}
-                </AlertDescription>
-              </Alert>
+              {selectedPayment === "nice_portal_receipt" && (
+                <Alert>
+                  <Info className="h-4 w-4" />
+                  <AlertDescription className="text-sm">
+                    {PAYMENT_INFO.nicePortalReceipt.instructions}
+                  </AlertDescription>
+                </Alert>
+              )}
+
+              {selectedPayment === "bank_transfer_receipt" && (
+                <div className="space-y-3">
+                  <Alert>
+                    <Info className="h-4 w-4" />
+                    <AlertDescription className="text-sm">
+                      {PAYMENT_INFO.bankTransferReceipt.instructions}
+                    </AlertDescription>
+                  </Alert>
+                  {banks.length > 0 && (
+                    <div className="rounded-lg border divide-y">
+                      {banks.map((b) => (
+                        <div
+                          key={b.bank}
+                          className="p-3 flex items-center justify-between text-sm"
+                        >
+                          <div>
+                            <p className="font-medium">{b.bank}</p>
+                            <p className="text-xs text-muted-foreground">{b.accountName}</p>
+                          </div>
+                          <p className="font-mono font-semibold">{b.accountNumber}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {selectedPayment === "remita" && (
+                <Alert>
+                  <CreditCard className="h-4 w-4" />
+                  <AlertDescription className="text-sm">
+                    {PAYMENT_INFO.remita.instructions}
+                  </AlertDescription>
+                </Alert>
+              )}
+
+              {isReceiptMethod && (
+                <div className="space-y-2">
+                  <Label className="text-sm">
+                    Upload Payment Receipt <span className="text-destructive">*</span>
+                  </Label>
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => fileInputRef.current?.click()}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") fileInputRef.current?.click();
+                    }}
+                    className="flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed p-6 cursor-pointer hover:bg-muted/50 transition-colors"
+                  >
+                    <UploadCloud className="h-6 w-6 text-brand-primary" />
+                    <p className="text-sm text-muted-foreground text-center">
+                      {receiptFile ? (
+                        <span className="font-medium text-foreground">{receiptFile.name}</span>
+                      ) : (
+                        <>Click to upload (PDF, JPG or PNG — max 8MB)</>
+                      )}
+                    </p>
+                  </div>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="application/pdf,image/png,image/jpeg"
+                    className="hidden"
+                    onChange={onReceiptChange}
+                  />
+                  {receiptError && (
+                    <p className="text-xs text-destructive">{receiptError}</p>
+                  )}
+                </div>
+              )}
             </CardContent>
           </Card>
 
@@ -393,7 +564,6 @@ export default function Registration() {
                   onCheckedChange={(v) =>
                     setValue("consent", (v === true) as true, { shouldValidate: true })
                   }
-
                 />
                 <Label htmlFor="consent" className="text-sm font-normal leading-snug">
                   I confirm the information provided is accurate and I consent to
@@ -404,8 +574,15 @@ export default function Registration() {
                 <p className="text-sm text-destructive">{errors.consent.message}</p>
               )}
 
-              <Button type="submit" variant="professional" size="lg" className="w-full">
-                Submit Registration
+              <Button
+                type="submit"
+                variant="professional"
+                size="lg"
+                className="w-full"
+                disabled={submitting}
+              >
+                {submitting && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
+                {selectedPayment === "remita" ? "Proceed to Remita Payment" : "Submit Registration"}
               </Button>
             </CardContent>
           </Card>
@@ -483,6 +660,35 @@ export default function Registration() {
         </aside>
       </div>
     </div>
+  );
+}
+
+function PaymentOption({
+  id,
+  value,
+  icon,
+  title,
+  desc,
+}: {
+  id: string;
+  value: string;
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <label
+      htmlFor={id}
+      className="flex items-start gap-3 rounded-lg border p-4 cursor-pointer hover:bg-muted/50 [&:has([data-state=checked])]:border-brand-primary [&:has([data-state=checked])]:bg-brand-primary/5"
+    >
+      <RadioGroupItem value={value} id={id} className="mt-1" />
+      <span>
+        <span className="font-medium flex items-center gap-2">
+          {icon} {title}
+        </span>
+        <span className="block text-xs text-muted-foreground mt-1">{desc}</span>
+      </span>
+    </label>
   );
 }
 
