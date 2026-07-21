@@ -94,8 +94,8 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background">
-      <Helmet title="Contact Us | NICE Kano 2025">
-        <meta name="description" content="Contact the NICE Kano 2025 organizing committee, conference leadership, subcommittee chairmen, and support team." />
+      <Helmet title="Contact Us | NICE Lagos 2026">
+        <meta name="description" content="Contact the NICE Lagos 2026 organizing committee, conference leadership, subcommittee chairmen, and support team." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/contact"} />
       </Helmet>
 
@@ -243,7 +243,7 @@ export default function Contact() {
                       <div className="flex items-center gap-2">
                         <Phone className="h-4 w-4 text-muted-foreground" />
                         <a 
-                          href={`https://wa.me/${member.phone.replace(/[^0-9]/g, '')}?text=Hello%20${member.name},%20I%20need%20assistance%20regarding%20the%20NICE%20Kano%202025%20conference.`}
+                          href={`https://wa.me/${member.phone.replace(/[^0-9]/g, '')}?text=Hello%20${member.name},%20I%20need%20assistance%20regarding%20the%20NICE%20Lagos%202026%20conference.`}
                           target="_blank"
                           rel="noreferrer"
                           className="text-sm text-primary hover:underline"

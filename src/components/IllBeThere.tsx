@@ -173,7 +173,7 @@ export const IllBeThere = () => {
     if (!canvas) return;
 
     const link = document.createElement('a');
-    link.download = `nice-kano-2025-${name.replace(/\s+/g, '-').toLowerCase()}.png`;
+    link.download = `nice-lagos-2026-${name.replace(/\s+/g, '-').toLowerCase()}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
     
@@ -181,7 +181,7 @@ export const IllBeThere = () => {
   }, [name]);
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-br from-brand/5 via-vibrant/5 to-kano-heritage/5">
+    <section className="py-16 md:py-20 bg-gradient-to-br from-brand/5 via-vibrant/5 to-brand-primary/5">
       <div className="container mx-auto px-6 lg:px-12 xl:px-16">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-2 mb-4">

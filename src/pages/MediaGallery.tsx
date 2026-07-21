@@ -225,10 +225,10 @@ const MediaGallery = () => {
 
   return (
     <>
-      <Helmet title="Media Gallery | NICE Kano 2025 Conference">
+      <Helmet title="Media Gallery | NICE Lagos 2026 Conference">
         <meta
           name="description"
-          content="Browse official photos and videos from the NICE Kano 2025 National Conference — grouped by day and activity."
+          content="Browse official photos and videos from the NICE Lagos 2026 National Conference — grouped by day and activity."
         />
       </Helmet>
 
@@ -237,7 +237,7 @@ const MediaGallery = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-4">
-              📸 NICE Kano 2025 Media Gallery
+              📸 NICE Lagos 2026 Media Gallery
             </h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Browse official photos and videos from the International Civil Engineering Conference and AGM — grouped by day and activity.

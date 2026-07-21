@@ -116,7 +116,7 @@ export default function Sponsorships() {
           <h2 className="text-2xl font-bold mb-4">About the Conference</h2>
           <div className="space-y-4">
             <p className="text-muted-foreground">
-              The Nigerian Institution of Civil Engineers (NICE) is pleased to present the 2025 International Civil Engineering Conference and Annual General Meeting, holding in Kano, Nigeria.
+              The Nigerian Institution of Civil Engineers (NICE) is pleased to present the 2025 International Civil Engineering Conference and Annual General Meeting, holding in Lagos, Nigeria.
             </p>
             <div className="bg-brand/5 p-4 rounded-lg">
               <h3 className="font-semibold text-brand-primary mb-2">Theme:</h3>
