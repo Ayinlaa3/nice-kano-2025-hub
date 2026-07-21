@@ -27,6 +27,11 @@ import PastConferenceDetail from "./pages/PastConferenceDetail";
 import AdminLogin from "./pages/AdminLogin";
 import AdminRegistrations from "./pages/AdminRegistrations";
 import AdminAnalytics from "./pages/AdminAnalytics";
+import ExperienceLagos from "./pages/experience/ExperienceLagos";
+import VenueGuide from "./pages/experience/VenueGuide";
+import TransportTips from "./pages/experience/TransportTips";
+import AccommodationHighlights from "./pages/experience/AccommodationHighlights";
+import DelegateFAQ from "./pages/experience/DelegateFAQ";
 
 const queryClient = new QueryClient();
 
