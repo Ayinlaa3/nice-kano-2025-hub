@@ -175,7 +175,10 @@ export default function MainLayout() {
           <div className="flex items-center gap-3">
   {/* Mobile only: Register above, Menu below */}
   <div className="flex flex-col-reverse items-end gap-2 md:hidden">
-    <MobileMenu />
+    <div className="flex items-center gap-2">
+      <ThemeToggle />
+      <MobileMenu />
+    </div>
     <Button asChild variant="professional" size="sm">
       <Link to="/registration">Register Now</Link>
     </Button>
@@ -183,6 +186,7 @@ export default function MainLayout() {
 
   {/* Desktop: Register + Sponsor inline */}
   <div className="hidden md:flex items-center gap-3">
+    <ThemeToggle />
     <Button asChild variant="professional" size="sm">
       <Link to="/registration">Register Now</Link>
     </Button>
