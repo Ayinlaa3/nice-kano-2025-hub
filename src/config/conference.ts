@@ -24,10 +24,10 @@ export const CONFERENCE = {
   },
 
   venue: {
-    name: "HiPoint Event Centre, Ikeja",
-    shortName: "HiPoint Event Centre",
+    name: "Academy Guest House & Events Halls, Agidingbi",
+    shortName: "Academy Guest House & Events Halls",
     address:
-      "5 Impressive Close, Behind NECA House & Opposite LASPARK, Off L.J. Dosunmu Street, Central Business District, Alausa, Ikeja, Lagos",
+      "Academy Guest House & Events Halls, Agidingbi, Ikeja, Lagos State, Nigeria",
     city: "Ikeja",
     region: "Lagos State",
     country: "NG",
