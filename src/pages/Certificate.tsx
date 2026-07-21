@@ -146,7 +146,7 @@ const Certificate = () => {
 
   return (
     <>
-      <Helmet title="Certificate Generator | NICE Kano 2025">
+      <Helmet title="Certificate Generator | NICE Lagos 2026">
         <meta name="description" content="Generate and download your NICE 2025 Conference Certificate of Participation" />
       </Helmet>
 

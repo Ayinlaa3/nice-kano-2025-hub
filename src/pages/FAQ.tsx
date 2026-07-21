@@ -16,7 +16,7 @@ const faqCategories = [
     badge: "Essential",
     questions: [
       {
-        question: "How do I register for NICE Kano 2025?",
+        question: "How do I register for NICE Lagos 2026?",
         answer: "Register online through our Google Forms link: https://forms.gle/HXocP4aGn5Pb1HmR6. You can also register on-site during the conference days (October 21-23, 2025), though online pre-registration is strongly recommended for guaranteed conference materials."
       },
       {
@@ -39,7 +39,7 @@ const faqCategories = [
     badge: "Program",
     questions: [
       {
-        question: "When is NICE Kano 2025 taking place?",
+        question: "When is NICE Lagos 2026 taking place?",
         answer: "The conference runs from October 21-23, 2025 (3 days). Day 1 includes site visits and Chairman's cocktail, Day 2 features the opening ceremony and main sessions, Day 3 concludes with the AGM and Awards gala."
       },
       {
@@ -52,7 +52,7 @@ const faqCategories = [
       },
       {
         question: "Will there be continuing professional development (CPD) credits?",
-        answer: "Yes, attendance at NICE Kano 2025 qualifies for CPD credits from the Institution. Electronic Certificates will be issued to all registered participants who attend the required sessions."
+        answer: "Yes, attendance at NICE Lagos 2026 qualifies for CPD credits from the Institution. Electronic Certificates will be issued to all registered participants who attend the required sessions."
       }
     ]
   },
@@ -145,10 +145,10 @@ const faqCategories = [
 export default function FAQ() {
   return (
     <>
-      <Helmet title="Frequently Asked Questions - NICE Kano 2025">
+      <Helmet title="Frequently Asked Questions - NICE Lagos 2026">
         <meta 
           name="description" 
-          content="Find answers to common questions about NICE Kano 2025 International Conference and Annual General Meeting. Registration, venue, accommodation, and program details." 
+          content="Find answers to common questions about NICE Lagos 2026 International Conference and Annual General Meeting. Registration, venue, accommodation, and program details." 
         />
         <link rel="canonical" href={`${window.location.origin}/faq`} />
       </Helmet>
@@ -165,7 +165,7 @@ export default function FAQ() {
               Frequently Asked Questions
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Everything you need to know about NICE Kano 2025 International Conference and Annual General Meeting
+              Everything you need to know about NICE Lagos 2026 International Conference and Annual General Meeting
             </p>
           </div>
         </section>
