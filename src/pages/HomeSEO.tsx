@@ -9,7 +9,7 @@ import {
 export default function HomeSEO() {
   return (
     <Helmet title="NICE Lagos 2026 — Home">
-      <meta name="description" content="NICE 23rd International Civil Engineering Conference & AGM. 21–23 Oct 2025, Kano. Register and explore sponsorships." />
+      <meta name="description" content="NICE 24th International Civil Engineering Conference & AGM. 20–22 Oct 2026, Lagos. Register and explore sponsorships." />
       <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/"} />
     </Helmet>
   );
