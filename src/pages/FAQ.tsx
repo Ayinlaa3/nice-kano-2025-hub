@@ -63,15 +63,15 @@ const faqCategories = [
     questions: [
       {
         question: "Where is the conference venue located?",
-        answer: "The main venue is the Coronation Hall at Kano Government House, centrally located with secure access. Additional sessions will be held at Tahir Guest Palace. Both venues offer modern conference facilities, A/V equipment, Wi-Fi, and ample parking."
+        answer: "The main venue is the Academy Guest House & Events Halls, Agidingbi, Ikeja, Lagos — a secure, modern facility with full conference infrastructure, A/V equipment, Wi-Fi, exhibition space and ample parking, located in the heart of the Lagos Central Business District."
       },
       {
         question: "Are there recommended hotels for accommodation?",
-        answer: "Yes, we've curated 35+ hotel options ranging from ₦19,000-₦390,000/night. Popular choices include Dan Yaya Guest Palace (₦40,000-₦80,000), Prince Hotel (₦50,000-₦315,900), and Bon Hotel Kano (₦78,000-₦390,000). Most are within 10-25 minutes of the venue."
+        answer: "Yes — we have curated a range of partner hotels in Ikeja, Alausa, GRA and Maryland from budget to 5-star, with negotiated delegate rates. See the Hotels & Travel page for the full list; most are within 5–20 minutes of the Academy Guest House venue."
       },
       {
         question: "Is transportation provided to/from the airport?",
-        answer: "Many recommended hotels offer complimentary airport pickup services. Additionally, commercial shuttle services and ride hauling apps like Uber and Bolt operates between major hotels and conference venues. Mallam Aminu Kano International Airport (KAN) is approximately 20-30 minutes from most hotels."
+        answer: "Many partner hotels offer complimentary airport pickup. Uber, Bolt and inDrive operate widely across Lagos. Murtala Muhammed International Airport (LOS) is approximately 15–25 minutes from Ikeja depending on traffic; we recommend arriving outside rush hours (7–10am, 4–8pm)."
       },
       {
         question: "What facilities are available at the venue?",
@@ -109,7 +109,7 @@ const faqCategories = [
       },
       {
         question: "Is there a spouse program?",
-        answer: "Yes, we offer a comprehensive spouses program featuring guided tours of Kano's historic sites (Ancient City Walls, Emir's Palace, Kurmi Market, Dye Pits), cultural workshops, career talks, and social activities. Registration is included with main conference registration."
+        answer: "Yes — the Lagos 2026 spouse programme features guided tours of Lagos landmarks (Lekki Conservation Centre, Nike Art Gallery, New Afrika Shrine, Lekki-Ikoyi Bridge viewpoint), cultural workshops, wellness sessions and social activities. Included with main registration."
       },
       {
         question: "Are there activities for students (NICESA) and Graduates?",
@@ -128,11 +128,11 @@ const faqCategories = [
       },
       {
         question: "What should I pack for the conference?",
-        answer: "Pack formal business attire for conference sessions, smart casual for evening events, comfortable clothing for site visits, light jacket for air-conditioned venues, comfortable walking shoes, and any personal medications. Kano has warm weather year-round."
+        answer: "Pack formal business attire for sessions, smart casual for evenings, comfortable clothing and closed shoes for site visits, a light jacket for air-conditioned halls, an umbrella (Lagos can have brief rain showers in October), and any personal medication. Lagos weather is warm and humid year-round."
       },
       {
         question: "Are there industrial visits planned?",
-        answer: "Yes, Day 1 includes 'Technical Project Site Visit and Technical Presentation' (9:00 AM - 2:00 PM) featuring guided tours of major civil engineering projects in Kano, showcasing innovative construction techniques and sustainable infrastructure development."
+        answer: "Yes — Day 1 includes a Technical Site Visit featuring guided tours of landmark Lagos civil engineering projects such as the Lekki Deep Sea Port, the Lekki–Ikoyi Cable-Stayed Bridge, the Blue Line Rail and the Eko Atlantic reclamation, showcasing sustainable and resilient infrastructure at scale."
       },
       {
         question: "Is local transport assistance available?",

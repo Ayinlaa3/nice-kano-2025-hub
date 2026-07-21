@@ -27,7 +27,7 @@ const schedule = {
   { time: "9:50 AM – 10:00 AM", title: "National Anthem", tags: ["Ceremony"], desc: "Recitation of the national anthem." },
   { time: "10:00 AM – 10:05 AM", title: "Opening Prayer", tags: ["Ceremony"], desc: "Prayer to officially open the program." },
   { time: "10:05 AM – 10:15 AM", title: "Welcome Address", speaker: "Engr. Tokunbo Ajanaku, FNSE, FNICE, PMP", tags: ["Address"], desc: "Welcome remarks by the National Chairman." },
-  { time: "10:15 AM – 10:30 AM", title: "Keynote Address", speaker: "Engr. Sen. Rabiu Musa Kwankwanso, FNSE (Fmr. Gov. Kano State)", tags: ["Keynote"], desc: "Keynote presentation by the former governor of Kano State." },
+  { time: "10:15 AM – 10:30 AM", title: "Keynote Address", speaker: "Keynote Speaker (To Be Announced)", tags: ["Keynote"], desc: "Keynote presentation on sustainable and resilient infrastructure for economic growth." },
   { time: "10:30 AM – 10:45 AM", title: "Remarks by Chairman of the Occasion", speaker: "Engr. Margaret Aina Oguntala, FNSE", tags: ["Remarks"], desc: "Speech by the chairman of the occasion." },
   { time: "10:45 AM – 10:55 AM", title: "Remarks by Guest of Honour", tags: ["Remarks"], desc: "Address by guest of honour." },
   { time: "10:55 AM – 11:05 AM", title: "Remarks by Special Guest of Honour", tags: ["Remarks"], desc: "Address by special guest of honour." },
