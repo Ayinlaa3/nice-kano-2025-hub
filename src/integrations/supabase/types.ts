@@ -203,6 +203,7 @@ export type Database = {
           intended_grade: string | null
           payment_reference: string | null
           reviewed_at: string | null
+          reviewed_by: string | null
           status: string | null
           submitted_at: string | null
           user_id: string | null
@@ -216,6 +217,7 @@ export type Database = {
           intended_grade?: string | null
           payment_reference?: string | null
           reviewed_at?: string | null
+          reviewed_by?: string | null
           status?: string | null
           submitted_at?: string | null
           user_id?: string | null
@@ -229,6 +231,7 @@ export type Database = {
           intended_grade?: string | null
           payment_reference?: string | null
           reviewed_at?: string | null
+          reviewed_by?: string | null
           status?: string | null
           submitted_at?: string | null
           user_id?: string | null
@@ -1261,6 +1264,7 @@ export type Database = {
           message: string
           sender_id: string | null
           target_audience: string
+          target_user_id: string | null
           title: string
         }
         Insert: {
@@ -1269,6 +1273,7 @@ export type Database = {
           message: string
           sender_id?: string | null
           target_audience?: string
+          target_user_id?: string | null
           title: string
         }
         Update: {
@@ -1277,6 +1282,7 @@ export type Database = {
           message?: string
           sender_id?: string | null
           target_audience?: string
+          target_user_id?: string | null
           title?: string
         }
         Relationships: []
@@ -2125,6 +2131,22 @@ export type Database = {
           surname: string
         }[]
       }
+      find_legacy_candidates_by_name: {
+        Args: { _firstname: string; _surname: string }
+        Returns: {
+          firstname: string
+          grade: string
+          has_email: boolean
+          has_othername: boolean
+          has_reg_no: boolean
+          is_claimed: boolean
+          masked_email: string
+          member_uid: string
+          othername: string
+          reg_no: string
+          surname: string
+        }[]
+      }
       find_legacy_member: {
         Args: {
           _email?: string
@@ -2206,6 +2228,10 @@ export type Database = {
           profile_photo_url: string
           status: string
         }[]
+      }
+      verify_blank_email_legacy_claim: {
+        Args: { _member_uid: string; _othername: string; _reg_no: string }
+        Returns: Json
       }
     }
     Enums: {
