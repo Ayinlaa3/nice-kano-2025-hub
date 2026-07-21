@@ -26,6 +26,7 @@ import PastConferences from "./pages/PastConferences";
 import PastConferenceDetail from "./pages/PastConferenceDetail";
 import AdminLogin from "./pages/AdminLogin";
 import AdminRegistrations from "./pages/AdminRegistrations";
+import AdminAnalytics from "./pages/AdminAnalytics";
 
 const queryClient = new QueryClient();
 
@@ -61,6 +62,14 @@ const App = () => (
                   element={
                     <RequireAdmin>
                       <AdminRegistrations />
+                    </RequireAdmin>
+                  }
+                />
+                <Route
+                  path="/admin/analytics"
+                  element={
+                    <RequireAdmin>
+                      <AdminAnalytics />
                     </RequireAdmin>
                   }
                 />

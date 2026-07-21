@@ -13,6 +13,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/co
 import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ChatSupport from "@/components/ChatSupport";
+import ThemeToggle from "@/components/ThemeToggle";
 import { CONFERENCE } from "@/config/conference";
 
 const navigationGroups = [
