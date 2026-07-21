@@ -1,30 +1,28 @@
 // ============================================================================
-// NICE Conference Platform — Central Configuration
-// ----------------------------------------------------------------------------
-// This is the single source of truth for the current conference edition.
-// To roll the platform over to a future year, update the values here and the
-// rest of the site (nav, hero, registration pricing, SEO) follows along.
+// NICE Conference Platform — Central Configuration (Lagos 2026)
 // ============================================================================
 
 export const CONFERENCE = {
   edition: "24th International Conference",
+  editionShort: "24th",
   year: 2026,
   shortName: "LAGOS 2026",
+  tagline: "THIS IS LAGOS!!!",
   organisation: "Nigerian Institution of Civil Engineers",
   organisationShort: "NICE",
   theme:
     "Civil Engineering: Sustainable and Resilient Infrastructure for Economic Growth",
   subtitle:
     "The 24th International Civil Engineering Conference and Annual General Meeting of the Nigerian Institution of Civil Engineers (NICE).",
-  // Dates
+
   dates: {
     startISO: "2026-10-20",
     endISO: "2026-10-22",
-    countdownTarget: "2026-10-20T00:00:00",
+    countdownTarget: "2026-10-20T09:00:00",
     display: "20–22 Oct 2026",
     displayLong: "October 20–22, 2026",
   },
-  // Venue
+
   venue: {
     name: "HiPoint Event Centre, Ikeja",
     shortName: "HiPoint Event Centre",
@@ -34,16 +32,32 @@ export const CONFERENCE = {
     region: "Lagos State",
     country: "NG",
   },
-  // Registration entry point — now the in-app page (replaces the old Google Form)
+
   registrationPath: "/registration",
   organiserUrl: "https://nicehq.org",
+
+  // Host-city stats — surfaced in the hero ticker
+  stats: [
+    { value: "3,000+", label: "Delegates" },
+    { value: "30+", label: "Nations" },
+    { value: "24th", label: "Edition" },
+    { value: "180+", label: "Years of Lagos Engineering Legacy" },
+  ],
+
+  subThemes: [
+    "Sustainable Materials & Green Construction",
+    "Resilient & Smart Cities",
+    "Digital Transformation, BIM & Digital Twins",
+    "Climate-Adaptive Infrastructure",
+    "Coastal, Marine & Water Engineering",
+    "Transportation & Mega-Projects",
+    "Engineering Policy, Finance & PPPs",
+  ],
 } as const;
 
 // ----------------------------------------------------------------------------
 // Registration pricing engine
 // ----------------------------------------------------------------------------
-// Early-bird cutoff: registrations completed on or before this date get the
-// early-bird rate; afterwards the regular rate applies.
 export const EARLY_BIRD_CUTOFF_ISO = "2026-08-15";
 
 export type RegistrationCategoryId =
@@ -59,8 +73,8 @@ export type RegistrationCategoryId =
 export interface RegistrationCategory {
   id: RegistrationCategoryId;
   label: string;
-  earlyBird: number; // in Naira
-  regular: number; // in Naira
+  earlyBird: number;
+  regular: number;
   note?: string;
 }
 

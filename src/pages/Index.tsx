@@ -1,215 +1,69 @@
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
-import Autoplay from "embla-carousel-autoplay"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { Card } from "@/components/ui/card";
-import logo from "@/assets/nice-logo.svg";
-import heroBridge from "@/assets/hero-bridge.jpg";
-import heroGreen from "@/assets/hero-green-building.jpg";
-import heroHighway from "@/assets/hero-highway.jpg";
-import heroConstruction from "@/assets/hero-construction.jpg";
-import heroSustainable from "@/assets/hero-sustainable.jpg";
-import { CalendarDays, MapPin, Building2, HardHat, Users, Briefcase, Award, GraduationCap, Handshake, Landmark, Beer, Presentation, ChevronDown, Mic, Star, Play, Users2 } from "lucide-react";
-import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { useMemo } from "react";
+import {
+  ArrowRight,
+  Building2,
+  Cpu,
+  Waves,
+  Leaf,
+  TrendingUp,
+  Ship,
+  Landmark,
+  Users,
+  Award,
+  Sparkles,
+  MapPin,
+  CalendarDays,
+} from "lucide-react";
+
 import Hero from "@/components/Hero";
-import { IllBeThere } from "@/components/IllBeThere";
 import { CONFERENCE } from "@/config/conference";
+import bridge from "@/assets/lagos/third-mainland-bridge.jpg";
+import ekoNight from "@/assets/lagos/eko-atlantic-night.jpg";
+import lekkiBridge from "@/assets/lagos/lekki-ikoyi-bridge.jpg";
+import port from "@/assets/lagos/lekki-port.jpg";
 
-// Import Leader photos
-import leaderTokunbo from "@/assets/leader-tokunbo.jpg";
-import leaderBalla from "@/assets/leader-balla.jpg";
-import senkila from "@/assets/senkila.png";
-import leaderOfoeyeno from "@/assets/leader-ofoeyeno.jpg";
-import rabiuKwankwaso from "@/assets/Rabiu-Musa-Kwankwaso.jpg";
-import kanoGovernor from "@/assets/kano-governor.jpg";
-import jigawaGovernor from "@/assets/umar-namadi.jpg";
-import royalFather from "@/assets/hrh-muhammadu.jpg";
-import housingMinister from "@/assets/arc-musa-ahmed.jpg";
-import nsePresident from "@/assets/engr-margaret.jpg";
-import speakerKano from "@/assets/jibril-ismail.jpg";
-import jigawaDeputyGov from "@/assets/aminu-usman.jpg";
-import kanoWorksComm from "@/assets/marwan-aminu.jpg";
-import waterMinister from "@/assets/prof-joseph.jpg";
-import bichiRep from "@/assets/engr-abubakar.jpg";
+const subThemeIcons = [Leaf, Building2, Cpu, Waves, Ship, TrendingUp, Landmark];
 
-// Import sponsor logos
-import sponsor1 from "@/assets/sponsors/sponsor01.png";
-import sponsor2 from "@/assets/sponsors/sponsor02.png";
-import sponsor3 from "@/assets/sponsors/sponsor03.png";
-import sponsor4 from "@/assets/sponsors/sponsor04.png";
-import sponsor5 from "@/assets/sponsors/sponsor05.png";
-import sponsor6 from "@/assets/sponsors/sponsor06.png";
-
-
-
-
-
-
-const activities = [
-  { 
-    title: "Technical Project Site Visit", 
-    icon: Landmark,
-    description: "Guided tours of major civil engineering projects in Kano, showcasing innovative construction techniques and sustainable infrastructure development."
-  },
-  { 
-    title: "Construction Tech Expo", 
-    icon: Building2,
-    description: "Exhibition of cutting-edge construction technologies, materials, and equipment from leading industry players."
-  },
-  { 
-    title: "Career Clinic for Graduates", 
-    icon: GraduationCap,
-    description: "Professional development sessions, CV reviews, and career guidance for young engineers and recent graduates."
-  },
-  { 
-    title: "National Chairman's Cocktail", 
-    icon: Beer,
-    description: "Exclusive networking event hosted by the NICE National Chairman for distinguished members and special guests."
-  },
-  { 
-    title: "Engineering Business Roundtable", 
-    icon: Briefcase,
-    description: "Strategic discussions on business opportunities, partnerships, and economic growth in the civil engineering sector."
-  },
-  { 
-    title: "Technical Sessions", 
-    icon: Presentation,
-    description: "Paper presentations and research findings on innovative construction methods and sustainable infrastructure solutions."
-  },
-  { 
-    title: "Fellowship Conferment & Fellows Roundtable", 
-    icon: Award,
-    description: "Recognition ceremony for new Fellows and strategic discussions among senior engineering professionals."
-  },
-  { 
-    title: "Exhibitions", 
-    icon: Handshake,
-    description: "Trade exhibitions featuring construction companies, consulting firms, and technology providers showcasing their services."
-  },
-  { 
-    title: "Students and Graduates Programs", 
-    icon: Users,
-    description: "Special programs designed for engineering students including competitions, mentorship sessions, and skill development workshops."
-  },
-  { 
-    title: "Spouses Programs", 
-    icon: Users,
-    description: "Cultural tours, craft workshops, and social activities designed for accompanying spouses and family members."
-  },
-  { 
-    title: "Annual General Meeting", 
-    icon: HardHat,
-    description: "Official NICE AGM covering institutional governance, financial reports, and strategic planning for the coming year."
-  },
-  { 
-    title: "Dinner, Awards, and Cultural Gala", 
-    icon: Award,
-    description: "Grand closing ceremony featuring awards presentation, cultural performances, and celebration of engineering excellence."
-  },
+const experiences = [
+  { title: "Cultural Night", desc: "Afrobeats, drums, fashion & Lagos energy.", to: "/about" },
+  { title: "Annual Dinner & Awards", desc: "Recognising excellence in civil engineering.", to: "/about" },
+  { title: "Technical Site Tours", desc: "Lekki Port, Eko Atlantic, Third Mainland & more.", to: "/location" },
+  { title: "Spouses Programme", desc: "Curated Lagos experiences for accompanying guests.", to: "/about" },
+  { title: "Students & Young Engineers", desc: "Competitions, mentorship, career clinics.", to: "/innovationchallenge" },
+  { title: "Exhibitions & Expo", desc: "Cutting-edge construction tech and materials.", to: "/sponsorships" },
 ];
 
-const speakers = [
+const dayPreview = [
   {
-    name: "Engr. Sen. Rabiu Musa Kwankwaso, FNSE",
-    title: "Keynote Speaker/Distinguished Guest of Honour",
-    position: "Former Governor of Kano State, Nigeria",
-    topic: " ",
-    image: rabiuKwankwaso,
-  },
-  // {
-  //   name: "T.B.D",
-  //   title: "Engineering Roundtable Speaker",
-  //   position: " ",
-  //   topic: "Unlocking the Potentials of SMEs in the Nigerian Construction Industry:Opportunities, Partnerships, and Policy Support",
-  //   image: "/placeholder.svg"
-  // },
-  // {
-  //   name: "T.B.D",
-  //   title: "Fellows Roundtable Speaker",
-  //   position: " ",
-  //   topic: "The Future of Civil Engineering Leadership in Nigeria: Charting Pathways for Innovation, Mentorship, and Sustainable Impact",
-  //   image: "/placeholder.svg"
-  // },
-  {
-    name: "H.E. Abba Kabir Yusuf",
-    title: "Distinguished Guest of Honour",
-    position: "Executive Governor of Kano State, Nigeria",
-    topic: " ",
-    image: kanoGovernor,
+    day: "Day 1",
+    date: "Mon · 20 Oct",
+    title: "Opening & Keynotes",
+    body: "Grand opening, keynote addresses, plenary on sustainable infrastructure for economic growth.",
   },
   {
-    name: "H. E ALH. UMAR NAMADI",
-    title: "Special Guest of Honour",
-    position: "Executive Governor of Jigawa State.D",
-    image: jigawaGovernor,
+    day: "Day 2",
+    date: "Tue · 21 Oct",
+    title: "Technical Sessions & AGM",
+    body: "Parallel technical tracks, business roundtable, NICE Annual General Meeting.",
   },
   {
-    name: "HRH. MUHAMMADU SANUSI II,CON. PHD.",
-    title: "Royal Father Of The Day",
-    position: "Emir of Kano",
-    image: royalFather,
+    day: "Day 3",
+    date: "Wed · 22 Oct",
+    title: "Awards, Dinner & Tours",
+    body: "Fellowship conferment, gala dinner, cultural night, technical site visits across Lagos.",
   },
-  {
-    name: "ARC. MUSA AHMED DANGIWA",
-    title: "Special Guest",
-    position: "Hon. Minister For Housing And Urban Development",
-    image: housingMinister,
-  },
-  {
-    name: "ENGR. MARGARET A. OGUNTALA,FNSE",
-    title: "Chairman of the Occasion",
-    position: "President, Nigerian Society of Engineers",
-    image: nsePresident,
-  },
-  {
-    name: "RT. HON. JIBRIL ISMA’IL FALGORE",
-    title: "Special Guest",
-    position:"Speaker, Kano State House of Assembly",
-    image: speakerKano,
-  },
-  {
-    name: "ENGR. AMINU USMAN, FNSE",
-    title: "Special Guest",
-    position: "Deputy Governor of Jigawa State",
-    image: jigawaDeputyGov,
-  },
-  {
-    name: "ENGR. MARWAN AMINU AHMAD, FNSE,FNICE",
-    title: "Special Guest",
-    position: "Hon. Commissioner Minister of works, Kano state",
-    image: kanoWorksComm,
-  },
-  {
-    name: "ENGR. PROF. JOSEPH TERLSUMAN UTS",
-    title: "Special Guest",
-    position: "Hon. Minister for Water Resources and Sanitation",
-    image: waterMinister,
-  },
-  {
-    name: "ENGR. ABUBAKAR KABIR ABUBAKAR",
-    title: "Special Guest",
-    position: "Reps. Member Bichi Federal Constituency and Chairman House of Committee on Appropriation.",
-    image: bichiRep,
-  },
-
 ];
 
 const Index = () => {
-  const [expandedActivity, setExpandedActivity] = useState<number | null>(null);
-  
   const eventJsonLd = useMemo(
     () => ({
       "@context": "https://schema.org",
       "@type": "Event",
-      name:
-        "NICE 24th International Civil Engineering Conference & AGM — Lagos 2026",
+      name: `NICE ${CONFERENCE.edition} & AGM — Lagos 2026`,
       startDate: CONFERENCE.dates.startISO,
       endDate: CONFERENCE.dates.endISO,
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
@@ -230,492 +84,232 @@ const Index = () => {
         name: "Nigerian Institution of Civil Engineers (NICE)",
         url: CONFERENCE.organiserUrl,
       },
-      url: typeof window !== "undefined" ? window.location.href : undefined,
-      image: [heroBridge, heroGreen, heroHighway, heroConstruction, heroSustainable],
-      description: `Theme: ${CONFERENCE.theme}.`,
+      description: `Theme: ${CONFERENCE.theme}. ${CONFERENCE.tagline}`,
     }),
     []
   );
 
-// Contact form moved to dedicated page
-
   return (
     <>
-      <Helmet title="NICE Lagos 2026 Conference & AGM | 20–22 Oct 2026">
+      <Helmet title="THIS IS LAGOS!!! · NICE 24th International Conference · Oct 2026">
         <meta
           name="description"
-          content="Nigeria's premier civil engineering conference by NICE. 20–22 Oct 2026, HiPoint Event Centre, Ikeja, Lagos. Register and explore sponsorship opportunities."
-        />
-        <link
-          rel="canonical"
-          href={typeof window !== "undefined" ? window.location.href : "/"}
+          content="Nigeria's premier civil engineering conference. Lagos, 20–22 October 2026. 3,000+ delegates, 30+ nations. Sustainable & resilient infrastructure for economic growth."
         />
         <script type="application/ld+json">{JSON.stringify(eventJsonLd)}</script>
       </Helmet>
 
-{/* Header moved to MainLayout */}
+      <Hero />
 
-<Hero />
+      {/* Marquee-style theme band */}
+      <div className="border-y border-border/60 bg-card/50 backdrop-blur overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-12 py-4 flex items-center gap-6 text-sm text-muted-foreground whitespace-nowrap overflow-x-auto">
+          <span className="text-accent font-medium uppercase tracking-widest">Theme</span>
+          <span className="text-foreground/80">{CONFERENCE.theme}</span>
+        </div>
+      </div>
 
-      {/* About */}
-      <main>
-        <section id="about" className="container mx-auto px-6 lg:px-12 xl:px-16 py-16 md:py-20 animate-fade-in">
-          <div className="grid md:grid-cols-12 gap-8 items-start">
-            <div className="md:col-span-5">
-              <div className="rounded-xl bg-gradient-to-br from-brand/5 via-kano-heritage/5 to-vibrant/5 ring-1 ring-brand/20 p-6 cultural-card">
-                <img src={logo} alt="NICE logo" className="h-14 w-auto floating-animation" />
-                <p className="mt-4 text-sm text-muted-foreground">
-                  The Nigerian Institution of Civil Engineers (NICE) is the premier body for civil engineers in Nigeria, fostering excellence across construction, structural, highway, geotechnics, and water resources engineering.
-                </p>
+      {/* Why Lagos */}
+      <section className="container mx-auto px-6 lg:px-12 py-24 md:py-32">
+        <div className="grid md:grid-cols-12 gap-12 items-center">
+          <div className="md:col-span-5 relative">
+            <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-elegant ring-1 ring-border">
+              <img
+                src={ekoNight}
+                alt="Lagos skyline"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="absolute -bottom-6 -right-6 hidden md:block bg-gradient-eko rounded-2xl p-6 shadow-gold">
+              <div className="font-display text-5xl text-white leading-none">180+</div>
+              <div className="text-xs uppercase tracking-widest text-white/90 mt-2">
+                Years of Lagos<br />engineering legacy
               </div>
             </div>
-            <article className="md:col-span-7">
-              <h2 className="text-2xl md:text-3xl font-bold">About the Conference</h2>
-              <p className="mt-4 leading-relaxed">
-                The NICE 24th International Civil Engineering Conference & AGM brings together engineers, industry experts, academics, students, and corporate partners for three days of knowledge sharing, innovation, and networking. As Nigeria's premier civil engineering gathering, the conference catalyzes professional growth and showcases transformative solutions for sustainable and resilient infrastructure that drives economic growth.
-              </p>
-            </article>
           </div>
-        </section>
 
-        {/* Publicity Section - Video Invitations */}
-        <section className="py-16 md:py-20 bg-gradient-to-br from-kano-heritage/10 via-brand/5 to-vibrant/10">
-          <div className="container mx-auto px-6 lg:px-12 xl:px-16">
-            <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold">Conference Spotlight</h2>
-              <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-                Relive the moments — messages and highlights from our last edition, NICE Kano 2025.
-              </p>
+          <div className="md:col-span-7 space-y-6">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-accent">
+              <Sparkles className="h-3.5 w-3.5" /> Why Lagos
             </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Conference Jingle */}
-              {/* <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand-red hover:border-l-vibrant transition-all duration-300">
-                <div className="relative aspect-video bg-gradient-to-br from-brand/20 to-kano-heritage/30 overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
-                  <img 
-                    src={heroGreen}
-                    alt="NICE Kano 2025 Conference Jingle" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <Play className="h-6 w-6 text-brand ml-1" fill="currentColor" />
-                    </div>
-                  </div>
-                  <div className="absolute top-4 left-4">
-                    <div className="bg-brand-red text-white px-2 py-1 rounded text-xs font-medium">
-                      OFFICIAL VIDEO JINGLE
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">NICE Kano 2025 - Official Conference Jingle</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Experience the excitement and vision for Nigeria's premier civil engineering conference, holding live in the city of Kano
-                  </p>
-                </div>
-              </Card> */}
-
-
-              <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand-red hover:border-l-vibrant transition-all duration-300">
-                <div className="relative aspect-video bg-gradient-to-br from-brand/20 to-kano-heritage/30 overflow-hidden">
-                  <iframe
-                    className="w-full h-full"
-                    src="https://www.youtube.com/embed/G9U_HEmKBX4"
-                    title="NICE Kano 2025 Conference Jingle"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                  <div className="absolute top-4 left-4">
-                    <div className="bg-brand-red text-white px-2 py-1 rounded text-xs font-medium">
-                      OFFICIAL VIDEO JINGLE
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">
-                    NICE Kano 2025 - Official Conference Jingle
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Experience the excitement and vision for Nigeria's premier civil
-                    engineering conference, holding live in the city of Kano
-                  </p>
-                </div>
-        </Card>
-
-
-
-
-              {/* NICE Chairman Invitation */}
-              <Card className="group overflow-hidden cultural-card border-l-4 border-l-vibrant hover:border-l-brand transition-all duration-300">
-                <div className="relative aspect-video bg-gradient-to-br from-vibrant/20 to-brand/30 overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
-                  <img 
-                    src={leaderTokunbo} 
-                    alt="NICE NATIONAL CHAIRMAN Invitation" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <Play className="h-6 w-6 text-vibrant ml-1" fill="currentColor" />
-                    </div>
-                  </div>
-                  <div className="absolute top-4 left-4">
-                    <div className="bg-vibrant text-black px-2 py-1 rounded text-xs font-medium">
-                      NATIONAL CHAIRMAN
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">National Chairman's Invite</h3>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    A personal invitation from the National Chairman of the Nigerian Institution of Civil Engineers, Engr. Tokunbo Ajanaku, FNSE, FNICE, PMP to join us in Kano for a 3-day powerpacked.
-                  </p>
-                </div>
-              </Card>
-
-              {/* Kano Branch Chairman */}
-              <Card className="group overflow-hidden cultural-card border-l-4 border-l-kano-heritage hover:border-l-brandYellow transition-all duration-300">
-                <div className="relative aspect-video bg-gradient-to-br from-kano-heritage/20 to-brandYellow/30 overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
-                  <img 
-                    src={leaderBalla} 
-                    alt="Kano Branch Chairman Welcome" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <Play className="h-6 w-6 text-kano-heritage ml-1" fill="currentColor" />
-                    </div>
-                  </div>
-                  <div className="absolute top-4 left-4">
-                    <div className="bg-kano-heritage text-white px-2 py-1 rounded text-xs font-medium">
-                      HOST WELCOME
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">Kano Welcomes You</h3>
-                  <p className="text-sm text-muted-foreground mb-2">
-                      
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Welcome message from Kano, led by the Branch Chairman Engr. Maryam Abubakar-Balla, FNSE, FNICE and the Conference LOC Chairman Prof. Hassim Alhassan, FNSE, FNICE welcomes you the warmth and heritage that awaits you in ancient Kano.
-                    </p>
-                </div>
-              </Card>
-
-              {/* Board of Trustees Chairman */}
-              <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand hover:border-l-brand-red transition-all duration-300">
-                <div className="relative aspect-video bg-gradient-to-br from-brand/20 to-brand-red/30 overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
-                  <img 
-                    src={senkila} 
-                    alt="Conference Chairman Message" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <Play className="h-6 w-6 text-brand ml-1" fill="currentColor" />
-                    </div>
-                  </div>
-                  <div className="absolute top-4 left-4">
-                    <div className="bg-brand text-white px-2 py-1 rounded text-xs font-medium">
-                      BOT CHAIRMAN
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">BOT Confirmation</h3>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Engr. Sen. Adefemi Kila, FNSE, FNICE - Board of Trustees Chairman
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Hear from the Chairman of the Board of Trustees on the innovative programs and opportunities at Kano 2025
-                  </p>
-                </div>
-              </Card>
-
-              {/* Conference CPC Chairman */}
-              <Card className="group overflow-hidden cultural-card border-l-4 border-l-brandYellow hover:border-l-vibrant transition-all duration-300">
-                <div className="relative aspect-video bg-gradient-to-br from-brandYellow/20 to-vibrant/30 overflow-hidden rounded-t-xl">
-                  <iframe
-                    className="absolute top-0 left-0 w-full h-full"
-                    src="https://www.youtube.com/embed/0hvds4EjRVE"
-                    title="CPC Chairman’s Invite"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                  <div className="absolute top-4 left-4">
-                    <div className="bg-brandYellow text-white px-2 py-1 rounded text-xs font-medium">
-                      CPC CHAIRMAN's INVITE
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">Mega Planning from the CPC</h3>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Engr. Dr. Bemigho Ofoeyeno, FNSE, FNICE — CPC Chairman
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    The Central Planning Committee Chairman warmly invites you to the 23rd Annual International Conference and General Meeting.
-                  </p>
-                </div>
-              </Card>
-
-
-              {/* Cultural Heritage Showcase */}
-               
-              <Card className="group overflow-hidden cultural-card border-l-4 border-l-brand-red hover:border-l-vibrant transition-all duration-300">
-                <div className="relative aspect-video bg-gradient-to-br from-brand/20 to-kano-heritage/30 overflow-hidden">
-                  <iframe
-                    className="w-full h-full"
-                    src="https://www.youtube.com/embed/OpByiCz1asw?autoplay=1&rel=0"
-                    title="Discover Kano Heritage"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                  <div className="absolute top-4 left-4">
-                    <div className="bg-brand-red text-white px-2 py-1 rounded text-xs font-medium">
-                      CULTURAL HERITAGE
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">
-                    Discover Kano Heritage
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Explore 1000 years of history, culture, and architectural marvels in ancient Kano
-                  </p>
-                </div>
-              </Card> 
-            </div>
-
-            <div className="text-center mt-12">
-              <div className="flex items-center justify-center gap-4 mb-6">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Users2 className="h-4 w-4" />
-                  <span>800+ Expected Attendees</span>
-                </div>
-                <div className="h-4 w-px bg-border"></div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Presentation className="h-4 w-4" />
-                  <span>50+ Technical Sessions</span>
-                </div>
-                <div className="h-4 w-px bg-border"></div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Award className="h-4 w-4" />
-                  <span>3 Days of Excellence</span>
-                </div>
-              </div>
-              <Button asChild size="lg" className="bg-gradient-to-r from-brand to-vibrant hover:from-brand/90 hover:to-vibrant/90">
-                <Link to="/registration">Join Us in Lagos - Register Now</Link>
+            <h2 className="font-display text-4xl md:text-6xl leading-tight">
+              From <span className="italic text-gradient-gold">Marina to Lekki</span> —
+              a city engineered by ambition.
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Lagos is West Africa's engineering laboratory. From the 1841 first-storey
+              building to the Lekki Deep Sea Port, Third Mainland Bridge and Eko
+              Atlantic City, this megacity of 21+ million tells the story of Nigerian
+              civil engineering at its most audacious.
+            </p>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              For three days in October 2026, {CONFERENCE.organisationShort} brings
+              the profession home to where it built its boldest chapters.
+            </p>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
+                <Link to="/about">Read the story <ArrowRight className="h-4 w-4" /></Link>
+              </Button>
+              <Button asChild size="lg" variant="ghost" className="hover:text-accent">
+                <Link to="/location">Explore the venue</Link>
               </Button>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* I'll Be There Generator */}
-        <IllBeThere />
-
-        {/* Theme & Objectives */}
-        <section id="theme" className="py-16 md:py-20 bg-brand/5">
-          <div className="container mx-auto px-6 lg:px-12 xl:px-16 grid md:grid-cols-12 gap-8">
-            <div className="md:col-span-6">
-              <h2 className="text-2xl md:text-3xl font-bold">Conference Theme</h2>
-              <p className="mt-4">
-                "{CONFERENCE.theme}" speaks to Nigeria's future—where modern methods, digital tools, and sustainable practices converge to deliver durable, cost-effective, and climate-resilient infrastructure that powers economic growth.
-              </p>
+      {/* Sub-themes */}
+      <section className="bg-card/30 border-y border-border/60 py-24">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="max-w-2xl mb-16">
+            <div className="text-xs uppercase tracking-[0.25em] text-accent mb-4">
+              Conference Tracks
             </div>
-            <aside className="md:col-span-6 mt-8 md:mt-0">
-              <h3 className="font-semibold">Objectives</h3>
-              <ul className="mt-4 grid gap-3 list-disc pl-5">
-                <li className="transition-colors duration-300 hover:text-brand">Showcase cutting-edge construction technologies and sustainable practices.</li>
-                <li className="transition-colors duration-300 hover:text-brand">Facilitate collaboration among engineers, policymakers, academia, and industry.</li>
-                <li className="transition-colors duration-300 hover:text-brand">Highlight case studies and standards for resilient infrastructure delivery.</li>
-                <li className="transition-colors duration-300 hover:text-brand">Support career advancement and mentorship for young engineers and students.</li>
-                <li className="transition-colors duration-300 hover:text-brand">Strengthen partnerships with sponsors and exhibitors shaping Nigeria's infrastructure.</li>
-              </ul>
-            </aside>
+            <h2 className="font-display text-4xl md:text-5xl leading-tight">
+              Seven pillars of resilient infrastructure.
+            </h2>
           </div>
-        </section>
 
-        {/* Activities & Programs */}
-        <section id="programs" className="container mx-auto px-6 lg:px-12 xl:px-16 py-16 md:py-20">
-          <h2 className="text-2xl md:text-3xl font-bold text-center">Activities & Programs</h2>
-          <p className="text-center text-muted-foreground mt-2 max-w-2xl mx-auto">
-            A rich, multi-track experience designed for learning, collaboration, and celebration.
-          </p>
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {activities.map(({ title, icon: Icon, description }, idx) => (
-              <Card 
-                key={title} 
-                className="p-5 cultural-card cursor-pointer border-l-4 border-l-transparent hover:border-l-vibrant"
-                onClick={() => setExpandedActivity(expandedActivity === idx ? null : idx)}
-              >
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-brand/10 to-kano-heritage/20 ring-1 ring-brand/15 flex items-center justify-center transition-all duration-300 hover:bg-gradient-to-br hover:from-brand/20 hover:to-vibrant/20">
-                    <Icon className="h-5 w-5 text-brand hover:text-vibrant transition-colors duration-300" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between">
-                      <h4 className="font-medium">{title}</h4>
-                      <ChevronDown 
-                        className={`h-4 w-4 text-muted-foreground transition-transform duration-300 ${
-                          expandedActivity === idx ? 'rotate-180' : ''
-                        }`} 
-                      />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {CONFERENCE.subThemes.map((t, i) => {
+              const Icon = subThemeIcons[i % subThemeIcons.length];
+              return (
+                <Card
+                  key={t}
+                  className="group p-8 bg-card border-border hover:border-accent/50 transition-all cultural-card"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="h-12 w-12 rounded-xl bg-gradient-eko flex items-center justify-center shrink-0 shadow-green group-hover:scale-110 transition-transform">
+                      <Icon className="h-6 w-6 text-white" />
                     </div>
-                    <div className={`overflow-hidden transition-all duration-300 ${
-                      expandedActivity === idx ? 'max-h-96 mt-3' : 'max-h-0'
-                    }`}>
-                      <p className="text-sm text-muted-foreground">{description}</p>
+                    <div>
+                      <div className="text-xs text-accent/80 uppercase tracking-widest mb-1">
+                        Track {String(i + 1).padStart(2, "0")}
+                      </div>
+                      <h3 className="font-display text-xl leading-snug">{t}</h3>
                     </div>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* Conference Speakers */}
-        <section id="speakers" className="py-16 md:py-20 bg-brandYellow/10">
-          <div className="container mx-auto px-6 lg:px-12 xl:px-16">
-            <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold">Invited Dignitaries — Kano 2025</h2>
-              <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-                A look back at the distinguished leaders, esteemed public servants, and visionary policymakers who honoured our last edition. The Lagos 2026 line-up will be announced soon.
-              </p>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {speakers.map((speaker, idx) => (
-                <Card key={idx} className="p-6 text-center cultural-card group border-t-4 border-t-brand-red">
-                  <div className="relative mb-4">
-                    <img 
-                      src={speaker.image} 
-                      alt={speaker.name}
-                      className="h-24 w-24 rounded-full mx-auto object-cover ring-4 ring-brand group-hover:ring-brandYellow transition-all duration-300"
-                    />
-                    <div className="absolute -top-2 -right-2 h-8 w-8 rounded-full bg-brand-red ring-2 ring-white flex items-center justify-center">
-                      <Mic className="h-4 w-4 text-white" />
-                    </div>
-                  </div>
-                  <h4 className="font-semibold text-sm mb-1">{speaker.name}</h4>
-                  <p className="text-xs text-brand font-medium mb-2">{speaker.title}</p>
-                  <p className="text-xs text-muted-foreground mb-3">{speaker.position}</p>
-                  <div className="pt-3 border-t border-border">
-                    <p className="text-xs font-medium">{speaker.topic}</p>
                   </div>
                 </Card>
-                
-              ))}
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Programme teaser */}
+      <section className="container mx-auto px-6 lg:px-12 py-24 md:py-32">
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
+          <div>
+            <div className="text-xs uppercase tracking-[0.25em] text-accent mb-4">
+              Three-day Programme
             </div>
-            <div className="text-center mt-8">
-              <Button asChild variant="outline">
-                <a href="/speakers">View All Speakers</a>
+            <h2 className="font-display text-4xl md:text-5xl leading-tight max-w-2xl">
+              A choreography of ideas, industry & culture.
+            </h2>
+          </div>
+          <Button asChild variant="ghost" className="hover:text-accent">
+            <Link to="/program">View full programme <ArrowRight className="h-4 w-4" /></Link>
+          </Button>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {dayPreview.map((d) => (
+            <Card
+              key={d.day}
+              className="relative overflow-hidden p-8 bg-card border-border hover:border-accent/40 transition-all cultural-card"
+            >
+              <div className="absolute top-0 right-0 h-32 w-32 bg-gradient-radial-gold pointer-events-none" />
+              <div className="text-xs uppercase tracking-widest text-accent">{d.date}</div>
+              <div className="font-display text-5xl text-gradient-gold mt-2">{d.day}</div>
+              <h3 className="font-display text-2xl mt-6">{d.title}</h3>
+              <p className="text-muted-foreground mt-3 leading-relaxed">{d.body}</p>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Experience Lagos */}
+      <section
+        className="relative py-24 md:py-32 overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(hsl(var(--background) / 0.9), hsl(var(--background) / 0.95)), url(${lekkiBridge})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+        }}
+      >
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="max-w-2xl mb-16">
+            <div className="text-xs uppercase tracking-[0.25em] text-accent mb-4">
+              Beyond the Conference Hall
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl leading-tight">
+              The full Lagos experience.
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {experiences.map((e) => (
+              <Link
+                key={e.title}
+                to={e.to}
+                className="group block p-8 rounded-2xl bg-card/80 backdrop-blur border border-border hover:border-accent transition-all cultural-card"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-display text-2xl">{e.title}</h3>
+                  <ArrowRight className="h-5 w-5 text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                </div>
+                <p className="text-muted-foreground leading-relaxed">{e.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Big CTA */}
+      <section className="container mx-auto px-6 lg:px-12 py-24">
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-midnight border border-accent/30 p-10 md:p-20 shadow-elegant">
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{
+              backgroundImage: `url(${bridge})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
+
+          <div className="relative max-w-2xl space-y-6">
+            <div className="text-xs uppercase tracking-[0.25em] text-accent">
+              Early-bird rates end 15 Aug 2026
+            </div>
+            <h2 className="font-display text-4xl md:text-6xl leading-tight">
+              Your seat at Nigeria's engineering summit awaits.
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Join 3,000+ delegates from 30+ nations for three days of ideas,
+              industry and culture in Lagos.
+            </p>
+            <div className="flex flex-wrap gap-4 pt-2">
+              <Button asChild size="xl" className="bg-gradient-eko text-white shadow-gold hover:shadow-green group">
+                <Link to="/registration">
+                  Reserve your place
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+              <Button asChild size="xl" variant="outline" className="border-accent/50 text-accent hover:bg-accent hover:text-accent-foreground">
+                <Link to="/sponsorships">Sponsor & exhibit</Link>
               </Button>
             </div>
-          </div>
-        </section>
 
-{/* Fees moved to dedicated page */}
-
-        {/* Sponsors CTA */}
-        <section id="sponsors" className="py-16 md:py-20">
-          <div className="container mx-auto px-6 lg:px-12 xl:px-16 grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Call for Sponsors & Partners</h2>
-              <p className="mt-4">
-                Showcase your brand to Nigeria's leading civil engineering professionals. Sponsorship unlocks visibility across sessions, exhibition spaces, media, and curated networking opportunities.
-              </p>
-              <ul className="mt-4 grid gap-2 list-disc pl-5">
-                <li className="transition-colors duration-300 hover:text-brand">Premium exposure at the Construction Tech Expo and exhibitions.</li>
-                <li className="transition-colors duration-300 hover:text-brand">Speaking and panel opportunities for thought leadership.</li>
-                <li className="transition-colors duration-300 hover:text-brand">Branded experiences at high-profile networking events.</li>
-              </ul>
-              <div className="mt-6 flex gap-3">
-                <Button variant="professional" size="lg">
-                  <a href="/sponsorships">Become a Sponsor</a>
-                  </Button>
-                <Button asChild variant="cultural" size="lg">
-                  <a href="/contact">Request Media Kit</a>
-                </Button>
-              </div>
+            <div className="flex flex-wrap gap-6 pt-6 text-sm text-muted-foreground">
+              <span className="flex items-center gap-2"><CalendarDays className="h-4 w-4 text-accent" /> {CONFERENCE.dates.displayLong}</span>
+              <span className="flex items-center gap-2"><MapPin className="h-4 w-4 text-accent" /> {CONFERENCE.venue.name}</span>
             </div>
-            <Card className="p-6 bg-brand/5 ring-1 ring-brand/10 transition-all duration-300 hover:shadow-lg hover:bg-brand/10">
-              <h3 className="font-semibold flex items-center gap-2">
-                <Star className="h-5 w-5 text-brand" />
-                Why Sponsor NICE Lagos 2026?
-              </h3>
-              <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
-                Sponsoring this premier event offers unmatched visibility and brand positioning before an influential audience of over <span className="font-semibold text-brand">800+ professionals</span>, including:
-              </p>
-              <ul className="text-sm text-muted-foreground mt-3 grid gap-1 list-disc pl-4">
-                <li>Top-tier engineers and consultants</li>
-                <li>Federal and state government delegates</li>
-                <li>Private sector construction and consulting firms</li>
-                <li>International partners and NGOs</li>
-                <li>Engineering students and graduates</li>
-              </ul>
-            </Card>
           </div>
-          {/* Sponsors logo carousel */}
-<div className="container mx-auto px-6 lg:px-12 xl:px-16 mt-10">
-  <h3 className="text-center text-lg font-semibold mb-6 text-muted-foreground">
-    Our Valued Partners and Sponsors
-  </h3>
-  <Carousel
-    opts={{ loop: true }}
-    plugins={[
-      Autoplay({ delay: 2500, stopOnInteraction: false })
-    ]}
-    className="w-full"
-  >
-    <CarouselContent className="items-center">
-      {[
-        { name: "BuildCore Engineering", logo: sponsor1 },
-        { name: "TechBuild Solutions", logo: sponsor2 },
-        { name: "Sterling Infrastructure Ltd", logo: sponsor3 },
-        { name: "Pinnacle Engineering Group", logo: sponsor4 },
-        { name: "Nexus Construction Technologies", logo: sponsor5 },
-        { name: "Atlas Civil Works", logo: sponsor6 },
-      ].map((sponsor, i) => (
-        <CarouselItem
-          key={i}
-          className="basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6"
-        >
-          <div className="p-4">
-            <img
-              src={sponsor.logo}
-              alt={sponsor.name}
-              className="h-16 w-auto mx-auto opacity-70 transition-all duration-300 hover:opacity-100 hover:scale-110 object-contain"
-              loading="lazy"
-            />
-          </div>
-        </CarouselItem>
-      ))}
-    </CarouselContent>
-  </Carousel>
-</div>
-        </section>
-
-{/* Travel moved to dedicated page */}
-
-{/* Contact moved to dedicated page */}
-      </main>
-      <script defer src="https://vercel.com/analytics/script.js"></script>
-
-
-{/* Footer moved to MainLayout */}
+        </div>
+      </section>
     </>
   );
 };
