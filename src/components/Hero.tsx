@@ -12,22 +12,31 @@ import {
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { CONFERENCE } from "@/config/conference";
 
-// Lagos cinematic hero images
-import bridge from "@/assets/lagos/third-mainland-bridge.jpg";
-import ekoNight from "@/assets/lagos/eko-atlantic-night.jpg";
-import lekkiBridge from "@/assets/lagos/lekki-ikoyi-bridge.jpg";
-import aerial from "@/assets/lagos/lagos-aerial-dusk.jpg";
-import construction from "@/assets/lagos/lagos-construction.jpg";
-import port from "@/assets/lagos/lekki-port.jpg";
+// Lagos cinematic hero images (CDN assets)
+import lagos1 from "@/assets/lagos-hero/This_is_lagos_1.jpg.asset.json";
+import lagos2 from "@/assets/lagos-hero/This_is_lagos_2.jpg.asset.json";
+import lagos3 from "@/assets/lagos-hero/This_is_lagos_3.jpg.asset.json";
+import lagos4 from "@/assets/lagos-hero/This_is_lagos_4.jpg.asset.json";
+import lagos5 from "@/assets/lagos-hero/This_is_lagos_5.jpg.asset.json";
+import lagos6 from "@/assets/lagos-hero/This_is_lagos_6.jpg.asset.json";
+import jkRandle from "@/assets/lagos-hero/JK-Randle-Centre.png.asset.json";
+import lagFerry from "@/assets/lagos-hero/images-4-9-2.jpeg.asset.json";
+import beachPavilion from "@/assets/lagos-hero/0_i6KophLt6FO56X_C.jpg.asset.json";
+import obaPalace from "@/assets/lagos-hero/iga-idungaran.jpg.asset.json";
 
 const HERO_IMAGES = [
-  { src: bridge, alt: "Third Mainland Bridge, Lagos" },
-  { src: ekoNight, alt: "Eko Atlantic skyline at night" },
-  { src: lekkiBridge, alt: "Lekki-Ikoyi Cable-Stayed Bridge" },
-  { src: aerial, alt: "Lagos aerial view at dusk" },
-  { src: construction, alt: "Lagos civil engineering construction" },
-  { src: port, alt: "Lekki Deep Sea Port" },
+  { src: lagos5.url, alt: "Lagos Island aerial panorama" },
+  { src: lagos4.url, alt: "Lekki-Ikoyi Link Bridge at dusk" },
+  { src: lagos2.url, alt: "Lagos waterfront and expressway" },
+  { src: lagos3.url, alt: "Lekki-Ikoyi Bridge aerial view" },
+  { src: lagos1.url, alt: "Lekki-Ikoyi Bridge at night" },
+  { src: lagos6.url, alt: "Lagos Yoruba heritage statues" },
+  { src: jkRandle.url, alt: "JK Randle Centre for Yoruba Culture, Onikan" },
+  { src: lagFerry.url, alt: "Lagos Ferry Services terminal" },
+  { src: beachPavilion.url, alt: "Lagos beachfront pavilion architecture" },
+  { src: obaPalace.url, alt: "Iga Idunganran — Oba of Lagos Palace" },
 ];
+
 
 export default function Hero() {
   return (
