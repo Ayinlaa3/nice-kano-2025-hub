@@ -216,7 +216,7 @@ export default function MainLayout() {
                     Nigerian Institution of Civil Engineers
                   </p>
                   <p className="font-semibold text-white">
-                    {CONFERENCE.edition} - {CONFERENCE.shortName}
+                    International Conference&nbsp;&amp; AGM - {CONFERENCE.shortName}
                   </p>
                 </div>
               </div>
