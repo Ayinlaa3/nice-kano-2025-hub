@@ -13,8 +13,8 @@ interface SupportAgent {
 
 const supportAgents: SupportAgent[] = [
   {
-    name: 'Boaz',
-    phone: '+234 803 715 4335',
+    name: 'Adeleke',
+    phone: '+234 803 443 6630',
     role: 'General Support',
     availability: 'online'
   },

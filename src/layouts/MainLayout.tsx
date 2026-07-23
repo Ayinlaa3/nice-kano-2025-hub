@@ -114,9 +114,8 @@ export default function MainLayout() {
     Nigerian Institution of Civil Engineers
   </h1>
               <p className="font-semibold bg-gradient-to-l tracking-wide from-brand-yellow to-brand-red bg-clip-text text-transparent">
-  <span className="sm:hidden">- {CONFERENCE.shortName}</span> 
-  <span className="hidden sm:inline">International Conference&nbsp;&amp; AGM - {CONFERENCE.shortName}</span>
-</p>
+                International Conference&nbsp;&amp; AGM
+              </p>
 </div>
           </Link>
           
