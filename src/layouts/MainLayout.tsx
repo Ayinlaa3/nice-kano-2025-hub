@@ -25,6 +25,8 @@ const navigationGroups = [
       { to: "/speakers", label: "Speakers", description: "Featured speakers and presenters" },
       { to: "/location", label: "Venue & Location", description: "Venue details and directions" },
       { to: "/innovationchallenge", label: "Innovation Challenge", description: "Young Engineers Competition" },
+      { to: "/sponsorships", label: "Sponsors & Exhibitions", description: "Partnership and exhibition opportunities" },
+      { to: "/past-conferences", label: "Past Conferences", description: "Reports and highlights from previous editions" },
     ]
   },
   {
@@ -33,6 +35,7 @@ const navigationGroups = [
       { to: "/registration", label: "Registration", description: "Register and view conference fees" },
       { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
       { to: "/certificate", label: "Certificate Generator", description: "Download your participation certificate" },
+      { to: "/faq", label: "FAQ", description: "Frequently asked questions" },
     ]
   },
   {
@@ -45,19 +48,6 @@ const navigationGroups = [
       { to: "/experience/faq", label: "Delegate FAQ", description: "Common questions from Lagos delegates" },
     ]
   },
-  {
-    label: "Partners",
-    items: [
-      { to: "/sponsorships", label: "Sponsors & Exhibitions", description: "Partnership and exhibition opportunities" },
-    ]
-  },
-  {
-    label: "Archive",
-    items: [
-      { to: "/past-conferences", label: "Past Conferences", description: "Reports and highlights from previous editions" },
-      { to: "/faq", label: "FAQ", description: "Frequently asked questions" },
-    ]
-  }
 ];
 
 
