@@ -3,7 +3,7 @@
 // ============================================================================
 
 export const CONFERENCE = {
-  edition: "24th International Conference",
+  edition: "24th International Conference\u00a0& AGM\u00a02026",
   editionShort: "24th",
   year: 2026,
   shortName: "LAGOS 2026",
@@ -39,7 +39,7 @@ export const CONFERENCE = {
   // Host-city stats — surfaced in the hero ticker
   stats: [
     { value: "3,000+", label: "Delegates" },
-    { value: "30+", label: "Nations" },
+    { value: "33+", label: "CHAPTERS" },
     { value: "24th", label: "Edition" },
     { value: "180+", label: "Years of Lagos Engineering Legacy" },
   ],
@@ -58,7 +58,7 @@ export const CONFERENCE = {
 // ----------------------------------------------------------------------------
 // Registration pricing engine
 // ----------------------------------------------------------------------------
-export const EARLY_BIRD_CUTOFF_ISO = "2026-08-15";
+export const EARLY_BIRD_CUTOFF_ISO = "2026-09-15";
 
 export type RegistrationCategoryId =
   | "fellow"

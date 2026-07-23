@@ -75,7 +75,7 @@ export default function Hero() {
           {/* Edition badge */}
           <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-background/40 backdrop-blur-md px-4 py-1.5 text-xs md:text-sm uppercase tracking-[0.2em] text-accent">
             <Sparkles className="h-3.5 w-3.5" />
-            {CONFERENCE.edition} · AGM
+            {CONFERENCE.edition}
           </div>
 
           {/* Massive display headline */}
