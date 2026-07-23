@@ -2178,6 +2178,16 @@ export type Database = {
         }
       }
       get_admin_chapter: { Args: { _user_id: string }; Returns: string }
+      get_featured_success_reviews: {
+        Args: never
+        Returns: {
+          full_name: string
+          id: string
+          profile_photo_url: string
+          rating: number
+          review_text: string
+        }[]
+      }
       get_member_applications: {
         Args: { _user_id: string }
         Returns: {
@@ -2202,6 +2212,17 @@ export type Database = {
           _surname?: string
         }
         Returns: number
+      }
+      get_public_reviews: {
+        Args: never
+        Returns: {
+          created_at: string
+          full_name: string
+          id: string
+          profile_photo_url: string
+          rating: number
+          review_text: string
+        }[]
       }
       get_total_revenue: { Args: never; Returns: number }
       get_user_role: {
