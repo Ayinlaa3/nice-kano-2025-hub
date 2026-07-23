@@ -23,6 +23,16 @@ import jkRandle from "@/assets/lagos-hero/JK-Randle-Centre.png.asset.json";
 import lagFerry from "@/assets/lagos-hero/images-4-9-2.jpeg.asset.json";
 import beachPavilion from "@/assets/lagos-hero/0_i6KophLt6FO56X_C.jpg.asset.json";
 import obaPalace from "@/assets/lagos-hero/iga-idungaran.jpg.asset.json";
+import lagos7 from "@/assets/lagos-hero/This_is_lagos_7.jpg.asset.json";
+import lagos8 from "@/assets/lagos-hero/This_is_lagos_8.jpg.asset.json";
+import lagos9 from "@/assets/lagos-hero/This_is_lagos_9.jpg.asset.json";
+import lagos10 from "@/assets/lagos-hero/This_is_lagos_10.jpg.asset.json";
+import lagos11 from "@/assets/lagos-hero/This_is_lagos_11.jpg.asset.json";
+import elegushi from "@/assets/lagos-hero/elegushi_beach.png.asset.json";
+import maskGroup from "@/assets/lagos-hero/mask-group.jpg.asset.json";
+import canopyWalk from "@/assets/lagos-hero/b3.jpg.asset.json";
+import nikeGallery from "@/assets/lagos-hero/Outside_Nike_Art_Gallery_4202980259.jpg.asset.json";
+import lekkiEpe from "@/assets/lagos-hero/Lekki-Epe_Expressway_Sandfill_Bustop.jpg.asset.json";
 
 const HERO_IMAGES = [
   { src: lagos5.url, alt: "Lagos Island aerial panorama" },
@@ -35,6 +45,16 @@ const HERO_IMAGES = [
   { src: lagFerry.url, alt: "Lagos Ferry Services terminal" },
   { src: beachPavilion.url, alt: "Lagos beachfront pavilion architecture" },
   { src: obaPalace.url, alt: "Iga Idunganran — Oba of Lagos Palace" },
+  { src: lagos7.url, alt: "Lagos elevated expressway interchange" },
+  { src: lagos8.url, alt: "Lagos Blue Line rail on Marina waterfront" },
+  { src: lagos9.url, alt: "Lagos highway interchange illuminated at night" },
+  { src: lagos10.url, alt: "Lagos lagoon boat regatta with Nigerian flag" },
+  { src: lagos11.url, alt: "Lekki Deep Sea coastal road with lamp columns" },
+  { src: elegushi.url, alt: "Elegushi Beach, Lagos" },
+  { src: maskGroup.url, alt: "Lagos leisure resort aerial rendering" },
+  { src: canopyWalk.url, alt: "Lekki Conservation Centre canopy walkway" },
+  { src: nikeGallery.url, alt: "Nike Art Gallery, Lekki" },
+  { src: lekkiEpe.url, alt: "Lekki-Epe Expressway at dusk" },
 ];
 
 
