@@ -282,7 +282,7 @@ const Index = () => {
 
           <div className="relative max-w-2xl space-y-6">
             <div className="text-xs uppercase tracking-[0.25em] text-accent">
-              Early-bird rates end 15 Aug 2026
+              EARLY-BIRD RATES END 15 SEPT. 2026
             </div>
             <h2 className="font-display text-4xl md:text-6xl leading-tight">
               Your seat at Nigeria's engineering summit awaits.
