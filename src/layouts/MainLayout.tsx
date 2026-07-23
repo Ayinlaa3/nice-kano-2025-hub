@@ -115,7 +115,7 @@ export default function MainLayout() {
   </h1>
               <p className="font-semibold bg-gradient-to-l tracking-wide from-brand-yellow to-brand-red bg-clip-text text-transparent">
   <span className="sm:hidden">- {CONFERENCE.shortName}</span> 
-  <span className="hidden sm:inline">{CONFERENCE.edition} - {CONFERENCE.shortName}</span>
+  <span className="hidden sm:inline">International Conference&nbsp;&amp; AGM - {CONFERENCE.shortName}</span>
 </p>
 </div>
           </Link>
