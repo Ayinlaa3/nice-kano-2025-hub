@@ -448,14 +448,6 @@ export default function Registration() {
                 </AlertDescription>
               </Alert>
 
-              <Alert>
-                <Info className="h-4 w-4" />
-                <AlertDescription className="text-sm">
-                  Already paid via the NICE member portal? You can complete your
-                  conference registration through the portal, or continue here and
-                  pay again via Remita.
-                </AlertDescription>
-              </Alert>
             </CardContent>
           </Card>
 
