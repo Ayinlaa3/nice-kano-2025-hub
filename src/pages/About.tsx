@@ -117,7 +117,7 @@ export default function About() {
         <section className="mb-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-primary">About NICE Lagos 2026</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-primary">About the 24th International Civil Engineering Conference</h2>
               <p className="text-lg mb-6 text-muted-foreground leading-relaxed">
                 The NICE 24th International Civil Engineering Conference & AGM is Nigeria's premier gathering for civil engineers, 
                 industry leaders, academics, and students. Over three transformative days, participants explore cutting-edge solutions 
