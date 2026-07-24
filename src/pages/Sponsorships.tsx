@@ -34,15 +34,16 @@ const TIERS = [
 ];
 
 const ADD_ONS = [
-  { name: "Conference Bag Branding", price: "₦500,000", note: "Exclusive to 1 sponsor" },
-  { name: "Delegate Notepad or Pen", price: "₦200,000", note: "Branded item in all kits" },
-  { name: "Side Workshop Session", price: "₦1,000,000", note: "60-minute hosted session" },
-  { name: "Coffee/Tea Stand Branding", price: "₦300,000", note: "2 spots available" },
-  { name: "Charging Station Branding", price: "₦250,000", note: "1 sponsor only" },
-  { name: "Centre Spread Brochure Advert", price: "₦500,000", note: "1 slot available" },
-  { name: "Full Page Brochure Advert", price: "₦300,000", note: "" },
-  { name: "Half-page Brochure Advert", price: "₦150,000", note: "A5 landscape design accepted" },
+  { name: "Conference Bag Branding", price: "₦500,000", amount: 500000, note: "Exclusive to 1 sponsor" },
+  { name: "Delegate Notepad or Pen", price: "₦200,000", amount: 200000, note: "Branded item in all kits" },
+  { name: "Side Workshop Session", price: "₦1,000,000", amount: 1000000, note: "60-minute hosted session" },
+  { name: "Coffee/Tea Stand Branding", price: "₦300,000", amount: 300000, note: "2 spots available" },
+  { name: "Charging Station Branding", price: "₦250,000", amount: 250000, note: "1 sponsor only" },
+  { name: "Centre Spread Brochure Advert", price: "₦500,000", amount: 500000, note: "1 slot available" },
+  { name: "Full Page Brochure Advert", price: "₦300,000", amount: 300000, note: "" },
+  { name: "Half-page Brochure Advert", price: "₦150,000", amount: 150000, note: "A5 landscape design accepted" },
 ];
+
 
 const BOOTH_OPTIONS = [
   { name: "Standard Booth (3m x 3m)=(9m²)", earlyBird: "₦350,000", standard: "₦500,000", amount: 500000 },
@@ -194,14 +195,30 @@ export default function Sponsorships() {
           <p className="text-muted-foreground mb-6">Available to all sponsors for enhanced visibility and engagement</p>
           <div className="grid md:grid-cols-2 gap-4">
             {ADD_ONS.map((addon, index) => (
-              <div key={index} className="flex justify-between items-center p-3 bg-muted/30 rounded-lg">
-                <div>
+              <div key={index} className="flex justify-between items-center gap-3 p-3 bg-muted/30 rounded-lg">
+                <div className="min-w-0">
                   <h4 className="font-medium text-sm">{addon.name}</h4>
                   {addon.note && <p className="text-xs text-muted-foreground">{addon.note}</p>}
                 </div>
-                <Badge variant="outline">{addon.price}</Badge>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Badge variant="outline">{addon.price}</Badge>
+                  <Button
+                    size="sm"
+                    variant="professional"
+                    onClick={() =>
+                      openApply({
+                        applicationType: "sponsorship",
+                        package: `Add-On: ${addon.name}`,
+                        amount: addon.amount,
+                      })
+                    }
+                  >
+                    Apply
+                  </Button>
+                </div>
               </div>
             ))}
+
           </div>
         </Card>
       </section>
