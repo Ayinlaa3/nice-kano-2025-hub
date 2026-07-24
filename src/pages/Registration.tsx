@@ -131,7 +131,7 @@ export default function Registration() {
       position: "",
       chapter: "",
       membershipStatus: "",
-      paymentMethod: "nice_portal_receipt",
+      paymentMethod: "remita",
       dietary: "",
       comments: "",
     },
