@@ -36,7 +36,7 @@ export default function About() {
                 3 Days Conference
               </Badge>
               <Badge variant="outline" className="border-border text-foreground hover:bg-muted text-md">
-                International Speakers
+                Reputable Speakers
               </Badge>
               <Badge variant="outline" className="border-border text-foreground hover:bg-muted text-md">
                 Networking Opportunities
@@ -64,7 +64,7 @@ export default function About() {
                     <Users className="h-8 w-8 text-brand-green" />
                   </div>
                 </div>
-                <h3 className="text-3xl font-bold text-brand-green mb-2">800+</h3>
+                <h3 className="text-3xl font-bold text-brand-green mb-2">3000+</h3>
                 <p className="text-sm text-muted-foreground">Expected Participants</p>
                 <Progress value={85} className="mt-3 h-2" />
               </CardContent>
