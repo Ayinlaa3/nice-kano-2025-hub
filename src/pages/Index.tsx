@@ -134,8 +134,8 @@ const Index = () => {
               <Sparkles className="h-3.5 w-3.5" /> Why Lagos
             </div>
             <h2 className="font-display text-4xl md:text-6xl leading-tight">
-              From <span className="italic text-gradient-gold">Marina to Lekki</span> —
-              a city engineered by ambition.
+              From <span className="italic text-gradient-gold">Ojuelegba to Lekki</span> —
+              a city engineered by ambition, nutured by vision.
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Lagos is West Africa's engineering laboratory. From the 1841 first-storey
