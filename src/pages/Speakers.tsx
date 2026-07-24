@@ -11,7 +11,7 @@ export default function Speakers() {
       <Helmet title={`Conference Speakers | NICE ${CONFERENCE.shortName}`}>
         <meta
           name="description"
-          content={`Speakers for the NICE ${CONFERENCE.edition} & AGM in Lagos will be announced soon. Stay tuned for keynote speakers, plenary sessions and panellists.`}
+          content={`Speakers for the NICE ${CONFERENCE.edition} in Lagos will be announced soon. Stay tuned for keynote speakers, plenary sessions and panellists.`}
         />
         <link
           rel="canonical"

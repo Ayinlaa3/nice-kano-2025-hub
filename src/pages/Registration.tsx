@@ -318,7 +318,7 @@ export default function Registration() {
       <Helmet title={`Register | NICE ${CONFERENCE.shortName} Conference ${CONFERENCE.year}`}>
         <meta
           name="description"
-          content={`Register for the NICE ${CONFERENCE.edition} & AGM, ${CONFERENCE.dates.displayLong}, ${CONFERENCE.venue.name}. Choose your category and pay by receipt upload or Remita.`}
+          content={`Register for the NICE ${CONFERENCE.edition}, ${CONFERENCE.dates.displayLong}, ${CONFERENCE.venue.name}. Choose your category and pay by receipt upload or Remita.`}
         />
         <link
           rel="canonical"
@@ -329,7 +329,7 @@ export default function Registration() {
       <header className="mb-8 max-w-3xl">
         <h1 className="text-3xl md:text-4xl font-bold">Conference Registration</h1>
         <p className="text-muted-foreground mt-2">
-          Secure your place at the NICE {CONFERENCE.edition} & AGM. Physical
+          Secure your place at the NICE {CONFERENCE.edition}. Physical
           attendance only.
         </p>
         <div className="mt-4 flex flex-wrap gap-3 text-sm">
