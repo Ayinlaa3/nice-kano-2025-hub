@@ -577,6 +577,7 @@ export type Database = {
           dietary: string | null
           early_bird_applied: boolean
           email: string
+          failed_email_sent_at: string | null
           full_name: string
           id: string
           institution: string | null
@@ -584,12 +585,14 @@ export type Database = {
           organization: string | null
           payment_method: Database["public"]["Enums"]["conf_payment_method"]
           payment_status: Database["public"]["Enums"]["conf_payment_status"]
+          pending_email_sent_at: string | null
           phone: string
           position: string | null
           receipt_path: string | null
           remita_reference: string | null
           remita_rrr: string | null
           status: string
+          success_email_sent_at: string | null
           ticket_code: string | null
           updated_at: string
           verified_at: string | null
@@ -607,6 +610,7 @@ export type Database = {
           dietary?: string | null
           early_bird_applied?: boolean
           email: string
+          failed_email_sent_at?: string | null
           full_name: string
           id?: string
           institution?: string | null
@@ -614,12 +618,14 @@ export type Database = {
           organization?: string | null
           payment_method: Database["public"]["Enums"]["conf_payment_method"]
           payment_status?: Database["public"]["Enums"]["conf_payment_status"]
+          pending_email_sent_at?: string | null
           phone: string
           position?: string | null
           receipt_path?: string | null
           remita_reference?: string | null
           remita_rrr?: string | null
           status?: string
+          success_email_sent_at?: string | null
           ticket_code?: string | null
           updated_at?: string
           verified_at?: string | null
@@ -637,6 +643,7 @@ export type Database = {
           dietary?: string | null
           early_bird_applied?: boolean
           email?: string
+          failed_email_sent_at?: string | null
           full_name?: string
           id?: string
           institution?: string | null
@@ -644,12 +651,14 @@ export type Database = {
           organization?: string | null
           payment_method?: Database["public"]["Enums"]["conf_payment_method"]
           payment_status?: Database["public"]["Enums"]["conf_payment_status"]
+          pending_email_sent_at?: string | null
           phone?: string
           position?: string | null
           receipt_path?: string | null
           remita_reference?: string | null
           remita_rrr?: string | null
           status?: string
+          success_email_sent_at?: string | null
           ticket_code?: string | null
           updated_at?: string
           verified_at?: string | null
