@@ -195,14 +195,30 @@ export default function Sponsorships() {
           <p className="text-muted-foreground mb-6">Available to all sponsors for enhanced visibility and engagement</p>
           <div className="grid md:grid-cols-2 gap-4">
             {ADD_ONS.map((addon, index) => (
-              <div key={index} className="flex justify-between items-center p-3 bg-muted/30 rounded-lg">
-                <div>
+              <div key={index} className="flex justify-between items-center gap-3 p-3 bg-muted/30 rounded-lg">
+                <div className="min-w-0">
                   <h4 className="font-medium text-sm">{addon.name}</h4>
                   {addon.note && <p className="text-xs text-muted-foreground">{addon.note}</p>}
                 </div>
-                <Badge variant="outline">{addon.price}</Badge>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Badge variant="outline">{addon.price}</Badge>
+                  <Button
+                    size="sm"
+                    variant="professional"
+                    onClick={() =>
+                      openApply({
+                        applicationType: "sponsorship",
+                        package: `Add-On: ${addon.name}`,
+                        amount: addon.amount,
+                      })
+                    }
+                  >
+                    Apply
+                  </Button>
+                </div>
               </div>
             ))}
+
           </div>
         </Card>
       </section>
