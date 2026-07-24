@@ -93,7 +93,7 @@ Deno.serve(async (req) => {
 
     const { data: reg, error } = await supabase
       .from("conference_registrations")
-      .select("id, remita_rrr, payment_status, ticket_code, full_name, email, category, days_attending")
+      .select("id, remita_rrr, remita_reference, payment_status, ticket_code, full_name, email, phone, organization, institution, category, days_attending, amount, verified_at, created_at")
       .eq("id", id)
       .maybeSingle();
     if (error || !reg) {
@@ -156,6 +156,20 @@ Deno.serve(async (req) => {
         message: data?.message ?? null,
         ticketCode: reg.ticket_code,
         daysAttending: reg.days_attending,
+        receipt: {
+          fullName: reg.full_name,
+          email: reg.email,
+          phone: reg.phone,
+          organization: reg.organization ?? reg.institution ?? null,
+          category: reg.category,
+          amount: reg.amount,
+          rrr: reg.remita_rrr,
+          reference: reg.remita_reference ?? null,
+          ticketCode: reg.ticket_code,
+          daysAttending: reg.days_attending,
+          paidAt: paid ? (reg.verified_at ?? new Date().toISOString()) : null,
+          registeredAt: reg.created_at,
+        },
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
