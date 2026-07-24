@@ -11,6 +11,8 @@ export default function RemitaCallback() {
   const regId = params.get("reg");
   const [state, setState] = useState<"checking" | "paid" | "pending" | "failed">("checking");
   const [message, setMessage] = useState<string | null>(null);
+  const [ticketCode, setTicketCode] = useState<string | null>(null);
+  const [daysAttending, setDaysAttending] = useState<string[] | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -29,6 +31,8 @@ export default function RemitaCallback() {
         setMessage("We could not verify your payment automatically. Please contact support.");
         return;
       }
+      setTicketCode(data.ticketCode ?? null);
+      setDaysAttending(Array.isArray(data.daysAttending) ? data.daysAttending : null);
       if (data.paid) {
         setState("paid");
       } else {
@@ -41,6 +45,10 @@ export default function RemitaCallback() {
       cancelled = true;
     };
   }, [regId]);
+
+  const qrSrc = ticketCode
+    ? `https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=10&data=${encodeURIComponent(ticketCode)}`
+    : null;
 
   return (
     <div className="container mx-auto py-16 max-w-lg">
@@ -65,10 +73,32 @@ export default function RemitaCallback() {
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">
             {state === "paid"
-              ? "Your conference registration payment has been confirmed. A confirmation will follow by email."
+              ? "Your conference registration is confirmed. Your ticket is below — a copy has also been emailed to you. Present the QR code at check-in."
               : message ?? "Please wait while we confirm your Remita payment."}
           </p>
-          {regId && (
+
+          {state === "paid" && qrSrc && (
+            <div className="rounded-xl border p-4 bg-muted/30">
+              <img
+                src={qrSrc}
+                alt={`Ticket QR for ${ticketCode}`}
+                width={220}
+                height={220}
+                className="mx-auto"
+              />
+              <p className="mt-3 font-mono text-lg tracking-widest text-brand-primary font-semibold">
+                {ticketCode}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">Your ticket code</p>
+              {daysAttending && daysAttending.length > 0 && (
+                <p className="text-xs text-muted-foreground mt-2">
+                  Days attending: {daysAttending.map((d) => `Day ${d}`).join(", ")}
+                </p>
+              )}
+            </div>
+          )}
+
+          {regId && state !== "paid" && (
             <p className="text-xs text-muted-foreground">
               Reference: <span className="font-mono">{regId.slice(0, 8).toUpperCase()}</span>
             </p>
