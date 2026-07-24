@@ -315,7 +315,7 @@ export default function Registration() {
       <Helmet title={`Register | NICE ${CONFERENCE.shortName} Conference ${CONFERENCE.year}`}>
         <meta
           name="description"
-          content={`Register for the NICE ${CONFERENCE.edition}, ${CONFERENCE.dates.displayLong}, ${CONFERENCE.venue.name}. Choose your category and pay by receipt upload or Remita.`}
+          content={`Register for the NICE ${CONFERENCE.edition}, ${CONFERENCE.dates.displayLong}, ${CONFERENCE.venue.name}. Select your category and pay securely online with Remita.`}
         />
         <link
           rel="canonical"
