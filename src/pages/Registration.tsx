@@ -60,9 +60,7 @@ const formSchema = z.object({
   category: z.enum(categoryIds, {
     errorMap: () => ({ message: "Select a registration category" }),
   }),
-  paymentMethod: z.enum(["nice_portal_receipt", "bank_transfer_receipt", "remita"], {
-    errorMap: () => ({ message: "Select a payment method" }),
-  }),
+  paymentMethod: z.literal("remita"),
   dietary: z.string().trim().max(300).optional().or(z.literal("")),
   comments: z.string().trim().max(500).optional().or(z.literal("")),
   consent: z.literal(true, {
@@ -133,7 +131,7 @@ export default function Registration() {
       position: "",
       chapter: "",
       membershipStatus: "",
-      paymentMethod: "nice_portal_receipt",
+      paymentMethod: "remita",
       dietary: "",
       comments: "",
     },
@@ -142,8 +140,7 @@ export default function Registration() {
   const selectedCategory = watch("category");
   const selectedPayment = watch("paymentMethod");
   const earlyBird = isEarlyBird();
-  const isReceiptMethod =
-    selectedPayment === "nice_portal_receipt" || selectedPayment === "bank_transfer_receipt";
+  const isReceiptMethod = false;
 
   const fee = useMemo(
     () => getCategoryFee(selectedCategory ?? ""),
@@ -318,7 +315,7 @@ export default function Registration() {
       <Helmet title={`Register | NICE ${CONFERENCE.shortName} Conference ${CONFERENCE.year}`}>
         <meta
           name="description"
-          content={`Register for the NICE ${CONFERENCE.edition}, ${CONFERENCE.dates.displayLong}, ${CONFERENCE.venue.name}. Choose your category and pay by receipt upload or Remita.`}
+          content={`Register for the NICE ${CONFERENCE.edition}, ${CONFERENCE.dates.displayLong}, ${CONFERENCE.venue.name}. Select your category and pay securely online with Remita.`}
         />
         <link
           rel="canonical"
@@ -423,120 +420,34 @@ export default function Registration() {
               <CardTitle className="text-lg">Payment Method</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <RadioGroup
-                value={selectedPayment}
-                onValueChange={(v) =>
-                  setValue("paymentMethod", v as FormValues["paymentMethod"], {
-                    shouldValidate: true,
-                  })
-                }
-                className="grid gap-3"
-              >
-                <PaymentOption
-                  id="pay-portal"
-                  value="nice_portal_receipt"
-                  icon={<Building2 className="h-4 w-4" />}
-                  title="NICE Portal Receipt"
-                  desc="Already paid via the NICE member portal — upload your receipt."
-                />
-                <PaymentOption
-                  id="pay-bank"
-                  value="bank_transfer_receipt"
-                  icon={<Landmark className="h-4 w-4" />}
-                  title="Bank Transfer Receipt"
-                  desc="Transfer to the NICE conference account — upload your receipt."
-                />
-                <PaymentOption
-                  id="pay-remita"
-                  value="remita"
-                  icon={<CreditCard className="h-4 w-4" />}
-                  title="Pay with Remita"
-                  desc="Pay online now via card, bank or USSD (instant confirmation)."
-                />
-              </RadioGroup>
-
-              {selectedPayment === "nice_portal_receipt" && (
-                <Alert>
-                  <Info className="h-4 w-4" />
-                  <AlertDescription className="text-sm">
-                    {PAYMENT_INFO.nicePortalReceipt.instructions}
-                  </AlertDescription>
-                </Alert>
-              )}
-
-              {selectedPayment === "bank_transfer_receipt" && (
-                <div className="space-y-3">
-                  <Alert>
-                    <Info className="h-4 w-4" />
-                    <AlertDescription className="text-sm">
-                      {PAYMENT_INFO.bankTransferReceipt.instructions}
-                    </AlertDescription>
-                  </Alert>
-                  {banks.length > 0 && (
-                    <div className="rounded-lg border divide-y">
-                      {banks.map((b) => (
-                        <div
-                          key={b.bank}
-                          className="p-3 flex items-center justify-between text-sm"
-                        >
-                          <div>
-                            <p className="font-medium">{b.bank}</p>
-                            <p className="text-xs text-muted-foreground">{b.accountName}</p>
-                          </div>
-                          <p className="font-mono font-semibold">{b.accountNumber}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+              <div className="flex items-start gap-3 rounded-lg border border-brand-primary bg-brand-primary/5 p-4">
+                <CreditCard className="h-5 w-5 mt-0.5 text-brand-primary" />
+                <div>
+                  <p className="font-medium">Pay with Remita</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Pay online now via card, bank or USSD — instant confirmation.
+                  </p>
                 </div>
-              )}
+              </div>
 
-              {selectedPayment === "remita" && (
-                <Alert>
-                  <CreditCard className="h-4 w-4" />
-                  <AlertDescription className="text-sm">
-                    {PAYMENT_INFO.remita.instructions}
-                  </AlertDescription>
-                </Alert>
-              )}
+              <Alert>
+                <CreditCard className="h-4 w-4" />
+                <AlertDescription className="text-sm">
+                  {PAYMENT_INFO.remita.instructions}
+                </AlertDescription>
+              </Alert>
 
-              {isReceiptMethod && (
-                <div className="space-y-2">
-                  <Label className="text-sm">
-                    Upload Payment Receipt <span className="text-destructive">*</span>
-                  </Label>
-                  <div
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => fileInputRef.current?.click()}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") fileInputRef.current?.click();
-                    }}
-                    className="flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed p-6 cursor-pointer hover:bg-muted/50 transition-colors"
-                  >
-                    <UploadCloud className="h-6 w-6 text-brand-primary" />
-                    <p className="text-sm text-muted-foreground text-center">
-                      {receiptFile ? (
-                        <span className="font-medium text-foreground">{receiptFile.name}</span>
-                      ) : (
-                        <>Click to upload (PDF, JPG or PNG — max 8MB)</>
-                      )}
-                    </p>
-                  </div>
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="application/pdf,image/png,image/jpeg"
-                    className="hidden"
-                    onChange={onReceiptChange}
-                  />
-                  {receiptError && (
-                    <p className="text-xs text-destructive">{receiptError}</p>
-                  )}
-                </div>
-              )}
+              <Alert>
+                <Info className="h-4 w-4" />
+                <AlertDescription className="text-sm">
+                  Already paid via the NICE member portal? You can complete your
+                  conference registration through the portal, or continue here and
+                  pay again via Remita.
+                </AlertDescription>
+              </Alert>
             </CardContent>
           </Card>
+
 
           <Card>
             <CardHeader>
