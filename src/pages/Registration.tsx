@@ -368,8 +368,11 @@ export default function Registration() {
               <Field label="Phone" error={errors.phone?.message} required>
                 <Input {...register("phone")} placeholder="080..." />
               </Field>
-              <Field label="Institution / Organization" error={errors.institution?.message} required>
-                <Input {...register("institution")} placeholder="Company / University" />
+              <Field label="Institution" error={errors.institution?.message} required>
+                <Input {...register("institution")} placeholder="University / Body" />
+              </Field>
+              <Field label="Organization / Employer" error={errors.organization?.message}>
+                <Input {...register("organization")} placeholder="Company name (if different)" />
               </Field>
               <Field label="Position / Title" error={errors.position?.message}>
                 <Input {...register("position")} placeholder="e.g. Project Engineer" />
