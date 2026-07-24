@@ -601,16 +601,27 @@ export default function Registration() {
           <Card>
             <CardHeader>
               <CardTitle className="text-base">All Categories</CardTitle>
+              <p className="text-xs text-muted-foreground">
+                Early bird ends {new Date(EARLY_BIRD_CUTOFF_ISO).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}.
+              </p>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm">
+            <CardContent className="space-y-3 text-sm">
+              <div className="grid grid-cols-[1fr_auto_auto] gap-x-4 text-[11px] uppercase tracking-wide text-muted-foreground border-b pb-1">
+                <span>Category</span>
+                <span className="text-right">Early Bird</span>
+                <span className="text-right">Late</span>
+              </div>
               {REGISTRATION_CATEGORIES.map((c) => (
                 <div
                   key={c.id}
-                  className="flex items-center justify-between border-b last:border-0 pb-2 last:pb-0"
+                  className="grid grid-cols-[1fr_auto_auto] gap-x-4 items-center border-b last:border-0 pb-2 last:pb-0"
                 >
                   <span className="text-muted-foreground">{c.label}</span>
-                  <span className="font-medium">
-                    {formatNaira(earlyBird ? c.earlyBird : c.regular)}
+                  <span className={`text-right font-medium ${earlyBird ? "text-brand-primary" : ""}`}>
+                    {formatNaira(c.earlyBird)}
+                  </span>
+                  <span className={`text-right font-medium ${!earlyBird ? "text-brand-primary" : "text-muted-foreground"}`}>
+                    {formatNaira(c.regular)}
                   </span>
                 </div>
               ))}

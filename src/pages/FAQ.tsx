@@ -123,20 +123,48 @@ const faqCategories = [
     badge: "Travel",
     questions: [
       {
-        question: "Do I need a visa to attend?",
-        answer: "International participants may require a visa to enter Nigeria. We can provide official invitation letters to assist with visa applications. Contact our secretariat at info@nicehq.org for visa support documentation and processing guidance."
+        question: "Do I need a visa to attend NICE Lagos 2026?",
+        answer: "Most non-ECOWAS nationals require a Nigerian visa. Apply through the Nigeria Immigration Service portal or your nearest Nigerian High Commission. NICE can issue an official invitation letter on request after registration — contact info@nicehq.org for visa support."
       },
       {
-        question: "What should I pack for the conference?",
-        answer: "Pack formal business attire for sessions, smart casual for evenings, comfortable clothing and closed shoes for site visits, a light jacket for air-conditioned halls, an umbrella (Lagos can have brief rain showers in October), and any personal medication. Lagos weather is warm and humid year-round."
+        question: "Which airport should I fly into?",
+        answer: "Murtala Muhammed International Airport (LOS), Ikeja. The venue is 15–25 minutes away by road, and most partner hotels offer complimentary airport pickup on request. The domestic terminal (MMA2) is a short drive from the international terminal."
+      },
+      {
+        question: "How safe is Lagos for delegates?",
+        answer: "Ikeja, Alausa, Ikoyi and Victoria Island — where the venue and partner hotels are located — are the well-patrolled business districts of Lagos. Use ride-hailing apps (Bolt, Uber, inDrive), avoid displaying valuables in traffic, and always carry your conference tag. Emergency: dial 112."
+      },
+      {
+        question: "What is the weather like in October?",
+        answer: "Warm and humid, roughly 24–31°C, with a chance of brief afternoon showers as the rainy season winds down. Pack breathable clothing, a light jacket for air-conditioned halls and a compact umbrella."
+      },
+      {
+        question: "What should I wear and pack for the conference?",
+        answer: "Formal business attire for plenary and technical sessions; smart casual for evenings; comfortable closed shoes and light clothing for the technical site tour. Bring an umbrella, personal medication, and any adapters you may need."
+      },
+      {
+        question: "Will there be shuttle service from partner hotels?",
+        answer: "Yes — organised shuttles will run between selected partner hotels and the venue on programme days. Details will be confirmed in your delegate pack."
+      },
+      {
+        question: "Can I pay in USD or by international card?",
+        answer: "The conference fee is billed in Naira, with an international delegate flat rate. International Visa/Mastercard payments are supported through Remita. Most Lagos hotels accept major international cards."
       },
       {
         question: "Are there industrial visits planned?",
-        answer: "Yes — Day 1 includes a Technical Site Visit featuring guided tours of landmark Lagos civil engineering projects such as the Lekki Deep Sea Port, the Lekki–Ikoyi Cable-Stayed Bridge, the Blue Line Rail and the Eko Atlantic reclamation, showcasing sustainable and resilient infrastructure at scale."
+        answer: "Yes — Day 1 includes a Technical Site Visit featuring guided tours of landmark Lagos civil engineering projects such as the Lekki Deep Sea Port, the Lekki–Ikoyi Cable-Stayed Bridge, the Blue Line Rail and the Eko Atlantic reclamation."
       },
       {
         question: "Is local transport assistance available?",
-        answer: "No, but there are local transportation options available which includes reputable taxis, ride-hailing apps, and hotel shuttles. Airport transfers are available through most recommended hotels."
+        answer: "Local transportation options include reputable taxis, ride-hailing apps (Bolt, Uber, inDrive), BRT along Mobolaji Bank Anthony Way, and hotel shuttles. Airport transfers are available through most recommended hotels."
+      },
+      {
+        question: "Will sessions be streamed or recorded?",
+        answer: "Selected sessions will be live-streamed and recorded for on-demand access via the NICE portal after the conference."
+      },
+      {
+        question: "How do I collect my delegate pack?",
+        answer: "Delegate packs are collected at the on-site registration desk at the Academy Guest House & Events Halls from the evening before Day 1. Bring a valid ID and your registration confirmation."
       }
     ]
   }
