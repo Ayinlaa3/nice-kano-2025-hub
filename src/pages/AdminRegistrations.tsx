@@ -70,9 +70,12 @@ export default function AdminRegistrations() {
 
   const load = useCallback(async () => {
     setLoading(true);
+    // Only successful (paid) registrations are surfaced in the admin dashboard.
+    // Pending / failed registrations are tracked internally and receive email nudges.
     const { data, error } = await supabase
       .from("conference_registrations")
       .select("*")
+      .eq("payment_status", "paid")
       .order("created_at", { ascending: false });
     if (error) {
       toast({ title: "Failed to load", description: error.message, variant: "destructive" });
