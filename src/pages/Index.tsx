@@ -138,10 +138,10 @@ const Index = () => {
               a city engineered by ambition, nutured by vision.
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Lagos is West Africa's engineering laboratory. From the 1841 first-storey
-              building to the Lekki Deep Sea Port, Third Mainland Bridge and Eko
-              Atlantic City, this megacity of 21+ million tells the story of Nigerian
-              civil engineering at its most audacious.
+              Lagos is West Africa's engineering delivery pipeline. From the 1841
+              first-storey building to the Lekki Deep Sea Port, Third Mainland
+              Bridge and Eko Atlantic City, this megacity of 21+ million tells the
+              story of Nigerian civil engineering at its most audacious.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
               For three days in October 2026, {CONFERENCE.organisationShort} brings
@@ -205,7 +205,7 @@ const Index = () => {
               Three-day Programme
             </div>
             <h2 className="font-display text-4xl md:text-5xl leading-tight max-w-2xl">
-              A choreography of ideas, industry & culture.
+              A kaleidoscope of ideas, industry & culture.
             </h2>
           </div>
           <Button asChild variant="ghost" className="hover:text-accent">
