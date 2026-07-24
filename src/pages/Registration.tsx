@@ -459,6 +459,51 @@ export default function Registration() {
             </CardContent>
           </Card>
 
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Days Attending</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p className="text-sm text-muted-foreground">
+                Select the conference days you plan to attend (Oct 20–22, 2026).
+              </p>
+              <div className="grid sm:grid-cols-3 gap-3">
+                {[
+                  { id: "1", label: "Day 1 — Oct 20" },
+                  { id: "2", label: "Day 2 — Oct 21" },
+                  { id: "3", label: "Day 3 — Oct 22" },
+                ].map((d) => {
+                  const checked = selectedDays.includes(d.id as "1" | "2" | "3");
+                  return (
+                    <label
+                      key={d.id}
+                      className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer hover:bg-muted/50 ${
+                        checked ? "border-brand-primary bg-brand-primary/5" : ""
+                      }`}
+                    >
+                      <Checkbox
+                        checked={checked}
+                        onCheckedChange={(v) => {
+                          const next = new Set(selectedDays);
+                          if (v === true) next.add(d.id as "1" | "2" | "3");
+                          else next.delete(d.id as "1" | "2" | "3");
+                          setValue(
+                            "daysAttending",
+                            Array.from(next).sort() as ("1" | "2" | "3")[],
+                            { shouldValidate: true }
+                          );
+                        }}
+                      />
+                      <span className="text-sm font-medium">{d.label}</span>
+                    </label>
+                  );
+                })}
+              </div>
+              {errors.daysAttending && (
+                <p className="text-xs text-destructive">{errors.daysAttending.message as string}</p>
+              )}
+            </CardContent>
+          </Card>
 
           <Card>
             <CardHeader>
