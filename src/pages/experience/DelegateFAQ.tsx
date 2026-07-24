@@ -56,7 +56,7 @@ export default function DelegateFAQ() {
       <header className="mb-10">
         <Badge className="bg-brand-primary/10 text-brand-primary mb-3">Experience Lagos · FAQ</Badge>
         <h1 className="text-4xl md:text-5xl font-bold mb-3">Delegate FAQ</h1>
-        <p className="text-lg text-muted-foreground">Quick answers for delegates travelling to Lagos for the {CONFERENCE.edition} & AGM.</p>
+        <p className="text-lg text-muted-foreground">Quick answers for delegates travelling to Lagos for the {CONFERENCE.edition}.</p>
       </header>
 
       <Accordion type="single" collapsible className="w-full">

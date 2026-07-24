@@ -63,7 +63,7 @@ const Index = () => {
     () => ({
       "@context": "https://schema.org",
       "@type": "Event",
-      name: `NICE ${CONFERENCE.edition} & AGM — Lagos 2026`,
+      name: `NICE ${CONFERENCE.edition} — Lagos 2026`,
       startDate: CONFERENCE.dates.startISO,
       endDate: CONFERENCE.dates.endISO,
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",

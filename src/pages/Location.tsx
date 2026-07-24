@@ -51,7 +51,7 @@ export default function Location() {
             Africa's most dynamic megacity — the commercial heartbeat of Nigeria and a living laboratory of civil engineering at scale.
           </p>
           <p className="text-lg text-muted-foreground">
-            NICE proudly welcomes you to Lagos for the {CONFERENCE.edition} & AGM — three days of ideas, infrastructure and unforgettable culture.
+            NICE proudly welcomes you to Lagos for the {CONFERENCE.edition} — three days of ideas, infrastructure and unforgettable culture.
           </p>
         </section>
 

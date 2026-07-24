@@ -25,7 +25,7 @@ export default function VenueGuide() {
         <Badge className="bg-brand-primary/10 text-brand-primary mb-3">Experience Lagos · Venue</Badge>
         <h1 className="text-4xl md:text-5xl font-bold mb-3">{CONFERENCE.venue.name}</h1>
         <p className="text-lg text-muted-foreground">
-          The official host venue for the {CONFERENCE.edition} & AGM. A modern, secure facility in the heart of Ikeja's Central Business District.
+          The official host venue for the {CONFERENCE.edition}. A modern, secure facility in the heart of Ikeja's Central Business District.
         </p>
       </header>
 

@@ -17,7 +17,7 @@ const faqCategories = [
     questions: [
       {
         question: "How do I register for NICE Lagos 2026?",
-        answer: "Register online through our Google Forms link: https://forms.gle/HXocP4aGn5Pb1HmR6. You can also register on-site during the conference days (October 21-23, 2025), though online pre-registration is strongly recommended for guaranteed conference materials."
+        answer: "Register online via our in-app registration page at /registration. Choose your category and pay by NICE portal receipt upload, direct bank transfer receipt, or securely via Remita. You can also register on-site during the conference days (October 20–22, 2026), though online pre-registration is strongly recommended for guaranteed conference materials."
       },
       {
         question: "What are the registration fees?",
@@ -40,7 +40,7 @@ const faqCategories = [
     questions: [
       {
         question: "When is NICE Lagos 2026 taking place?",
-        answer: "The conference runs from October 21-23, 2025 (3 days). Day 1 includes site visits and Chairman's cocktail, Day 2 features the opening ceremony and main sessions, Day 3 concludes with the AGM and Awards gala."
+        answer: "The conference runs from October 20–22, 2026 (3 days) at the Academy Guest House & Events Halls, Agidingbi, Ikeja, Lagos. Day 1 includes site visits and Chairman's cocktail, Day 2 features the opening ceremony and main sessions, Day 3 concludes with the AGM and Awards gala."
       },
       {
         question: "What is included in the conference program?",
@@ -105,7 +105,7 @@ const faqCategories = [
     questions: [
       {
         question: "What social events are planned?",
-        answer: "Social events include: Chairman's Cocktail & Engineering Business Roundtable (Day 1), Opening Ceremony with cultural performances (Day 2), Fellows Roundtable (Day 2), and the grand AGM Dinner, Awards & Honours Night with Cultural Gala (Day 3) at Tahir Guest Palace."
+        answer: "Social events include: Chairman's Cocktail & Engineering Business Roundtable (Day 1), Opening Ceremony with cultural performances (Day 2), Fellows Roundtable (Day 2), and the grand AGM Dinner, Awards & Honours Night with Cultural Gala (Day 3) at the Academy Guest House & Events Halls, Agidingbi, Ikeja, Lagos."
       },
       {
         question: "Is there a spouse program?",
