@@ -93,7 +93,7 @@ Deno.serve(async (req) => {
 
     const { data: reg, error } = await supabase
       .from("conference_registrations")
-      .select("id, remita_rrr, payment_status, ticket_code, full_name, email, category, days_attending")
+      .select("id, remita_rrr, remita_reference, payment_status, ticket_code, full_name, email, phone, organization, institution, category, days_attending, amount, verified_at, created_at")
       .eq("id", id)
       .maybeSingle();
     if (error || !reg) {
