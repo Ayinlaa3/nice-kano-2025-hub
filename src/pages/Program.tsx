@@ -33,7 +33,7 @@ const schedule = {
   { time: "10:55 AM – 11:05 AM", title: "Remarks by Special Guest of Honour", tags: ["Remarks"], desc: "Address by special guest of honour." },
   { time: "11:05 AM – 11:15 AM", title: "Remarks by Distinguished Guest of Honour", speaker: "H.E. Alh. Abba Kabir Yusuf", tags: ["Remarks"], desc: "Remarks by the distinguished guest of honour and chief host." },
   { time: "11:15 AM – 11:25 AM", title: "Goodwill Messages", tags: ["Remarks"], desc: "Goodwill messages from dignitaries and partners." },
-  { time: "11:25 AM – 11:55 AM", title: "Presentation of the NICE 2025 Achievements", tags: ["Presentation"], desc: "Showcasing achievements and milestones of NICE 2025." },
+  { time: "11:25 AM – 11:55 AM", title: "Presentation of the NICE 2026 Achievements", tags: ["Presentation"], desc: "Showcasing achievements and milestones of NICE 2026." },
   { time: "11:55 AM – 12:20 PM", title: "NICE Special Awards", tags: ["Awards"], desc: "Award presentation ceremony recognizing excellence." },
   { time: "12:20 PM – 12:30 PM", title: "Vote of Thanks", speaker: "Engr. Dr. Bemigho Ofoeyeno, FNSE, FNICE", tags: ["Remarks"], desc: "Vote of thanks by the CPC Chairman." },
   { time: "12:30 PM – 12:35 PM", title: "Closing Prayer & National Pledge", tags: ["Ceremony"], desc: "Closing prayer and recitation of the national pledge." },
