@@ -532,6 +532,38 @@ export type Database = {
         }
         Relationships: []
       }
+      conference_checkins: {
+        Row: {
+          checked_in_at: string
+          checked_in_by: string | null
+          day: number
+          id: string
+          registration_id: string
+        }
+        Insert: {
+          checked_in_at?: string
+          checked_in_by?: string | null
+          day: number
+          id?: string
+          registration_id: string
+        }
+        Update: {
+          checked_in_at?: string
+          checked_in_by?: string | null
+          day?: number
+          id?: string
+          registration_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conference_checkins_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "conference_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       conference_registrations: {
         Row: {
           address: string | null
@@ -541,6 +573,7 @@ export type Database = {
           chapter: string | null
           comments: string | null
           created_at: string
+          days_attending: number[]
           dietary: string | null
           early_bird_applied: boolean
           email: string
@@ -548,6 +581,7 @@ export type Database = {
           id: string
           institution: string | null
           membership_status: string | null
+          organization: string | null
           payment_method: Database["public"]["Enums"]["conf_payment_method"]
           payment_status: Database["public"]["Enums"]["conf_payment_status"]
           phone: string
@@ -555,6 +589,8 @@ export type Database = {
           receipt_path: string | null
           remita_reference: string | null
           remita_rrr: string | null
+          status: string
+          ticket_code: string | null
           updated_at: string
           verified_at: string | null
           verified_by: string | null
@@ -567,6 +603,7 @@ export type Database = {
           chapter?: string | null
           comments?: string | null
           created_at?: string
+          days_attending?: number[]
           dietary?: string | null
           early_bird_applied?: boolean
           email: string
@@ -574,6 +611,7 @@ export type Database = {
           id?: string
           institution?: string | null
           membership_status?: string | null
+          organization?: string | null
           payment_method: Database["public"]["Enums"]["conf_payment_method"]
           payment_status?: Database["public"]["Enums"]["conf_payment_status"]
           phone: string
@@ -581,6 +619,8 @@ export type Database = {
           receipt_path?: string | null
           remita_reference?: string | null
           remita_rrr?: string | null
+          status?: string
+          ticket_code?: string | null
           updated_at?: string
           verified_at?: string | null
           verified_by?: string | null
@@ -593,6 +633,7 @@ export type Database = {
           chapter?: string | null
           comments?: string | null
           created_at?: string
+          days_attending?: number[]
           dietary?: string | null
           early_bird_applied?: boolean
           email?: string
@@ -600,6 +641,7 @@ export type Database = {
           id?: string
           institution?: string | null
           membership_status?: string | null
+          organization?: string | null
           payment_method?: Database["public"]["Enums"]["conf_payment_method"]
           payment_status?: Database["public"]["Enums"]["conf_payment_status"]
           phone?: string
@@ -607,9 +649,95 @@ export type Database = {
           receipt_path?: string | null
           remita_reference?: string | null
           remita_rrr?: string | null
+          status?: string
+          ticket_code?: string | null
           updated_at?: string
           verified_at?: string | null
           verified_by?: string | null
+        }
+        Relationships: []
+      }
+      conference_sponsorships: {
+        Row: {
+          addons: Json | null
+          address: string | null
+          application_no: string
+          application_type: string
+          booth_type: string | null
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          contact_title: string | null
+          created_at: string
+          currency: string
+          id: string
+          industry: string | null
+          notes: string | null
+          org_name: string
+          package: string | null
+          paid_at: string | null
+          payment_status: string
+          remita_order_id: string | null
+          remita_rrr: string | null
+          total_amount: number
+          updated_at: string
+          verified_at: string | null
+          verified_by: string | null
+          website: string | null
+        }
+        Insert: {
+          addons?: Json | null
+          address?: string | null
+          application_no: string
+          application_type: string
+          booth_type?: string | null
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          contact_title?: string | null
+          created_at?: string
+          currency?: string
+          id?: string
+          industry?: string | null
+          notes?: string | null
+          org_name: string
+          package?: string | null
+          paid_at?: string | null
+          payment_status?: string
+          remita_order_id?: string | null
+          remita_rrr?: string | null
+          total_amount?: number
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+          website?: string | null
+        }
+        Update: {
+          addons?: Json | null
+          address?: string | null
+          application_no?: string
+          application_type?: string
+          booth_type?: string | null
+          contact_email?: string
+          contact_name?: string
+          contact_phone?: string
+          contact_title?: string | null
+          created_at?: string
+          currency?: string
+          id?: string
+          industry?: string | null
+          notes?: string | null
+          org_name?: string
+          package?: string | null
+          paid_at?: string | null
+          payment_status?: string
+          remita_order_id?: string | null
+          remita_rrr?: string | null
+          total_amount?: number
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+          website?: string | null
         }
         Relationships: []
       }
@@ -2117,6 +2245,10 @@ export type Database = {
         Args: { _day: number; _ticket_code: string }
         Returns: Json
       }
+      checkin_conference_ticket: {
+        Args: { _day: number; _ticket_code: string }
+        Returns: Json
+      }
       claim_legacy_membership: {
         Args: { _member_uid: string; _user_id: string }
         Returns: Json
@@ -2238,6 +2370,7 @@ export type Database = {
       }
       is_admin_role: { Args: { _user_id: string }; Returns: boolean }
       is_anniversary_staff: { Args: { _user_id: string }; Returns: boolean }
+      is_conference_staff: { Args: { _user_id: string }; Returns: boolean }
       is_national_level_admin: { Args: { _user_id: string }; Returns: boolean }
       search_members_public: {
         Args: { _search?: string }
@@ -2268,7 +2401,7 @@ export type Database = {
         | "finance"
         | "training_manager"
         | "chapter_chairman"
-        | "anniversary_steward"
+        | "conference_steward"
       conf_payment_method:
         | "nice_portal_receipt"
         | "bank_transfer_receipt"
@@ -2419,7 +2552,7 @@ export const Constants = {
         "finance",
         "training_manager",
         "chapter_chairman",
-        "anniversary_steward",
+        "conference_steward",
       ],
       conf_payment_method: [
         "nice_portal_receipt",
