@@ -60,9 +60,7 @@ const formSchema = z.object({
   category: z.enum(categoryIds, {
     errorMap: () => ({ message: "Select a registration category" }),
   }),
-  paymentMethod: z.enum(["nice_portal_receipt", "bank_transfer_receipt", "remita"], {
-    errorMap: () => ({ message: "Select a payment method" }),
-  }),
+  paymentMethod: z.literal("remita"),
   dietary: z.string().trim().max(300).optional().or(z.literal("")),
   comments: z.string().trim().max(500).optional().or(z.literal("")),
   consent: z.literal(true, {
