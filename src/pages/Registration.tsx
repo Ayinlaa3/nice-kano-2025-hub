@@ -54,6 +54,7 @@ const formSchema = z.object({
   phone: z.string().trim().min(7, "Enter a valid phone number").max(30),
   address: z.string().trim().min(3, "Please enter your address").max(250),
   institution: z.string().trim().min(2, "Please enter your institution").max(160),
+  organization: z.string().trim().max(160).optional().or(z.literal("")),
   position: z.string().trim().max(120).optional().or(z.literal("")),
   chapter: z.string().trim().max(120).optional().or(z.literal("")),
   membershipStatus: z.string().min(1, "Select your membership status"),
@@ -61,6 +62,8 @@ const formSchema = z.object({
     errorMap: () => ({ message: "Select a registration category" }),
   }),
   paymentMethod: z.literal("remita"),
+  daysAttending: z.array(z.enum(["1", "2", "3"]))
+    .min(1, "Select at least one day you plan to attend"),
   dietary: z.string().trim().max(300).optional().or(z.literal("")),
   comments: z.string().trim().max(500).optional().or(z.literal("")),
   consent: z.literal(true, {
