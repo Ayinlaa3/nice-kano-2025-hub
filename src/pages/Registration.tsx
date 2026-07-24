@@ -131,10 +131,12 @@ export default function Registration() {
       phone: "",
       address: "",
       institution: "",
+      organization: "",
       position: "",
       chapter: "",
       membershipStatus: "",
       paymentMethod: "remita",
+      daysAttending: ["1", "2", "3"],
       dietary: "",
       comments: "",
     },
@@ -142,6 +144,7 @@ export default function Registration() {
 
   const selectedCategory = watch("category");
   const selectedPayment = watch("paymentMethod");
+  const selectedDays = watch("daysAttending") ?? [];
   const earlyBird = isEarlyBird();
   const isReceiptMethod = false;
 
@@ -183,6 +186,7 @@ export default function Registration() {
       phone: values.phone,
       address: values.address,
       institution: values.institution,
+      organization: values.organization || values.institution,
       position: values.position || null,
       chapter: values.chapter || null,
       membershipStatus: values.membershipStatus,
@@ -191,6 +195,7 @@ export default function Registration() {
       category: values.category,
       amount: feeInfo.amount,
       earlyBird: feeInfo.isEarly,
+      daysAttending: values.daysAttending,
     };
 
     setSubmitting(true);
