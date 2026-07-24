@@ -140,8 +140,7 @@ export default function Registration() {
   const selectedCategory = watch("category");
   const selectedPayment = watch("paymentMethod");
   const earlyBird = isEarlyBird();
-  const isReceiptMethod =
-    selectedPayment === "nice_portal_receipt" || selectedPayment === "bank_transfer_receipt";
+  const isReceiptMethod = false;
 
   const fee = useMemo(
     () => getCategoryFee(selectedCategory ?? ""),
