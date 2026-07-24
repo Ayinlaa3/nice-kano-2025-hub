@@ -21,6 +21,54 @@ function parseRemitaResponse(text: string): any {
   return JSON.parse(text.slice(start, end + 1));
 }
 
+async function sendTicketEmail(opts: {
+  toEmail: string;
+  toName: string;
+  ticketCode: string;
+  category: string;
+  daysAttending: string[] | null;
+}) {
+  const key = Deno.env.get("RESEND_API_KEY");
+  if (!key) {
+    console.warn("RESEND_API_KEY not set; skipping email");
+    return;
+  }
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=10&data=${encodeURIComponent(opts.ticketCode)}`;
+  const days = (opts.daysAttending ?? []).map((d) => `Day ${d}`).join(", ") || "All days";
+  const html = `
+    <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#111">
+      <h2 style="color:#0A7B34;margin:0 0 8px">NICE Conference 2026 — Ticket Confirmed</h2>
+      <p>Hello ${opts.toName},</p>
+      <p>Your payment has been received and your registration is confirmed. Present this ticket (QR code) at check-in.</p>
+      <div style="text-align:center;border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin:20px 0">
+        <img src="${qrUrl}" alt="Ticket QR" width="220" height="220" style="display:block;margin:0 auto" />
+        <p style="font-family:monospace;font-size:20px;letter-spacing:2px;margin:12px 0 0;color:#0A7B34"><strong>${opts.ticketCode}</strong></p>
+        <p style="font-size:12px;color:#6b7280;margin:4px 0 0">Your ticket code</p>
+      </div>
+      <p><strong>Category:</strong> ${opts.category}<br/>
+         <strong>Days attending:</strong> ${days}</p>
+      <p style="font-size:12px;color:#6b7280">If you have any questions, reply to this email or contact conference@nicengineers.com.</p>
+      <p>See you in Lagos!<br/>— NICE Conference Secretariat</p>
+    </div>`;
+  try {
+    const resp = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+      body: JSON.stringify({
+        from: "NICE Conference <conference@nicengineers.com>",
+        to: [opts.toEmail],
+        subject: `Your NICE Conference 2026 Ticket — ${opts.ticketCode}`,
+        html,
+      }),
+    });
+    if (!resp.ok) {
+      console.error("resend failed", await resp.text());
+    }
+  } catch (e) {
+    console.error("resend error", e);
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
@@ -45,7 +93,7 @@ Deno.serve(async (req) => {
 
     const { data: reg, error } = await supabase
       .from("conference_registrations")
-      .select("id, remita_rrr, payment_status")
+      .select("id, remita_rrr, payment_status, ticket_code, full_name, email, category, days_attending, email_sent_at")
       .eq("id", id)
       .maybeSingle();
     if (error || !reg) {
@@ -78,18 +126,41 @@ Deno.serve(async (req) => {
     }
 
     const code = String(data?.status ?? "");
-    // "00" = successful, "01" = pending, others = failed
     const paid = code === "00" || String(data?.message ?? "").toLowerCase().includes("success");
 
     if (paid && reg.payment_status !== "paid") {
       await supabase
         .from("conference_registrations")
-        .update({ payment_status: "paid", verified_at: new Date().toISOString() })
+        .update({
+          payment_status: "paid",
+          verified_at: new Date().toISOString(),
+        })
+        .eq("id", id);
+    }
+
+    if (paid && !reg.email_sent_at && reg.ticket_code && reg.email) {
+      await sendTicketEmail({
+        toEmail: reg.email,
+        toName: reg.full_name ?? "Delegate",
+        ticketCode: reg.ticket_code,
+        category: reg.category ?? "",
+        daysAttending: (reg.days_attending as string[] | null) ?? null,
+      });
+      await supabase
+        .from("conference_registrations")
+        .update({ email_sent_at: new Date().toISOString() })
         .eq("id", id);
     }
 
     return new Response(
-      JSON.stringify({ success: true, paid, status: code, message: data?.message ?? null }),
+      JSON.stringify({
+        success: true,
+        paid,
+        status: code,
+        message: data?.message ?? null,
+        ticketCode: reg.ticket_code,
+        daysAttending: reg.days_attending,
+      }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   } catch (e) {

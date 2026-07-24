@@ -8,6 +8,7 @@ const BodySchema = z.object({
   phone: z.string().trim().min(7).max(30),
   address: z.string().trim().max(250).optional().nullable(),
   institution: z.string().trim().max(160).optional().nullable(),
+  organization: z.string().trim().max(160).optional().nullable(),
   position: z.string().trim().max(120).optional().nullable(),
   chapter: z.string().trim().max(120).optional().nullable(),
   membershipStatus: z.string().trim().max(120).optional().nullable(),
@@ -16,6 +17,7 @@ const BodySchema = z.object({
   category: z.string().trim().min(1).max(60),
   amount: z.number().positive(),
   earlyBird: z.boolean().optional().default(false),
+  daysAttending: z.array(z.enum(["1", "2", "3"])).min(1).max(3),
   origin: z.string().url(),
 });
 
@@ -28,7 +30,6 @@ async function sha512Hex(input: string): Promise<string> {
 }
 
 function parseRemitaResponse(text: string): any {
-  // Remita returns JSONP-style: jsonp ({...})
   const start = text.indexOf("{");
   const end = text.lastIndexOf("}");
   if (start === -1 || end === -1) throw new Error("Unexpected Remita response: " + text.slice(0, 200));
@@ -61,28 +62,36 @@ Deno.serve(async (req) => {
     const id = crypto.randomUUID();
     const orderId = id.replace(/-/g, "").slice(0, 20);
     const amount = b.amount.toFixed(2);
+    const organization = b.organization ?? b.institution ?? null;
 
-    // Insert pending row first
-    const { error: insertError } = await supabase.from("conference_registrations").insert({
-      id,
-      full_name: b.fullName,
-      email: b.email,
-      phone: b.phone,
-      address: b.address ?? null,
-      institution: b.institution ?? null,
-      position: b.position ?? null,
-      chapter: b.chapter ?? null,
-      membership_status: b.membershipStatus ?? null,
-      dietary: b.dietary ?? null,
-      comments: b.comments ?? null,
-      category: b.category,
-      amount: b.amount,
-      early_bird_applied: b.earlyBird ?? false,
-      payment_method: "remita",
-      remita_reference: orderId,
-      payment_status: "pending",
-    });
-    if (insertError) {
+    const { data: inserted, error: insertError } = await supabase
+      .from("conference_registrations")
+      .insert({
+        id,
+        full_name: b.fullName,
+        email: b.email,
+        phone: b.phone,
+        address: b.address ?? null,
+        institution: b.institution ?? null,
+        organization,
+        position: b.position ?? null,
+        chapter: b.chapter ?? null,
+        membership_status: b.membershipStatus ?? null,
+        dietary: b.dietary ?? null,
+        comments: b.comments ?? null,
+        category: b.category,
+        amount: b.amount,
+        early_bird_applied: b.earlyBird ?? false,
+        days_attending: b.daysAttending,
+        status: "confirmed",
+        payment_method: "remita",
+        remita_reference: orderId,
+        payment_status: "pending",
+      })
+      .select("id, ticket_code")
+      .single();
+
+    if (insertError || !inserted) {
       console.error("insert error", insertError);
       return new Response(JSON.stringify({ error: "Failed to create registration" }), {
         status: 500,
@@ -90,7 +99,6 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Generate RRR
     const apiHash = await sha512Hex(`${merchantId}${serviceTypeId}${orderId}${amount}${apiKey}`);
     const initUrl = `${baseUrl}/remita/exapp/api/v1/send/api/echannelsvc/merchant/api/payment/init`;
     const initResp = await fetch(initUrl, {
@@ -113,7 +121,7 @@ Deno.serve(async (req) => {
     let initData: any;
     try {
       initData = parseRemitaResponse(initText);
-    } catch (e) {
+    } catch {
       console.error("remita init parse error", initText);
       return new Response(JSON.stringify({ error: "Remita did not return a valid response" }), {
         status: 502,
@@ -140,6 +148,7 @@ Deno.serve(async (req) => {
       JSON.stringify({
         success: true,
         id,
+        ticketCode: inserted.ticket_code,
         rrr: String(rrr),
         gatewayUrl,
         fields: {
