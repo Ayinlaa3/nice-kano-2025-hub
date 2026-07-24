@@ -160,7 +160,7 @@ export default function About() {
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-brand-gold rounded-full"></div>
-                    <span>Industrial site visits</span>
+                    <span>Industrial site visits and City Tours</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-brand-gold rounded-full"></div>
