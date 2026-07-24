@@ -23,8 +23,9 @@ export default function Speakers() {
         <h1 className="text-3xl md:text-4xl font-bold">Conference Speakers</h1>
         <p className="text-muted-foreground mt-2">
           Our distinguished line-up of keynote speakers, plenary leads, and
-          panellists for NICE Lagos 2026 is being finalised. Confirmed speakers
-          will be published here as announcements are made.
+          panelists for the 24th International Civil Engineering Conference is
+          being finalized. Confirmed speakers will be published here as
+          announcements are made.
         </p>
       </header>
 
