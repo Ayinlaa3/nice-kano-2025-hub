@@ -105,7 +105,7 @@ const faqCategories = [
     questions: [
       {
         question: "What social events are planned?",
-        answer: "Social events include: Chairman's Cocktail & Engineering Business Roundtable (Day 1), Opening Ceremony with cultural performances (Day 2), Fellows Roundtable (Day 2), and the grand AGM Dinner, Awards & Honours Night with Cultural Gala (Day 3) at Tahir Guest Palace."
+        answer: "Social events include: Chairman's Cocktail & Engineering Business Roundtable (Day 1), Opening Ceremony with cultural performances (Day 2), Fellows Roundtable (Day 2), and the grand AGM Dinner, Awards & Honours Night with Cultural Gala (Day 3) at the Academy Guest House & Events Halls, Agidingbi, Ikeja, Lagos."
       },
       {
         question: "Is there a spouse program?",
