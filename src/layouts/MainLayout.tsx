@@ -41,11 +41,7 @@ const navigationGroups = [
   {
     label: "Experience Lagos",
     items: [
-      { to: "/experience", label: "Experience Lagos Hub", description: "Your delegate hub for Lagos" },
-      { to: "/experience/venue", label: "Venue Guide", description: "Academy Guest House & Events Halls details" },
-      { to: "/experience/transport", label: "Transport Tips", description: "Airports, ride-hailing, BRT and rail" },
-      { to: "/experience/accommodation", label: "Accommodation Highlights", description: "Curated hotel picks around Ikeja" },
-      { to: "/experience/faq", label: "Delegate FAQ", description: "Common questions from Lagos delegates" },
+      { to: "/experience", label: "Experience Lagos", description: "Venue, transport, hotels, landmarks, food, culture & FAQ — all in one guide" },
     ]
   },
 ];

@@ -30,10 +30,6 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminRegistrations from "./pages/AdminRegistrations";
 import AdminAnalytics from "./pages/AdminAnalytics";
 import ExperienceLagos from "./pages/experience/ExperienceLagos";
-import VenueGuide from "./pages/experience/VenueGuide";
-import TransportTips from "./pages/experience/TransportTips";
-import AccommodationHighlights from "./pages/experience/AccommodationHighlights";
-import DelegateFAQ from "./pages/experience/DelegateFAQ";
 
 const queryClient = new QueryClient();
 
@@ -60,10 +56,10 @@ const App = () => (
                 <Route path="/certificate" element={<Certificate />} />
                 <Route path="/media-gallery" element={<MediaGallery />} />
                 <Route path="/experience" element={<ExperienceLagos />} />
-                <Route path="/experience/venue" element={<VenueGuide />} />
-                <Route path="/experience/transport" element={<TransportTips />} />
-                <Route path="/experience/accommodation" element={<AccommodationHighlights />} />
-                <Route path="/experience/faq" element={<DelegateFAQ />} />
+                <Route path="/experience/venue" element={<ExperienceLagos />} />
+                <Route path="/experience/transport" element={<ExperienceLagos />} />
+                <Route path="/experience/accommodation" element={<ExperienceLagos />} />
+                <Route path="/experience/faq" element={<ExperienceLagos />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/registration/remita-callback" element={<RemitaCallback />} />
                 <Route path="/payment-status" element={<PaymentStatus />} />
