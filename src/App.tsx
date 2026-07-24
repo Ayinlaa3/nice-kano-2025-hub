@@ -22,6 +22,7 @@ import Certificate from "./pages/Certificate";
 import MediaGallery from "./pages/MediaGallery";
 import Registration from "./pages/Registration";
 import RemitaCallback from "./pages/RemitaCallback";
+import SponsorshipCallback from "./pages/SponsorshipCallback";
 import PastConferences from "./pages/PastConferences";
 import PastConferenceDetail from "./pages/PastConferenceDetail";
 import AdminLogin from "./pages/AdminLogin";
@@ -64,6 +65,7 @@ const App = () => (
                 <Route path="/experience/faq" element={<DelegateFAQ />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/registration/remita-callback" element={<RemitaCallback />} />
+                <Route path="/sponsorships/remita-callback" element={<SponsorshipCallback />} />
                 <Route path="/past-conferences" element={<PastConferences />} />
                 <Route path="/past-conferences/:slug" element={<PastConferenceDetail />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
