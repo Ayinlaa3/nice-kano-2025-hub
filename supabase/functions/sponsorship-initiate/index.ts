@@ -3,21 +3,20 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { z } from "npm:zod@3.23.8";
 
 const BodySchema = z.object({
-  fullName: z.string().trim().min(2).max(120),
-  email: z.string().trim().email().max(160),
-  phone: z.string().trim().min(7).max(30),
+  orgName: z.string().trim().min(2).max(160),
+  industry: z.string().trim().max(120).optional().nullable(),
+  contactName: z.string().trim().min(2).max(120),
+  contactTitle: z.string().trim().max(120).optional().nullable(),
+  contactEmail: z.string().trim().email().max(160),
+  contactPhone: z.string().trim().min(6).max(30),
+  website: z.string().trim().max(200).optional().nullable(),
   address: z.string().trim().max(250).optional().nullable(),
-  institution: z.string().trim().max(160).optional().nullable(),
-  organization: z.string().trim().max(160).optional().nullable(),
-  position: z.string().trim().max(120).optional().nullable(),
-  chapter: z.string().trim().max(120).optional().nullable(),
-  membershipStatus: z.string().trim().max(120).optional().nullable(),
-  dietary: z.string().trim().max(300).optional().nullable(),
-  comments: z.string().trim().max(500).optional().nullable(),
-  category: z.string().trim().min(1).max(60),
-  amount: z.number().positive(),
-  earlyBird: z.boolean().optional().default(false),
-  daysAttending: z.array(z.enum(["1", "2", "3"])).min(1).max(3),
+  applicationType: z.enum(["sponsorship", "exhibition", "both"]),
+  package: z.string().trim().max(80).optional().nullable(),
+  boothType: z.string().trim().max(120).optional().nullable(),
+  addons: z.array(z.object({ name: z.string(), price: z.number().optional() })).optional(),
+  notes: z.string().trim().max(1000).optional().nullable(),
+  totalAmount: z.number().positive(),
   origin: z.string().url(),
 });
 
@@ -34,6 +33,17 @@ function parseRemitaResponse(text: string): any {
   const end = text.lastIndexOf("}");
   if (start === -1 || end === -1) throw new Error("Unexpected Remita response: " + text.slice(0, 200));
   return JSON.parse(text.slice(start, end + 1));
+}
+
+async function nextApplicationNo(supabase: any): Promise<string> {
+  const year = new Date().getFullYear();
+  const prefix = `NICE-CONF-SPON/${year}/`;
+  const { count } = await supabase
+    .from("conference_sponsorships")
+    .select("id", { count: "exact", head: true })
+    .like("application_no", `${prefix}%`);
+  const seq = String((count ?? 0) + 1).padStart(3, "0");
+  return `${prefix}${seq}`;
 }
 
 Deno.serve(async (req) => {
@@ -61,39 +71,33 @@ Deno.serve(async (req) => {
 
     const id = crypto.randomUUID();
     const orderId = id.replace(/-/g, "").slice(0, 20);
-    const amount = b.amount.toFixed(2);
-    const organization = b.organization ?? b.institution ?? null;
+    const amount = b.totalAmount.toFixed(2);
+    const applicationNo = await nextApplicationNo(supabase);
 
-    const { data: inserted, error: insertError } = await supabase
-      .from("conference_registrations")
-      .insert({
-        id,
-        full_name: b.fullName,
-        email: b.email,
-        phone: b.phone,
-        address: b.address ?? null,
-        institution: b.institution ?? null,
-        organization,
-        position: b.position ?? null,
-        chapter: b.chapter ?? null,
-        membership_status: b.membershipStatus ?? null,
-        dietary: b.dietary ?? null,
-        comments: b.comments ?? null,
-        category: b.category,
-        amount: b.amount,
-        early_bird_applied: b.earlyBird ?? false,
-        days_attending: b.daysAttending,
-        status: "confirmed",
-        payment_method: "remita",
-        remita_reference: orderId,
-        payment_status: "pending",
-      })
-      .select("id, ticket_code")
-      .single();
-
-    if (insertError || !inserted) {
-      console.error("insert error", insertError);
-      return new Response(JSON.stringify({ error: "Failed to create registration" }), {
+    const { error: insertError } = await supabase.from("conference_sponsorships").insert({
+      id,
+      application_no: applicationNo,
+      org_name: b.orgName,
+      industry: b.industry ?? null,
+      contact_name: b.contactName,
+      contact_title: b.contactTitle ?? null,
+      contact_email: b.contactEmail,
+      contact_phone: b.contactPhone,
+      website: b.website ?? null,
+      address: b.address ?? null,
+      application_type: b.applicationType,
+      package: b.package ?? null,
+      booth_type: b.boothType ?? null,
+      addons: b.addons ?? null,
+      notes: b.notes ?? null,
+      total_amount: b.totalAmount,
+      currency: "NGN",
+      remita_order_id: orderId,
+      payment_status: "pending_payment",
+    });
+    if (insertError) {
+      console.error("sponsorship insert error", insertError);
+      return new Response(JSON.stringify({ error: "Failed to create application" }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -111,10 +115,10 @@ Deno.serve(async (req) => {
         serviceTypeId,
         amount,
         orderId,
-        payerName: b.fullName,
-        payerEmail: b.email,
-        payerPhone: b.phone,
-        description: `NICE Conference Registration (${b.category})`,
+        payerName: b.contactName,
+        payerEmail: b.contactEmail,
+        payerPhone: b.contactPhone,
+        description: `NICE Conference Sponsorship (${b.applicationType}${b.package ? " – " + b.package : ""})`,
       }),
     });
     const initText = await initResp.text();
@@ -128,7 +132,6 @@ Deno.serve(async (req) => {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-
     const rrr = initData?.RRR ?? initData?.rrr;
     if (!rrr) {
       console.error("remita init failed", initData);
@@ -138,17 +141,21 @@ Deno.serve(async (req) => {
       );
     }
 
-    await supabase.from("conference_registrations").update({ remita_rrr: String(rrr) }).eq("id", id);
-
-    const responseUrl = `${b.origin.replace(/\/$/, "")}/registration/remita-callback?reg=${id}`;
+    const responseUrl = `${b.origin.replace(/\/$/, "")}/sponsorships/remita-callback?app=${id}`;
     const redirectHash = await sha512Hex(`${merchantId}${String(rrr)}${apiKey}`);
     const gatewayUrl = `${baseUrl}/remita/ecomm/finalize.reg`;
+    const paymentUrl = `${gatewayUrl}?merchantId=${merchantId}&rrr=${rrr}&hash=${redirectHash}&responseurl=${encodeURIComponent(responseUrl)}`;
+
+    await supabase
+      .from("conference_sponsorships")
+      .update({ remita_rrr: String(rrr), remita_payment_url: paymentUrl })
+      .eq("id", id);
 
     return new Response(
       JSON.stringify({
         success: true,
         id,
-        ticketCode: inserted.ticket_code,
+        applicationNo,
         rrr: String(rrr),
         gatewayUrl,
         fields: {
@@ -161,7 +168,7 @@ Deno.serve(async (req) => {
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   } catch (e) {
-    console.error("remita-initiate error", e);
+    console.error("sponsorship-initiate error", e);
     return new Response(JSON.stringify({ error: "Unexpected error" }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },

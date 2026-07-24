@@ -2,9 +2,7 @@ import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { z } from "npm:zod@3.23.8";
 
-const BodySchema = z.object({
-  id: z.string().uuid(),
-});
+const BodySchema = z.object({ id: z.string().uuid() });
 
 async function sha512Hex(input: string): Promise<string> {
   const data = new TextEncoder().encode(input);
@@ -21,49 +19,36 @@ function parseRemitaResponse(text: string): any {
   return JSON.parse(text.slice(start, end + 1));
 }
 
-async function sendTicketEmail(opts: {
+async function sendConfirmationEmail(opts: {
   toEmail: string;
-  toName: string;
-  ticketCode: string;
-  category: string;
-  daysAttending: string[] | null;
+  contactName: string;
+  orgName: string;
+  applicationNo: string;
+  totalAmount: number;
 }) {
   const key = Deno.env.get("RESEND_API_KEY");
-  if (!key) {
-    console.warn("RESEND_API_KEY not set; skipping email");
-    return;
-  }
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=10&data=${encodeURIComponent(opts.ticketCode)}`;
-  const days = (opts.daysAttending ?? []).map((d) => `Day ${d}`).join(", ") || "All days";
+  if (!key) return;
   const html = `
     <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#111">
-      <h2 style="color:#0A7B34;margin:0 0 8px">NICE Conference 2026 — Ticket Confirmed</h2>
-      <p>Hello ${opts.toName},</p>
-      <p>Your payment has been received and your registration is confirmed. Present this ticket (QR code) at check-in.</p>
-      <div style="text-align:center;border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin:20px 0">
-        <img src="${qrUrl}" alt="Ticket QR" width="220" height="220" style="display:block;margin:0 auto" />
-        <p style="font-family:monospace;font-size:20px;letter-spacing:2px;margin:12px 0 0;color:#0A7B34"><strong>${opts.ticketCode}</strong></p>
-        <p style="font-size:12px;color:#6b7280;margin:4px 0 0">Your ticket code</p>
-      </div>
-      <p><strong>Category:</strong> ${opts.category}<br/>
-         <strong>Days attending:</strong> ${days}</p>
-      <p style="font-size:12px;color:#6b7280">If you have any questions, reply to this email or contact conference@nicengineers.com.</p>
-      <p>See you in Lagos!<br/>— NICE Conference Secretariat</p>
+      <h2 style="color:#0A7B34;margin:0 0 8px">Sponsorship Payment Confirmed</h2>
+      <p>Dear ${opts.contactName},</p>
+      <p>Thank you! We have received your payment of <strong>₦${opts.totalAmount.toLocaleString()}</strong>
+      for <strong>${opts.orgName}</strong>'s sponsorship of the NICE International Conference &amp; AGM 2026 (Lagos).</p>
+      <p><strong>Application No:</strong> ${opts.applicationNo}</p>
+      <p>Our sponsorship desk will be in touch shortly with next steps and branding requirements.</p>
+      <p>— NICE Conference Secretariat</p>
     </div>`;
   try {
-    const resp = await fetch("https://api.resend.com/emails", {
+    await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
       body: JSON.stringify({
         from: "NICE Conference <conference@nicengineers.com>",
         to: [opts.toEmail],
-        subject: `Your NICE Conference 2026 Ticket — ${opts.ticketCode}`,
+        subject: `Sponsorship confirmed — ${opts.applicationNo}`,
         html,
       }),
     });
-    if (!resp.ok) {
-      console.error("resend failed", await resp.text());
-    }
   } catch (e) {
     console.error("resend error", e);
   }
@@ -91,25 +76,25 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
-    const { data: reg, error } = await supabase
-      .from("conference_registrations")
-      .select("id, remita_rrr, payment_status, ticket_code, full_name, email, category, days_attending")
+    const { data: row, error } = await supabase
+      .from("conference_sponsorships")
+      .select("id, remita_rrr, payment_status, application_no, org_name, contact_name, contact_email, total_amount, confirmation_email_sent_at")
       .eq("id", id)
       .maybeSingle();
-    if (error || !reg) {
-      return new Response(JSON.stringify({ error: "Registration not found" }), {
+    if (error || !row) {
+      return new Response(JSON.stringify({ error: "Application not found" }), {
         status: 404,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    if (!reg.remita_rrr) {
-      return new Response(JSON.stringify({ error: "No Remita RRR on this registration" }), {
+    if (!row.remita_rrr) {
+      return new Response(JSON.stringify({ error: "No Remita RRR on this application" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    const rrr = reg.remita_rrr;
+    const rrr = row.remita_rrr;
     const statusHash = await sha512Hex(`${rrr}${apiKey}${merchantId}`);
     const statusUrl = `${baseUrl}/remita/exapp/api/v1/send/api/echannelsvc/${merchantId}/${rrr}/${statusHash}/status.reg`;
     const resp = await fetch(statusUrl, { headers: { "Content-Type": "application/json" } });
@@ -118,7 +103,6 @@ Deno.serve(async (req) => {
     try {
       data = parseRemitaResponse(text);
     } catch {
-      console.error("remita status parse error", text);
       return new Response(JSON.stringify({ error: "Could not read Remita status" }), {
         status: 502,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -128,23 +112,24 @@ Deno.serve(async (req) => {
     const code = String(data?.status ?? "");
     const paid = code === "00" || String(data?.message ?? "").toLowerCase().includes("success");
 
-    if (paid && reg.payment_status !== "paid") {
+    if (paid && row.payment_status !== "paid") {
       await supabase
-        .from("conference_registrations")
-        .update({
-          payment_status: "paid",
-          verified_at: new Date().toISOString(),
-        })
+        .from("conference_sponsorships")
+        .update({ payment_status: "paid", paid_at: new Date().toISOString() })
         .eq("id", id);
 
-      if (reg.ticket_code && reg.email) {
-        await sendTicketEmail({
-          toEmail: reg.email,
-          toName: reg.full_name ?? "Delegate",
-          ticketCode: reg.ticket_code,
-          category: reg.category ?? "",
-          daysAttending: (reg.days_attending as string[] | null) ?? null,
+      if (!row.confirmation_email_sent_at && row.contact_email) {
+        await sendConfirmationEmail({
+          toEmail: row.contact_email,
+          contactName: row.contact_name ?? "Partner",
+          orgName: row.org_name ?? "your organisation",
+          applicationNo: row.application_no ?? "",
+          totalAmount: Number(row.total_amount ?? 0),
         });
+        await supabase
+          .from("conference_sponsorships")
+          .update({ confirmation_email_sent_at: new Date().toISOString() })
+          .eq("id", id);
       }
     }
 
@@ -152,15 +137,13 @@ Deno.serve(async (req) => {
       JSON.stringify({
         success: true,
         paid,
-        status: code,
-        message: data?.message ?? null,
-        ticketCode: reg.ticket_code,
-        daysAttending: reg.days_attending,
+        applicationNo: row.application_no,
+        orgName: row.org_name,
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   } catch (e) {
-    console.error("remita-verify error", e);
+    console.error("sponsorship-verify error", e);
     return new Response(JSON.stringify({ error: "Unexpected error" }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },

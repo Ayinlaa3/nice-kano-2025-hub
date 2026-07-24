@@ -54,6 +54,7 @@ const formSchema = z.object({
   phone: z.string().trim().min(7, "Enter a valid phone number").max(30),
   address: z.string().trim().min(3, "Please enter your address").max(250),
   institution: z.string().trim().min(2, "Please enter your institution").max(160),
+  organization: z.string().trim().max(160).optional().or(z.literal("")),
   position: z.string().trim().max(120).optional().or(z.literal("")),
   chapter: z.string().trim().max(120).optional().or(z.literal("")),
   membershipStatus: z.string().min(1, "Select your membership status"),
@@ -61,6 +62,8 @@ const formSchema = z.object({
     errorMap: () => ({ message: "Select a registration category" }),
   }),
   paymentMethod: z.literal("remita"),
+  daysAttending: z.array(z.enum(["1", "2", "3"]))
+    .min(1, "Select at least one day you plan to attend"),
   dietary: z.string().trim().max(300).optional().or(z.literal("")),
   comments: z.string().trim().max(500).optional().or(z.literal("")),
   consent: z.literal(true, {
@@ -128,10 +131,12 @@ export default function Registration() {
       phone: "",
       address: "",
       institution: "",
+      organization: "",
       position: "",
       chapter: "",
       membershipStatus: "",
       paymentMethod: "remita",
+      daysAttending: ["1", "2", "3"],
       dietary: "",
       comments: "",
     },
@@ -139,6 +144,7 @@ export default function Registration() {
 
   const selectedCategory = watch("category");
   const selectedPayment = watch("paymentMethod");
+  const selectedDays = watch("daysAttending") ?? [];
   const earlyBird = isEarlyBird();
   const isReceiptMethod = false;
 
@@ -180,6 +186,7 @@ export default function Registration() {
       phone: values.phone,
       address: values.address,
       institution: values.institution,
+      organization: values.organization || values.institution,
       position: values.position || null,
       chapter: values.chapter || null,
       membershipStatus: values.membershipStatus,
@@ -188,6 +195,7 @@ export default function Registration() {
       category: values.category,
       amount: feeInfo.amount,
       earlyBird: feeInfo.isEarly,
+      daysAttending: values.daysAttending,
     };
 
     setSubmitting(true);
@@ -360,8 +368,11 @@ export default function Registration() {
               <Field label="Phone" error={errors.phone?.message} required>
                 <Input {...register("phone")} placeholder="080..." />
               </Field>
-              <Field label="Institution / Organization" error={errors.institution?.message} required>
-                <Input {...register("institution")} placeholder="Company / University" />
+              <Field label="Institution" error={errors.institution?.message} required>
+                <Input {...register("institution")} placeholder="University / Body" />
+              </Field>
+              <Field label="Organization / Employer" error={errors.organization?.message}>
+                <Input {...register("organization")} placeholder="Company name (if different)" />
               </Field>
               <Field label="Position / Title" error={errors.position?.message}>
                 <Input {...register("position")} placeholder="e.g. Project Engineer" />
@@ -448,6 +459,51 @@ export default function Registration() {
             </CardContent>
           </Card>
 
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Days Attending</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p className="text-sm text-muted-foreground">
+                Select the conference days you plan to attend (Oct 20–22, 2026).
+              </p>
+              <div className="grid sm:grid-cols-3 gap-3">
+                {[
+                  { id: "1", label: "Day 1 — Oct 20" },
+                  { id: "2", label: "Day 2 — Oct 21" },
+                  { id: "3", label: "Day 3 — Oct 22" },
+                ].map((d) => {
+                  const checked = selectedDays.includes(d.id as "1" | "2" | "3");
+                  return (
+                    <label
+                      key={d.id}
+                      className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer hover:bg-muted/50 ${
+                        checked ? "border-brand-primary bg-brand-primary/5" : ""
+                      }`}
+                    >
+                      <Checkbox
+                        checked={checked}
+                        onCheckedChange={(v) => {
+                          const next = new Set(selectedDays);
+                          if (v === true) next.add(d.id as "1" | "2" | "3");
+                          else next.delete(d.id as "1" | "2" | "3");
+                          setValue(
+                            "daysAttending",
+                            Array.from(next).sort() as ("1" | "2" | "3")[],
+                            { shouldValidate: true }
+                          );
+                        }}
+                      />
+                      <span className="text-sm font-medium">{d.label}</span>
+                    </label>
+                  );
+                })}
+              </div>
+              {errors.daysAttending && (
+                <p className="text-xs text-destructive">{errors.daysAttending.message as string}</p>
+              )}
+            </CardContent>
+          </Card>
 
           <Card>
             <CardHeader>
