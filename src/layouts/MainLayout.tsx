@@ -289,7 +289,15 @@ export default function MainLayout() {
                 </li>
               </ul>
               <p className="text-muted-white text-sm mt-9">
-              Developed by: <span className="text-white">AIS Designs</span>
+                Developed by:{" "}
+                <a
+                  href="https://www.getquickwebsite.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-brand-gold transition-colors"
+                >
+                  AIS Designs
+                </a>
               </p>
             </div>
           </div>
