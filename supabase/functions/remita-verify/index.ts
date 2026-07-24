@@ -93,7 +93,7 @@ Deno.serve(async (req) => {
 
     const { data: reg, error } = await supabase
       .from("conference_registrations")
-      .select("id, remita_rrr, payment_status, ticket_code, full_name, email, category, days_attending, email_sent_at")
+      .select("id, remita_rrr, payment_status, ticket_code, full_name, email, category, days_attending")
       .eq("id", id)
       .maybeSingle();
     if (error || !reg) {
@@ -136,20 +136,16 @@ Deno.serve(async (req) => {
           verified_at: new Date().toISOString(),
         })
         .eq("id", id);
-    }
 
-    if (paid && !reg.email_sent_at && reg.ticket_code && reg.email) {
-      await sendTicketEmail({
-        toEmail: reg.email,
-        toName: reg.full_name ?? "Delegate",
-        ticketCode: reg.ticket_code,
-        category: reg.category ?? "",
-        daysAttending: (reg.days_attending as string[] | null) ?? null,
-      });
-      await supabase
-        .from("conference_registrations")
-        .update({ email_sent_at: new Date().toISOString() })
-        .eq("id", id);
+      if (reg.ticket_code && reg.email) {
+        await sendTicketEmail({
+          toEmail: reg.email,
+          toName: reg.full_name ?? "Delegate",
+          ticketCode: reg.ticket_code,
+          category: reg.category ?? "",
+          daysAttending: (reg.days_attending as string[] | null) ?? null,
+        });
+      }
     }
 
     return new Response(
