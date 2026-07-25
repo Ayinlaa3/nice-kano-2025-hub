@@ -67,13 +67,16 @@ export default function RemitaCallback() {
 
   useEffect(() => {
     cancelledRef.current = false;
+    pollCountRef.current = 0;
+    setPollCount(0);
     let timer: number | undefined;
 
     const tick = async () => {
       const result = await runVerify();
-      setPollCount((c) => c + 1);
+      pollCountRef.current += 1;
+      setPollCount(pollCountRef.current);
       if (cancelledRef.current) return;
-      if (result === "pending" && pollCount < MAX_POLLS) {
+      if (result === "pending" && pollCountRef.current < MAX_POLLS) {
         timer = window.setTimeout(tick, POLL_INTERVAL_MS);
       }
     };
