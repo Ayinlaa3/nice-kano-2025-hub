@@ -78,7 +78,7 @@ Deno.serve(async (req) => {
 
     const { data: row, error } = await supabase
       .from("conference_sponsorships")
-      .select("id, remita_rrr, payment_status, application_no, org_name, contact_name, contact_email, total_amount, confirmation_email_sent_at")
+      .select("id, remita_rrr, payment_status, application_no, org_name, contact_name, contact_email, total_amount, paid_at")
       .eq("id", id)
       .maybeSingle();
     if (error || !row) {
