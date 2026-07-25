@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
     let query = supabase
       .from("conference_registrations")
       .select(
-        "id, full_name, email, category, amount, ticket_code, days_attending, remita_rrr, remita_reference, payment_status, status, paid_at, created_at",
+        "id, full_name, email, category, amount, ticket_code, days_attending, remita_rrr, remita_reference, payment_status, status, verified_at, created_at",
       )
       .limit(1);
 
