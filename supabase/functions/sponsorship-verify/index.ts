@@ -118,7 +118,8 @@ Deno.serve(async (req) => {
         .update({ payment_status: "paid", paid_at: new Date().toISOString() })
         .eq("id", id);
 
-      if (!row.confirmation_email_sent_at && row.contact_email) {
+      // Send confirmation email once — dedup via payment_status transition above.
+      if (row.contact_email) {
         await sendConfirmationEmail({
           toEmail: row.contact_email,
           contactName: row.contact_name ?? "Partner",
@@ -126,10 +127,6 @@ Deno.serve(async (req) => {
           applicationNo: row.application_no ?? "",
           totalAmount: Number(row.total_amount ?? 0),
         });
-        await supabase
-          .from("conference_sponsorships")
-          .update({ confirmation_email_sent_at: new Date().toISOString() })
-          .eq("id", id);
       }
     }
 
