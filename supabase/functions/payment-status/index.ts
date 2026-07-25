@@ -70,7 +70,7 @@ Deno.serve(async (req) => {
         rrr: data.remita_rrr,
         paymentStatus: data.payment_status,
         status: data.status,
-        paidAt: data.paid_at,
+        paidAt: data.verified_at,
         createdAt: data.created_at,
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
