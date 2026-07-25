@@ -33,6 +33,7 @@ export default function RemitaCallback() {
   const [daysAttending, setDaysAttending] = useState<string[] | null>(null);
   const [receipt, setReceipt] = useState<Receipt | null>(null);
   const [pollCount, setPollCount] = useState(0);
+  const pollCountRef = useRef(0);
   const [lastCheckedAt, setLastCheckedAt] = useState<Date | null>(null);
   const cancelledRef = useRef(false);
 
@@ -66,13 +67,16 @@ export default function RemitaCallback() {
 
   useEffect(() => {
     cancelledRef.current = false;
+    pollCountRef.current = 0;
+    setPollCount(0);
     let timer: number | undefined;
 
     const tick = async () => {
       const result = await runVerify();
-      setPollCount((c) => c + 1);
+      pollCountRef.current += 1;
+      setPollCount(pollCountRef.current);
       if (cancelledRef.current) return;
-      if (result === "pending" && pollCount < MAX_POLLS) {
+      if (result === "pending" && pollCountRef.current < MAX_POLLS) {
         timer = window.setTimeout(tick, POLL_INTERVAL_MS);
       }
     };
@@ -177,7 +181,7 @@ export default function RemitaCallback() {
                 <div className="mt-1">Last checked: {lastCheckedAt.toLocaleTimeString()}</div>
               )}
               {pollCount >= MAX_POLLS && (
-                <Button size="sm" variant="outline" className="mt-3" onClick={() => { setPollCount(0); runVerify(); }}>
+                <Button size="sm" variant="outline" className="mt-3" onClick={() => { pollCountRef.current = 0; setPollCount(0); runVerify(); }}>
                   Check again
                 </Button>
               )}

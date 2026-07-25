@@ -148,7 +148,7 @@ Deno.serve(async (req) => {
 
     await supabase
       .from("conference_sponsorships")
-      .update({ remita_rrr: String(rrr), remita_payment_url: paymentUrl })
+      .update({ remita_rrr: String(rrr) })
       .eq("id", id);
 
     return new Response(
