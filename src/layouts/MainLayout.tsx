@@ -175,29 +175,12 @@ export default function MainLayout() {
               </NavigationMenuList>
             </NavigationMenu>
           </div>
-          <div className="flex items-center gap-3">
-  {/* Mobile only: Register above, Menu below */}
-  <div className="flex flex-col-reverse items-end gap-2 md:hidden">
-    <div className="flex items-center gap-2">
-      <ThemeToggle />
-      <MobileMenu />
-    </div>
-    <Button asChild variant="professional" size="sm">
-      <Link to="/registration">Register Now</Link>
-    </Button>
-  </div>
-
-  {/* Desktop: Register + Sponsor inline */}
-  <div className="hidden md:flex items-center gap-3">
-    <ThemeToggle />
-    <Button asChild variant="professional" size="sm">
-      <Link to="/registration">Register Now</Link>
-    </Button>
-    <Button asChild variant="cultural" size="sm">
-      <Link to="/sponsorships">Sponsor Us</Link>
-    </Button>
-  </div>
-</div>
+          <div className="flex items-center gap-2">
+            {/* Mobile: only hamburger (register/sponsor/theme moved to FloatingActions) */}
+            <div className="md:hidden">
+              <MobileMenu />
+            </div>
+          </div>
 
         </div>
       </header>
@@ -206,7 +189,9 @@ export default function MainLayout() {
         <Outlet />
       </main>
 
+      <FloatingActions />
       <ChatSupport />
+
 
       <footer className="border-t border-brand-green/20 py-12 bg-brand-green text-white">
         <div className="container mx-auto">
