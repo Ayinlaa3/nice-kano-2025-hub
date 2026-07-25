@@ -181,7 +181,7 @@ export default function RemitaCallback() {
                 <div className="mt-1">Last checked: {lastCheckedAt.toLocaleTimeString()}</div>
               )}
               {pollCount >= MAX_POLLS && (
-                <Button size="sm" variant="outline" className="mt-3" onClick={() => { setPollCount(0); runVerify(); }}>
+                <Button size="sm" variant="outline" className="mt-3" onClick={() => { pollCountRef.current = 0; setPollCount(0); runVerify(); }}>
                   Check again
                 </Button>
               )}
