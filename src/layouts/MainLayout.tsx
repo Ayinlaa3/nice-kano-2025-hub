@@ -50,50 +50,56 @@ const navigationGroups = [
 
 export default function MainLayout() {
   const isMobile = useIsMobile();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const MobileMenu = () => (
-    <Sheet>
+    <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
       <SheetTrigger asChild>
         <Button variant="ghost" className="md:hidden p-2">
           <Menu className="h-7 w-7" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-80">
-        <SheetHeader>
+      <SheetContent side="left" className="w-80 flex flex-col p-0">
+        <SheetHeader className="p-6 pb-2 shrink-0">
           <SheetTitle className="text-left">Menu</SheetTitle>
         </SheetHeader>
-        <div className="flex flex-col gap-4 mt-6">
-          <NavLink 
-            to="/" 
-            className={({ isActive }) =>
-              `px-3 py-2 rounded-md transition-colors ${isActive ? "text-brand-primary font-medium bg-brand-primary/5" : "text-foreground hover:text-brand-primary"}`
-            }
-          >
-            Home
-          </NavLink>
-          
-          {navigationGroups.map((group) => (
-            <div key={group.label} className="space-y-2">
-              <h4 className="font-semibold text-brand-primary text-sm uppercase tracking-wide">{group.label}</h4>
-              {group.items.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className="block px-3 py-2 text-sm text-muted-foreground hover:text-brand-primary hover:bg-brand-primary/5 rounded-md transition-colors"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          ))}
-          
-          <div className="border-t pt-4">
-            <Link
-              to="/contact"
-              className="block px-3 py-2 text-sm text-muted-foreground hover:text-brand-primary hover:bg-brand-primary/5 rounded-md transition-colors"
+        <div className="flex-1 overflow-y-auto px-6 pb-8">
+          <div className="flex flex-col gap-4 mt-2">
+            <NavLink
+              to="/"
+              onClick={() => setMobileOpen(false)}
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-md transition-colors ${isActive ? "text-brand-primary font-medium bg-brand-primary/5" : "text-foreground hover:text-brand-primary"}`
+              }
             >
-              Contact
-            </Link>
+              Home
+            </NavLink>
+
+            {navigationGroups.map((group) => (
+              <div key={group.label} className="space-y-2">
+                <h4 className="font-semibold text-brand-primary text-sm uppercase tracking-wide">{group.label}</h4>
+                {group.items.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    onClick={() => setMobileOpen(false)}
+                    className="block px-3 py-2 text-sm text-muted-foreground hover:text-brand-primary hover:bg-brand-primary/5 rounded-md transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            ))}
+
+            <div className="border-t pt-4">
+              <Link
+                to="/contact"
+                onClick={() => setMobileOpen(false)}
+                className="block px-3 py-2 text-sm text-muted-foreground hover:text-brand-primary hover:bg-brand-primary/5 rounded-md transition-colors"
+              >
+                Contact
+              </Link>
+            </div>
           </div>
         </div>
       </SheetContent>
@@ -106,12 +112,13 @@ export default function MainLayout() {
         <div className="container mx-auto flex items-center justify-between py-3">
           <Link to="/" className="flex items-center gap-3 transition-transform duration-200 hover:scale-105 min-w-0">
             <img src={logo} alt="NICE logo" className="h-11 sm:h-14 w-auto shrink-0" />
-            {/* Mobile: single condensed line */}
+            {/* Mobile: single condensed line using the secondary (gradient) style */}
             <div className="md:hidden min-w-0">
-              <p className="font-old-english text-brand-primary text-[15px] leading-tight truncate">
+              <p className="font-semibold bg-gradient-to-l tracking-wide from-brand-yellow to-brand-red bg-clip-text text-transparent text-[15px] leading-tight truncate">
                 NICE CONFERENCE&nbsp;&amp; AGM
               </p>
             </div>
+
             {/* Desktop: full name + tagline */}
             <div className="hidden md:block">
               <h1 className="font-old-english text-brand-primary text-xl sm:text-xl md:text-2xl">
