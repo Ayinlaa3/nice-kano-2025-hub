@@ -139,8 +139,8 @@ export default function Hero() {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-4 pt-2">
-            <Button asChild size="xl" className="bg-gradient-eko text-white shadow-gold hover:opacity-95 hover:shadow-green group">
+          <div className="flex flex-row flex-nowrap gap-3 pt-2">
+            <Button asChild size="lg" className="flex-1 sm:flex-none bg-gradient-eko text-white shadow-gold hover:opacity-95 hover:shadow-green group text-sm sm:text-base px-4 sm:px-8">
               <Link to="/registration">
                 Register Now
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -148,9 +148,9 @@ export default function Hero() {
             </Button>
             <Button
               asChild
-              size="xl"
+              size="lg"
               variant="outline"
-              className="border-accent/50 text-accent hover:bg-accent hover:text-accent-foreground backdrop-blur"
+              className="flex-1 sm:flex-none border-accent/50 text-accent hover:bg-accent hover:text-accent-foreground backdrop-blur text-sm sm:text-base px-4 sm:px-8"
             >
               <Link to="/sponsorships">Become a Sponsor</Link>
             </Button>
