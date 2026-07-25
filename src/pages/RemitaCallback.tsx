@@ -33,6 +33,7 @@ export default function RemitaCallback() {
   const [daysAttending, setDaysAttending] = useState<string[] | null>(null);
   const [receipt, setReceipt] = useState<Receipt | null>(null);
   const [pollCount, setPollCount] = useState(0);
+  const pollCountRef = useRef(0);
   const [lastCheckedAt, setLastCheckedAt] = useState<Date | null>(null);
   const cancelledRef = useRef(false);
 
