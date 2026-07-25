@@ -104,16 +104,23 @@ export default function MainLayout() {
     <div className="min-h-dvh flex flex-col">
       <header className="sticky top-0 z-40 bg-gradient-to-r from-brand-primary/10 via-brand-yellow/5 to-brand-red/10 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-brand-primary/30 shadow-lg">
         <div className="container mx-auto flex items-center justify-between py-3">
-          <Link to="/" className="flex items-center gap-3 transition-transform duration-200 hover:scale-105">
-            <img src={logo} alt="NICE logo" className="h-14 w-auto" />
-            <div>
-  <h1 className="font-old-english text-brand-primary text-xl sm:text-xl md:text-2xl">
-    Nigerian Institution of Civil Engineers
-  </h1>
+          <Link to="/" className="flex items-center gap-3 transition-transform duration-200 hover:scale-105 min-w-0">
+            <img src={logo} alt="NICE logo" className="h-11 sm:h-14 w-auto shrink-0" />
+            {/* Mobile: single condensed line */}
+            <div className="md:hidden min-w-0">
+              <p className="font-old-english text-brand-primary text-[15px] leading-tight truncate">
+                NICE CONFERENCE&nbsp;&amp; AGM
+              </p>
+            </div>
+            {/* Desktop: full name + tagline */}
+            <div className="hidden md:block">
+              <h1 className="font-old-english text-brand-primary text-xl sm:text-xl md:text-2xl">
+                Nigerian Institution of Civil Engineers
+              </h1>
               <p className="font-semibold bg-gradient-to-l tracking-wide from-brand-yellow to-brand-red bg-clip-text text-transparent">
                 International Conference&nbsp;&amp; AGM
               </p>
-</div>
+            </div>
           </Link>
           
           <div className="hidden md:flex items-center gap-4">
