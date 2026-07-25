@@ -194,7 +194,7 @@ export default function MainLayout() {
         </div>
       </header>
 
-      <main className="flex-1">
+      <main className="flex-1 pr-[92px] sm:pr-[104px] md:pr-0">
         <Outlet />
       </main>
 
