@@ -24,6 +24,7 @@ import {
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { payWithRemita } from "@/lib/remitaWidget";
 
 const TIERS = [
   { name: "Platinum", price: "₦15,000,000", amount: 15000000, perks: ["Prime logo placement on stage backdrop & website","2 premium booths at Construction Expo Africa","5 complimentary full-access registrations","Keynote acknowledgment at opening session","5-minute video ad before plenary sessions","Centre-spread ad in event brochure","Exclusive premium table at Business Roundtable"], color: "bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20", icon: "👑" },
@@ -111,18 +112,27 @@ export default function Sponsorships() {
       if (error || !data?.success) {
         throw new Error(data?.error || error?.message || "Could not start payment");
       }
-      const el = document.createElement("form");
-      el.method = "POST";
-      el.action = data.gatewayUrl;
-      Object.entries(data.fields as Record<string, string>).forEach(([k, v]) => {
-        const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = k;
-        input.value = v;
-        el.appendChild(input);
+      const callbackUrl = `/sponsorships/callback?app=${data.id}`;
+      payWithRemita({
+        rrr: data.rrr,
+        merchantId: data.fields.merchantId,
+        orderId: data.id,
+        onSuccess: () => {
+          window.location.href = callbackUrl;
+        },
+        onClose: () => {
+          window.location.href = callbackUrl;
+        },
+        onError: (resp) => {
+          console.error("Remita widget error", resp);
+          toast({
+            title: "Payment error",
+            description: "The payment could not be completed. You can verify or retry from the sponsorship status page.",
+            variant: "destructive",
+          });
+          window.location.href = callbackUrl;
+        },
       });
-      document.body.appendChild(el);
-      el.submit();
     } catch (err) {
       toast({
         title: "Application failed",

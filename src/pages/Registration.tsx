@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
+import { payWithRemita } from "@/lib/remitaWidget";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -231,26 +232,40 @@ export default function Registration() {
         });
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
-        // Remita
+        // Remita — open the inline widget with a pre-generated RRR
         const { data, error } = await supabase.functions.invoke("remita-initiate", {
           body: { ...payload, origin: window.location.origin },
         });
         if (error || !data?.success) {
           throw new Error(data?.error || error?.message || "Could not start Remita payment");
         }
-        // Auto-submit a form to the Remita gateway
-        const form = document.createElement("form");
-        form.method = "POST";
-        form.action = data.gatewayUrl;
-        Object.entries(data.fields as Record<string, string>).forEach(([k, v]) => {
-          const input = document.createElement("input");
-          input.type = "hidden";
-          input.name = k;
-          input.value = v;
-          form.appendChild(input);
-        });
-        document.body.appendChild(form);
-        form.submit();
+        const callbackUrl = `/registration/remita-callback?reg=${data.id}`;
+        try {
+          payWithRemita({
+            rrr: data.rrr,
+            merchantId: data.fields.merchantId,
+            orderId: data.id,
+            onSuccess: () => {
+              window.location.href = callbackUrl;
+            },
+            onClose: () => {
+              // User closed the widget — send them to the callback page which
+              // polls Remita and shows Pending / Paid / Failed accordingly.
+              window.location.href = callbackUrl;
+            },
+            onError: (resp) => {
+              console.error("Remita widget error", resp);
+              toast({
+                title: "Payment error",
+                description: "The payment could not be completed. You can verify or retry from the payment status page.",
+                variant: "destructive",
+              });
+              window.location.href = callbackUrl;
+            },
+          });
+        } catch (widgetErr) {
+          throw widgetErr instanceof Error ? widgetErr : new Error("Payment widget failed to load");
+        }
       }
     } catch (err) {
       toast({
