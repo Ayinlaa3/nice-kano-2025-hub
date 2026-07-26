@@ -46,9 +46,32 @@ function normalizeRemitaBaseUrl(rawBase: string): string {
   }
 }
 
-async function buildInlinePublicKey(merchantId: string, serviceTypeId: string, apiKey: string): Promise<string> {
-  const publicKeyHash = await sha512Hex(`${merchantId}${serviceTypeId}${apiKey}`);
-  return btoa(`${merchantId}|${serviceTypeId}|${publicKeyHash}`);
+function getInlinePublicKey(categoryKey: string): string | null {
+  return (
+    Deno.env.get(`REMITA_INLINE_PUBLIC_KEY_${categoryKey}`) ||
+    Deno.env.get(`REMITA_PUBLIC_KEY_${categoryKey}`) ||
+    Deno.env.get("REMITA_INLINE_PUBLIC_KEY") ||
+    Deno.env.get("REMITA_PUBLIC_KEY") ||
+    null
+  );
+}
+
+async function validateInlinePublicKey(widgetHost: string, publicKey: string): Promise<{ ok: boolean; message?: string }> {
+  try {
+    const resp = await fetch(`${widgetHost.replace(/\/+$/, "")}/url_request/index.json`, {
+      method: "GET",
+      headers: { publicKey },
+    });
+    const data = await resp.json().catch(() => null);
+    const responseCode = data?.responseCode ? String(data.responseCode) : "";
+    return {
+      ok: resp.ok && responseCode === "00" && Array.isArray(data?.responseData) && data.responseData.length > 0,
+      message: data?.responseMsg ? String(data.responseMsg) : `Remita key validation failed with HTTP ${resp.status}`,
+    };
+  } catch (error) {
+    console.error("remita inline public key validation error", error);
+    return { ok: false, message: "Could not validate the Remita inline public key" };
+  }
 }
 
 Deno.serve(async (req) => {
@@ -96,6 +119,34 @@ Deno.serve(async (req) => {
     // Accept either the Remita host or a pasted deep Remita URL; always rebuild
     // the canonical first-generation endpoint from the host.
     const baseUrl = normalizeRemitaBaseUrl(rawBase);
+    const widgetHost = `${baseUrl}/payment/v1`;
+    const inlinePublicKey = getInlinePublicKey(categoryKey);
+
+    if (!inlinePublicKey) {
+      console.error("remita inline public key missing", { category: b.category, categoryKey });
+      return new Response(
+        JSON.stringify({
+          error: `Remita inline payment is not configured for category "${b.category}". Please contact the organisers.`,
+        }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    const keyValidation = await validateInlinePublicKey(widgetHost, inlinePublicKey);
+    if (!keyValidation.ok) {
+      console.error("remita inline public key rejected", {
+        category: b.category,
+        categoryKey,
+        message: keyValidation.message,
+      });
+      return new Response(
+        JSON.stringify({
+          error: `Remita inline payment is not authorized for category "${b.category}". Please contact the organisers.`,
+          remita: { responseMsg: keyValidation.message },
+        }),
+        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
@@ -186,8 +237,6 @@ Deno.serve(async (req) => {
     const responseUrl = `${b.origin.replace(/\/$/, "")}/registration/remita-callback?reg=${id}`;
     const redirectHash = await sha512Hex(`${merchantId}${String(rrr)}${apiKey}`);
     const gatewayUrl = `${baseUrl}/remita/ecomm/finalize.reg`;
-    const inlinePublicKey = await buildInlinePublicKey(merchantId, serviceTypeId, apiKey);
-
     return new Response(
       JSON.stringify({
         success: true,
@@ -200,7 +249,7 @@ Deno.serve(async (req) => {
           merchantId,
           publicKey: inlinePublicKey,
           serviceTypeId,
-          widgetHost: `${baseUrl}/payment/v1`,
+          widgetHost,
           rrr: String(rrr),
           hash: redirectHash,
           responseurl: responseUrl,
