@@ -45,9 +45,32 @@ function normalizeRemitaBaseUrl(rawBase: string): string {
   }
 }
 
-async function buildInlinePublicKey(merchantId: string, serviceTypeId: string, apiKey: string): Promise<string> {
-  const publicKeyHash = await sha512Hex(`${merchantId}${serviceTypeId}${apiKey}`);
-  return btoa(`${merchantId}|${serviceTypeId}|${publicKeyHash}`);
+function getInlinePublicKey(): string | null {
+  return (
+    Deno.env.get("REMITA_INLINE_PUBLIC_KEY_SPONSORSHIP") ||
+    Deno.env.get("REMITA_PUBLIC_KEY_SPONSORSHIP") ||
+    Deno.env.get("REMITA_INLINE_PUBLIC_KEY") ||
+    Deno.env.get("REMITA_PUBLIC_KEY") ||
+    null
+  );
+}
+
+async function validateInlinePublicKey(widgetHost: string, publicKey: string): Promise<{ ok: boolean; message?: string }> {
+  try {
+    const resp = await fetch(`${widgetHost.replace(/\/+$/, "")}/url_request/index.json`, {
+      method: "GET",
+      headers: { publicKey },
+    });
+    const data = await resp.json().catch(() => null);
+    const responseCode = data?.responseCode ? String(data.responseCode) : "";
+    return {
+      ok: resp.ok && responseCode === "00" && Array.isArray(data?.responseData) && data.responseData.length > 0,
+      message: data?.responseMsg ? String(data.responseMsg) : `Remita key validation failed with HTTP ${resp.status}`,
+    };
+  } catch (error) {
+    console.error("sponsorship remita inline public key validation error", error);
+    return { ok: false, message: "Could not validate the Remita inline public key" };
+  }
 }
 
 async function nextApplicationNo(supabase: any): Promise<string> {
@@ -93,6 +116,28 @@ Deno.serve(async (req) => {
     }
 
     const baseUrl = normalizeRemitaBaseUrl(rawBase);
+    const widgetHost = `${baseUrl}/payment/v1`;
+    const inlinePublicKey = getInlinePublicKey();
+
+    if (!inlinePublicKey) {
+      console.error("sponsorship remita inline public key missing");
+      return new Response(JSON.stringify({ error: "Sponsorship inline payment is not configured. Please contact the organisers." }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const keyValidation = await validateInlinePublicKey(widgetHost, inlinePublicKey);
+    if (!keyValidation.ok) {
+      console.error("sponsorship remita inline public key rejected", { message: keyValidation.message });
+      return new Response(
+        JSON.stringify({
+          error: "Sponsorship inline payment is not authorized. Please contact the organisers.",
+          remita: { responseMsg: keyValidation.message },
+        }),
+        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
@@ -175,8 +220,6 @@ Deno.serve(async (req) => {
     const redirectHash = await sha512Hex(`${merchantId}${String(rrr)}${apiKey}`);
     const gatewayUrl = `${baseUrl}/remita/ecomm/finalize.reg`;
     const paymentUrl = `${gatewayUrl}?merchantId=${merchantId}&rrr=${rrr}&hash=${redirectHash}&responseurl=${encodeURIComponent(responseUrl)}`;
-    const inlinePublicKey = await buildInlinePublicKey(merchantId, serviceTypeId, apiKey);
-
     await supabase
       .from("conference_sponsorships")
       .update({ remita_rrr: String(rrr) })
@@ -194,7 +237,7 @@ Deno.serve(async (req) => {
           merchantId,
           publicKey: inlinePublicKey,
           serviceTypeId,
-          widgetHost: `${baseUrl}/payment/v1`,
+          widgetHost,
           rrr: String(rrr),
           hash: redirectHash,
           responseurl: responseUrl,
