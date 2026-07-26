@@ -46,6 +46,11 @@ function normalizeRemitaBaseUrl(rawBase: string): string {
   }
 }
 
+async function buildInlinePublicKey(merchantId: string, serviceTypeId: string, apiKey: string): Promise<string> {
+  const publicKeyHash = await sha512Hex(`${merchantId}${serviceTypeId}${apiKey}`);
+  return btoa(`${merchantId}|${serviceTypeId}|${publicKeyHash}`);
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
@@ -121,7 +126,7 @@ Deno.serve(async (req) => {
         amount: b.amount,
         early_bird_applied: b.earlyBird ?? false,
         days_attending: b.daysAttending,
-        status: "confirmed",
+        status: "pending",
         payment_method: "remita",
         remita_reference: orderId,
         payment_status: "pending",
@@ -181,16 +186,21 @@ Deno.serve(async (req) => {
     const responseUrl = `${b.origin.replace(/\/$/, "")}/registration/remita-callback?reg=${id}`;
     const redirectHash = await sha512Hex(`${merchantId}${String(rrr)}${apiKey}`);
     const gatewayUrl = `${baseUrl}/remita/ecomm/finalize.reg`;
+    const inlinePublicKey = await buildInlinePublicKey(merchantId, serviceTypeId, apiKey);
 
     return new Response(
       JSON.stringify({
         success: true,
         id,
+        orderId,
         ticketCode: inserted.ticket_code,
         rrr: String(rrr),
         gatewayUrl,
         fields: {
           merchantId,
+          publicKey: inlinePublicKey,
+          serviceTypeId,
+          widgetHost: `${baseUrl}/payment/v1`,
           rrr: String(rrr),
           hash: redirectHash,
           responseurl: responseUrl,

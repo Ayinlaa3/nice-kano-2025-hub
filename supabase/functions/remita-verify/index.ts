@@ -234,7 +234,7 @@ Deno.serve(async (req) => {
     if (paid && reg.payment_status !== "paid") {
       await supabase
         .from("conference_registrations")
-        .update({ payment_status: "paid", verified_at: new Date().toISOString() })
+        .update({ payment_status: "paid", status: "confirmed", verified_at: new Date().toISOString() })
         .eq("id", id);
 
       if (!reg.success_email_sent_at && reg.ticket_code && reg.email) {
@@ -278,7 +278,7 @@ Deno.serve(async (req) => {
       if (reg.payment_status !== "rejected") {
         await supabase
           .from("conference_registrations")
-          .update({ payment_status: "rejected" })
+          .update({ payment_status: "rejected", status: "rejected" })
           .eq("id", id);
       }
       if (!reg.failed_email_sent_at && reg.email) {

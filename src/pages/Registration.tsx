@@ -243,8 +243,9 @@ export default function Registration() {
         try {
           await payWithRemita({
             rrr: data.rrr,
-            merchantId: data.fields.merchantId,
-            orderId: data.id,
+            publicKey: data.fields.publicKey,
+            orderId: data.orderId,
+            widgetHost: data.fields.widgetHost,
             onSuccess: () => {
               window.location.href = callbackUrl;
             },
