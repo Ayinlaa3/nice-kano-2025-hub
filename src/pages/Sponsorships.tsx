@@ -24,6 +24,7 @@ import {
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { payWithRemita } from "@/lib/remitaWidget";
 
 const TIERS = [
   { name: "Platinum", price: "₦15,000,000", amount: 15000000, perks: ["Prime logo placement on stage backdrop & website","2 premium booths at Construction Expo Africa","5 complimentary full-access registrations","Keynote acknowledgment at opening session","5-minute video ad before plenary sessions","Centre-spread ad in event brochure","Exclusive premium table at Business Roundtable"], color: "bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20", icon: "👑" },
