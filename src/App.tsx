@@ -36,6 +36,14 @@ import ExperienceLagos from "./pages/experience/ExperienceLagos";
 
 const queryClient = new QueryClient();
 
+function AnalyticsTracker() {
+  const location = useLocation();
+  useEffect(() => {
+    trackPageview(location.pathname + location.search);
+  }, [location]);
+  return null;
+}
+
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
@@ -44,7 +52,9 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <AuthProvider>
+            <AnalyticsTracker />
             <Routes>
+
               <Route element={<MainLayout />}>
                 <Route path="/" element={<Index />} />
                 <Route path="/program" element={<Program />} />
