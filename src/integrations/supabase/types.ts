@@ -1896,6 +1896,69 @@ export type Database = {
           },
         ]
       }
+      site_analytics_events: {
+        Row: {
+          browser: string | null
+          city: string | null
+          country: string | null
+          country_code: string | null
+          created_at: string
+          device: string | null
+          event_type: string
+          id: string
+          language: string | null
+          os: string | null
+          path: string | null
+          referrer: string | null
+          referrer_host: string | null
+          screen_size: string | null
+          session_id: string | null
+          site: string
+          user_agent: string | null
+          visitor_id: string | null
+        }
+        Insert: {
+          browser?: string | null
+          city?: string | null
+          country?: string | null
+          country_code?: string | null
+          created_at?: string
+          device?: string | null
+          event_type?: string
+          id?: string
+          language?: string | null
+          os?: string | null
+          path?: string | null
+          referrer?: string | null
+          referrer_host?: string | null
+          screen_size?: string | null
+          session_id?: string | null
+          site?: string
+          user_agent?: string | null
+          visitor_id?: string | null
+        }
+        Update: {
+          browser?: string | null
+          city?: string | null
+          country?: string | null
+          country_code?: string | null
+          created_at?: string
+          device?: string | null
+          event_type?: string
+          id?: string
+          language?: string | null
+          os?: string | null
+          path?: string | null
+          referrer?: string | null
+          referrer_host?: string | null
+          screen_size?: string | null
+          session_id?: string | null
+          site?: string
+          user_agent?: string | null
+          visitor_id?: string | null
+        }
+        Relationships: []
+      }
       spotlights: {
         Row: {
           created_at: string
