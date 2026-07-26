@@ -35,6 +35,16 @@ function parseRemitaResponse(text: string): any {
   return JSON.parse(text.slice(start, end + 1));
 }
 
+function normalizeRemitaBaseUrl(rawBase: string): string {
+  let baseUrl = rawBase.trim().replace(/\/+$/, "");
+  try {
+    const u = new URL(baseUrl);
+    return `${u.protocol}//${u.host}`;
+  } catch {
+    return baseUrl;
+  }
+}
+
 async function nextApplicationNo(supabase: any): Promise<string> {
   const year = new Date().getFullYear();
   const prefix = `NICE-CONF-SPON/${year}/`;
@@ -59,10 +69,25 @@ Deno.serve(async (req) => {
     }
     const b = parsed.data;
 
-    const baseUrl = Deno.env.get("REMITA_BASE_URL")!.replace(/\/$/, "");
-    const merchantId = Deno.env.get("REMITA_MERCHANT_ID")!;
-    const apiKey = Deno.env.get("REMITA_API_KEY")!;
-    const serviceTypeId = Deno.env.get("REMITA_SERVICE_TYPE_ID")!;
+    const rawBase = Deno.env.get("REMITA_BASE_URL");
+    const merchantId = Deno.env.get("REMITA_MERCHANT_ID");
+    const apiKey = Deno.env.get("REMITA_API_KEY");
+    const serviceTypeId = Deno.env.get("REMITA_SERVICE_TYPE_ID");
+
+    if (!rawBase || !merchantId || !apiKey || !serviceTypeId) {
+      console.error("sponsorship remita env missing", {
+        hasBase: !!rawBase,
+        hasMerchant: !!merchantId,
+        hasApiKey: !!apiKey,
+        hasService: !!serviceTypeId,
+      });
+      return new Response(JSON.stringify({ error: "Sponsorship payment gateway is not configured. Please contact the organisers." }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const baseUrl = normalizeRemitaBaseUrl(rawBase);
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
@@ -104,12 +129,12 @@ Deno.serve(async (req) => {
     }
 
     const apiHash = await sha512Hex(`${merchantId}${serviceTypeId}${orderId}${amount}${apiKey}`);
-    const initUrl = `${baseUrl}/remita/exapp/api/v1/send/api/echannelsvc/merchant/api/payment/init`;
+    const initUrl = `${baseUrl}/remita/exapp/api/v1/send/api/echannelsvc/merchant/api/paymentinit`;
     const initResp = await fetch(initUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `remitaConsumerKey=${merchantId},remitaConsumerSecret=${apiKey}`,
+        Authorization: `remitaConsumerKey=${merchantId},remitaConsumerToken=${apiHash}`,
       },
       body: JSON.stringify({
         serviceTypeId,
