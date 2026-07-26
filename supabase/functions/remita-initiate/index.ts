@@ -49,10 +49,34 @@ Deno.serve(async (req) => {
     }
     const b = parsed.data;
 
-    const baseUrl = Deno.env.get("REMITA_BASE_URL")!.replace(/\/$/, "");
-    const merchantId = Deno.env.get("REMITA_MERCHANT_ID")!;
-    const apiKey = Deno.env.get("REMITA_API_KEY")!;
-    const serviceTypeId = Deno.env.get("REMITA_SERVICE_TYPE_ID")!;
+    const rawBase = Deno.env.get("REMITA_BASE_URL");
+    const merchantId = Deno.env.get("REMITA_MERCHANT_ID");
+    const apiKey = Deno.env.get("REMITA_API_KEY");
+    const serviceTypeId = Deno.env.get("REMITA_SERVICE_TYPE_ID");
+
+    if (!rawBase || !merchantId || !apiKey || !serviceTypeId) {
+      console.error("remita env missing", {
+        hasBase: !!rawBase,
+        hasMerchant: !!merchantId,
+        hasApiKey: !!apiKey,
+        hasService: !!serviceTypeId,
+      });
+      return new Response(
+        JSON.stringify({ error: "Payment gateway is not configured. Please contact the organisers." }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    // Normalise base URL: accept full host only (recommended) OR any URL that
+    // includes Remita path segments — we strip everything from /remita or
+    // /microservice onward so we can always append the canonical init path.
+    let baseUrl = rawBase.trim().replace(/\/$/, "");
+    try {
+      const u = new URL(baseUrl);
+      baseUrl = `${u.protocol}//${u.host}`;
+    } catch {
+      // leave as-is; fetch will fail loudly below
+    }
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
