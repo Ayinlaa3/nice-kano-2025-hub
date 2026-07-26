@@ -19,6 +19,16 @@ function parseRemitaResponse(text: string): any {
   return JSON.parse(text.slice(start, end + 1));
 }
 
+function normalizeRemitaBaseUrl(rawBase: string): string {
+  let baseUrl = rawBase.trim().replace(/\/+$/, "");
+  try {
+    const u = new URL(baseUrl);
+    return `${u.protocol}//${u.host}`;
+  } catch {
+    return baseUrl;
+  }
+}
+
 async function sendConfirmationEmail(opts: {
   toEmail: string;
   contactName: string;
@@ -67,9 +77,23 @@ Deno.serve(async (req) => {
     }
     const { id } = parsed.data;
 
-    const baseUrl = Deno.env.get("REMITA_BASE_URL")!.replace(/\/$/, "");
-    const merchantId = Deno.env.get("REMITA_MERCHANT_ID")!;
-    const apiKey = Deno.env.get("REMITA_API_KEY")!;
+    const rawBase = Deno.env.get("REMITA_BASE_URL");
+    const merchantId = Deno.env.get("REMITA_MERCHANT_ID");
+    const apiKey = Deno.env.get("REMITA_API_KEY");
+
+    if (!rawBase || !merchantId || !apiKey) {
+      console.error("sponsorship verify env missing", {
+        hasBase: !!rawBase,
+        hasMerchant: !!merchantId,
+        hasApiKey: !!apiKey,
+      });
+      return new Response(JSON.stringify({ error: "Sponsorship payment verification is not configured. Please contact the organisers." }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const baseUrl = normalizeRemitaBaseUrl(rawBase);
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
@@ -97,7 +121,12 @@ Deno.serve(async (req) => {
     const rrr = row.remita_rrr;
     const statusHash = await sha512Hex(`${rrr}${apiKey}${merchantId}`);
     const statusUrl = `${baseUrl}/remita/exapp/api/v1/send/api/echannelsvc/${merchantId}/${rrr}/${statusHash}/status.reg`;
-    const resp = await fetch(statusUrl, { headers: { "Content-Type": "application/json" } });
+    const resp = await fetch(statusUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `remitaConsumerKey=${merchantId},remitaConsumerToken=${statusHash}`,
+      },
+    });
     const text = await resp.text();
     let data: any;
     try {

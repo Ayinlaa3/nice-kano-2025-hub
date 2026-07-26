@@ -36,6 +36,16 @@ function parseRemitaResponse(text: string): any {
   return JSON.parse(text.slice(start, end + 1));
 }
 
+function normalizeRemitaBaseUrl(rawBase: string): string {
+  let baseUrl = rawBase.trim().replace(/\/+$/, "");
+  try {
+    const u = new URL(baseUrl);
+    return `${u.protocol}//${u.host}`;
+  } catch {
+    return baseUrl;
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
@@ -78,16 +88,9 @@ Deno.serve(async (req) => {
     }
 
 
-    // Normalise base URL: accept full host only (recommended) OR any URL that
-    // includes Remita path segments — we strip everything from /remita or
-    // /microservice onward so we can always append the canonical init path.
-    let baseUrl = rawBase.trim().replace(/\/$/, "");
-    try {
-      const u = new URL(baseUrl);
-      baseUrl = `${u.protocol}//${u.host}`;
-    } catch {
-      // leave as-is; fetch will fail loudly below
-    }
+    // Accept either the Remita host or a pasted deep Remita URL; always rebuild
+    // the canonical first-generation endpoint from the host.
+    const baseUrl = normalizeRemitaBaseUrl(rawBase);
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
@@ -135,12 +138,12 @@ Deno.serve(async (req) => {
     }
 
     const apiHash = await sha512Hex(`${merchantId}${serviceTypeId}${orderId}${amount}${apiKey}`);
-    const initUrl = `${baseUrl}/remita/exapp/api/v1/send/api/echannelsvc/merchant/api/payment/init`;
+    const initUrl = `${baseUrl}/remita/exapp/api/v1/send/api/echannelsvc/merchant/api/paymentinit`;
     const initResp = await fetch(initUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `remitaConsumerKey=${merchantId},remitaConsumerSecret=${apiKey}`,
+        Authorization: `remitaConsumerKey=${merchantId},remitaConsumerToken=${apiHash}`,
       },
       body: JSON.stringify({
         serviceTypeId,
