@@ -52,7 +52,15 @@ Deno.serve(async (req) => {
     const rawBase = Deno.env.get("REMITA_BASE_URL");
     const merchantId = Deno.env.get("REMITA_MERCHANT_ID");
     const apiKey = Deno.env.get("REMITA_API_KEY");
-    const serviceTypeId = Deno.env.get("REMITA_SERVICE_TYPE_ID");
+
+    // Per-category service IDs. Each category can have its own Remita
+    // serviceTypeId set as REMITA_SERVICE_TYPE_ID_<CATEGORY> (uppercase,
+    // non-alphanumerics -> underscore). Fallback to the generic
+    // REMITA_SERVICE_TYPE_ID for any category not explicitly configured.
+    const categoryKey = b.category.toUpperCase().replace(/[^A-Z0-9]+/g, "_");
+    const serviceTypeId =
+      Deno.env.get(`REMITA_SERVICE_TYPE_ID_${categoryKey}`) ||
+      Deno.env.get("REMITA_SERVICE_TYPE_ID");
 
     if (!rawBase || !merchantId || !apiKey || !serviceTypeId) {
       console.error("remita env missing", {
@@ -60,12 +68,15 @@ Deno.serve(async (req) => {
         hasMerchant: !!merchantId,
         hasApiKey: !!apiKey,
         hasService: !!serviceTypeId,
+        category: b.category,
+        categoryKey,
       });
       return new Response(
-        JSON.stringify({ error: "Payment gateway is not configured. Please contact the organisers." }),
+        JSON.stringify({ error: `Payment gateway is not configured for category "${b.category}". Please contact the organisers.` }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
+
 
     // Normalise base URL: accept full host only (recommended) OR any URL that
     // includes Remita path segments — we strip everything from /remita or
