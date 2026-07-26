@@ -45,6 +45,11 @@ function normalizeRemitaBaseUrl(rawBase: string): string {
   }
 }
 
+async function buildInlinePublicKey(merchantId: string, serviceTypeId: string, apiKey: string): Promise<string> {
+  const publicKeyHash = await sha512Hex(`${merchantId}${serviceTypeId}${apiKey}`);
+  return btoa(`${merchantId}|${serviceTypeId}|${publicKeyHash}`);
+}
+
 async function nextApplicationNo(supabase: any): Promise<string> {
   const year = new Date().getFullYear();
   const prefix = `NICE-CONF-SPON/${year}/`;
@@ -170,6 +175,7 @@ Deno.serve(async (req) => {
     const redirectHash = await sha512Hex(`${merchantId}${String(rrr)}${apiKey}`);
     const gatewayUrl = `${baseUrl}/remita/ecomm/finalize.reg`;
     const paymentUrl = `${gatewayUrl}?merchantId=${merchantId}&rrr=${rrr}&hash=${redirectHash}&responseurl=${encodeURIComponent(responseUrl)}`;
+    const inlinePublicKey = await buildInlinePublicKey(merchantId, serviceTypeId, apiKey);
 
     await supabase
       .from("conference_sponsorships")
@@ -180,11 +186,15 @@ Deno.serve(async (req) => {
       JSON.stringify({
         success: true,
         id,
+        orderId,
         applicationNo,
         rrr: String(rrr),
         gatewayUrl,
         fields: {
           merchantId,
+          publicKey: inlinePublicKey,
+          serviceTypeId,
+          widgetHost: `${baseUrl}/payment/v1`,
           rrr: String(rrr),
           hash: redirectHash,
           responseurl: responseUrl,

@@ -112,11 +112,12 @@ export default function Sponsorships() {
       if (error || !data?.success) {
         throw new Error(data?.error || error?.message || "Could not start payment");
       }
-      const callbackUrl = `/sponsorships/callback?app=${data.id}`;
+      const callbackUrl = `/sponsorships/remita-callback?app=${data.id}`;
       await payWithRemita({
         rrr: data.rrr,
-        merchantId: data.fields.merchantId,
-        orderId: data.id,
+        publicKey: data.fields.publicKey,
+        orderId: data.orderId,
+        widgetHost: data.fields.widgetHost,
         onSuccess: () => {
           window.location.href = callbackUrl;
         },

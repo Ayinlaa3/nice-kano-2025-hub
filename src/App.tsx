@@ -77,6 +77,7 @@ const App = () => (
                 <Route path="/registration/remita-callback" element={<RemitaCallback />} />
                 <Route path="/payment-status" element={<PaymentStatus />} />
                 <Route path="/sponsorships/remita-callback" element={<SponsorshipCallback />} />
+                <Route path="/sponsorships/callback" element={<SponsorshipCallback />} />
                 <Route path="/past-conferences" element={<PastConferences />} />
                 <Route path="/past-conferences/:slug" element={<PastConferenceDetail />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
