@@ -241,7 +241,7 @@ export default function Registration() {
         }
         const callbackUrl = `/registration/remita-callback?reg=${data.id}`;
         try {
-          payWithRemita({
+          await payWithRemita({
             rrr: data.rrr,
             merchantId: data.fields.merchantId,
             orderId: data.id,
@@ -249,22 +249,33 @@ export default function Registration() {
               window.location.href = callbackUrl;
             },
             onClose: () => {
-              // User closed the widget — send them to the callback page which
-              // polls Remita and shows Pending / Paid / Failed accordingly.
-              window.location.href = callbackUrl;
+              // Widget was dismissed. Do NOT auto-redirect — the user may not
+              // have paid. Show a toast with a link so they can verify later.
+              toast({
+                title: "Payment window closed",
+                description: `If you completed payment, check status with RRR ${data.rrr}.`,
+              });
+              setSubmitting(false);
             },
             onError: (resp) => {
               console.error("Remita widget error", resp);
               toast({
                 title: "Payment error",
-                description: "The payment could not be completed. You can verify or retry from the payment status page.",
+                description: `Could not load the payment widget. Your RRR is ${data.rrr} — you can pay at any bank or on the Remita app, then verify on the Payment Status page.`,
                 variant: "destructive",
               });
-              window.location.href = callbackUrl;
+              setSubmitting(false);
             },
           });
         } catch (widgetErr) {
-          throw widgetErr instanceof Error ? widgetErr : new Error("Payment widget failed to load");
+          const msg = widgetErr instanceof Error ? widgetErr.message : "Payment widget failed to load";
+          toast({
+            title: "Payment widget unavailable",
+            description: `${msg} Your RRR is ${data.rrr} — you can pay via any bank or on the Remita app.`,
+            variant: "destructive",
+          });
+          setSubmitting(false);
+          return;
         }
       }
     } catch (err) {

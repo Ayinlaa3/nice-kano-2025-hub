@@ -113,7 +113,7 @@ export default function Sponsorships() {
         throw new Error(data?.error || error?.message || "Could not start payment");
       }
       const callbackUrl = `/sponsorships/callback?app=${data.id}`;
-      payWithRemita({
+      await payWithRemita({
         rrr: data.rrr,
         merchantId: data.fields.merchantId,
         orderId: data.id,
@@ -121,16 +121,20 @@ export default function Sponsorships() {
           window.location.href = callbackUrl;
         },
         onClose: () => {
-          window.location.href = callbackUrl;
+          toast({
+            title: "Payment window closed",
+            description: `If you completed payment, check status with RRR ${data.rrr}.`,
+          });
+          setSubmitting(false);
         },
         onError: (resp) => {
           console.error("Remita widget error", resp);
           toast({
             title: "Payment error",
-            description: "The payment could not be completed. You can verify or retry from the sponsorship status page.",
+            description: `Could not load the payment widget. Your RRR is ${data.rrr} — pay at any bank or on the Remita app, then verify from the sponsorship status page.`,
             variant: "destructive",
           });
-          window.location.href = callbackUrl;
+          setSubmitting(false);
         },
       });
     } catch (err) {
