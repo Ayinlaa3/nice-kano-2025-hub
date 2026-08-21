@@ -1,45 +1,40 @@
-## Why users land on `login.remita.net/remita/onepage/...`
+# Payment wording + confirmation email / QR ticket
 
-Today `remita-initiate` generates the RRR correctly, then the Registration page auto-submits a form to `${baseUrl}/remita/ecomm/finalize.reg` with `merchantId/rrr/hash/responseurl`. When that redirect endpoint is not enabled for our merchant profile Remita falls back to its generic hosted "Pay Once" form, forcing the user to re-enter everything. The membership portal avoids this by using Remita's **inline widget** (`remita-pay-inline.bundle.js`) with `processRrr: true` and the pre-generated RRR — no redirect, no re-entry.
+## 1. Payment method wording (registration page)
 
-Sponsorships (`/sponsorships`) uses the same redirect pattern and has the same issue; fix it the same way.
+Update the Remita payment card text to recommend bank transfer:
 
-## Scope of changes (frontend + one script tag only — keep RRR generation as-is)
+- Current: "Pay online now via card, bank or USSD — instant confirmation."
+- New: "Pay online now via card, bank transfer or USSD — instant confirmation. We recommend paying by **transfer** on Remita for the smoothest experience."
 
-The existing `remita-initiate` and `sponsorship-initiate` functions already return `rrr` and `fields.merchantId`. They stay untouched except for one cosmetic change (drop the unused `gatewayUrl` from the response). No new edge functions, no new secrets, no schema changes, no changes to `remita-verify` / `sponsorship-verify` / callback pages.
+Also add the same recommendation line to the Remita instructions block in the central config so it shows consistently wherever payment instructions appear.
 
-### 1. `index.html`
-Add the Remita inline widget script in `<head>`:
-```html
-<script src="https://login.remita.net/payment/v1/remita-pay-inline.bundle.js"></script>
-```
+## 2. Confirmation email and QR entry ticket — current state
 
-### 2. New helper `src/lib/remitaWidget.ts`
-Small wrapper that:
-- Declares `window.RmPaymentEngine` type.
-- Exports `payWithRemita({ rrr, merchantId, orderId, onSuccess, onError, onClose })` which calls `RmPaymentEngine.init({ key: merchantId, processRrr: true, transactionId: orderId, extendedData: { customFields: [{ name: "rrr", value: rrr }] }, onSuccess, onError, onClose }).showPaymentWidget()`.
-- Rejects if the script hasn't loaded yet with a clear error toast message.
+Confirmed by reading the payment verification function:
 
-### 3. `src/pages/Registration.tsx` (around line 235–250)
-Replace the form-submit redirect with:
-- Invoke `remita-initiate` as today → get `{ id, rrr, fields.merchantId }`.
-- Call `payWithRemita({ rrr, merchantId: data.fields.merchantId, orderId: data.id, onSuccess/onClose: navigate to `/registration/remita-callback?reg=${id}`, onError: toast + stay on page })`.
-- Remove the dynamic `<form>` creation and `form.submit()` block.
+- When Remita reports a successful payment, the registration flips to paid/confirmed and a confirmation email is sent once (guarded against duplicates).
+- That email already contains a **personalised QR code** encoding the delegate's unique ticket code, plus the ticket code in text, category, days attending, venue and dates. The QR is the entry pass for check-in scanning.
+- It does **not** currently read as a payment receipt: it omits the amount paid, the Remita RRR, the payment date and a receipt/invoice reference.
+- Separate emails already exist for pending and failed payments.
 
-### 4. `src/pages/Sponsorships.tsx` (around line 110–120)
-Same swap: after `sponsorship-initiate` returns `{ id, rrr, fields.merchantId }`, open the widget and route to `/sponsorships/callback?app=${id}` on success/close.
+### Known blocker (from the live function logs)
 
-### 5. `supabase/functions/remita-initiate/index.ts` & `sponsorship-initiate/index.ts`
-Cosmetic only: stop returning the now-unused `gatewayUrl` field. Do NOT touch the RRR generation, hash, headers, per-category service ID logic, or DB inserts — those are working.
+Email sending is currently failing with:
+`The nicengineers.com domain is not verified` (Resend 403).
 
-## What is intentionally NOT changed
-- Existing Remita secrets and per-category `REMITA_SERVICE_TYPE_ID_*` env vars.
-- `remita-verify`, `sponsorship-verify`, `RemitaCallback.tsx`, `SponsorshipCallback.tsx`, `payment-status` — all continue to poll/verify by `id`/`rrr` exactly as today.
-- `conference_registrations` / `conference_sponsorships` schema, RLS, ticket-code trigger, email flows.
-- Fee schedule and category logic in `src/config/conference.ts` (already aligned; user asked not to modify what works).
+So the confirmation emails are being attempted but rejected — no delegate is receiving the ticket. This must be fixed for any of this to reach inboxes.
 
-## Verification after build
-1. `curl` `remita-initiate` locally with a test payload → confirm `rrr` + `fields.merchantId` still returned.
-2. Load `/registration`, submit test form → widget overlay appears on the site (no redirect to `login.remita.net/remita/onepage`).
-3. Close widget → user stays on callback page which polls `remita-verify` and shows Pending until paid, matching current behaviour.
-4. Repeat on `/sponsorships` "Apply" flow (both package and add-on dialogs).
+### Proposed work
+
+1. Upgrade the success email into a proper **payment receipt + entry badge**: add amount paid (formatted in Naira), Remita RRR, payment date/time, receipt reference, and delegate name/email — keeping the QR badge block prominent.
+2. Fix email delivery. Two options:
+   - Verify `nicengineers.com` in the email provider (recommended — emails come from conference@nicengineers.com), or
+   - Switch to Lovable's built-in email sending with a verified sending domain.
+3. Re-verify end-to-end by re-running verification on the one confirmed registration and checking the function logs are clean.
+
+## Technical notes
+
+- Files touched: `src/pages/Registration.tsx`, `src/config/conference.ts`, `supabase/functions/remita-verify/index.ts` (success email template), and the matching sponsorship confirmation email for consistency.
+- QR generation stays as-is (external QR image service keyed on the ticket code) so existing check-in scanning keeps working.
+- No database schema changes needed; amount, RRR and verified_at are already stored on the registration row.
