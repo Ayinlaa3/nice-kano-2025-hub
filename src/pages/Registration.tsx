@@ -463,8 +463,10 @@ export default function Registration() {
                 <div>
                   <p className="font-medium">Pay with Remita</p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Pay online now via card, bank or USSD — instant confirmation.
+                    Pay online now via card, bank transfer or USSD — instant confirmation.
+                    We recommend paying by <strong>transfer via Remita</strong> for the smoothest experience.
                   </p>
+
                 </div>
               </div>
 

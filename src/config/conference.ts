@@ -140,6 +140,7 @@ export const PAYMENT_INFO = {
   remita: {
     label: "Pay with Remita",
     instructions:
-      "Pay securely online via Remita (card, bank, USSD). You will be redirected to Remita to complete payment, and your registration is confirmed automatically once payment succeeds.",
+      "Pay securely online via Remita (card, bank transfer, USSD). We recommend paying by transfer via Remita. You will be redirected to Remita to complete payment, and your registration is confirmed automatically once payment succeeds.",
   },
+
 } as const;
