@@ -40,8 +40,8 @@ const money = (n: number | null) =>
     : new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN" }).format(n);
 
 const FROM_EMAIL =
-  Deno.env.get("CONFERENCE_FROM_EMAIL") ?? "NICE Conference <conference@conference.nicehq.org>";
-const SUPPORT_EMAIL = Deno.env.get("CONFERENCE_SUPPORT_EMAIL") ?? "conference@conference.nicehq.org";
+  Deno.env.get("CONFERENCE_FROM_EMAIL") ?? "NICE Conference <conference@nicehq.org>";
+const SUPPORT_EMAIL = Deno.env.get("CONFERENCE_SUPPORT_EMAIL") ?? "conference@nicehq.org";
 
 async function sendEmail(opts: { toEmail: string; subject: string; html: string }) {
   const key = Deno.env.get("RESEND_API_KEY");
