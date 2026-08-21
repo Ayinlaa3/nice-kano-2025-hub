@@ -39,6 +39,10 @@ const money = (n: number | null) =>
     ? "—"
     : new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN" }).format(n);
 
+const FROM_EMAIL =
+  Deno.env.get("CONFERENCE_FROM_EMAIL") ?? "NICE Conference <conference@conference.nicehq.org>";
+const SUPPORT_EMAIL = Deno.env.get("CONFERENCE_SUPPORT_EMAIL") ?? "conference@conference.nicehq.org";
+
 async function sendEmail(opts: { toEmail: string; subject: string; html: string }) {
   const key = Deno.env.get("RESEND_API_KEY");
   if (!key) {
@@ -50,7 +54,7 @@ async function sendEmail(opts: { toEmail: string; subject: string; html: string 
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
       body: JSON.stringify({
-        from: "NICE Conference <conference@nicengineers.com>",
+        from: FROM_EMAIL,
         to: [opts.toEmail],
         subject: opts.subject,
         html: opts.html,
@@ -62,32 +66,55 @@ async function sendEmail(opts: { toEmail: string; subject: string; html: string 
   }
 }
 
+
 function successHtml(opts: {
   toName: string;
+  toEmail: string;
   ticketCode: string;
   category: string;
   daysAttending: string[] | null;
+  amount: number | null;
+  rrr: string;
+  paidAt: string;
 }) {
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=10&data=${encodeURIComponent(opts.ticketCode)}`;
   const days = (opts.daysAttending ?? []).map((d) => `Day ${d}`).join(", ") || "All days";
+  const paidOn = new Date(opts.paidAt).toLocaleString("en-NG", { dateStyle: "medium", timeStyle: "short" });
+  const row = (k: string, v: string) =>
+    `<tr><td style="padding:6px 0;color:#6b7280;font-size:13px">${k}</td><td style="padding:6px 0;text-align:right;font-size:13px"><strong>${v}</strong></td></tr>`;
   return `
     <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#111">
-      <h2 style="color:#0A7B34;margin:0 0 8px">🎉 Congratulations — Registration Confirmed!</h2>
+      <h2 style="color:#0A7B34;margin:0 0 8px">🎉 Payment Received — Registration Confirmed!</h2>
       <p>Hello ${opts.toName},</p>
-      <p>Your payment has been received and your registration for the <strong>NICE 24th International Conference &amp; AGM 2026 (Lagos)</strong> is confirmed. Present this ticket (QR code) at check-in.</p>
+      <p>Your payment has been received and your registration for the <strong>NICE 24th International Conference &amp; AGM 2026 (Lagos)</strong> is confirmed. This email is your official receipt and entry ticket — present the QR code below at check-in.</p>
+
       <div style="text-align:center;border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin:20px 0">
-        <img src="${qrUrl}" alt="Ticket QR" width="220" height="220" style="display:block;margin:0 auto" />
+        <img src="${qrUrl}" alt="Ticket QR code" width="220" height="220" style="display:block;margin:0 auto" />
         <p style="font-family:monospace;font-size:20px;letter-spacing:2px;margin:12px 0 0;color:#0A7B34"><strong>${opts.ticketCode}</strong></p>
-        <p style="font-size:12px;color:#6b7280;margin:4px 0 0">Your ticket code</p>
+        <p style="font-size:12px;color:#6b7280;margin:4px 0 0">Your ticket code — scanned at entry</p>
       </div>
-      <p><strong>Category:</strong> ${opts.category}<br/>
-         <strong>Days attending:</strong> ${days}<br/>
+
+      <h3 style="font-size:15px;margin:24px 0 4px">Payment receipt</h3>
+      <table style="width:100%;border-collapse:collapse;border-top:1px solid #e5e7eb">
+        ${row("Receipt reference", opts.ticketCode)}
+        ${row("Delegate", `${opts.toName}`)}
+        ${row("Email", opts.toEmail)}
+        ${row("Category", opts.category)}
+        ${row("Amount paid", money(opts.amount))}
+        ${row("Payment method", "Remita")}
+        ${row("Remita RRR", opts.rrr)}
+        ${row("Payment date", paidOn)}
+        ${row("Status", "PAID")}
+      </table>
+
+      <p style="margin-top:20px"><strong>Days attending:</strong> ${days}<br/>
          <strong>Venue:</strong> Academy Guest House &amp; Events Halls, Ikeja, Lagos<br/>
          <strong>Dates:</strong> 20–22 October 2026</p>
-      <p style="font-size:12px;color:#6b7280">Questions? Reply to this email or contact conference@nicengineers.com.</p>
+      <p style="font-size:12px;color:#6b7280">Questions? Reply to this email or contact ${SUPPORT_EMAIL}.</p>
       <p>See you in Lagos!<br/>— NICE Conference Secretariat</p>
     </div>`;
 }
+
 
 function pendingHtml(opts: {
   toName: string;
@@ -114,7 +141,7 @@ function pendingHtml(opts: {
         <a href="${opts.verifyUrl}" style="background:#0A7B34;color:#fff;text-decoration:none;padding:12px 28px;border-radius:8px;font-weight:600;display:inline-block">Verify My Payment</a>
       </p>
       <p style="font-size:12px;color:#6b7280">Or paste this link in your browser:<br/>${opts.verifyUrl}</p>
-      <p style="font-size:12px;color:#6b7280">Need help? Reply to this email or contact conference@nicengineers.com.</p>
+      <p style="font-size:12px;color:#6b7280">Need help? Reply to this email or contact ${SUPPORT_EMAIL}.</p>
       <p>— NICE Conference Secretariat</p>
     </div>`;
 }
@@ -243,10 +270,15 @@ Deno.serve(async (req) => {
           subject: `🎉 You're in! NICE Conference 2026 — Ticket ${reg.ticket_code}`,
           html: successHtml({
             toName: reg.full_name ?? "Delegate",
+            toEmail: reg.email,
             ticketCode: reg.ticket_code,
             category: reg.category ?? "",
             daysAttending: (reg.days_attending as string[] | null) ?? null,
+            amount: reg.amount != null ? Number(reg.amount) : null,
+            rrr: rrr,
+            paidAt: reg.verified_at ?? new Date().toISOString(),
           }),
+
         });
         await supabase
           .from("conference_registrations")
