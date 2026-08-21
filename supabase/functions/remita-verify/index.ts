@@ -39,6 +39,10 @@ const money = (n: number | null) =>
     ? "—"
     : new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN" }).format(n);
 
+const FROM_EMAIL =
+  Deno.env.get("CONFERENCE_FROM_EMAIL") ?? "NICE Conference <conference@conference.nicehq.org>";
+const SUPPORT_EMAIL = Deno.env.get("CONFERENCE_SUPPORT_EMAIL") ?? "conference@conference.nicehq.org";
+
 async function sendEmail(opts: { toEmail: string; subject: string; html: string }) {
   const key = Deno.env.get("RESEND_API_KEY");
   if (!key) {
@@ -50,7 +54,7 @@ async function sendEmail(opts: { toEmail: string; subject: string; html: string 
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
       body: JSON.stringify({
-        from: "NICE Conference <conference@nicengineers.com>",
+        from: FROM_EMAIL,
         to: [opts.toEmail],
         subject: opts.subject,
         html: opts.html,
@@ -61,6 +65,7 @@ async function sendEmail(opts: { toEmail: string; subject: string; html: string 
     console.error("resend error", e);
   }
 }
+
 
 function successHtml(opts: {
   toName: string;
