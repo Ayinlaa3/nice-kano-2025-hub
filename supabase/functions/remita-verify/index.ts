@@ -141,7 +141,7 @@ function pendingHtml(opts: {
         <a href="${opts.verifyUrl}" style="background:#0A7B34;color:#fff;text-decoration:none;padding:12px 28px;border-radius:8px;font-weight:600;display:inline-block">Verify My Payment</a>
       </p>
       <p style="font-size:12px;color:#6b7280">Or paste this link in your browser:<br/>${opts.verifyUrl}</p>
-      <p style="font-size:12px;color:#6b7280">Need help? Reply to this email or contact conference@nicengineers.com.</p>
+      <p style="font-size:12px;color:#6b7280">Need help? Reply to this email or contact ${SUPPORT_EMAIL}.</p>
       <p>— NICE Conference Secretariat</p>
     </div>`;
 }

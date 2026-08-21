@@ -53,7 +53,7 @@ async function sendConfirmationEmail(opts: {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
       body: JSON.stringify({
-        from: "NICE Conference <conference@nicengineers.com>",
+        from: Deno.env.get("CONFERENCE_FROM_EMAIL") ?? "NICE Conference <conference@conference.nicehq.org>",
         to: [opts.toEmail],
         subject: `Sponsorship confirmed — ${opts.applicationNo}`,
         html,
