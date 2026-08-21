@@ -270,10 +270,15 @@ Deno.serve(async (req) => {
           subject: `🎉 You're in! NICE Conference 2026 — Ticket ${reg.ticket_code}`,
           html: successHtml({
             toName: reg.full_name ?? "Delegate",
+            toEmail: reg.email,
             ticketCode: reg.ticket_code,
             category: reg.category ?? "",
             daysAttending: (reg.days_attending as string[] | null) ?? null,
+            amount: reg.amount != null ? Number(reg.amount) : null,
+            rrr: rrr,
+            paidAt: reg.verified_at ?? new Date().toISOString(),
           }),
+
         });
         await supabase
           .from("conference_registrations")
