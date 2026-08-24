@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { FunctionsHttpError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { payWithRemita } from "@/lib/remitaWidget";
 import { toast } from "@/hooks/use-toast";
@@ -237,7 +238,18 @@ export default function Registration() {
           body: { ...payload, origin: window.location.origin },
         });
         if (error || !data?.success) {
-          throw new Error(data?.error || error?.message || "Could not start Remita payment");
+          let message = data?.error || "Could not start Remita payment. Please try again.";
+          if (error instanceof FunctionsHttpError) {
+            try {
+              const details = await error.context.json();
+              message = details?.error || message;
+            } catch {
+              // Keep the user-friendly fallback when the response is not JSON.
+            }
+          } else if (error?.message) {
+            message = error.message;
+          }
+          throw new Error(message);
         }
         const callbackUrl = `/registration/remita-callback?reg=${data.id}`;
         try {
