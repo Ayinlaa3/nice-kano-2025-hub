@@ -177,7 +177,6 @@ const ZONES: { zone: string; blurb: string; hotels: Hotel[] }[] = [
       {
         name: "Bestab Luxury Suites",
         address: "3 Ishola Bello Close, Off Iyalla Street, Beside Ikeja City Mall, Alausa, Ikeja",
-        phone: "+234 700 880 8800",
         tier: "Value",
         priceRange: "₦60,000 – ₦120,000/night",
         distance: "10 mins from venue",
@@ -195,7 +194,6 @@ const ZONES: { zone: string; blurb: string; hotels: Hotel[] }[] = [
       {
         name: "Eeyilobe Guest House",
         address: "6B Makinde Street, Off Obafemi Awolowo Way, CBD, Alausa, Ikeja",
-        phone: "+234 700 880 8800",
         tier: "Value",
         priceRange: "₦40,000 – ₦85,000/night",
         distance: "10 mins from venue",

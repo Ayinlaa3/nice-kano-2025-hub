@@ -56,24 +56,6 @@ function getInlinePublicKey(categoryKey: string): string | null {
   );
 }
 
-async function validateInlinePublicKey(widgetHost: string, publicKey: string): Promise<{ ok: boolean; message?: string }> {
-  try {
-    const resp = await fetch(`${widgetHost.replace(/\/+$/, "")}/url_request/index.json`, {
-      method: "GET",
-      headers: { publicKey },
-    });
-    const data = await resp.json().catch(() => null);
-    const responseCode = data?.responseCode ? String(data.responseCode) : "";
-    return {
-      ok: resp.ok && responseCode === "00" && Array.isArray(data?.responseData) && data.responseData.length > 0,
-      message: data?.responseMsg ? String(data.responseMsg) : `Remita key validation failed with HTTP ${resp.status}`,
-    };
-  } catch (error) {
-    console.error("remita inline public key validation error", error);
-    return { ok: false, message: "Could not validate the Remita inline public key" };
-  }
-}
-
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
@@ -129,22 +111,6 @@ Deno.serve(async (req) => {
           error: `Remita inline payment is not configured for category "${b.category}". Please contact the organisers.`,
         }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
-      );
-    }
-
-    const keyValidation = await validateInlinePublicKey(widgetHost, inlinePublicKey);
-    if (!keyValidation.ok) {
-      console.error("remita inline public key rejected", {
-        category: b.category,
-        categoryKey,
-        message: keyValidation.message,
-      });
-      return new Response(
-        JSON.stringify({
-          error: `Remita inline payment is not authorized for category "${b.category}". Please contact the organisers.`,
-          remita: { responseMsg: keyValidation.message },
-        }),
-        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 
@@ -217,6 +183,7 @@ Deno.serve(async (req) => {
       initData = parseRemitaResponse(initText);
     } catch {
       console.error("remita init parse error", initText);
+      await supabase.from("conference_registrations").delete().eq("id", id);
       return new Response(JSON.stringify({ error: "Remita did not return a valid response" }), {
         status: 502,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -226,6 +193,7 @@ Deno.serve(async (req) => {
     const rrr = initData?.RRR ?? initData?.rrr;
     if (!rrr) {
       console.error("remita init failed", initData);
+      await supabase.from("conference_registrations").delete().eq("id", id);
       return new Response(
         JSON.stringify({ error: "Could not generate Remita RRR", remita: initData }),
         { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
