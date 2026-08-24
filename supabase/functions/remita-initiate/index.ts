@@ -56,6 +56,8 @@ function getInlinePublicKey(categoryKey: string): string | null {
   );
 }
 
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
@@ -161,7 +163,7 @@ Deno.serve(async (req) => {
 
     const apiHash = await sha512Hex(`${merchantId}${serviceTypeId}${orderId}${amount}${apiKey}`);
     const initUrl = `${baseUrl}/remita/exapp/api/v1/send/api/echannelsvc/merchant/api/paymentinit`;
-    const initResp = await fetch(initUrl, {
+    const initRequest = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -176,8 +178,33 @@ Deno.serve(async (req) => {
         payerPhone: b.phone,
         description: `NICE Conference Registration (${b.category})`,
       }),
-    });
-    const initText = await initResp.text();
+    };
+
+    let initResp: Response | null = null;
+    let initText = "";
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      try {
+        initResp = await fetch(initUrl, {
+          ...initRequest,
+          signal: AbortSignal.timeout(15000),
+        });
+        initText = await initResp.text();
+        if (initResp.ok || (initResp.status !== 429 && initResp.status < 500)) break;
+      } catch (error) {
+        console.error("remita init request error", { attempt, error });
+      }
+      if (attempt < 3) await wait(400 * attempt);
+    }
+
+    if (!initResp || !initResp.ok) {
+      console.error("remita init unavailable", { status: initResp?.status, body: initText.slice(0, 500) });
+      await supabase.from("conference_registrations").delete().eq("id", id);
+      return new Response(
+        JSON.stringify({ error: "Remita is temporarily unavailable. Please wait a moment and try again." }),
+        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
     let initData: any;
     try {
       initData = parseRemitaResponse(initText);
@@ -194,8 +221,13 @@ Deno.serve(async (req) => {
     if (!rrr) {
       console.error("remita init failed", initData);
       await supabase.from("conference_registrations").delete().eq("id", id);
+      const providerMessage = initData?.responseMsg ?? initData?.message;
       return new Response(
-        JSON.stringify({ error: "Could not generate Remita RRR", remita: initData }),
+        JSON.stringify({
+          error: providerMessage
+            ? `Remita could not start this payment: ${String(providerMessage)}`
+            : "Remita could not generate a payment reference. Please try again.",
+        }),
         { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
