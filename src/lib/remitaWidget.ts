@@ -14,6 +14,10 @@ interface RemitaInitOptions {
   processRrr: boolean;
   transactionId: string;
   config?: { host: string };
+  /** Preselect a payment channel in the widget (Remita accepts a comma list). */
+  channel?: string;
+  paymentChannel?: string;
+  defaultChannel?: string;
   extendedData?: { customFields: Array<{ name: string; value: string }> };
   onSuccess?: (resp: unknown) => void;
   onError?: (resp: unknown) => void;
@@ -84,6 +88,13 @@ export async function payWithRemita(args: PayWithRemitaArgs): Promise<void> {
     processRrr: true,
     transactionId: args.orderId,
     config: args.widgetHost ? { host: args.widgetHost.replace(/\/$/, "") } : undefined,
+    // Bank transfer has a materially higher success rate than card for our
+    // delegates, so open the widget on that channel by default. Remita has
+    // used a few different key names for this across widget versions; unknown
+    // keys are ignored, so we send all of them.
+    channel: "BT",
+    paymentChannel: "BT",
+    defaultChannel: "BT",
     extendedData: { customFields: [{ name: "rrr", value: args.rrr }] },
     onSuccess: (r) => {
       terminalEvent = "success";
