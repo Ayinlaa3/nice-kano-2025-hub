@@ -4,12 +4,32 @@ import { z } from "npm:zod@3.23.8";
 
 const RECEIPT_METHODS = ["nice_portal_receipt", "bank_transfer_receipt"] as const;
 
+const FROM_EMAIL =
+  Deno.env.get("CONFERENCE_FROM_EMAIL") ?? "NICE Conference <conference@nicehq.org>";
+const SUPPORT_EMAIL = Deno.env.get("CONFERENCE_SUPPORT_EMAIL") ?? "conference@nicehq.org";
+
+async function sendEmail(opts: { toEmail: string; subject: string; html: string }) {
+  const key = Deno.env.get("RESEND_API_KEY");
+  if (!key) return;
+  try {
+    const resp = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+      body: JSON.stringify({ from: FROM_EMAIL, to: [opts.toEmail], subject: opts.subject, html: opts.html }),
+    });
+    if (!resp.ok) console.error("resend failed", await resp.text());
+  } catch (e) {
+    console.error("resend error", e);
+  }
+}
+
 const BodySchema = z.object({
   fullName: z.string().trim().min(2).max(120),
   email: z.string().trim().email().max(160),
   phone: z.string().trim().min(7).max(30),
   address: z.string().trim().max(250).optional().nullable(),
   institution: z.string().trim().max(160).optional().nullable(),
+  organization: z.string().trim().max(160).optional().nullable(),
   position: z.string().trim().max(120).optional().nullable(),
   chapter: z.string().trim().max(120).optional().nullable(),
   membershipStatus: z.string().trim().max(120).optional().nullable(),
@@ -19,6 +39,7 @@ const BodySchema = z.object({
   amount: z.number().nonnegative(),
   earlyBird: z.boolean().optional().default(false),
   paymentMethod: z.enum(RECEIPT_METHODS),
+  daysAttending: z.array(z.enum(["1", "2", "3"])).min(1).max(3).optional().default(["1", "2", "3"]),
   receipt: z.object({
     filename: z.string().min(1).max(200),
     contentType: z.string().min(1).max(120),
@@ -76,13 +97,14 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { error: insertError } = await supabase.from("conference_registrations").insert({
+    const { data: inserted, error: insertError } = await supabase.from("conference_registrations").insert({
       id,
       full_name: b.fullName,
       email: b.email,
       phone: b.phone,
       address: b.address ?? null,
       institution: b.institution ?? null,
+      organization: b.organization ?? b.institution ?? null,
       position: b.position ?? null,
       chapter: b.chapter ?? null,
       membership_status: b.membershipStatus ?? null,
@@ -93,8 +115,10 @@ Deno.serve(async (req) => {
       early_bird_applied: b.earlyBird ?? false,
       payment_method: b.paymentMethod,
       receipt_path: receiptPath,
+      days_attending: b.daysAttending,
+      status: "pending",
       payment_status: "submitted",
-    });
+    }).select("id, ticket_code").single();
 
     if (insertError) {
       console.error("insert error", insertError);
@@ -104,8 +128,27 @@ Deno.serve(async (req) => {
       });
     }
 
+    const reference = inserted?.ticket_code ?? id.slice(0, 8).toUpperCase();
+
+    await sendEmail({
+      toEmail: b.email,
+      subject: `Registration received — pending payment confirmation (${reference})`,
+      html: `
+        <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#111">
+          <h2 style="color:#0A7B34;margin:0 0 8px">Registration received — awaiting confirmation</h2>
+          <p>Hello ${b.fullName},</p>
+          <p>We have received your registration for the <strong>NICE 24th International Conference &amp; AGM 2026 (Lagos)</strong> along with your bank transfer receipt.</p>
+          <p>Your registration status is currently <strong>PENDING</strong>. Our secretariat will verify your transfer and, once confirmed, you will receive your official payment receipt and personalised conference badge (QR entry ticket) by email.</p>
+          <p><strong>Reference:</strong> ${reference}<br/>
+             <strong>Category:</strong> ${b.category}<br/>
+             <strong>Amount:</strong> NGN ${b.amount.toLocaleString("en-NG")}</p>
+          <p style="font-size:12px;color:#6b7280">Questions? Contact ${SUPPORT_EMAIL}.</p>
+          <p>— NICE Conference Secretariat</p>
+        </div>`,
+    });
+
     return new Response(
-      JSON.stringify({ success: true, id, reference: id.slice(0, 8).toUpperCase() }),
+      JSON.stringify({ success: true, id, reference }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   } catch (e) {

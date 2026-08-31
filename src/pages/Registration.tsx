@@ -43,6 +43,7 @@ import {
   isEarlyBird,
   EARLY_BIRD_CUTOFF_ISO,
   PAYMENT_INFO,
+  NICE_BANK_ACCOUNT,
 } from "@/config/conference";
 
 const categoryIds = REGISTRATION_CATEGORIES.map((c) => c.id) as [
@@ -63,7 +64,7 @@ const formSchema = z.object({
   category: z.enum(categoryIds, {
     errorMap: () => ({ message: "Select a registration category" }),
   }),
-  paymentMethod: z.literal("remita"),
+  paymentMethod: z.enum(["remita", "bank_transfer_receipt"]),
   daysAttending: z.array(z.enum(["1", "2", "3"]))
     .min(1, "Select at least one day you plan to attend"),
   dietary: z.string().trim().max(300).optional().or(z.literal("")),
@@ -148,7 +149,7 @@ export default function Registration() {
   const selectedPayment = watch("paymentMethod");
   const selectedDays = watch("daysAttending") ?? [];
   const earlyBird = isEarlyBird();
-  const isReceiptMethod = false;
+  const isReceiptMethod = selectedPayment === "bank_transfer_receipt";
 
   const fee = useMemo(
     () => getCategoryFee(selectedCategory ?? ""),
@@ -213,6 +214,7 @@ export default function Registration() {
           body: {
             ...payload,
             paymentMethod: values.paymentMethod,
+            daysAttending: values.daysAttending,
             receipt: {
               filename: receiptFile.name,
               contentType: receiptFile.type || "application/octet-stream",
@@ -470,26 +472,110 @@ export default function Registration() {
               <CardTitle className="text-lg">Payment Method</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-start gap-3 rounded-lg border border-brand-primary bg-brand-primary/5 p-4">
-                <CreditCard className="h-5 w-5 mt-0.5 text-brand-primary" />
-                <div>
-                  <p className="font-medium">Pay with Remita</p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Pay online now via card, bank transfer or USSD — instant confirmation.
-                    We recommend paying by <strong>transfer via Remita</strong> for the smoothest experience.
-                  </p>
+              <RadioGroup
+                value={selectedPayment}
+                onValueChange={(v) =>
+                  setValue("paymentMethod", v as FormValues["paymentMethod"], {
+                    shouldValidate: true,
+                  })
+                }
+                className="space-y-3"
+              >
+                <label
+                  className={`flex items-start gap-3 rounded-lg border p-4 cursor-pointer transition-colors ${
+                    selectedPayment === "remita"
+                      ? "border-brand-primary bg-brand-primary/5"
+                      : "hover:bg-muted/50"
+                  }`}
+                >
+                  <RadioGroupItem value="remita" className="mt-1" />
+                  <div>
+                    <p className="font-medium flex items-center gap-2">
+                      <CreditCard className="h-4 w-4 text-brand-primary" />
+                      Pay with Remita — instant confirmation
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      The Remita window opens on <strong>Bank Transfer</strong>, which has the
+                      highest success rate. Your registration is confirmed automatically and your
+                      receipt and conference badge are emailed to you immediately.
+                    </p>
+                  </div>
+                </label>
 
-                </div>
-              </div>
+                <label
+                  className={`flex items-start gap-3 rounded-lg border p-4 cursor-pointer transition-colors ${
+                    isReceiptMethod
+                      ? "border-brand-primary bg-brand-primary/5"
+                      : "hover:bg-muted/50"
+                  }`}
+                >
+                  <RadioGroupItem value="bank_transfer_receipt" className="mt-1" />
+                  <div>
+                    <p className="font-medium flex items-center gap-2">
+                      <Landmark className="h-4 w-4 text-brand-primary" />
+                      Transfer to the NICE account & upload receipt
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Pay directly into the NICE account, then upload your receipt. Your
+                      registration stays <strong>pending</strong> until the secretariat confirms
+                      the transfer; your receipt and badge are emailed after confirmation.
+                    </p>
+                  </div>
+                </label>
+              </RadioGroup>
 
               <Alert>
                 <CreditCard className="h-4 w-4" />
                 <AlertDescription className="text-sm">
-                  {PAYMENT_INFO.remita.instructions}
+                  {isReceiptMethod
+                    ? PAYMENT_INFO.bankTransferReceipt.instructions
+                    : PAYMENT_INFO.remita.instructions}
                 </AlertDescription>
               </Alert>
 
+              {isReceiptMethod && (
+                <div className="space-y-4">
+                  <div className="rounded-lg border bg-muted/40 p-4">
+                    <p className="text-xs uppercase tracking-wide text-muted-foreground flex items-center gap-2">
+                      <Building2 className="h-4 w-4" /> NICE Conference Account
+                    </p>
+                    <div className="mt-3 grid sm:grid-cols-3 gap-3 text-sm">
+                      <Detail label="Bank" value={NICE_BANK_ACCOUNT.bank} />
+                      <Detail label="Account Number" value={NICE_BANK_ACCOUNT.accountNumber} />
+                      <Detail label="Account Name" value={NICE_BANK_ACCOUNT.accountName} />
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-3">
+                      Use your <strong>full name</strong> as the transfer narration so we can match
+                      your payment quickly.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="text-sm font-medium">
+                      Upload payment receipt <span className="text-destructive">*</span>
+                    </Label>
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*,application/pdf"
+                      onChange={onReceiptChange}
+                      className="block w-full text-sm file:mr-3 file:rounded-md file:border-0 file:bg-brand-primary file:px-4 file:py-2 file:text-primary-foreground hover:file:opacity-90"
+                    />
+                    <p className="text-xs text-muted-foreground flex items-center gap-2">
+                      <UploadCloud className="h-3.5 w-3.5" />
+                      JPG, PNG or PDF — max 8MB.
+                    </p>
+                    {receiptFile && (
+                      <p className="text-xs text-brand-primary">Selected: {receiptFile.name}</p>
+                    )}
+                    {receiptError && (
+                      <p className="text-xs text-destructive">{receiptError}</p>
+                    )}
+                  </div>
+                </div>
+              )}
             </CardContent>
+
           </Card>
 
           <Card>

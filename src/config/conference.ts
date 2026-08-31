@@ -126,6 +126,12 @@ export type ConfPaymentMethod =
   | "bank_transfer_receipt"
   | "remita";
 
+export const NICE_BANK_ACCOUNT = {
+  bank: "Zenith Bank",
+  accountName: "Nigerian Institution of Civil Engineers",
+  accountNumber: "1010515768",
+} as const;
+
 export const PAYMENT_INFO = {
   nicePortalReceipt: {
     label: "NICE Portal Payment",
@@ -133,14 +139,14 @@ export const PAYMENT_INFO = {
       "If you have already paid through the NICE member portal, upload your portal payment receipt below. Our team will verify it and confirm your registration.",
   },
   bankTransferReceipt: {
-    label: "Direct Bank Transfer",
+    label: "Bank Transfer + Receipt Upload",
     instructions:
-      "Transfer the exact amount to one of the NICE conference bank accounts shown below, using your full name as the reference. Then upload your transfer receipt for verification.",
+      "Transfer the exact amount to the NICE conference account below, using your full name as the transfer reference. Then upload your payment receipt. Your registration stays PENDING until the secretariat confirms the transfer — you will receive your receipt and conference badge by email once confirmed.",
   },
   remita: {
-    label: "Pay with Remita",
+    label: "Pay with Remita (recommended)",
     instructions:
-      "Pay securely online via Remita (card, bank transfer, USSD). We recommend paying by transfer via Remita. You will be redirected to Remita to complete payment, and your registration is confirmed automatically once payment succeeds.",
+      "Pay securely via Remita. The payment window opens on Bank Transfer, which has the highest success rate — simply transfer to the account Remita displays. Your registration is confirmed automatically and your receipt and conference badge are emailed to you immediately once payment succeeds.",
   },
-
 } as const;
+
