@@ -59,7 +59,7 @@ const METHOD_LABELS: Record<string, string> = {
 };
 
 export default function AdminRegistrations() {
-  const { user, signOut } = useAuth();
+  const { signOut } = useAuth();
   const [rows, setRows] = useState<Registration[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState<string>("all");
