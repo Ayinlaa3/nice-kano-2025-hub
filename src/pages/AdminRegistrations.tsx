@@ -70,12 +70,13 @@ export default function AdminRegistrations() {
 
   const load = useCallback(async () => {
     setLoading(true);
-    // Only successful (paid) registrations are surfaced in the admin dashboard.
-    // Pending / failed registrations are tracked internally and receive email nudges.
+    // Paid registrations plus manual bank-transfer submissions awaiting review.
+    // Abandoned Remita attempts (status "pending") stay hidden — they receive
+    // automated email nudges instead.
     const { data, error } = await supabase
       .from("conference_registrations")
       .select("*")
-      .eq("payment_status", "paid")
+      .in("payment_status", ["paid", "submitted", "verified", "rejected"])
       .order("created_at", { ascending: false });
     if (error) {
       toast({ title: "Failed to load", description: error.message, variant: "destructive" });
@@ -113,24 +114,31 @@ export default function AdminRegistrations() {
     window.open(data.url, "_blank", "noopener,noreferrer");
   };
 
-  const updateStatus = async (status: "verified" | "rejected") => {
+  const updateStatus = async (action: "confirm" | "reject") => {
     if (!active) return;
     setWorking(true);
-    const { error } = await supabase
-      .from("conference_registrations")
-      .update({
-        payment_status: status,
-        admin_note: note || null,
-        verified_by: user?.id ?? null,
-        verified_at: new Date().toISOString(),
-      })
-      .eq("id", active.id);
+    const { data: sessionData } = await supabase.auth.getSession();
+    const token = sessionData.session?.access_token;
+    const { data, error } = await supabase.functions.invoke("admin-confirm-registration", {
+      body: { id: active.id, action, note: note || null },
+      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    });
     setWorking(false);
-    if (error) {
-      toast({ title: "Update failed", description: error.message, variant: "destructive" });
+    if (error || !data?.success) {
+      toast({
+        title: "Update failed",
+        description: data?.error || error?.message || "Please try again.",
+        variant: "destructive",
+      });
       return;
     }
-    toast({ title: `Registration ${status}` });
+    toast({
+      title: action === "confirm" ? "Payment confirmed" : "Registration rejected",
+      description:
+        action === "confirm"
+          ? "The delegate has been emailed their receipt and conference badge."
+          : "The delegate has been notified.",
+    });
     setActive(null);
     setNote("");
     load();
@@ -305,17 +313,17 @@ export default function AdminRegistrations() {
             <Button
               variant="destructive"
               disabled={working}
-              onClick={() => updateStatus("rejected")}
+              onClick={() => updateStatus("reject")}
             >
               Reject
             </Button>
             <Button
               variant="professional"
               disabled={working}
-              onClick={() => updateStatus("verified")}
+              onClick={() => updateStatus("confirm")}
             >
               {working && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
-              Approve / Verify
+              Confirm Payment & Send Badge
             </Button>
           </DialogFooter>
         </DialogContent>
