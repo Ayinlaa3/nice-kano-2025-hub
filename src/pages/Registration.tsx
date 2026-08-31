@@ -43,6 +43,7 @@ import {
   isEarlyBird,
   EARLY_BIRD_CUTOFF_ISO,
   PAYMENT_INFO,
+  NICE_BANK_ACCOUNT,
 } from "@/config/conference";
 
 const categoryIds = REGISTRATION_CATEGORIES.map((c) => c.id) as [
@@ -63,7 +64,7 @@ const formSchema = z.object({
   category: z.enum(categoryIds, {
     errorMap: () => ({ message: "Select a registration category" }),
   }),
-  paymentMethod: z.literal("remita"),
+  paymentMethod: z.enum(["remita", "bank_transfer_receipt"]),
   daysAttending: z.array(z.enum(["1", "2", "3"]))
     .min(1, "Select at least one day you plan to attend"),
   dietary: z.string().trim().max(300).optional().or(z.literal("")),
@@ -148,7 +149,7 @@ export default function Registration() {
   const selectedPayment = watch("paymentMethod");
   const selectedDays = watch("daysAttending") ?? [];
   const earlyBird = isEarlyBird();
-  const isReceiptMethod = false;
+  const isReceiptMethod = selectedPayment === "bank_transfer_receipt";
 
   const fee = useMemo(
     () => getCategoryFee(selectedCategory ?? ""),
@@ -213,6 +214,7 @@ export default function Registration() {
           body: {
             ...payload,
             paymentMethod: values.paymentMethod,
+            daysAttending: values.daysAttending,
             receipt: {
               filename: receiptFile.name,
               contentType: receiptFile.type || "application/octet-stream",
