@@ -88,13 +88,10 @@ export async function payWithRemita(args: PayWithRemitaArgs): Promise<void> {
     processRrr: true,
     transactionId: args.orderId,
     config: args.widgetHost ? { host: args.widgetHost.replace(/\/$/, "") } : undefined,
-    // Bank transfer has a materially higher success rate than card for our
-    // delegates, so open the widget on that channel by default. Remita has
-    // used a few different key names for this across widget versions; unknown
-    // keys are ignored, so we send all of them.
-    channel: "BT",
-    paymentChannel: "BT",
-    defaultChannel: "BT",
+    // Remita's short channel codes are inconsistent between widget versions
+    // ("BT" resolves to Bank Branch on the current one), so instead of passing
+    // a code we auto-select the "Bank Transfer" option in the widget UI below.
+
     extendedData: { customFields: [{ name: "rrr", value: args.rrr }] },
     onSuccess: (r) => {
       terminalEvent = "success";
