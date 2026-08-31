@@ -112,4 +112,53 @@ export async function payWithRemita(args: PayWithRemitaArgs): Promise<void> {
     },
   });
   instance.showPaymentWidget();
+  autoSelectBankTransfer();
+}
+
+/**
+ * The Remita inline widget opens on "Card" (or whatever channel it defaults to).
+ * Bank Transfer has a materially higher success rate for our delegates, so we
+ * watch the widget DOM and click the "Bank Transfer" option as soon as it
+ * renders. Purely cosmetic — the delegate can still pick any other channel.
+ */
+function autoSelectBankTransfer(timeoutMs = 15000) {
+  if (typeof document === "undefined") return;
+  const start = Date.now();
+  let done = false;
+
+  const findOption = (): HTMLElement | null => {
+    const nodes = Array.from(
+      document.querySelectorAll<HTMLElement>("li, button, a, div, span, p"),
+    );
+    return (
+      nodes.find((el) => {
+        const text = (el.textContent || "").trim().toLowerCase();
+        if (text !== "bank transfer") return false;
+        // Only click something that is actually visible.
+        const rect = el.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0;
+      }) ?? null
+    );
+  };
+
+  const tick = () => {
+    if (done) return;
+    if (Date.now() - start > timeoutMs) {
+      done = true;
+      return;
+    }
+    const option = findOption();
+    if (option) {
+      done = true;
+      // Click the clickable ancestor when the match is a text node wrapper.
+      const target =
+        (option.closest("li, button, a") as HTMLElement | null) ?? option;
+      target.click();
+      console.log("[Remita] auto-selected Bank Transfer channel");
+      return;
+    }
+    setTimeout(tick, 200);
+  };
+
+  setTimeout(tick, 400);
 }
