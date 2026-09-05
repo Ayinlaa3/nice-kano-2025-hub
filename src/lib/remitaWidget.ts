@@ -87,10 +87,12 @@ export async function payWithRemita(args: PayWithRemitaArgs): Promise<void> {
     processRrr: true,
     transactionId: args.orderId,
     config: args.widgetHost ? { host: args.widgetHost.replace(/\/$/, "") } : undefined,
-    // Remita's current inline bundle maps `bank` to Bank Transfer and `branch`
-    // to Bank Branch. The legacy "BT" shorthand resolves to Branch, so always
-    // use the bundle's canonical lowercase identifier here.
-    channel: "bank",
+    // Verified against Remita's live app.bundle.js PaymentChannel enum:
+    //   transfer = Bank Transfer, card = Card, ussd = USSD,
+    //   bank = e-Payment (account debit), branch = Bank Branch.
+    // A single `channel` locks the widget to that one method with no tabs.
+    // `channels` (comma list) shows the tabs and opens on the FIRST entry.
+    channels: "transfer,card,ussd,bank,branch",
     extendedData: { customFields: [{ name: "rrr", value: args.rrr }] },
     onSuccess: (r) => {
       terminalEvent = "success";
