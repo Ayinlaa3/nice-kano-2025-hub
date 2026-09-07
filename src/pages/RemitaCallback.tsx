@@ -152,8 +152,10 @@ export default function RemitaCallback() {
         <tr><th>Registered At</th><td>${fmt(receipt.registeredAt)}</td></tr>
         <tr><th>Paid At</th><td>${fmt(receipt.paidAt)}</td></tr>
       </table>
+      </div>
       <p class="foot">This is an electronically generated receipt from the Nigerian Institution of Civil Engineers.
-      Present your ticket code at check-in. For queries: conference@nicengineers.com.</p>
+      Present your ticket code at check-in. For queries: conference@nicehq.org.</p>
+      </div>
       <p class="noprint" style="text-align:center;margin-top:24px">
         <button onclick="window.print()" style="background:#0A7B34;color:#fff;border:0;padding:10px 20px;border-radius:8px;font-size:14px;cursor:pointer">Print / Save as PDF</button>
       </p>
