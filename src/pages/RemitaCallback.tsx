@@ -254,5 +254,8 @@ export default function RemitaCallback() {
         </CardContent>
       </Card>
     </div>
+    {state === "paid" && <IllBeThere />}
+    </>
   );
 }
+
