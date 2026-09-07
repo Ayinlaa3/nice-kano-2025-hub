@@ -166,11 +166,13 @@ export default function RemitaCallback() {
   };
 
   return (
+    <>
     <div className="container mx-auto py-16 max-w-lg">
       <Helmet title="Payment Status | NICE Conference">
         <meta name="robots" content="noindex" />
       </Helmet>
       <Card className="border-t-4 border-t-brand-primary text-center">
+
         <CardHeader>
           <div className="mx-auto mb-2 h-14 w-14 rounded-full bg-brand-primary/10 flex items-center justify-center">
             {state === "checking" && <Loader2 className="h-7 w-7 animate-spin text-brand-primary" />}
