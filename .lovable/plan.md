@@ -1,40 +1,25 @@
-# Payment wording + confirmation email / QR ticket
+# "I'll Be Attending" Flyer Maker
 
-## 1. Payment method wording (registration page)
+Turn the new 2026 flyer into a personalised, shareable graphic: a delegate adds their photo and name, sees a finished flyer, then saves or shares it.
 
-Update the Remita payment card text to recommend bank transfer:
+## What the delegate sees
 
-- Current: "Pay online now via card, bank or USSD — instant confirmation."
-- New: "Pay online now via card, bank transfer or USSD — instant confirmation. We recommend paying by **transfer** on Remita for the smoothest experience."
+1. **Two fields** — full name, and a photo upload (tap to pick, max 5MB, JPG/PNG/WEBP). A small round preview confirms the photo.
+2. **Live flyer preview** — the photo is fitted into the gold circle and the name is centred in the dark green bar, in the flyer's bold style, shrinking automatically for long names.
+3. **Ready state** — once both are filled, a headline reads "Your flyer is ready to be shared" with the finished flyer above it.
+4. **Save button** — downloads a high-quality square image (1080x1080) named after the delegate.
+5. **Share buttons** — WhatsApp Status, Instagram, Facebook, LinkedIn, TikTok and X. Each one first saves the image to the device, then opens that app (or its web share page) with the conference link and a short pre-written caption, so the delegate just attaches the saved image and posts. A short note explains this one-tap flow.
 
-Also add the same recommendation line to the Remita instructions block in the central config so it shows consistently wherever payment instructions appear.
+## Where it appears
 
-## 2. Confirmation email and QR entry ticket — current state
-
-Confirmed by reading the payment verification function:
-
-- When Remita reports a successful payment, the registration flips to paid/confirmed and a confirmation email is sent once (guarded against duplicates).
-- That email already contains a **personalised QR code** encoding the delegate's unique ticket code, plus the ticket code in text, category, days attending, venue and dates. The QR is the entry pass for check-in scanning.
-- It does **not** currently read as a payment receipt: it omits the amount paid, the Remita RRR, the payment date and a receipt/invoice reference.
-- Separate emails already exist for pending and failed payments.
-
-### Known blocker (from the live function logs)
-
-Email sending is currently failing with:
-`The nicengineers.com domain is not verified` (Resend 403).
-
-So the confirmation emails are being attempted but rejected — no delegate is receiving the ticket. This must be fixed for any of this to reach inboxes.
-
-### Proposed work
-
-1. Upgrade the success email into a proper **payment receipt + entry badge**: add amount paid (formatted in Naira), Remita RRR, payment date/time, receipt reference, and delegate name/email — keeping the QR badge block prominent.
-2. Fix email delivery. Two options:
-   - Verify `nicengineers.com` in the email provider (recommended — emails come from conference@nicengineers.com), or
-   - Switch to Lovable's built-in email sending with a verified sending domain.
-3. Re-verify end-to-end by re-running verification on the one confirmed registration and checking the function logs are clean.
+- A new page at `/flyer`, reachable from the site menu.
+- Automatically on the payment-success screen after a confirmed registration, so delegates are invited to share right away.
 
 ## Technical notes
 
-- Files touched: `src/pages/Registration.tsx`, `src/config/conference.ts`, `supabase/functions/remita-verify/index.ts` (success email template), and the matching sponsorship confirmation email for consistency.
-- QR generation stays as-is (external QR image service keyed on the ticket code) so existing check-in scanning keeps working.
-- No database schema changes needed; amount, RRR and verified_at are already stored on the registration row.
+- Upload the new flyer artwork (`NICE_2026_I_will_be_there_flyer.png`) through the asset CLI and reference the pointer JSON; retire the old `nice-template.png` usage.
+- Rewrite `src/components/IllBeThere.tsx` as a reusable flyer composer: canvas 1080x1080, template drawn first, photo clipped to the circle (centre ≈ 300, 466, radius ≈ 232; cover-fit, no stretching), name drawn centred in the green bar (≈ x 495–1070, y 630–705) in bold condensed white type with auto-fit sizing.
+- Re-render the canvas on every change via `useEffect` rather than a "Generate" button; keep a hidden full-size canvas and show a scaled `<img>` preview.
+- Save uses `canvas.toBlob` + object URL download. Share handlers download first, then `window.open` per network: WhatsApp `https://wa.me/?text=`, Facebook sharer, LinkedIn sharing, X intent, Instagram `https://www.instagram.com/`, TikTok `https://www.tiktok.com/upload`.
+- New `src/pages/Flyer.tsx` with Helmet SEO, route in `App.tsx`, menu entry in `MainLayout.tsx`, and embed the component in the success branch of `RemitaCallback.tsx`.
+- Styling uses existing design tokens and card components; no colour hardcoding.
