@@ -215,8 +215,8 @@ export default function PaymentStatus() {
 
       <p className="text-center text-xs text-muted-foreground mt-6">
         Need help? Email{" "}
-        <a href="mailto:conference@nicengineers.com" className="text-brand-primary underline">
-          conference@nicengineers.com
+        <a href="mailto:conference@nicehq.org" className="text-brand-primary underline">
+          conference@nicehq.org
         </a>
       </p>
     </div>
