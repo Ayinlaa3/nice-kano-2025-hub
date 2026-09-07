@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Loader2, CheckCircle2, Clock, XCircle, Download, RefreshCw } from "lucide-react";
+import niceLogo from "@/assets/nice-logo.svg.asset.json";
 
 type Receipt = {
   fullName: string | null;
@@ -101,23 +102,43 @@ export default function RemitaCallback() {
       n == null ? "—" : new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN" }).format(n);
     const fmt = (d: string | null) => (d ? new Date(d).toLocaleString("en-NG") : "—");
     const days = (receipt.daysAttending ?? []).map((d) => `Day ${d}`).join(", ") || "—";
+    const logoUrl = `${window.location.origin}${niceLogo.url}`;
     win.document.write(`<!doctype html><html><head><meta charset="utf-8"/>
       <title>NICE Conference 2026 Receipt — ${receipt.ticketCode ?? ""}</title>
       <style>
-        *{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#111;padding:32px;max-width:640px;margin:0 auto}
-        h1{color:#0A7B34;margin:0 0 4px;font-size:22px}
-        .sub{color:#6b7280;margin:0 0 24px;font-size:13px}
-        table{width:100%;border-collapse:collapse;margin:16px 0}
-        th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #e5e7eb;font-size:14px;vertical-align:top}
+        *{box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#111;padding:28px;max-width:680px;margin:0 auto;background:#fff}
+        .sheet{border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;box-shadow:0 8px 28px rgba(10,123,52,.08)}
+        .head{background:linear-gradient(135deg,#0A7B34,#065C26);color:#fff;padding:22px 24px;display:flex;align-items:center;gap:16px}
+        .head img{width:64px;height:64px;background:#fff;border-radius:50%;padding:6px;flex:none}
+        .head h1{margin:0;font-size:17px;letter-spacing:.4px;line-height:1.3}
+        .head p{margin:4px 0 0;font-size:12px;opacity:.9;line-height:1.4}
+        .rule{height:4px;background:linear-gradient(90deg,#0A7B34,#D4A017,#0A7B34)}
+        .body{padding:22px 24px}
+        .title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:6px}
+        .title h2{margin:0;font-size:18px;color:#0A7B34}
+        .sub{color:#6b7280;margin:0 0 18px;font-size:12px}
+        table{width:100%;border-collapse:collapse;margin:8px 0}
+        th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #eef1f4;font-size:14px;vertical-align:top}
+        tr:nth-child(odd) th,tr:nth-child(odd) td{background:#fafbfa}
         th{color:#374151;width:38%;font-weight:600}
-        .badge{display:inline-block;background:#0A7B34;color:#fff;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:0.5px}
-        .foot{margin-top:24px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:12px;color:#6b7280}
+        .badge{display:inline-block;background:#0A7B34;color:#fff;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:1px}
+        .foot{margin:0;padding:16px 24px;border-top:1px solid #e5e7eb;font-size:11.5px;color:#6b7280;background:#fafbfa;line-height:1.6}
         .ticket{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:700;color:#0A7B34;font-size:16px;letter-spacing:2px}
-        @media print{.noprint{display:none}}
+        @media print{.noprint{display:none}body{padding:0}.sheet{box-shadow:none}}
       </style></head><body>
-      <h1>NICE Conference 2026 — Payment Receipt</h1>
-      <p class="sub">24th International Conference &amp; AGM · Academy Guest House &amp; Events Halls, Ikeja, Lagos · 20–22 October 2026</p>
-      <p><span class="badge">PAID</span></p>
+      <div class="sheet">
+      <div class="head">
+        <img src="${logoUrl}" alt="NICE logo"/>
+        <div>
+          <h1>NIGERIAN INSTITUTION OF CIVIL ENGINEERS</h1>
+          <p>24th International Conference &amp; AGM · LAGOS 2026<br/>Academy Guest House &amp; Events Halls, Ikeja, Lagos · 20–22 October 2026</p>
+        </div>
+      </div>
+      <div class="rule"></div>
+      <div class="body">
+      <div class="title"><h2>Payment Receipt</h2><span class="badge">PAID</span></div>
+      <p class="sub">Official receipt of conference registration payment</p>
       <table>
         <tr><th>Ticket Code</th><td class="ticket">${receipt.ticketCode ?? "—"}</td></tr>
         <tr><th>Full Name</th><td>${receipt.fullName ?? "—"}</td></tr>
@@ -132,8 +153,10 @@ export default function RemitaCallback() {
         <tr><th>Registered At</th><td>${fmt(receipt.registeredAt)}</td></tr>
         <tr><th>Paid At</th><td>${fmt(receipt.paidAt)}</td></tr>
       </table>
+      </div>
       <p class="foot">This is an electronically generated receipt from the Nigerian Institution of Civil Engineers.
-      Present your ticket code at check-in. For queries: conference@nicengineers.com.</p>
+      Present your ticket code at check-in. For queries: conference@nicehq.org.</p>
+      </div>
       <p class="noprint" style="text-align:center;margin-top:24px">
         <button onclick="window.print()" style="background:#0A7B34;color:#fff;border:0;padding:10px 20px;border-radius:8px;font-size:14px;cursor:pointer">Print / Save as PDF</button>
       </p>
