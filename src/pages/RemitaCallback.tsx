@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Loader2, CheckCircle2, Clock, XCircle, Download, RefreshCw } from "lucide-react";
 import niceLogo from "@/assets/nice-logo.svg.asset.json";
+import { IllBeThere } from "@/components/IllBeThere";
+
 
 type Receipt = {
   fullName: string | null;
@@ -166,11 +168,13 @@ export default function RemitaCallback() {
   };
 
   return (
+    <>
     <div className="container mx-auto py-16 max-w-lg">
       <Helmet title="Payment Status | NICE Conference">
         <meta name="robots" content="noindex" />
       </Helmet>
       <Card className="border-t-4 border-t-brand-primary text-center">
+
         <CardHeader>
           <div className="mx-auto mb-2 h-14 w-14 rounded-full bg-brand-primary/10 flex items-center justify-center">
             {state === "checking" && <Loader2 className="h-7 w-7 animate-spin text-brand-primary" />}
@@ -252,5 +256,8 @@ export default function RemitaCallback() {
         </CardContent>
       </Card>
     </div>
+    {state === "paid" && <IllBeThere />}
+    </>
   );
 }
+
