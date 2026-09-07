@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Download, Upload, User, Sparkles, Share2 } from "lucide-react";
 import { toast } from "sonner";
-import flyerTemplate from "@/assets/nice-2026-attending-flyer.png.asset.json";
+import flyerTemplate from "@/assets/nice-2026-attending-flyer.jpg";
 
 const SITE_URL = "https://conference.nicehq.org";
 const CAPTION =
@@ -94,7 +94,7 @@ export const IllBeThere = () => {
           });
 
         const [template, photo] = await Promise.all([
-          loadImage(flyerTemplate.url),
+          loadImage(flyerTemplate),
           loadImage(uploadedImage),
         ]);
         if (cancelled) return;
