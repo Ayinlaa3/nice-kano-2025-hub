@@ -37,7 +37,9 @@ const navigationGroups = [
     items: [
       { to: "/registration", label: "Registration", description: "Register and view conference fees" },
       { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
+      { to: "/flyer", label: "I'll Be Attending Flyer", description: "Create and share your personalised flyer" },
       { to: "/certificate", label: "Certificate Generator", description: "Download your participation certificate" },
+
       { to: "/faq", label: "FAQ", description: "Frequently asked questions" },
     ]
   },

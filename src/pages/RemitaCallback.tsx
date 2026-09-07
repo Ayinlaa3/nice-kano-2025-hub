@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Loader2, CheckCircle2, Clock, XCircle, Download, RefreshCw } from "lucide-react";
 import niceLogo from "@/assets/nice-logo.svg.asset.json";
+import { IllBeThere } from "@/components/IllBeThere";
+
 
 type Receipt = {
   fullName: string | null;

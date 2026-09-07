@@ -22,6 +22,8 @@ import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import InnovationChallenge from "./pages/InnovationChallenge";
 import Certificate from "./pages/Certificate";
+import Flyer from "./pages/Flyer";
+
 import MediaGallery from "./pages/MediaGallery";
 import Registration from "./pages/Registration";
 import RemitaCallback from "./pages/RemitaCallback";
@@ -67,6 +69,8 @@ const App = () => (
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/innovationchallenge" element={<InnovationChallenge />} />
                 <Route path="/certificate" element={<Certificate />} />
+                <Route path="/flyer" element={<Flyer />} />
+
                 <Route path="/media-gallery" element={<MediaGallery />} />
                 <Route path="/experience" element={<ExperienceLagos />} />
                 <Route path="/experience/venue" element={<ExperienceLagos />} />
