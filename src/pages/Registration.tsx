@@ -56,7 +56,7 @@ const formSchema = z.object({
   email: z.string().trim().email("Enter a valid email address").max(160),
   phone: z.string().trim().min(7, "Enter a valid phone number").max(30),
   address: z.string().trim().min(3, "Please enter your address").max(250),
-  institution: z.string().trim().min(2, "Please enter your institution").max(160),
+  institution: z.string().trim().max(160).optional().or(z.literal("")),
   organization: z.string().trim().max(160).optional().or(z.literal("")),
   position: z.string().trim().max(120).optional().or(z.literal("")),
   chapter: z.string().trim().max(120).optional().or(z.literal("")),
