@@ -417,7 +417,11 @@ export default function Registration() {
               <Field label="Phone" error={errors.phone?.message} required>
                 <Input {...register("phone")} placeholder="080..." />
               </Field>
-              <Field label="Institution" error={errors.institution?.message} required>
+              <Field
+                label={selectedCategory === "student" ? "Institution (School)" : "Institution"}
+                error={errors.institution?.message}
+                required={selectedCategory === "student"}
+              >
                 <Input {...register("institution")} placeholder="University / Body" />
               </Field>
               <Field label="Organization / Employer" error={errors.organization?.message}>
