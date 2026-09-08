@@ -55,7 +55,7 @@ const formSchema = z.object({
   fullName: z.string().trim().min(2, "Please enter your full name").max(120),
   email: z.string().trim().email("Enter a valid email address").max(160),
   phone: z.string().trim().min(7, "Enter a valid phone number").max(30),
-  address: z.string().trim().min(3, "Please enter your address").max(250),
+  address: z.string().trim().max(250).optional().or(z.literal("")),
   institution: z.string().trim().max(160).optional().or(z.literal("")),
   organization: z.string().trim().max(160).optional().or(z.literal("")),
   position: z.string().trim().max(120).optional().or(z.literal("")),
@@ -434,7 +434,7 @@ export default function Registration() {
                 <Input {...register("chapter")} placeholder="e.g. Lagos Chapter" />
               </Field>
               <div className="sm:col-span-2">
-                <Field label="Address" error={errors.address?.message} required>
+                <Field label="Address" error={errors.address?.message}>
                   <Input {...register("address")} placeholder="Your address" />
                 </Field>
               </div>
