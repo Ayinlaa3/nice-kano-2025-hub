@@ -56,7 +56,7 @@ const formSchema = z.object({
   email: z.string().trim().email("Enter a valid email address").max(160),
   phone: z.string().trim().min(7, "Enter a valid phone number").max(30),
   address: z.string().trim().min(3, "Please enter your address").max(250),
-  institution: z.string().trim().min(2, "Please enter your institution").max(160),
+  institution: z.string().trim().max(160).optional().or(z.literal("")),
   organization: z.string().trim().max(160).optional().or(z.literal("")),
   position: z.string().trim().max(120).optional().or(z.literal("")),
   chapter: z.string().trim().max(120).optional().or(z.literal("")),
@@ -72,6 +72,14 @@ const formSchema = z.object({
   consent: z.literal(true, {
     errorMap: () => ({ message: "You must accept the terms to register" }),
   }),
+}).superRefine((values, ctx) => {
+  if (values.category === "student" && (values.institution ?? "").trim().length < 2) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["institution"],
+      message: "Please enter your institution",
+    });
+  }
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -188,8 +196,8 @@ export default function Registration() {
       email: values.email,
       phone: values.phone,
       address: values.address,
-      institution: values.institution,
-      organization: values.organization || values.institution,
+      institution: values.institution || "",
+      organization: values.organization || values.institution || "",
       position: values.position || null,
       chapter: values.chapter || null,
       membershipStatus: values.membershipStatus,
@@ -409,7 +417,11 @@ export default function Registration() {
               <Field label="Phone" error={errors.phone?.message} required>
                 <Input {...register("phone")} placeholder="080..." />
               </Field>
-              <Field label="Institution" error={errors.institution?.message} required>
+              <Field
+                label={selectedCategory === "student" ? "Institution (School)" : "Institution"}
+                error={errors.institution?.message}
+                required={selectedCategory === "student"}
+              >
                 <Input {...register("institution")} placeholder="University / Body" />
               </Field>
               <Field label="Organization / Employer" error={errors.organization?.message}>
