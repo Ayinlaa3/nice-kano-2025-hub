@@ -72,6 +72,14 @@ const formSchema = z.object({
   consent: z.literal(true, {
     errorMap: () => ({ message: "You must accept the terms to register" }),
   }),
+}).superRefine((values, ctx) => {
+  if (values.category === "student" && (values.institution ?? "").trim().length < 2) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["institution"],
+      message: "Please enter your institution",
+    });
+  }
 });
 
 type FormValues = z.infer<typeof formSchema>;
