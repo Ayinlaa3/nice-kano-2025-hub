@@ -1068,6 +1068,39 @@ export type Database = {
         }
         Relationships: []
       }
+      legacy_claim_tokens: {
+        Row: {
+          consumed_at: string | null
+          created_at: string
+          created_ip: string | null
+          email: string
+          expires_at: string
+          id: string
+          member_uid: string
+          token_hash: string
+        }
+        Insert: {
+          consumed_at?: string | null
+          created_at?: string
+          created_ip?: string | null
+          email: string
+          expires_at?: string
+          id?: string
+          member_uid: string
+          token_hash: string
+        }
+        Update: {
+          consumed_at?: string | null
+          created_at?: string
+          created_ip?: string | null
+          email?: string
+          expires_at?: string
+          id?: string
+          member_uid?: string
+          token_hash?: string
+        }
+        Relationships: []
+      }
       legacy_members: {
         Row: {
           application_date: string | null
@@ -2447,6 +2480,45 @@ export type Database = {
       is_anniversary_staff: { Args: { _user_id: string }; Returns: boolean }
       is_conference_staff: { Args: { _user_id: string }; Returns: boolean }
       is_national_level_admin: { Args: { _user_id: string }; Returns: boolean }
+      link_legacy_record_from_token: { Args: { _token: string }; Returns: Json }
+      search_legacy_directory: {
+        Args: {
+          _email?: string
+          _firstname?: string
+          _othername?: string
+          _reg_no?: string
+          _surname?: string
+        }
+        Returns: {
+          firstname: string
+          grade: string
+          has_email: boolean
+          is_claimed: boolean
+          masked_email: string
+          masked_phone: string
+          masked_reg_no: string
+          match_score: number
+          member_uid: string
+          othername: string
+          surname: string
+        }[]
+      }
+      search_legacy_directory_simple: {
+        Args: { _q?: string }
+        Returns: {
+          firstname: string
+          grade: string
+          has_email: boolean
+          is_claimed: boolean
+          masked_email: string
+          masked_phone: string
+          masked_reg_no: string
+          match_score: number
+          member_uid: string
+          othername: string
+          surname: string
+        }[]
+      }
       search_members_public: {
         Args: { _search?: string }
         Returns: {
@@ -2458,6 +2530,8 @@ export type Database = {
           status: string
         }[]
       }
+      show_limit: { Args: never; Returns: number }
+      show_trgm: { Args: { "": string }; Returns: string[] }
       verify_blank_email_legacy_claim: {
         Args: { _member_uid: string; _othername: string; _reg_no: string }
         Returns: Json
