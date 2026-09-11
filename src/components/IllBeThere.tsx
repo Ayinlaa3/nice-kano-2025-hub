@@ -170,38 +170,17 @@ export const IllBeThere = () => {
     (url: string, label: string) => {
       if (!previewUrl) return;
 
-      // Try the device's native share sheet first (best on mobile: shares the image itself)
-      const nativeShare = async () => {
-        try {
-          const blob = await (await fetch(previewUrl)).blob();
-          const file = new File([blob], fileName, { type: "image/png" });
-          const nav = navigator as Navigator & {
-            canShare?: (data: ShareData) => boolean;
-Ó         };
-          if (nav.share && nav.canShare?.({ files: [file] })) {
-            await nav.share({ files: [file], text: `${CAPTION} ${SITE_URL}` });
-            return true;
-          }
-        } catch {
-          /* fall through to the link flow */
-        }
-        return false;
-      };
-
       // Open the network synchronously inside the click so popup blockers allow it
       const win = window.open(url, "_blank", "noopener,noreferrer");
+      saveFlyer();
       if (!win) {
-        // Popup blocked — navigate in the same tab after saving
-        saveFlyer();
         toast.info(`Flyer saved — opening ${label}`);
         window.location.href = url;
         return;
       }
-      saveFlyer();
       toast.info(`Flyer saved — now attach it in ${label}`);
-      void nativeShare();
     },
-    [previewUrl, saveFlyer, fileName]
+    [previewUrl, saveFlyer]
   );
 
   return (
