@@ -169,9 +169,16 @@ export const IllBeThere = () => {
   const shareTo = useCallback(
     (url: string, label: string) => {
       if (!previewUrl) return;
+
+      // Open the network synchronously inside the click so popup blockers allow it
+      const win = window.open(url, "_blank", "noopener,noreferrer");
       saveFlyer();
+      if (!win) {
+        toast.info(`Flyer saved — opening ${label}`);
+        window.location.href = url;
+        return;
+      }
       toast.info(`Flyer saved — now attach it in ${label}`);
-      window.setTimeout(() => window.open(url, "_blank", "noopener,noreferrer"), 700);
     },
     [previewUrl, saveFlyer]
   );
