@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -73,11 +74,26 @@ const formSchema = z.object({
     errorMap: () => ({ message: "You must accept the terms to register" }),
   }),
 }).superRefine((values, ctx) => {
-  if (values.category === "student" && (values.institution ?? "").trim().length < 2) {
+  const isStudent = values.category === "student";
+  if (isStudent && (values.institution ?? "").trim().length < 2) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
       path: ["institution"],
       message: "Please enter your institution",
+    });
+  }
+  if (!isStudent && (values.organization ?? "").trim().length < 2) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["organization"],
+      message: "Please enter your organization / employer",
+    });
+  }
+  if ((values.position ?? "").trim().length < 2) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["position"],
+      message: "Please enter your position / title",
     });
   }
 });
@@ -380,6 +396,18 @@ export default function Registration() {
         />
       </Helmet>
 
+      <div className="mb-8 rounded-xl border border-accent/40 bg-accent/10 p-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div>
+          <p className="font-semibold">Already paid via Remita but still marked pending?</p>
+          <p className="text-sm text-muted-foreground">
+            Verify with your ticket code, Remita RRR or reference to get your receipt and QR badge.
+          </p>
+        </div>
+        <Button asChild size="lg" variant="professional" className="shrink-0">
+          <Link to="/payment-status">Confirm My Payment</Link>
+        </Button>
+      </div>
+
       <header className="mb-8 max-w-3xl">
         <h1 className="text-3xl md:text-4xl font-bold">Conference Registration</h1>
         <p className="text-muted-foreground mt-2">
@@ -424,10 +452,14 @@ export default function Registration() {
               >
                 <Input {...register("institution")} placeholder="University / Body" />
               </Field>
-              <Field label="Organization / Employer" error={errors.organization?.message}>
+              <Field
+                label="Organization / Employer"
+                error={errors.organization?.message}
+                required={selectedCategory !== "student"}
+              >
                 <Input {...register("organization")} placeholder="Company name (if different)" />
               </Field>
-              <Field label="Position / Title" error={errors.position?.message}>
+              <Field label="Position / Title" error={errors.position?.message} required>
                 <Input {...register("position")} placeholder="e.g. Project Engineer" />
               </Field>
               <Field label="NICE Chapter / Location" error={errors.chapter?.message}>

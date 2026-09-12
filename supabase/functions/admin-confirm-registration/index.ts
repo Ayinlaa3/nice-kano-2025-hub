@@ -63,6 +63,12 @@ function ticketHtml(opts: {
       <p>Hello ${opts.toName},</p>
       <p>Your bank transfer has been verified by the NICE secretariat and your registration for the <strong>NICE 24th International Conference &amp; AGM 2026 (Lagos)</strong> is now confirmed. This email is your official receipt and entry badge — present the QR code below at check-in.</p>
 
+      <div style="text-align:center;margin:24px 0">
+        <a href="https://conference.nicehq.org/flyer" style="display:inline-block;background:#0A7B34;color:#ffffff;text-decoration:none;font-weight:bold;font-size:15px;padding:14px 26px;border-radius:9999px">Generate My "I Will Be Attending" Flyer</a>
+        <p style="font-size:12px;color:#6b7280;margin:8px 0 0">Add your photo and name, then share it on WhatsApp, Instagram, X and more.</p>
+      </div>
+
+
       <div style="text-align:center;border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin:20px 0">
         <img src="${qrUrl}" alt="Ticket QR code" width="220" height="220" style="display:block;margin:0 auto" />
         <p style="font-family:monospace;font-size:20px;letter-spacing:2px;margin:12px 0 0;color:#0A7B34"><strong>${opts.ticketCode}</strong></p>
