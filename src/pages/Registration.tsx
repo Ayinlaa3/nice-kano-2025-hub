@@ -60,7 +60,7 @@ const formSchema = z.object({
   institution: z.string().trim().max(160).optional().or(z.literal("")),
   organization: z.string().trim().max(160).optional().or(z.literal("")),
   position: z.string().trim().max(120).optional().or(z.literal("")),
-  chapter: z.string().trim().max(120).optional().or(z.literal("")),
+  chapter: z.string().trim().min(2, "Please enter your NICE chapter / location").max(120),
   membershipStatus: z.string().min(1, "Select your membership status"),
   category: z.enum(categoryIds, {
     errorMap: () => ({ message: "Select a registration category" }),
@@ -462,7 +462,7 @@ export default function Registration() {
               <Field label="Position / Title" error={errors.position?.message} required>
                 <Input {...register("position")} placeholder="e.g. Project Engineer" />
               </Field>
-              <Field label="NICE Chapter / Location" error={errors.chapter?.message}>
+              <Field label="NICE Chapter / Location" error={errors.chapter?.message} required>
                 <Input {...register("chapter")} placeholder="e.g. Lagos Chapter" />
               </Field>
               <div className="sm:col-span-2">
