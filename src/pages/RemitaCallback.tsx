@@ -243,8 +243,16 @@ export default function RemitaCallback() {
           )}
 
           <div className="flex flex-col sm:flex-row gap-2 justify-center">
+            {state === "paid" && (
+              <Button asChild variant="professional">
+                <Link to="/flyer">
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Generate My "I'll Be Attending" Flyer
+                </Link>
+              </Button>
+            )}
             {state === "paid" && receipt && (
-              <Button variant="professional" onClick={downloadReceipt}>
+              <Button variant="outline" onClick={downloadReceipt}>
                 <Download className="h-4 w-4 mr-2" />
                 Download Receipt
               </Button>
