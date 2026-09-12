@@ -462,7 +462,7 @@ export default function Registration() {
               <Field label="Position / Title" error={errors.position?.message} required>
                 <Input {...register("position")} placeholder="e.g. Project Engineer" />
               </Field>
-              <Field label="NICE Chapter / Location" error={errors.chapter?.message}>
+              <Field label="NICE Chapter / Location" error={errors.chapter?.message} required>
                 <Input {...register("chapter")} placeholder="e.g. Lagos Chapter" />
               </Field>
               <div className="sm:col-span-2">
