@@ -34,6 +34,7 @@ import {
   Building2,
   UploadCloud,
   Loader2,
+  Sparkles,
 } from "lucide-react";
 import {
   CONFERENCE,
@@ -366,13 +367,19 @@ export default function Registration() {
               <Detail label="Amount" value={formatNaira(confirmation.amount)} />
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button asChild variant="professional">
+                <Link to="/flyer">
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Generate My "I'll Be Attending" Flyer
+                </Link>
+              </Button>
               <Button
                 onClick={() => {
                   setConfirmation(null);
                   setReceiptFile(null);
                 }}
-                variant="professional"
+                variant="outline"
               >
                 Register Another Delegate
               </Button>
