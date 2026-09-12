@@ -34,6 +34,7 @@ import {
   Building2,
   UploadCloud,
   Loader2,
+  Sparkles,
 } from "lucide-react";
 import {
   CONFERENCE,
