@@ -395,6 +395,18 @@ export default function Registration() {
         />
       </Helmet>
 
+      <div className="mb-8 rounded-xl border border-accent/40 bg-accent/10 p-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div>
+          <p className="font-semibold">Already paid via Remita but still marked pending?</p>
+          <p className="text-sm text-muted-foreground">
+            Verify with your ticket code, Remita RRR or reference to get your receipt and QR badge.
+          </p>
+        </div>
+        <Button asChild size="lg" variant="professional" className="shrink-0">
+          <Link to="/payment-status">Confirm My Payment</Link>
+        </Button>
+      </div>
+
       <header className="mb-8 max-w-3xl">
         <h1 className="text-3xl md:text-4xl font-bold">Conference Registration</h1>
         <p className="text-muted-foreground mt-2">

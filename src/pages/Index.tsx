@@ -109,6 +109,23 @@ const Index = () => {
         </div>
       </div>
 
+      {/* Paid but still pending? */}
+      <div className="border-b border-accent/30 bg-accent/10">
+        <div className="container mx-auto px-6 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <div>
+            <p className="font-semibold text-foreground">
+              Paid via Remita but your registration still shows pending?
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Confirm your payment instantly and get your receipt and QR badge by email.
+            </p>
+          </div>
+          <Button asChild size="lg" className="shrink-0 bg-gradient-eko text-white shadow-gold hover:opacity-95">
+            <Link to="/payment-status">Confirm My Payment</Link>
+          </Button>
+        </div>
+      </div>
+
       {/* Why Lagos */}
       <section className="container mx-auto px-6 lg:px-12 py-24 md:py-32">
         <div className="grid md:grid-cols-12 gap-12 items-center">
