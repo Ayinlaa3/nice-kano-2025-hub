@@ -73,11 +73,26 @@ const formSchema = z.object({
     errorMap: () => ({ message: "You must accept the terms to register" }),
   }),
 }).superRefine((values, ctx) => {
-  if (values.category === "student" && (values.institution ?? "").trim().length < 2) {
+  const isStudent = values.category === "student";
+  if (isStudent && (values.institution ?? "").trim().length < 2) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
       path: ["institution"],
       message: "Please enter your institution",
+    });
+  }
+  if (!isStudent && (values.organization ?? "").trim().length < 2) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["organization"],
+      message: "Please enter your organization / employer",
+    });
+  }
+  if ((values.position ?? "").trim().length < 2) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["position"],
+      message: "Please enter your position / title",
     });
   }
 });
@@ -424,10 +439,14 @@ export default function Registration() {
               >
                 <Input {...register("institution")} placeholder="University / Body" />
               </Field>
-              <Field label="Organization / Employer" error={errors.organization?.message}>
+              <Field
+                label="Organization / Employer"
+                error={errors.organization?.message}
+                required={selectedCategory !== "student"}
+              >
                 <Input {...register("organization")} placeholder="Company name (if different)" />
               </Field>
-              <Field label="Position / Title" error={errors.position?.message}>
+              <Field label="Position / Title" error={errors.position?.message} required>
                 <Input {...register("position")} placeholder="e.g. Project Engineer" />
               </Field>
               <Field label="NICE Chapter / Location" error={errors.chapter?.message}>
