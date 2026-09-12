@@ -4,7 +4,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Loader2, CheckCircle2, Clock, XCircle, Download, RefreshCw } from "lucide-react";
+import { Loader2, CheckCircle2, Clock, XCircle, Download, RefreshCw, Sparkles } from "lucide-react";
 import niceLogo from "@/assets/nice-logo.svg.asset.json";
 import { IllBeThere } from "@/components/IllBeThere";
 
