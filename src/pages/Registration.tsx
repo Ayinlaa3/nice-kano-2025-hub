@@ -145,6 +145,13 @@ export default function Registration() {
   const [banks, setBanks] = useState<BankAccount[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const resetForm = () => {
+    reset();
+    setReceiptFile(null);
+    setReceiptError(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
   const {
     register,
     handleSubmit,
