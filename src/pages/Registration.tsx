@@ -145,11 +145,19 @@ export default function Registration() {
   const [banks, setBanks] = useState<BankAccount[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const resetForm = () => {
+    reset();
+    setReceiptFile(null);
+    setReceiptError(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
   const {
     register,
     handleSubmit,
     watch,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -258,6 +266,7 @@ export default function Registration() {
           amount: feeInfo.amount,
           paymentMethod: values.paymentMethod,
         });
+        resetForm();
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         // Remita — open the inline widget with a pre-generated RRR
@@ -377,7 +386,7 @@ export default function Registration() {
               <Button
                 onClick={() => {
                   setConfirmation(null);
-                  setReceiptFile(null);
+                  resetForm();
                 }}
                 variant="outline"
               >
