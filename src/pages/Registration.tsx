@@ -266,6 +266,7 @@ export default function Registration() {
           amount: feeInfo.amount,
           paymentMethod: values.paymentMethod,
         });
+        resetForm();
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         // Remita — open the inline widget with a pre-generated RRR
