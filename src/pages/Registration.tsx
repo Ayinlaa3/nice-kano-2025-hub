@@ -386,7 +386,7 @@ export default function Registration() {
               <Button
                 onClick={() => {
                   setConfirmation(null);
-                  setReceiptFile(null);
+                  resetForm();
                 }}
                 variant="outline"
               >
