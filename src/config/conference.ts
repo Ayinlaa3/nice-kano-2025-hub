@@ -58,7 +58,9 @@ export const CONFERENCE = {
 // ----------------------------------------------------------------------------
 // Registration pricing engine
 // ----------------------------------------------------------------------------
-export const EARLY_BIRD_CUTOFF_ISO = "2026-09-15";
+// Extended from 15 September 2026 to 25 September 2026
+export const EARLY_BIRD_CUTOFF_ISO = "2026-09-25";
+export const EARLY_BIRD_EXTENDED_FROM_ISO = "2026-09-15";
 
 export type RegistrationCategoryId =
   | "fellow"
