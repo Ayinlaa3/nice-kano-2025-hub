@@ -99,6 +99,8 @@ const Index = () => {
         <script type="application/ld+json">{JSON.stringify(eventJsonLd)}</script>
       </Helmet>
 
+      <EarlyBirdAlert />
+
       <Hero />
 
       {/* Marquee-style theme band */}
