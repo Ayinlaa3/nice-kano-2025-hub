@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 
 import Hero from "@/components/Hero";
+import EarlyBirdAlert from "@/components/EarlyBirdAlert";
 import { CONFERENCE } from "@/config/conference";
 import bridge from "@/assets/lagos/third-mainland-bridge.jpg";
 import ekoNight from "@/assets/lagos/eko-atlantic-night.jpg";
