@@ -47,8 +47,8 @@ const ADD_ONS = [
 
 
 const BOOTH_OPTIONS = [
-  { name: "Standard Booth (3m x 3m)=(9m²)", earlyBird: "₦350,000", standard: "₦500,000", amount: 500000 },
-  { name: "Premium Booth (3m x 6m)=(18m²)", earlyBird: "₦600,000", standard: "₦900,000", amount: 900000 },
+  { name: "Standard Booth (3m x 3m)=(9m²)", standard: "₦500,000", amount: 500000 },
+  { name: "Premium Booth (3m x 6m)=(18m²)", standard: "₦900,000", amount: 900000 },
   { name: "Vendor's Option (Outside The Hall)", standard: "₦70,000", amount: 70000 },
 ];
 
@@ -175,7 +175,10 @@ export default function Sponsorships() {
                   <span className="text-2xl">{tier.icon}</span>
                   <h3 className="text-xl font-bold">{tier.name}</h3>
                 </div>
-                <Badge variant="secondary" className="text-lg px-3 py-1">{tier.price}</Badge>
+                <Badge variant="secondary" className="px-3 py-1 text-right">
+                  <span className="block text-[10px] uppercase tracking-wider text-muted-foreground">Standard Rate</span>
+                  <span className="text-lg">{tier.price}</span>
+                </Badge>
               </div>
               <ul className="space-y-2 mb-6">
                 {tier.perks.map((perk, index) => (
@@ -254,8 +257,7 @@ export default function Sponsorships() {
                   <div key={index} className="bg-muted/30 p-4 rounded-lg">
                     <h4 className="font-medium">{booth.name}</h4>
                     <div className="flex gap-4 mt-2 mb-3 flex-wrap">
-                      {booth.earlyBird && <Badge variant="secondary">Early Bird: {booth.earlyBird}</Badge>}
-                      <Badge variant="outline">Standard: {booth.standard}</Badge>
+                      <Badge variant="outline">Standard Rate: {booth.standard}</Badge>
                     </div>
                     <Button
                       size="sm"
