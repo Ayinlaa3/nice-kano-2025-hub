@@ -1104,6 +1104,7 @@ export type Database = {
       legacy_members: {
         Row: {
           application_date: string | null
+          chapter: string | null
           email: string | null
           firstname: string | null
           grade: string | null
@@ -1118,6 +1119,7 @@ export type Database = {
         }
         Insert: {
           application_date?: string | null
+          chapter?: string | null
           email?: string | null
           firstname?: string | null
           grade?: string | null
@@ -1132,6 +1134,7 @@ export type Database = {
         }
         Update: {
           application_date?: string | null
+          chapter?: string | null
           email?: string | null
           firstname?: string | null
           grade?: string | null
@@ -2398,6 +2401,7 @@ export type Database = {
         }
         Returns: {
           application_date: string | null
+          chapter: string | null
           email: string | null
           firstname: string | null
           grade: string | null
@@ -2427,6 +2431,10 @@ export type Database = {
           rating: number
           review_text: string
         }[]
+      }
+      get_legacy_outstanding_balance: {
+        Args: { _member_uid: string }
+        Returns: number
       }
       get_member_applications: {
         Args: { _user_id: string }
