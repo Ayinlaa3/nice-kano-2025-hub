@@ -1588,6 +1588,51 @@ export type Database = {
           },
         ]
       }
+      payment_reconciliation_logs: {
+        Row: {
+          account_credited: boolean
+          checked_at: string
+          id: string
+          outcome: string
+          payment_id: string | null
+          previous_status: string | null
+          remita_message: string | null
+          remita_status: string | null
+          rrr: string | null
+          settlement_found: boolean
+          source: string
+          user_id: string | null
+        }
+        Insert: {
+          account_credited?: boolean
+          checked_at?: string
+          id?: string
+          outcome: string
+          payment_id?: string | null
+          previous_status?: string | null
+          remita_message?: string | null
+          remita_status?: string | null
+          rrr?: string | null
+          settlement_found?: boolean
+          source?: string
+          user_id?: string | null
+        }
+        Update: {
+          account_credited?: boolean
+          checked_at?: string
+          id?: string
+          outcome?: string
+          payment_id?: string | null
+          previous_status?: string | null
+          remita_message?: string | null
+          remita_status?: string | null
+          rrr?: string | null
+          settlement_found?: boolean
+          source?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       payments: {
         Row: {
           amount: number | null
