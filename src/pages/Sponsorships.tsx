@@ -25,6 +25,7 @@ import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { payWithRemita } from "@/lib/remitaWidget";
+import { NICE_BANK_ACCOUNT } from "@/config/conference";
 
 const TIERS = [
   { name: "Platinum", price: "₦15,000,000", amount: 15000000, perks: ["Prime logo placement on stage backdrop & website","2 premium booths at Construction Expo Africa","5 complimentary full-access registrations","Keynote acknowledgment at opening session","5-minute video ad before plenary sessions","Centre-spread ad in event brochure","Exclusive premium table at Business Roundtable"], color: "bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20", icon: "👑" },
@@ -82,6 +83,8 @@ export default function Sponsorships() {
   const [applyOpen, setApplyOpen] = useState(false);
   const [form, setForm] = useState<ApplyForm>(emptyForm);
   const [submitting, setSubmitting] = useState(false);
+  const [payMethod, setPayMethod] = useState<"remita" | "bank_transfer_receipt">("remita");
+  const [receiptFile, setReceiptFile] = useState<File | null>(null);
 
   const openApply = (preset?: {
     applicationType?: ApplyForm["applicationType"];
@@ -96,12 +99,51 @@ export default function Sponsorships() {
       boothType: preset?.boothType ?? "",
       totalAmount: preset?.amount ?? 0,
     });
+    setReceiptFile(null);
     setApplyOpen(true);
   };
 
   const submitApplication = async () => {
     if (!form.orgName || !form.contactName || !form.contactEmail || !form.contactPhone || !form.totalAmount) {
       toast({ title: "Missing details", description: "Fill organisation, contact, and amount.", variant: "destructive" });
+      return;
+    }
+    if (payMethod === "bank_transfer_receipt") {
+      if (!receiptFile) {
+        toast({ title: "Receipt required", description: "Upload your bank transfer receipt.", variant: "destructive" });
+        return;
+      }
+      if (receiptFile.size > 8 * 1024 * 1024) {
+        toast({ title: "File too large", description: "Receipt must be under 8MB.", variant: "destructive" });
+        return;
+      }
+      setSubmitting(true);
+      try {
+        const dataUrl: string = await new Promise((res, rej) => {
+          const r = new FileReader();
+          r.onload = () => res(r.result as string);
+          r.onerror = () => rej(new Error("Could not read file"));
+          r.readAsDataURL(receiptFile);
+        });
+        const { data, error } = await supabase.functions.invoke("sponsorship-submit-receipt", {
+          body: {
+            ...form,
+            receipt: { filename: receiptFile.name, contentType: receiptFile.type || "application/octet-stream", data: dataUrl.split(",")[1] },
+          },
+        });
+        if (error || !data?.success) throw new Error(data?.error || error?.message || "Submission failed");
+        toast({
+          title: "Application submitted",
+          description: `Application ${data.applicationNo} is pending confirmation. We'll email you once your transfer is verified.`,
+        });
+        setApplyOpen(false);
+        setForm(emptyForm);
+        setReceiptFile(null);
+      } catch (err) {
+        toast({ title: "Submission failed", description: err instanceof Error ? err.message : "Please try again.", variant: "destructive" });
+      } finally {
+        setSubmitting(false);
+      }
       return;
     }
     setSubmitting(true);
@@ -323,7 +365,7 @@ export default function Sponsorships() {
           <DialogHeader>
             <DialogTitle>Sponsorship / Exhibition Application</DialogTitle>
             <DialogDescription>
-              Complete this form to generate a Remita payment link. You'll be redirected to Remita to complete payment.
+              Complete this form, then pay via Remita or by bank transfer to the NICE Zenith Bank account with receipt upload.
             </DialogDescription>
           </DialogHeader>
 
@@ -416,11 +458,51 @@ export default function Sponsorships() {
             </div>
           </div>
 
+          <div className="space-y-3 border-t pt-4">
+            <Label>Payment Method *</Label>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {([
+                ["remita", "Pay with Remita", "Instant confirmation"],
+                ["bank_transfer_receipt", "Bank Transfer + Upload Receipt", "Confirmed after admin review"],
+              ] as const).map(([val, title, sub]) => (
+                <button
+                  key={val}
+                  type="button"
+                  onClick={() => setPayMethod(val)}
+                  className={`text-left rounded-lg border p-3 transition-colors ${payMethod === val ? "border-brand-primary bg-brand-primary/10" : "border-border hover:bg-muted/40"}`}
+                >
+                  <p className="font-medium text-sm">{title}</p>
+                  <p className="text-xs text-muted-foreground">{sub}</p>
+                </button>
+              ))}
+            </div>
+            {payMethod === "bank_transfer_receipt" && (
+              <div className="space-y-3">
+                <div className="rounded-lg bg-muted/40 p-3 text-sm space-y-1">
+                  <p><strong>Bank:</strong> {NICE_BANK_ACCOUNT.bank}</p>
+                  <p><strong>Account Name:</strong> {NICE_BANK_ACCOUNT.accountName}</p>
+                  <p><strong>Account Number:</strong> <span className="font-mono text-base">{NICE_BANK_ACCOUNT.accountNumber}</span></p>
+                  <p className="text-xs text-muted-foreground pt-1">
+                    Transfer the exact amount using your organisation name as reference, then upload the receipt. Your application stays PENDING until the secretariat confirms it.
+                  </p>
+                </div>
+                <div className="space-y-1.5">
+                  <Label>Payment Receipt * (JPG, PNG or PDF, max 8MB)</Label>
+                  <Input
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,application/pdf"
+                    onChange={(e) => setReceiptFile(e.target.files?.[0] ?? null)}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
           <DialogFooter>
             <Button variant="outline" onClick={() => setApplyOpen(false)} disabled={submitting}>Cancel</Button>
             <Button variant="professional" onClick={submitApplication} disabled={submitting}>
               {submitting && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-              Continue to Remita Payment
+              {payMethod === "remita" ? "Continue to Remita Payment" : "Submit Application & Receipt"}
             </Button>
           </DialogFooter>
         </DialogContent>
