@@ -99,7 +99,6 @@ Deno.serve(async (req) => {
         <p style="font-size:12px;color:#6b7280">Our team will contact you about next steps. Questions? ${SUPPORT_EMAIL}</p>
         <p>— NICE Conference Secretariat</p>
       </div>`);
-    await admin.from("conference_sponsorships").update({ confirmation_email_sent_at: now } as never).eq("id", id).then(() => {}, () => {});
 
     return json({ success: true, status: "paid" });
   } catch (e) {
