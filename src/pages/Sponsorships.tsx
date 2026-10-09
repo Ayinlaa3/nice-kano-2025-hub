@@ -364,7 +364,7 @@ export default function Sponsorships() {
           <DialogHeader>
             <DialogTitle>Sponsorship / Exhibition Application</DialogTitle>
             <DialogDescription>
-              Complete this form to generate a Remita payment link. You'll be redirected to Remita to complete payment.
+              Complete this form, then pay via Remita or by bank transfer to the NICE Zenith Bank account with receipt upload.
             </DialogDescription>
           </DialogHeader>
 
