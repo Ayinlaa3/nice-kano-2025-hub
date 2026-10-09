@@ -99,6 +99,7 @@ export default function Sponsorships() {
       boothType: preset?.boothType ?? "",
       totalAmount: preset?.amount ?? 0,
     });
+    setReceiptFile(null);
     setApplyOpen(true);
   };
 
