@@ -670,6 +670,7 @@ export type Database = {
         Row: {
           addons: Json | null
           address: string | null
+          admin_note: string | null
           application_no: string
           application_type: string
           booth_type: string | null
@@ -685,7 +686,9 @@ export type Database = {
           org_name: string
           package: string | null
           paid_at: string | null
+          payment_method: string
           payment_status: string
+          receipt_path: string | null
           remita_order_id: string | null
           remita_rrr: string | null
           total_amount: number
@@ -697,6 +700,7 @@ export type Database = {
         Insert: {
           addons?: Json | null
           address?: string | null
+          admin_note?: string | null
           application_no: string
           application_type: string
           booth_type?: string | null
@@ -712,7 +716,9 @@ export type Database = {
           org_name: string
           package?: string | null
           paid_at?: string | null
+          payment_method?: string
           payment_status?: string
+          receipt_path?: string | null
           remita_order_id?: string | null
           remita_rrr?: string | null
           total_amount?: number
@@ -724,6 +730,7 @@ export type Database = {
         Update: {
           addons?: Json | null
           address?: string | null
+          admin_note?: string | null
           application_no?: string
           application_type?: string
           booth_type?: string | null
@@ -739,7 +746,9 @@ export type Database = {
           org_name?: string
           package?: string | null
           paid_at?: string | null
+          payment_method?: string
           payment_status?: string
+          receipt_path?: string | null
           remita_order_id?: string | null
           remita_rrr?: string | null
           total_amount?: number
