@@ -4,8 +4,8 @@
 - [ ] Remaining employer logos/websites — waiting for approved assets and identity confirmation for Planover, Hooluc, Soilsmart, Modehouse, Godrej and VLX (research found VXL, not VLX)
 - [x] Activate Innovation Challenge with flyers and application form
 - [x] Align programme and sitewide dates with uploaded schedule; explicit no-new-registration policy overrides obsolete document wording
-- [ ] Final Career Fair and Innovation Challenge session timings — awaiting clarification of conflicts between supplied flyers and programme
+- [x] Final Career Fair and Innovation Challenge session timings — programme takes precedence, per user
 - [x] Lagos City Tour storytelling page and Experience Lagos introduction, no costs displayed
-- [ ] Red Door Gallery photo — awaiting an authentic approved photograph; unrelated retrieved image was not used
+- [x] Red Door Gallery remains text-only, per user; unrelated retrieved image was not used
 - [x] Replace official contacts and WhatsApp support sitewide; original attached flyers remain unchanged with current contacts alongside
 - [x] Verify new pages, hosted images, programme tabs, personalized WhatsApp links and phone-screen overflow

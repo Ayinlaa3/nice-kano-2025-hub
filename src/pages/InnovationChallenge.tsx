@@ -26,7 +26,7 @@ export default function InnovationChallenge() {
   const studentSupport = SUPPORT_CONTACTS.find((c) => c.name === "Salisu");
   return <div className="container mx-auto py-12 md:py-20 space-y-14">
     <Helmet title="Young Engineers Innovation Challenge 2026 | NICE Lagos">
-      <meta name="description" content="Apply for the NICE 2026 Young Engineers Innovation Challenge in partnership with Contech. Teams of 3–5; deadline 15 October; final pitch 22 October. First prize ₦1,000,000." />
+      <meta name="description" content="Apply for the NICE 2026 Young Engineers Innovation Challenge in partnership with Contech. Teams of 3–5; deadline 15 October; challenge session 21 October, 3:00–3:45 PM. First prize ₦1,000,000." />
       <link rel="canonical" href="https://conference.nicehq.org/innovationchallenge" />
     </Helmet>
     <header className="max-w-4xl space-y-6">
@@ -34,8 +34,8 @@ export default function InnovationChallenge() {
       <h1 className="text-4xl md:text-6xl leading-tight">Young Engineers <span className="text-accent">Innovation Challenge 2026</span></h1>
       <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">An innovation platform for Nigeria’s next generation of engineers. Develop and showcase practical solutions to real challenges facing Nigeria’s infrastructure and built environment, pitch before experts and industry leaders, and gain recognition at the NICE Conference.</p>
       <div className="flex flex-wrap gap-3"><Button asChild variant="professional" size="lg"><a href={APPLICATION_URL} target="_blank" rel="noopener noreferrer">Submit Your Idea <ArrowUpRight className="w-4 h-4" /></a></Button><Button asChild variant="outline" size="lg"><a href="#challenge-themes">Explore the Themes</a></Button></div>
-      <div className="flex flex-wrap gap-6 text-sm"><span className="flex items-center gap-2"><CalendarDays className="w-4 h-4 text-accent" />Submission deadline: Thursday, 15 October 2026</span><span className="flex items-center gap-2"><CalendarDays className="w-4 h-4 text-accent" />Final pitch: Thursday, 22 October 2026</span></div>
-      <p className="text-sm text-muted-foreground">Applications submitted after the deadline will not be considered.</p>
+      <div className="flex flex-wrap gap-6 text-sm"><span className="flex items-center gap-2"><CalendarDays className="w-4 h-4 text-accent" />Submission deadline: Thursday, 15 October 2026</span><span className="flex items-center gap-2"><CalendarDays className="w-4 h-4 text-accent" />Challenge session: Wednesday, 21 October 2026 · 3:00–3:45 PM</span></div>
+      <p className="text-sm text-muted-foreground">Applications submitted after the deadline will not be considered. Programme timings take precedence over the final-pitch date printed on the flyers.</p>
       <div className="flex items-center gap-4 border-t border-border pt-5"><span className="text-sm text-muted-foreground">NICE · In partnership with</span><img src={contech} alt="Contech" className="h-12 w-36 object-contain bg-primary-foreground rounded-md p-2" /></div>
     </header>
     <section><h2 className="text-3xl mb-6 flex items-center gap-3"><Trophy className="text-accent" />Prizes & Recognition</h2><div className="grid md:grid-cols-3 gap-5">{prizes.map((p) => <article key={p.place} className="border border-border rounded-lg p-6 bg-card"><p className="text-sm text-accent">{p.place}</p><h3 className="text-3xl mt-3 mb-5">{p.amount}</h3><ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">{p.benefits.map((b) => <li key={b}>{b}</li>)}</ul></article>)}</div></section>

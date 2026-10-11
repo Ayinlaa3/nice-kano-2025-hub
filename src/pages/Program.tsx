@@ -89,7 +89,7 @@ export default function Program() {
         <h1 className="text-3xl md:text-4xl font-bold">Programme / Schedule</h1>
         <p className="text-muted-foreground mt-2">Provisional schedule for Tuesday 20–Thursday 22 October 2026. Sessions, times and venues are in draft and subject to updates.</p>
         <p className="text-sm text-accent mt-3">Registration closes Wednesday, 14 October. The arrival desks are for pre-registered delegate check-in only.</p>
-        <p className="text-sm text-muted-foreground mt-2">The Career Fair flyer announces 2:00 PM daily; the provisional programme lists Thursday’s Career Fair at 1:30–3:00 PM. The Innovation Challenge final pitch is confirmed for Thursday, 22 October; Wednesday’s programme also lists a challenge session. Please confirm final timings with the programmes team.</p>
+
       </header>
 
       <Tabs defaultValue="day1" className="w-full">
