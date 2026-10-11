@@ -8,12 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Phone, Mail, Users, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 
-// Import leadership photos
-import leaderOfoeyeno from "@/assets/leader-ofoeyeno.jpg";
-import leaderBalla from "@/assets/leader-balla.jpg";
-import leaderAlhassan from "@/assets/leader-alhassan.jpg";
-import leaderBoaz from "@/assets/leader-boaz.jpg";
-
+import { OFFICIAL_CONTACTS, SUPPORT_CONTACTS, whatsappLink } from "@/config/contacts";
 
 export default function Contact() {
   const { toast } = useToast();
@@ -41,61 +36,10 @@ export default function Contact() {
     (e.target as HTMLFormElement).reset();
   }
 
-  const leadershipContacts = [
-    {
-      name: "Engr. Dr. Bemigho Ofoeyeno",
-      title: "FNSE, FNICE",
-      role: "Chairman, Central Planning Committee",
-      phone: "+234 802 331 8732",
-      image: leaderOfoeyeno,
-      color: "primary"
-    },
-    {
-      name: "Engr. Maryam Abubakar Balla",
-      title: "FNSE, FNICE", 
-      role: "Secretary, Central Planning Committee",
-      phone: "+234 803 811 1882",
-      image: leaderBalla,
-      color: "green"
-    },
-    {
-      name: "Engr. Prof. Hassim Alhassan",
-      title: "FNSE, FNICE",
-      role: "Chairman, Local Organizing Committee", 
-      phone: "+234 810 310 2219",
-      image: leaderAlhassan,
-      color: "gold"
-    },
-    {
-      name: "Engr. David Boaz",
-      title: "FNSE, FNICE",
-      role: "NICE Executive Secretary",
-      phone: "+234 803 715 4335",
-      image: leaderBoaz,
-      color: "red"
-    }
-  ];
-
-  const subcommitteeContacts = [
-    { department: "Registration", chairman: "ENGR. JOAN NWEKE, FNICE", phone: "+234 803 048 0459", description: "Conference registration and attendee support" },
-    { department: "Sponsorship", chairman: "ENGR. BEMIGHO OFOEYENO, FNICE", phone: "+234 802 331 8732", description: "Partnership and sponsorship opportunities" },
-    { department: "Logistics", chairman: "Engr. Fatima Aliyu", phone: "+234 807 890 1234", description: "Venue, transportation, and logistics coordination" },
-    { department: "Media", chairman: "Engr. Abdullahi Sani", phone: "+234 809 567 8901", description: "Press coverage and media relations" },
-    { department: "Technical Sessions", chairman: "PROF. ALHASSAN HASHIM MOHAMMED, FNICE", phone: "+234 810 310 2219", description: "Paper submissions and technical programs" },
-    { department: "Accommodation", chairman: ">ENGR. USMAN TIJANI ", phone: "+234 803 935 1937", description: "Hotel bookings and accommodation assistance" },
-    { department: "Transportation", chairman: "Engr. Khadija Ahmad", phone: "+234 805 123 4567", description: "Airport transfers and local transportation" },
-    { department: "Protocol", chairman: "Engr. Yusuf Abdullahi", phone: "+234 813 456 7890", description: "VIP coordination and ceremonial activities" }
-  ];
-
-  const supportTeam = [
-    { name: "Boaz", phone: "+234 803 715 4335", role: "General Support" },
-    { name: "Ahmed", phone: "+234 818 209 7622", role: "Technical Support" }
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background">
       <Helmet title="Contact Us | NICE Lagos 2026">
-        <meta name="description" content="Contact the NICE Lagos 2026 organizing committee, conference leadership, subcommittee chairmen, and support team." />
+        <meta name="description" content="Contact the NICE Lagos 2026 organizing committee, conference contacts and specialist WhatsApp support team." />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/contact"} />
       </Helmet>
 
@@ -106,7 +50,7 @@ export default function Contact() {
             Contact & Support
           </h1>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Connect with our conference leadership, specialized subcommittees, and dedicated support team for all your conference needs.
+            Contact our conference team or speak to the right specialist for your enquiry.
           </p>
         </header>
 
@@ -142,87 +86,18 @@ export default function Contact() {
                     </div>
                   </div>
                   
-                  {/* Key Leadership */}
                   <div className="border-t pt-4">
-                    <h4 className="font-semibold mb-3">Key Leadership</h4>
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-3">
-                        <div className="w-12 h-12 rounded-full overflow-hidden bg-muted flex-shrink-0">
-                          <img src={leaderOfoeyeno} alt="Engr. Dr. Bemigho Ofoeyeno" className="w-full h-full object-cover" />
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-medium">Engr. Dr. Bemigho Ofoeyeno</p>
-                          <p className="text-sm text-muted-foreground">FNSE, FNICE | CPC Chairman</p>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                            <Phone className="h-3 w-3" />
-                            <a href="tel:+2348023318732" className="hover:text-primary transition-colors">+234 802 331 8732</a>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-start gap-3">
-                        <div className="w-12 h-12 rounded-full overflow-hidden bg-muted flex-shrink-0">
-                          <img src={leaderAlhassan} alt="Engr. Prof. Hassim Alhassan" className="w-full h-full object-cover" />
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-medium">Engr. Prof. Hassim Alhassan</p>
-                          <p className="text-sm text-muted-foreground">FNSE, FNICE | LOC Chairman</p>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                            <Phone className="h-3 w-3" />
-                            <a href="tel:+2348103102219" className="hover:text-primary transition-colors">+234 810 310 2219</a>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-start gap-3">
-                        <div className="w-12 h-12 rounded-full overflow-hidden bg-muted flex-shrink-0">
-                          <img src={leaderBoaz} alt="Engr. David Boaz" className="w-full h-full object-cover" />
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-medium">Engr. David Boaz</p>
-                          <p className="text-sm text-muted-foreground">FNSE, FNICE | NICE Executive Secretary</p>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                            <Phone className="h-3 w-3" />
-                            <a href="tel:+2348037154335" className="hover:text-primary transition-colors">+234 803 715 4335</a>
-                          </div>
-                        </div>
-                      </div>
+                    <h4 className="font-semibold mb-3">Conference Contacts</h4>
+                    <div className="space-y-5">
+                      {OFFICIAL_CONTACTS.map((contact) => <div key={contact.name}>
+                        <p className="font-medium">{contact.name}{contact.role === "Acting ES" ? " (Acting ES)" : ""}</p>
+                        <a className="text-accent underline text-sm" href={`tel:${contact.phone.replace(/\s/g, "")}`}>{contact.phone}</a>
+                      </div>)}
                     </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
-
-            {/* Subcommittee Contacts */}
-            {/* <Card>
-              <CardHeader>
-                <CardTitle>Subcommittee Contacts</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-4">
-                  {subcommitteeContacts.map((committee, index) => (
-                    <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
-                      <Phone className="h-4 w-4 text-muted-foreground mt-1" />
-                      <div className="flex-1">
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                          <h4 className="font-medium">{committee.department}</h4>
-                          <div className="text-sm">
-                            <p className="font-medium">{committee.chairman}</p>
-                            <a 
-                              href={`tel:${committee.phone}`}
-                              className="text-primary hover:underline"
-                            >
-                              {committee.phone}
-                            </a>
-                          </div>
-                        </div>
-                        <p className="text-sm text-muted-foreground mt-1">{committee.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card> */}
 
             {/* Support Team */}
             <Card>
@@ -234,8 +109,8 @@ export default function Contact() {
               </CardHeader>
               <CardContent>
                 <div className="grid gap-3">
-                  {supportTeam.map((member, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
+                  {SUPPORT_CONTACTS.map((member, index) => (
+                    <div key={index} className="flex flex-wrap gap-3 items-center justify-between p-3 rounded-lg bg-muted/50">
                       <div>
                         <h4 className="font-medium">{member.name}</h4>
                         <p className="text-sm text-muted-foreground">{member.role}</p>
@@ -243,7 +118,7 @@ export default function Contact() {
                       <div className="flex items-center gap-2">
                         <Phone className="h-4 w-4 text-muted-foreground" />
                         <a 
-                          href={`https://wa.me/${member.phone.replace(/[^0-9]/g, '')}?text=Hello%20${member.name},%20I%20need%20assistance%20regarding%20the%20NICE%20Lagos%202026%20conference.`}
+                          href={whatsappLink(member)}
                           target="_blank"
                           rel="noreferrer"
                           className="text-sm text-primary hover:underline"

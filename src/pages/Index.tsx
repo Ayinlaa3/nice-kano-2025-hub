@@ -41,21 +41,21 @@ const experiences = [
 const dayPreview = [
   {
     day: "Day 1",
-    date: "Mon · 20 Oct",
-    title: "Opening & Keynotes",
-    body: "Grand opening, keynote addresses, plenary on sustainable infrastructure for economic growth.",
+    date: "Tue · 20 Oct",
+    title: "Arrival, Tours & Cocktail",
+    body: "Delegate check-in, exhibitions, technical and city tours, innovation showcase and Chairman’s Cocktail & Engineering Business Roundtable.",
   },
   {
     day: "Day 2",
-    date: "Tue · 21 Oct",
-    title: "Technical Sessions & AGM",
-    body: "Parallel technical tracks, business roundtable, NICE Annual General Meeting.",
+    date: "Wed · 21 Oct",
+    title: "Opening & Plenary Sessions",
+    body: "Opening ceremony, keynote, awards, plenary and panel sessions, career clinic, mentorship and evening networking.",
   },
   {
     day: "Day 3",
-    date: "Wed · 22 Oct",
-    title: "Awards, Dinner & Tours",
-    body: "Fellowship conferment, gala dinner, cultural night, technical site visits across Lagos.",
+    date: "Thu · 22 Oct",
+    title: "AGM, Career Fair & Awards",
+    body: "Plenary sessions, conference communiqué, AGM and elections, graduate career fair, Annual Dinner & NICE Awards.",
   },
 ];
 
@@ -302,7 +302,7 @@ const Index = () => {
 
           <div className="relative max-w-2xl space-y-6">
             <div className="text-xs uppercase tracking-[0.25em] text-accent">
-              EXTENDED — EARLY-BIRD RATES NOW END 25 SEPT. 2026
+              REGISTRATION CLOSES WEDNESDAY, 14 OCTOBER 2026
             </div>
             <h2 className="font-display text-4xl md:text-6xl leading-tight">
               Your seat at Nigeria's engineering summit awaits.

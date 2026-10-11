@@ -34,6 +34,7 @@ import {
   Phone,
 } from "lucide-react";
 import { CONFERENCE } from "@/config/conference";
+import randlePhoto from "@/assets/lagos-hero/JK-Randle-Centre.png.asset.json";
 
 const VENUE_FEATURES = [
   { icon: Wifi, title: "Full A/V & Wi-Fi", desc: "Multi-room A/V rigs, live-stream capable, high-capacity Wi-Fi throughout." },
@@ -136,7 +137,7 @@ const FAQS = [
   },
   {
     q: "How do I collect my delegate pack?",
-    a: `Delegate packs are collected at the on-site registration desk at ${CONFERENCE.venue.shortName} from the evening before Day 1. Bring a valid ID and your registration confirmation.`,
+    a: `Delegate packs are collected at the delegate check-in desk at ${CONFERENCE.venue.shortName}. Bring a valid ID and your registration confirmation. Registration closes Wednesday, 14 October; no new registrations during the conference.`,
   },
 ];
 
@@ -173,6 +174,10 @@ export default function ExperienceLagos() {
       </header>
 
       {/* Venue */}
+      <section className="grid md:grid-cols-2 gap-8 items-center border-y border-border py-8">
+        <img src={randlePhoto.url} alt="J. Randle Centre for Yoruba Culture and History, Lagos" className="w-full aspect-[4/3] object-cover rounded-lg" loading="lazy" />
+        <div className="space-y-4"><Badge variant="outline">Beyond the conference</Badge><h2 className="text-3xl md:text-4xl">Lagos City Tour</h2><p className="text-muted-foreground text-lg">From railway memories in Ebute Metta to Yoruba heritage in Onikan and contemporary art in Lekki, discover a city whose stories are as bold as its skyline.</p><p className="text-sm text-muted-foreground">Departure point: Agidingbi, Ikeja. Proposed destinations and final arrangements are subject to confirmation. The overall tour cost will be communicated shortly.</p><Button asChild variant="professional"><Link to="/lagos-city-tour">Discover the Lagos City Tour</Link></Button></div>
+      </section>
       <section id="venue" className="space-y-6 scroll-mt-24">
         <div className="max-w-3xl">
           <Badge className="bg-brand-primary/10 text-brand-primary mb-3">Venue</Badge>

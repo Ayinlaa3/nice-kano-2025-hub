@@ -21,6 +21,8 @@ import Sponsorships from "./pages/Sponsorships";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import InnovationChallenge from "./pages/InnovationChallenge";
+import CareerFair from "./pages/CareerFair";
+import LagosCityTour from "./pages/LagosCityTour";
 import Certificate from "./pages/Certificate";
 import Flyer from "./pages/Flyer";
 
@@ -69,6 +71,8 @@ const App = () => (
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/innovationchallenge" element={<InnovationChallenge />} />
+                <Route path="/career-fair" element={<CareerFair />} />
+                <Route path="/lagos-city-tour" element={<LagosCityTour />} />
                 <Route path="/certificate" element={<Certificate />} />
                 <Route path="/flyer" element={<Flyer />} />
 

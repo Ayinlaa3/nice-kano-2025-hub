@@ -1,0 +1,45 @@
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { MapPin, ArrowRight, MessageCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { SUPPORT_CONTACTS, whatsappLink } from "@/config/contacts";
+import jaekel from "@/assets/city-tour/jaekel-house.jpg.asset.json";
+import theatre from "@/assets/city-tour/national-theatre-iganmu.jpg.asset.json";
+import museum from "@/assets/city-tour/national-museum-lagos.jpg.asset.json";
+import tinubu from "@/assets/city-tour/tinubu-square.jpg.asset.json";
+import freedom from "@/assets/city-tour/freedom-park.jpg.asset.json";
+import shyllon from "@/assets/city-tour/yemisi-shyllon-museum-of-art.jpg.asset.json";
+import randle from "@/assets/lagos-hero/JK-Randle-Centre.png.asset.json";
+import nike from "@/assets/lagos-hero/Outside_Nike_Art_Gallery_4202980259.jpg.asset.json";
+
+const stops = [
+  { name: "Jaekel House", chapter: "The railway remembers", address: "17 Federal Road, Ebute Metta", distance: "12–15 km", image: jaekel.url, story: "Begin where the tracks once carried a city into its future. At Jaekel House, colonial architecture, historical photographs and railway artefacts connect Lagos’s everyday movement with Nigeria’s engineering history.", credit: "Wikimedia Commons · Jaekel House" },
+  { name: "National Theatre", chapter: "A stage for a nation", address: "Iganmu, Lagos", distance: "15–18 km", image: theatre.url, story: "The unmistakable silhouette of the National Theatre rises over Iganmu. This major cultural landmark brings architecture and the history of Nigerian arts together — a place to consider how a building can become a national symbol.", credit: "Wikimedia Commons · CC BY-SA 4.0" },
+  { name: "National Museum Lagos", chapter: "Objects that carry our history", address: "King George V Road, Onikan, Lagos Island", distance: "18–22 km", image: museum.url, story: "In Onikan, the story moves from structures to the objects people leave behind. Traditional artefacts, archaeology, art and cultural heritage offer an encounter with the many histories that shape Nigeria.", credit: "Wikimedia Commons · Beendy234" },
+  { name: "J. Randle Centre for Yoruba Culture & History", chapter: "Heritage, told anew", address: "J.K. Randle Road, Onikan", distance: "18–22 km", image: randle.url, story: "Meet Yoruba history through culture, heritage and exhibitions. The J. Randle Centre invites a new generation to engage with old stories in a contemporary setting, placing identity at the heart of the city’s renewal.", note: "The supplied proposal notes that the centre closes on Wednesdays; access will be confirmed with the final itinerary." },
+  { name: "Tinubu Square", chapter: "At the crossroads of old Lagos", address: "Broad Street / Marina area, Lagos Island", distance: "19–23 km", image: tinubu.url, story: "Pause amid the rhythm of Lagos Island. Tinubu Square is one of the city’s historic landmarks, connecting the energy of today’s streets with the people and events that shaped Lagos’s development.", credit: "Wikimedia Commons · Joeyjayjuniors" },
+  { name: "Freedom Park", chapter: "From confinement to creativity", address: "1 Hospital Road, Lagos Island", distance: "19–23 km", image: freedom.url, story: "A former prison becomes a place for culture. Developed from the old Broad Street Prison, Freedom Park turns a difficult chapter of the city’s history into space for exhibitions, cultural activities and reflection.", credit: "Wikimedia Commons · Olusola David, Ayibiowu" },
+  { name: "Nike Art Gallery", chapter: "Colour, craft and imagination", address: "2 Nike Art Gallery Road, Lekki Phase 1", distance: "28–33 km", image: nike.url, story: "Across the city, a world of Nigerian and African art awaits. Traditional crafts, cultural displays and vivid works of art make Nike Art Gallery an invitation to see Lagos through the imagination of its artists." },
+  { name: "Yemisi Shyllon Museum of Art", chapter: "A conversation across generations", address: "Pan-Atlantic University, KM 52 Lekki–Epe Expressway, Ibeju-Lekki", distance: "40–45 km", image: shyllon.url, story: "Further along the Lekki–Epe corridor, Nigerian and African modern and contemporary art opens another window onto the continent. The museum’s cultural collections connect artistic expression with a changing world.", credit: "Wikimedia Commons · YSMA" },
+  { name: "Red Door Gallery", chapter: "The story continues", address: "Victoria Island, Lagos", distance: "23–27 km", story: "Contemporary African art brings our proposed journey into the present. At Red Door Gallery, exhibitions and creative expression offer another perspective on the city — a reminder that Lagos is still writing its story." },
+];
+export default function LagosCityTour() {
+  const support = SUPPORT_CONTACTS.find((c) => c.name === "Rokeebat");
+  return <>
+    <Helmet title="Lagos City Tour | NICE Lagos 2026"><meta name="description" content="Discover the proposed NICE Lagos City Tour: railway history, iconic architecture, Yoruba heritage and African art. Starting from Agidingbi, Ikeja; final itinerary to be confirmed." /><link rel="canonical" href="https://conference.nicehq.org/lagos-city-tour" /></Helmet>
+    <header className="relative min-h-[480px] flex items-end overflow-hidden">
+      <img src={tinubu.url} alt="Tinubu Square and the surrounding historic Lagos Island streets" className="absolute inset-0 w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-background/65" />
+      <div className="container mx-auto relative py-12 md:py-16 space-y-5"><Badge className="bg-accent text-accent-foreground">THIS IS LAGOS!!!</Badge><h1 className="text-4xl md:text-6xl text-primary-foreground">Lagos City Tour</h1><p className="text-lg max-w-2xl text-primary-foreground">A railway house. A national stage. A square full of stories. An island of art. Follow the threads of history, culture and creativity that make Lagos unforgettable.</p><Button asChild variant="professional"><a href="#journey">Explore the Journey <ArrowRight className="h-4 w-4" /></a></Button></div>
+    </header>
+    <div className="container mx-auto py-10 md:py-16 space-y-14">
+      <section className="border-b border-border pb-8 space-y-4"><h2 className="text-3xl">One city. Many stories.</h2><p className="text-muted-foreground max-w-3xl">Our proposed city tour starts in Agidingbi, Ikeja, and opens up a different Lagos beyond the conference hall. These nine destinations are proposed locations, not a confirmed sequence or a promise to visit every stop.</p><div className="flex flex-wrap gap-6 text-sm"><span className="flex gap-2 items-center"><MapPin className="h-4 w-4 text-accent" />Starting point: Agidingbi, Ikeja</span><span>The overall City Tour cost will be communicated shortly.</span></div><p className="text-sm text-muted-foreground">The provisional programme lists the Lagos Tour on Tuesday, 20 October, 11:00 AM–2:00 PM. Final route, access and travel arrangements will be confirmed by the tour team. Distances below are estimates from Agidingbi, not distances between stops.</p></section>
+      <section id="journey" className="space-y-16 scroll-mt-24">{stops.map((stop, i) => <article key={stop.name} className={`grid ${stop.image ? "md:grid-cols-2" : "md:max-w-3xl"} gap-8 md:gap-12 items-center border-b border-border pb-12`}>
+        {stop.image && <figure className={i % 2 ? "md:order-2" : ""}><img src={stop.image} alt={stop.name + ", Lagos"} className="w-full aspect-[4/3] object-cover rounded-lg" loading="lazy" />{stop.credit && <figcaption className="text-xs text-muted-foreground mt-2">Photo: {stop.credit}</figcaption>}</figure>}
+        <div className="space-y-4"><p className="text-sm text-accent">{String(i + 1).padStart(2, "0")} / {stop.chapter}</p><h2 className="text-3xl md:text-4xl">{stop.name}</h2><p className="text-muted-foreground text-lg leading-relaxed">{stop.story}</p><div className="text-sm space-y-2 border-t border-border pt-4"><p className="flex items-start gap-2"><MapPin className="h-4 w-4 shrink-0 text-accent mt-0.5" />{stop.address}</p><p className="text-muted-foreground">Estimated distance from Agidingbi: {stop.distance}</p>{stop.note && <p className="text-muted-foreground">{stop.note}</p>}</div></div>
+      </article>)}</section>
+      <section className="space-y-5"><h2 className="text-3xl">Make room for a little Lagos.</h2><p className="text-muted-foreground">For the final itinerary and participation arrangements, speak with our Lagos City Tour support contact.</p><div className="flex flex-wrap gap-3">{support && <Button asChild variant="professional"><a href={whatsappLink(support)} target="_blank" rel="noopener noreferrer"><MessageCircle className="h-4 w-4" />Chat with Rokeebat</a></Button>}<Button asChild variant="outline"><Link to="/experience">Back to Experience Lagos</Link></Button></div></section>
+    </div>
+  </>;
+}

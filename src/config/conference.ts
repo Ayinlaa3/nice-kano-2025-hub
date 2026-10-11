@@ -20,7 +20,7 @@ export const CONFERENCE = {
     endISO: "2026-10-22",
     countdownTarget: "2026-10-20T09:00:00",
     display: "20–22 Oct 2026",
-    displayLong: "October 20–22, 2026",
+    displayLong: "Tuesday 20–Thursday 22 October 2026",
   },
 
   venue: {

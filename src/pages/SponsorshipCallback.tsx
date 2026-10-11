@@ -67,7 +67,7 @@ export default function SponsorshipCallback() {
               ? "Thank you for partnering with NICE. Our sponsorship desk will be in touch shortly."
               : state === "pending"
                 ? "Your Remita payment is still being processed. This page will show the confirmed status once it clears."
-                : "We could not verify your payment automatically. Please contact sponsorship@nicehq.org."}
+                : "We could not verify your payment automatically. Please contact conference@nicehq.org."}
           </p>
           <Button asChild variant="professional">
             <Link to="/sponsorships">Back to Sponsorships</Link>
