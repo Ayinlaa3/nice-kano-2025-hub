@@ -79,7 +79,7 @@ const ChatSupport = () => {
           ) : (
             <>
               <MessageCircle className="h-6 w-6" />
-              <span className="text-sm font-medium whitespace-nowrap">Need Help? Chat with us</span>
+              <span className="hidden sm:inline text-sm font-medium whitespace-nowrap">Need Help? Chat with us</span>
             </>
           )}
         </Button>

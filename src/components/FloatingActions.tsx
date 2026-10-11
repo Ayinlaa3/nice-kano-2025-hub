@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Ticket, Handshake, Moon, Sun } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
+import { Button } from "@/components/ui/button";
 
 export default function FloatingActions() {
   const { theme, toggle } = useTheme();
@@ -40,7 +41,7 @@ export default function FloatingActions() {
         className="pointer-events-auto flex items-center gap-2 rounded-full bg-brand-primary/85 hover:bg-brand-primary text-white backdrop-blur-md shadow-lg border border-white/20 px-3 py-2.5 text-xs sm:text-sm font-semibold transition-all"
       >
         <Ticket className="h-4 w-4 shrink-0" />
-        <span>Register</span>
+        <span className="hidden sm:inline">Register</span>
       </Link>
 
       <Link
@@ -49,16 +50,16 @@ export default function FloatingActions() {
         className="pointer-events-auto flex items-center gap-2 rounded-full bg-brand-yellow/85 hover:bg-brand-yellow text-brand-primary backdrop-blur-md shadow-lg border border-white/20 px-3 py-2.5 text-xs sm:text-sm font-semibold transition-all"
       >
         <Handshake className="h-4 w-4 shrink-0" />
-        <span>Sponsor</span>
+        <span className="hidden sm:inline">Sponsor</span>
       </Link>
 
-      <button
+      <Button variant="ghost" size="icon"
         onClick={toggle}
         aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
         className="pointer-events-auto self-end flex items-center justify-center rounded-full bg-background/70 hover:bg-background text-foreground backdrop-blur-md shadow-lg border border-border/60 h-10 w-10 transition-all"
       >
         {isDark ? <Sun className="h-4 w-4 text-accent" /> : <Moon className="h-4 w-4 text-primary" />}
-      </button>
+      </Button>
     </div>
   );
 }

@@ -30,9 +30,9 @@ import port from "@/assets/lagos/lekki-port.jpg";
 const subThemeIcons = [Leaf, Building2, Cpu, Waves, Ship, TrendingUp, Landmark];
 
 const experiences = [
-  { title: "Cultural Night", desc: "Afrobeats, drums, fashion & Lagos energy.", to: "/about" },
+  { title: "Lagos City Tour", desc: "Railway heritage, historic landmarks and African art.", to: "/lagos-city-tour" },
   { title: "Annual Dinner & Awards", desc: "Recognising excellence in civil engineering.", to: "/about" },
-  { title: "Technical Site Tours", desc: "Lekki Port, Eko Atlantic, Third Mainland & more.", to: "/location" },
+  { title: "Graduate Career Fair", desc: "Live interviews, CV reviews and career opportunities.", to: "/career-fair" },
   { title: "Spouses Programme", desc: "Curated Lagos experiences for accompanying guests.", to: "/about" },
   { title: "Students & Young Engineers", desc: "Competitions, mentorship, career clinics.", to: "/innovationchallenge" },
   { title: "Exhibitions & Expo", desc: "Cutting-edge construction tech and materials.", to: "/sponsorships" },

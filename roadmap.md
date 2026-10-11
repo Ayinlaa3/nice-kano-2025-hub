@@ -1,8 +1,11 @@
 # NICE conference updates
-- [ ] Prominent registration-closing alert
-- [ ] Career Fair page, confirmed organizations, verified logos and links
-- [ ] Activate Innovation Challenge with flyers and application form
-- [ ] Align programme and sitewide dates with uploaded schedule
-- [ ] Lagos City Tour storytelling page and Experience Lagos introduction
-- [ ] Replace official contacts and WhatsApp support sitewide
-- [ ] Verify new pages and links
+- [x] Prominent registration-closing alert
+- [x] Career Fair page and all eight confirmed organizations; verified CitiBIM and LSPWC logos and four official website links
+- [ ] Remaining employer logos/websites — waiting for approved assets and identity confirmation for Planover, Hooluc, Soilsmart, Modehouse, Godrej and VLX (research found VXL, not VLX)
+- [x] Activate Innovation Challenge with flyers and application form
+- [x] Align programme and sitewide dates with uploaded schedule; explicit no-new-registration policy overrides obsolete document wording
+- [ ] Final Career Fair and Innovation Challenge session timings — awaiting clarification of conflicts between supplied flyers and programme
+- [x] Lagos City Tour storytelling page and Experience Lagos introduction, no costs displayed
+- [ ] Red Door Gallery photo — awaiting an authentic approved photograph; unrelated retrieved image was not used
+- [x] Replace official contacts and WhatsApp support sitewide; original attached flyers remain unchanged with current contacts alongside
+- [x] Verify new pages, hosted images, programme tabs, personalized WhatsApp links and phone-screen overflow
