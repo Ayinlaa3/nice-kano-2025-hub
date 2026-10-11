@@ -2,12 +2,15 @@ import { Helmet } from "react-helmet-async";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
+
+type Session = { time: string; title: string; venue?: string; speaker?: string; tags: string[]; desc: string };
 
 
-const schedule = {
+const schedule: Record<"day1" | "day2" | "day3", Session[]> = {
   day1: [
-    { time: "All Day", title: "Delegates Arrival and On-site Registration", venue: "Academy Guest House & Events Halls", tags: ["Registration"], desc: "Welcome and registration for all conference delegates." },
-    { time: "9:00 AM - 5:00 PM", title: "Arrival/Registration of Delegates", venue: "Academy Guest House & Events Halls", tags: [""], desc: "" },
+    { time: "All Day", title: "Delegates Arrival and Check-in", venue: "Academy Guest House & Events Halls", tags: ["Check-in"], desc: "Welcome and check-in for pre-registered conference delegates. No new registrations during the conference." },
+    { time: "9:00 AM - 5:00 PM", title: "Arrival / Delegate Check-in", venue: "Academy Guest House & Events Halls", tags: ["Check-in"], desc: "" },
     { time: "9:00 AM - 6:00 PM", title: "Exhibition", venue: "Academy Guest House & Events Halls Exterior", tags: ["Exhibition"], desc: "" },
     {time:	"11:00am – 2:00pm",	title:"Technical Tour", venue:"Site Event",	tags:["Tour"], desc:	"Guided technical tours to local engineering sites of interest."},
     { time: "11:00am – 2:00pm", title: "Lagos Tour", venue: " Lagos City Tour", tags: ["Tour"], desc: "Explore Lagos — its vibrant culture, landmarks, and scenic views."},
@@ -16,7 +19,7 @@ const schedule = {
   ],
 
   day2: [
-  { time: "9:00 AM – 5:00 PM", title: "Registration of Delegates", tags: ["Registration"], desc: "On-site registration for delegates." },
+  { time: "9:00 AM – 5:00 PM", title: "Delegate Check-in", tags: ["Check-in"], desc: "Check-in and materials collection for pre-registered delegates only." },
   { time: "9:00 AM – 9:15 AM", title: "Arrival of Civil Engineers and Guests", tags: ["Arrival"], desc: "Welcoming attendees to the conference venue." },
   { time: "9:15 AM – 9:25 AM", title: "Arrival of NICE National Chairman", tags: ["Arrival"], desc: "Arrival of the National Chairman of NICE." },
   { time: "9:25 AM – 9:30 AM", title: "Arrival of Keynote Speaker", tags: ["Arrival"], desc: "Arrival of the keynote speaker." },
@@ -52,7 +55,7 @@ const schedule = {
 
 
 day3: [
-  { time: "9:00 AM – 6:00 PM", title: "Registration of Delegates", tags: ["Registration"], desc: "On-site registration continues for all delegates." },
+  { time: "9:00 AM – 6:00 PM", title: "Delegate Check-in", tags: ["Check-in"], desc: "Check-in for pre-registered delegates only; registration closed on 14 October." },
   { time: "9:00 AM – 9:15 AM", title: "Arrival of Civil Engineers and Guests", tags: ["Arrival"], desc: "Arrival and welcome of participants and guests." },
   { time: "9:15 AM – 9:25 AM", title: "Arrival of NICE National Chairman", tags: ["Arrival"], desc: "Arrival of the National Chairman of NICE." },
   { time: "9:25 AM – 9:30 AM", title: "National Anthem", tags: ["Ceremony"], desc: "Recitation of the national anthem." },
@@ -84,14 +87,16 @@ export default function Program() {
 
       <header className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold">Programme / Schedule</h1>
-        <p className="text-muted-foreground mt-2">Provisional schedule for 20–22 October 2026. Sessions, times and venues are in draft and subject to updates.</p>
+        <p className="text-muted-foreground mt-2">Provisional schedule for Tuesday 20–Thursday 22 October 2026. Sessions, times and venues are in draft and subject to updates.</p>
+        <p className="text-sm text-accent mt-3">Registration closes Wednesday, 14 October. The arrival desks are for pre-registered delegate check-in only.</p>
+        <p className="text-sm text-muted-foreground mt-2">The Career Fair flyer announces 2:00 PM daily; the provisional programme lists Thursday’s Career Fair at 1:30–3:00 PM. The Innovation Challenge final pitch is confirmed for Thursday, 22 October; Wednesday’s programme also lists a challenge session. Please confirm final timings with the programmes team.</p>
       </header>
 
       <Tabs defaultValue="day1" className="w-full">
-        <TabsList>
-          <TabsTrigger value="day1">Day 1</TabsTrigger>
-          <TabsTrigger value="day2">Day 2</TabsTrigger>
-          <TabsTrigger value="day3">Day 3</TabsTrigger>
+        <TabsList className="h-auto flex flex-wrap justify-start gap-1">
+          <TabsTrigger value="day1">Tue 20 Oct · Day 1</TabsTrigger>
+          <TabsTrigger value="day2">Wed 21 Oct · Day 2</TabsTrigger>
+          <TabsTrigger value="day3">Thu 22 Oct · Day 3</TabsTrigger>
         </TabsList>
         {(["day1","day2","day3"] as const).map((day) => (
           <TabsContent key={day} value={day} className="mt-6 grid gap-4">
@@ -101,6 +106,10 @@ export default function Program() {
                 <div className="md:col-span-7">
                   <h3 className="font-medium">{s.title}</h3>
                   {s.desc && <p className="text-sm text-muted-foreground mt-1">{s.desc}</p>}
+                  {s.speaker && <p className="text-sm text-accent mt-2">{s.speaker}</p>}
+                  {s.title.includes("Career") && <Link className="inline-block text-sm text-accent underline mt-2" to="/career-fair">Graduate Career Fair details</Link>}
+                  {s.title === "Lagos Tour" && <Link className="inline-block text-sm text-accent underline mt-2" to="/lagos-city-tour">Explore the Lagos City Tour</Link>}
+                  {s.title === "Young Engineers Innovation Challenge" && <Link className="inline-block text-sm text-accent underline mt-2" to="/innovationchallenge">Challenge details & application</Link>}
                 </div>
                 <div className="md:col-span-3 flex items-start md:items-center justify-between md:justify-end gap-3">
                   <span className="text-sm">{s.venue}</span>

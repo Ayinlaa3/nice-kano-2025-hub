@@ -1,58 +1,18 @@
-import React, { useState } from 'react';
-import { MessageCircle, X, Phone, Users } from 'lucide-react';
+import { useState } from 'react';
+import { MessageCircle, X, Users } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-
-interface SupportAgent {
-  name: string;
-  phone: string;
-  role: string;
-  availability: 'online' | 'busy' | 'offline';
-}
-
-const supportAgents: SupportAgent[] = [
-  {
-    name: 'Adeleke',
-    phone: '+234 803 443 6630',
-    role: 'General Support',
-    availability: 'online'
-  },
-  {
-    name: 'Ahmed',
-    phone: '+234 818 209 7622',
-    role: 'Technical Support',
-    availability: 'online'
-  }
-];
+import { SUPPORT_CONTACTS, whatsappLink } from '@/config/contacts';
 
 const ChatSupport = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const handleWhatsAppContact = (agent: SupportAgent) => {
-    const message = encodeURIComponent(
-      `Hello ${agent.name}, I need assistance regarding the NICE LAGOS 2026 conference. Could you please help me?`
-    );
-    const whatsappUrl = `https://wa.me/${agent.phone.replace(/[^0-9]/g, '')}?text=${message}`;
-    window.open(whatsappUrl, '_blank');
-    setIsOpen(false);
-  };
-
-  const getAvailabilityColor = (status: string) => {
-    switch (status) {
-      case 'online': return 'bg-green-500';
-      case 'busy': return 'bg-yellow-500';
-      case 'offline': return 'bg-gray-500';
-      default: return 'bg-gray-500';
-    }
-  };
 
   return (
     <>
       {/* Chat Widget */}
       <div className="fixed bottom-6 right-6 z-50">
         {isOpen && (
-          <Card className="mb-4 w-80 shadow-lg border-primary/20">
+          <Card className="mb-4 w-80 max-w-[calc(100vw-3rem)] shadow-lg border-primary/20 max-h-[70dvh] overflow-y-auto">
             <CardContent className="p-4">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
@@ -64,6 +24,7 @@ const ChatSupport = () => {
                   size="sm"
                   onClick={() => setIsOpen(false)}
                   className="h-8 w-8 p-0"
+                  aria-label="Close chat support"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -74,11 +35,12 @@ const ChatSupport = () => {
               </p>
 
               <div className="space-y-3">
-                {supportAgents.map((agent, index) => (
-                  <div
+                {SUPPORT_CONTACTS.map((agent, index) => (
+                  <Button asChild variant="outline" className="h-auto w-full justify-start whitespace-normal p-3" key={index}>
+                  <a
                     key={index}
-                    className="flex items-center justify-between p-3 rounded-lg border border-border hover:bg-accent/50 transition-colors cursor-pointer"
-                    onClick={() => handleWhatsAppContact(agent)}
+                    href={whatsappLink(agent)} target="_blank" rel="noopener noreferrer"
+                    onClick={() => setIsOpen(false)}
                   >
                     <div className="flex items-center gap-3">
                       <div className="relative">
@@ -87,25 +49,20 @@ const ChatSupport = () => {
                             {agent.name.charAt(0)}
                           </span>
                         </div>
-                        <div 
-                          className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full ${getAvailabilityColor(agent.availability)} border-2 border-background`}
-                        />
                       </div>
                       <div>
                         <p className="font-medium text-sm text-foreground">{agent.name}</p>
                         <p className="text-xs text-muted-foreground">{agent.role}</p>
                       </div>
                     </div>
-                    <Badge variant="outline" className="text-xs">
-                      {agent.availability}
-                    </Badge>
-                  </div>
+                  </a>
+                  </Button>
                 ))}
               </div>
 
               <div className="mt-4 pt-3 border-t border-border">
                 <p className="text-xs text-muted-foreground text-center">
-                  Powered by WhatsApp • Available 24/7
+                  WhatsApp conference support
                 </p>
               </div>
             </CardContent>
@@ -122,7 +79,7 @@ const ChatSupport = () => {
           ) : (
             <>
               <MessageCircle className="h-6 w-6" />
-              <span className="text-sm font-medium whitespace-nowrap">Need Help? Chat with us</span>
+              <span className="hidden sm:inline text-sm font-medium whitespace-nowrap">Need Help? Chat with us</span>
             </>
           )}
         </Button>

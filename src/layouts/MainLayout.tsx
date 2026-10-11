@@ -18,6 +18,8 @@ import ChatSupport from "@/components/ChatSupport";
 import ThemeToggle from "@/components/ThemeToggle";
 import FloatingActions from "@/components/FloatingActions";
 import { CONFERENCE } from "@/config/conference";
+import RegistrationDeadlineAlert from "@/components/RegistrationDeadlineAlert";
+import { OFFICIAL_CONTACTS, CONFERENCE_EMAIL } from "@/config/contacts";
 
 const navigationGroups = [
   {
@@ -28,6 +30,7 @@ const navigationGroups = [
       { to: "/speakers", label: "Speakers", description: "Featured speakers and presenters" },
       { to: "/location", label: "Venue & Location", description: "Venue details and directions" },
       { to: "/innovationchallenge", label: "Innovation Challenge", description: "Young Engineers Competition" },
+      { to: "/career-fair", label: "Graduate Career Fair", description: "Meet confirmed employers and explore opportunities" },
       { to: "/sponsorships", label: "Sponsors & Exhibitions", description: "Partnership and exhibition opportunities" },
       { to: "/past-conferences", label: "Past Conferences", description: "Reports and highlights from previous editions" },
     ]
@@ -47,6 +50,7 @@ const navigationGroups = [
     label: "Experience Lagos",
     items: [
       { to: "/experience", label: "Experience Lagos", description: "Venue, transport, hotels, landmarks, food, culture & FAQ — all in one guide" },
+      { to: "/lagos-city-tour", label: "Lagos City Tour", description: "A journey through Lagos history, culture and art" },
     ]
   },
 ];
@@ -197,6 +201,7 @@ export default function MainLayout() {
       </header>
 
       <main className="flex-1">
+        <RegistrationDeadlineAlert />
         <Outlet />
       </main>
 
@@ -206,6 +211,10 @@ export default function MainLayout() {
 
       <footer className="border-t border-brand-green/20 py-12 bg-brand-green text-white">
         <div className="container mx-auto">
+          <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 border-b border-border pb-6">
+            {OFFICIAL_CONTACTS.map((contact) => <div key={contact.name} className="text-sm"><p className="font-semibold">{contact.name}{contact.role === "Acting ES" ? " (Acting ES)" : ""}</p><a className="underline" href={`tel:${contact.phone.replace(/\s/g, "")}`}>{contact.phone}</a></div>)}
+            <a className="text-sm underline break-all" href={`mailto:${CONFERENCE_EMAIL}`}>{CONFERENCE_EMAIL}</a>
+          </div>
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">

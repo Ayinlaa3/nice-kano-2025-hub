@@ -347,8 +347,8 @@ export default function Sponsorships() {
           </p>
           <div className="bg-background/80 p-4 rounded-lg mb-4 inline-block text-left">
             <div className="space-y-1 text-sm">
-              <p><strong>📧 Email:</strong> sponsorship@nicehq.org</p>
-              <p><strong>📞 Phone:</strong> +234 802 331 8732</p>
+              <p><strong>Email:</strong> conference@nicehq.org</p>
+              <p><strong>Phone:</strong> +234 803 443 6630 · +234 803 614 3465 · +234 818 209 7622</p>
             </div>
           </div>
           <div>

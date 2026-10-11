@@ -17,7 +17,7 @@ const faqCategories = [
     questions: [
       {
         question: "How do I register for NICE Lagos 2026?",
-        answer: "Register online via our in-app registration page at /registration. Choose your category and pay by NICE portal receipt upload, direct bank transfer receipt, or securely via Remita. You can also register on-site during the conference days (October 20–22, 2026), though online pre-registration is strongly recommended for guaranteed conference materials."
+        answer: "Register online at /registration. Choose your category and pay via Remita or direct NICE Zenith bank transfer with receipt upload. Registration closes Wednesday, 14 October 2026. Registration will not be entertained during the conference; on-site desks are for pre-registered delegate check-in only."
       },
       {
         question: "What are the registration fees?",
@@ -25,7 +25,7 @@ const faqCategories = [
       },
       {
         question: "Are there group discounts available?",
-        answer: "Yes, organizations registering 5 or more participants receive group discounts. Contact our registration team at info@nicehq.org for special group rates and flexible payment arrangements."
+        answer: "Yes, organizations registering 5 or more participants receive group discounts. Contact our registration team at conference@nicehq.org for special group rates and flexible payment arrangements."
       },
       {
         question: "What payment methods are accepted?",
@@ -48,7 +48,7 @@ const faqCategories = [
       },
       {
         question: "Are technical papers required for attendance?",
-        answer: "No, technical papers are not mandatory for attendance. However, we encourage participants to submit papers for presentation. All submitted papers undergo peer review by our technical committee and align with the theme: 'Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development.'"
+        answer: "No, technical papers are not mandatory for attendance. However, we encourage participants to submit papers for presentation. All submitted papers undergo peer review by our technical committee and align with the theme: 'Civil Engineering: Sustainable and Resilient Infrastructure for Economic Growth.'"
       },
       {
         question: "Will there be continuing professional development (CPD) credits?",
@@ -90,7 +90,7 @@ const faqCategories = [
       },
       {
         question: "Can I submit a technical paper for presentation?",
-        answer: "Yes, we welcome technical paper submissions aligned with our theme: 'Integration of Innovative Construction Towards Sustainable Civil Infrastructure Development.' Papers undergo peer review and should focus on sustainable practices, innovative construction methods, or infrastructure resilience."
+        answer: "Yes, we welcome technical paper submissions aligned with our theme: 'Civil Engineering: Sustainable and Resilient Infrastructure for Economic Growth.' Papers undergo peer review and should focus on sustainable practices, innovative construction methods, or infrastructure resilience."
       },
       {
         question: "Are presentation materials available after the conference?",
@@ -124,7 +124,7 @@ const faqCategories = [
     questions: [
       {
         question: "Do I need a visa to attend NICE Lagos 2026?",
-        answer: "Most non-ECOWAS nationals require a Nigerian visa. Apply through the Nigeria Immigration Service portal or your nearest Nigerian High Commission. NICE can issue an official invitation letter on request after registration — contact info@nicehq.org for visa support."
+        answer: "Most non-ECOWAS nationals require a Nigerian visa. Apply through the Nigeria Immigration Service portal or your nearest Nigerian High Commission. NICE can issue an official invitation letter on request after registration — contact conference@nicehq.org for visa support."
       },
       {
         question: "Which airport should I fly into?",
@@ -164,7 +164,7 @@ const faqCategories = [
       },
       {
         question: "How do I collect my delegate pack?",
-        answer: "Delegate packs are collected at the on-site registration desk at the Academy Guest House & Events Halls from the evening before Day 1. Bring a valid ID and your registration confirmation."
+        answer: "Delegate packs are collected at the delegate check-in desk at the Academy Guest House & Events Halls from the evening before Day 1. Bring a valid ID and your registration confirmation."
       }
     ]
   }
@@ -214,11 +214,11 @@ export default function FAQ() {
               <CardContent className="text-center space-y-2">
                 <p className="flex items-center justify-center gap-2">
                   <Mail className="h-4 w-4" />
-                  <span>Email: info@nicehq.org</span>
+                  <span>Email: conference@nicehq.org</span>
                 </p>
                 <p className="flex items-center justify-center gap-2">
                   <Phone className="h-4 w-4" />
-                  <span>Phone: 08023318732, 08103102219</span>
+                  <span>Phone: 0803 443 6630, 0803 614 3465, 0818 209 7622</span>
                 </p>
               </CardContent>
             </Card>
