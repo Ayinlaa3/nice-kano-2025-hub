@@ -48,8 +48,8 @@ const schedule: Record<"day1" | "day2" | "day3", Session[]> = {
   { time: "2:00 PM – 3:00 PM", title: "Graduate Career Clinic & Workshop", tags: ["Career"], desc: "Career clinic and mentorship for graduate members." },
   { time: "3:00 PM – 4:00 PM", title: "AI Workshop", tags: ["Workshop"], desc: "Expert-led workshop on Artificial Intelligence. CONTECH to provide facilitators." },
   { time: "4:00 PM – 6:00 PM", title: "Young Engineers Mentorship Session", speaker: "Engr. Kingsley Erifeta, Engr. Donald Okeke", tags: ["Mentorship"], desc: "Interactive mentorship session for young engineers." },
-  { time: "7:00 PM – 9:00 PM", title: "Fellows’ Roundtable", speaker: "Engr. Mrs. Aramide Adeyoye", tags: ["Fellowship"], desc: "Exclusive roundtable for fellows and conferees only. AI Video on Conferment of Fellowship." },
-  { time: "7:00 PM – 9:00 PM", title: "Young Engineers’ Night", speaker: "Engr. Igbuan Okaisabor", tags: ["Social"], desc: "Networking and relaxation event for students and graduate members. Coordinated by Engr. Emeka Ibeh, Prof. T. E. Adejumo, and Engr. Samuel Ukata." }
+  { time: "7:00 PM – 9:00 PM", title: "Fellows’ Roundtable", speaker: "Engr. Mrs. Aramide Adeyoye", tags: ["Fellowship"], desc: "Exclusive roundtable for fellows and conferees only." },
+  { time: "7:00 PM – 9:00 PM", title: "Young Engineers’ Night", speaker: "Engr. ", tags: ["Social"], desc: "Networking and relaxation event for students and graduate members. Coordinated by Engr. Emeka Ibeh, Prof. T. E. Adejumo, and Engr. Samuel Ukata." }
 ],
 
 
