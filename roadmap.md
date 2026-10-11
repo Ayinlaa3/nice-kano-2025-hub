@@ -1,4 +1,5 @@
 # NICE conference updates
+- [ ] Replace the outdated programme with the latest uploaded PDF and align related event details
 - [x] Prominent registration-closing alert
 - [x] Career Fair page and all eight confirmed organizations; verified CitiBIM and LSPWC logos and four official website links
 - [ ] Remaining employer logos/websites — waiting for approved assets and identity confirmation for Planover, Hooluc, Soilsmart, Modehouse, Godrej and VLX (research found VXL, not VLX)
