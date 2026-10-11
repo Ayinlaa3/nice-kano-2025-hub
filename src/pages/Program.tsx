@@ -12,14 +12,14 @@ const schedule: Record<"day1" | "day2" | "day3", Session[]> = {
     { time: "All Day", title: "Delegates Arrival and Check-in", venue: "Academy Guest House & Events Halls", tags: ["Check-in"], desc: "Welcome and check-in for pre-registered conference delegates. No new registrations during the conference." },
     { time: "9:00 AM - 5:00 PM", title: "Arrival / Delegate Check-in", venue: "Academy Guest House & Events Halls", tags: ["Check-in"], desc: "" },
     { time: "9:00 AM - 6:00 PM", title: "Exhibition", venue: "Academy Guest House & Events Halls Exterior", tags: ["Exhibition"], desc: "" },
-    {time:	"11:00am – 2:00pm",	title:"Technical Tour", venue:"Site Event",	tags:["Tour"], desc:	"Guided technical tours to local engineering sites of interest."},
-    { time: "11:00am – 2:00pm", title: "Lagos Tour", venue: " Lagos City Tour", tags: ["Tour"], desc: "Explore Lagos — its vibrant culture, landmarks, and scenic views."},
+    { time: "9:00 AM – 2:00 PM", title: "Technical Tour", venue: "Site Event", tags: ["Tour"], desc: "Guided technical tours to engineering sites of interest: Opebi-Mende Bridge, Egan/Ayobo Bridge, VXL Nigeria Limited, LSPDC (Monday), and Airport Upgrade Construction by FAAN." },
+    { time: "10:00 AM – 4:00 PM", title: "Lagos Tour", venue: "Lagos City Tour", tags: ["Tour"], desc: "Explore Lagos — its vibrant culture, landmarks, and scenic views."},
     { time: "3:00pm  – 5:00pm", title: "Construction Tech Innovation  Showcase/ Challenge", venue: "Academy Guest House & Events Halls", tags: ["Showcase"], desc: "Showcasing innovative construction technologies and solutions." },
-    { time: "6:00 PM -8:00PM", title: "Chairman's Cocktail & Engineering Business Roundtable", venue: "Academy Guest House & Events Halls", tags: ["Networking"], desc: "Evening of networking and business discussions, connecting engineers and business owners to investors and business opportunities." },
+    { time: "6:00 PM – 8:00 PM", title: "Chairman's Cocktail", venue: "Academy Guest House & Events Halls", tags: ["Networking"], desc: "Evening of networking and felicitations." },
   ],
 
   day2: [
-  { time: "9:00 AM – 5:00 PM", title: "Delegate Check-in", tags: ["Check-in"], desc: "Check-in and materials collection for pre-registered delegates only." },
+  { time: "9:00 AM – 5:00 PM", title: "Arrival of Delegates", tags: ["Check-in"], desc: "Check-in for pre-registered delegates only." },
   { time: "9:00 AM – 9:15 AM", title: "Arrival of Civil Engineers and Guests", tags: ["Arrival"], desc: "Welcoming attendees to the conference venue." },
   { time: "9:15 AM – 9:25 AM", title: "Arrival of NICE National Chairman", tags: ["Arrival"], desc: "Arrival of the National Chairman of NICE." },
   { time: "9:25 AM – 9:30 AM", title: "Arrival of Keynote Speaker", tags: ["Arrival"], desc: "Arrival of the keynote speaker." },
@@ -27,51 +27,50 @@ const schedule: Record<"day1" | "day2" | "day3", Session[]> = {
   { time: "9:35 AM – 9:40 AM", title: "Arrival of Guests of Honour", tags: ["Arrival"], desc: "Arrival of guests of honour." },
   { time: "9:40 AM – 9:45 AM", title: "Arrival of the Special Guest of Honour", tags: ["Arrival"], desc: "Arrival of the special guest of honour." },
   { time: "9:45 AM – 9:50 AM", title: "Arrival of Distinguished Guest of Honour and Chief Host", tags: ["Arrival"], desc: "Arrival of distinguished guest of honour and chief host." },
-  { time: "9:50 AM – 10:00 AM", title: "National Anthem", tags: ["Ceremony"], desc: "Recitation of the national anthem." },
+  { time: "9:50 AM – 10:00 AM", title: "National Anthem", tags: ["Ceremony"], desc: "Rendition of the national anthem." },
   { time: "10:00 AM – 10:05 AM", title: "Opening Prayer", tags: ["Ceremony"], desc: "Prayer to officially open the program." },
   { time: "10:05 AM – 10:15 AM", title: "Welcome Address", speaker: "Engr. Tokunbo Ajanaku, FNSE, FNICE, PMP", tags: ["Address"], desc: "Welcome remarks by the National Chairman." },
   { time: "10:15 AM – 10:30 AM", title: "Keynote Address", speaker: "Keynote Speaker (To Be Announced)", tags: ["Keynote"], desc: "Keynote presentation on sustainable and resilient infrastructure for economic growth." },
-  { time: "10:30 AM – 10:45 AM", title: "Remarks by Chairman of the Occasion", speaker: "Engr. Margaret Aina Oguntala, FNSE", tags: ["Remarks"], desc: "Speech by the chairman of the occasion." },
-  { time: "10:45 AM – 10:55 AM", title: "Remarks by Guest of Honour", tags: ["Remarks"], desc: "Address by guest of honour." },
-  { time: "10:55 AM – 11:05 AM", title: "Remarks by Special Guest of Honour", tags: ["Remarks"], desc: "Address by special guest of honour." },
-  { time: "11:05 AM – 11:15 AM", title: "Remarks by Distinguished Guest of Honour", speaker: "H.E. Alh. Abba Kabir Yusuf", tags: ["Remarks"], desc: "Remarks by the distinguished guest of honour and chief host." },
+  { time: "10:30 AM – 10:45 AM", title: "Remarks by Chairman of the Occasion", speaker: "Engr. Ali Alimasuya Rabiu, FNSE, FNICE, FAEng, MFR", tags: ["Remarks"], desc: "Speech by the chairman of the occasion." },
+  { time: "10:45 AM – 10:55 AM", title: "Remarks by Royal Father of the Day", speaker: "Oba Riliwan Osuolale Akiolu — The Oba of Lagos", tags: ["Remarks"], desc: "Address by Royal Father of the Day." },
+  { time: "10:55 AM – 11:05 AM", title: "Remarks by Special Guest of Honour", speaker: "Hon. Minister of State for Works", tags: ["Remarks"], desc: "Address by special guest of honour." },
+  { time: "11:05 AM – 11:15 AM", title: "Remarks by Distinguished Guest of Honour", speaker: "H.E. Gov. Babajide Olusola Sanwo-Olu", tags: ["Remarks"], desc: "Remarks by the distinguished guest of honour and chief host." },
   { time: "11:15 AM – 11:25 AM", title: "Goodwill Messages", tags: ["Remarks"], desc: "Goodwill messages from dignitaries and partners." },
-  { time: "11:25 AM – 11:55 AM", title: "Presentation of the NICE 2026 Achievements", tags: ["Presentation"], desc: "Showcasing achievements and milestones of NICE 2026." },
+  { time: "11:25 AM – 11:55 AM", title: "Presentation of the NICE 2026 Achievements", tags: ["Media Presentation"], desc: "Showcasing achievements and milestones of NICE 2026." },
   { time: "11:55 AM – 12:20 PM", title: "NICE Special Awards", tags: ["Awards"], desc: "Award presentation ceremony recognizing excellence." },
-  { time: "12:20 PM – 12:30 PM", title: "Vote of Thanks", speaker: "Engr. Dr. Bemigho Ofoeyeno, FNSE, FNICE", tags: ["Remarks"], desc: "Vote of thanks by the CPC Chairman." },
+  { time: "12:20 PM – 12:30 PM", title: "Vote of Thanks", speaker: "Engr. Saliu Alao Lawal, FNSE, FNICE", tags: ["Remarks"], desc: "Vote of thanks by the CPC Chairman." },
   { time: "12:30 PM – 12:35 PM", title: "Closing Prayer & National Pledge", tags: ["Ceremony"], desc: "Closing prayer and recitation of the national pledge." },
   { time: "12:45 PM – 1:00 PM", title: "Opening of Exhibition", tags: ["Exhibition"], desc: "Official opening of the Construction Expo Africa (CEA)." },
   { time: "1:00 PM – 2:00 PM", title: "Lunch Break", tags: ["Break"], desc: "Lunch and networking session." },
   { time: "2:00 PM – 5:00 PM", title: "Plenary Session & Panel Session", tags: ["Plenary", "Panel"], desc: "Engaging plenary and panel discussions on engineering innovations." },
   { time: "2:00 PM – 5:00 PM", title: "Spouses’ Programs", tags: ["Social"], desc: "Specially curated programs for spouses of participants." },
-  { time: "2:00 PM – 3:00 PM", title: "NICESA Innovation Workshop", tags: ["Workshop"], desc: "Hands-on workshop on engineering and construction innovation." },
+  { time: "2:00 PM – 3:00 PM", title: "Construction Tech Innovation Showcase/ Challenge", tags: ["Workshop"], desc: "Showcasing innovative construction technologies and solutions." },
   { time: "2:00 PM – 3:00 PM", title: "Graduate Career Clinic & Workshop", tags: ["Career"], desc: "Career clinic and mentorship for graduate members." },
-  { time: "3:00 PM – 3:45 PM", title: "Young Engineers Innovation Challenge", tags: ["Competition"], desc: "Innovation challenge session for young engineers." },
-  { time: "4:00 PM – 5:00 PM", title: "Young Engineers Mentorship Session", tags: ["Mentorship"], desc: "Interactive mentorship session for young engineers." },
-  { time: "7:00 PM – 9:00 PM", title: "Fellows’ Roundtable", tags: ["Fellowship"], desc: "Exclusive roundtable for fellows and conferees only." },
-  { time: "7:00 PM – 9:00 PM", title: "Graduate Members’ Night", tags: ["Social"], desc: "Networking and relaxation event for graduate members." },
-  { time: "7:00 PM – 9:00 PM", title: "Students’ Dinner", tags: ["Social"], desc: "Dinner event for student participants." }
+  { time: "3:00 PM – 4:00 PM", title: "AI Workshop", tags: ["Workshop"], desc: "Expert-led workshop on Artificial Intelligence. CONTECH to provide facilitators." },
+  { time: "4:00 PM – 6:00 PM", title: "Young Engineers Mentorship Session", speaker: "Engr. Kingsley Erifeta, Engr. Donald Okeke", tags: ["Mentorship"], desc: "Interactive mentorship session for young engineers." },
+  { time: "7:00 PM – 9:00 PM", title: "Fellows’ Roundtable", speaker: "Engr. Mrs. Aramide Adeyoye", tags: ["Fellowship"], desc: "Exclusive roundtable for fellows and conferees only. AI Video on Conferment of Fellowship." },
+  { time: "7:00 PM – 9:00 PM", title: "Young Engineers’ Night", speaker: "Engr. Igbuan Okaisabor", tags: ["Social"], desc: "Networking and relaxation event for students and graduate members. Coordinated by Engr. Emeka Ibeh, Prof. T. E. Adejumo, and Engr. Samuel Ukata." }
 ],
 
 
 day3: [
-  { time: "9:00 AM – 6:00 PM", title: "Delegate Check-in", tags: ["Check-in"], desc: "Check-in for pre-registered delegates only; registration closed on 14 October." },
+  { time: "9:00 AM – 6:00 PM", title: "Check-in of Delegates", tags: ["Check-in"], desc: "On-site check-in continues for pre-registered delegates only; registration closed on 14 October." },
   { time: "9:00 AM – 9:15 AM", title: "Arrival of Civil Engineers and Guests", tags: ["Arrival"], desc: "Arrival and welcome of participants and guests." },
   { time: "9:15 AM – 9:25 AM", title: "Arrival of NICE National Chairman", tags: ["Arrival"], desc: "Arrival of the National Chairman of NICE." },
   { time: "9:25 AM – 9:30 AM", title: "National Anthem", tags: ["Ceremony"], desc: "Recitation of the national anthem." },
   { time: "9:30 AM – 9:35 AM", title: "National Prayer", tags: ["Ceremony"], desc: "National prayer to open the day's activities." },
   { time: "9:35 AM – 11:00 AM", title: "Plenary Session", tags: ["Plenary"], desc: "Morning plenary session featuring presentations and discussions." },
-  { time: "11:00 AM – 11:30 AM", title: "Coffee/Snacks Break", tags: ["Break"], desc: "Networking and refreshments break." },
-  { time: "11:30 AM – 12:30 PM", title: "Continuation of Plenary Session", tags: ["Plenary"], desc: "Continuation of the plenary session with additional speakers." },
-  { time: "12:30 PM – 1:00 PM", title: "Lunch Break", tags: ["Break"], desc: "Lunch and informal networking among participants." },
-  { time: "1:00 PM – 1:30 PM", title: "Communique / Conference Closing", tags: ["Closing"], desc: "Presentation of conference communique and official closing." },
+  { time: "10:00 AM – 11:30 AM", title: "Coffee/Snacks Break", tags: ["Break"], desc: "Networking and refreshments break." },
+  { time: "11:30 AM – 12:30 PM", title: "Engineering Business Roundtable", speaker: "Mr. Oludele James Clinton / Engr. Kola Osinowo", tags: ["Plenary"], desc: "Engineering Entrepreneurship and Financials." },
+  { time: "12:30 PM – 1:00 PM", title: "Communique / Conference Closing", tags: ["Closing"], desc: "Presentation of conference communique and official closing." },
+  { time: "1:00 PM – 1:30 PM", title: "Lunch Break", tags: ["Break"], desc: "Lunch and informal networking among participants." },
   { time: "1:30 PM – 2:00 PM", title: "Accreditation of AGM", tags: ["AGM"], desc: "Accreditation process for the Annual General Meeting." },
   { time: "2:00 PM – 4:00 PM", title: "Annual General Meeting / Elections", tags: ["AGM", "Elections"], desc: "Annual meeting of NICE members, including elections." },
   { time: "1:30 PM – 3:00 PM", title: "NICESA Innovation Workshop", tags: ["Workshop"], desc: "Interactive innovation workshop for NICESA participants." },
   { time: "1:30 PM – 3:00 PM", title: "Graduate Career Fair", tags: ["Career"], desc: "Career fair providing networking and job opportunities for graduates." },
   { time: "3:00 PM – 4:00 PM", title: "Young Engineers Join the AGM (After Election)", tags: ["Engagement"], desc: "Young engineers participate in the AGM following the election." },
   { time: "4:00 PM – 4:30 PM", title: "National Chairman Meets the Young Engineers", tags: ["Engagement"], desc: "Interactive session between the National Chairman and young engineers." },
-  { time: "6:00 PM – 9:00 PM", title: "Annual Dinner & NICE Awards", tags: ["Dinner", "Awards"], desc: "Annual dinner event featuring the presentation of NICE Group Dynamics results and awards." }
+  { time: "6:00 PM – 9:00 PM", title: "Annual Dinner & NICE Awards", speaker: "H.E. Dr. Obafemi Kadiri Hamzat, FNSE", tags: ["Dinner", "Awards"], desc: "Annual dinner event featuring the presentation of NICE Group Dynamics results and awards." }
 ],
 
 
@@ -109,7 +108,7 @@ export default function Program() {
                   {s.speaker && <p className="text-sm text-accent mt-2">{s.speaker}</p>}
                   {s.title.includes("Career") && <Link className="inline-block text-sm text-accent underline mt-2" to="/career-fair">Graduate Career Fair details</Link>}
                   {s.title === "Lagos Tour" && <Link className="inline-block text-sm text-accent underline mt-2" to="/lagos-city-tour">Explore the Lagos City Tour</Link>}
-                  {s.title === "Young Engineers Innovation Challenge" && <Link className="inline-block text-sm text-accent underline mt-2" to="/innovationchallenge">Challenge details & application</Link>}
+                  {s.title.startsWith("Construction Tech Innovation") && <Link className="inline-block text-sm text-accent underline mt-2" to="/innovationchallenge">Challenge details & application</Link>}
                 </div>
                 <div className="md:col-span-3 flex items-start md:items-center justify-between md:justify-end gap-3">
                   <span className="text-sm">{s.venue}</span>

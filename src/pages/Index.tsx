@@ -43,19 +43,19 @@ const dayPreview = [
     day: "Day 1",
     date: "Tue · 20 Oct",
     title: "Arrival, Tours & Cocktail",
-    body: "Delegate check-in, exhibitions, technical and city tours, innovation showcase and Chairman’s Cocktail & Engineering Business Roundtable.",
+    body: "Delegate check-in, exhibitions, technical and city tours, innovation showcase and Chairman’s Cocktail.",
   },
   {
     day: "Day 2",
     date: "Wed · 21 Oct",
     title: "Opening & Plenary Sessions",
-    body: "Opening ceremony, keynote, awards, plenary and panel sessions, career clinic, mentorship and evening networking.",
+    body: "Opening ceremony, keynote, awards, plenary and panel sessions, innovation showcase, career clinic, AI workshop, mentorship, Fellows’ Roundtable and Young Engineers’ Night.",
   },
   {
     day: "Day 3",
     date: "Thu · 22 Oct",
     title: "AGM, Career Fair & Awards",
-    body: "Plenary sessions, conference communiqué, AGM and elections, graduate career fair, Annual Dinner & NICE Awards.",
+    body: "Plenary session, Engineering Business Roundtable, conference communiqué, AGM and elections, graduate career fair, Annual Dinner & NICE Awards.",
   },
 ];
 
