@@ -21,7 +21,7 @@ const companies: { name: string; website?: string; logo?: string }[] = [
   { name: "Hooluc Integrated Services Ltd.", website: "https://www.hooluc.com/", logo: hooluc.url },
   { name: "Lagos State Public Works Corporation", website: "https://publicworks.lagosstate.gov.ng/", logo: lspwc.url },
   { name: "Soilsmart Engineering", logo: soilsmart.url },
-  { name: "Modehouse Projekts Ltd." },
+  { name: "Modehouse Projekts Ltd.", logo: modehouse.url },
   { name: "Godrej Nigeria Ltd.", website: "https://www.godrejafrica.com/", logo: godrej.url },
   { name: "VXL Nigeria Ltd.", website: "http://vxlnigeria.com/", logo: vxl.url },
 ];
