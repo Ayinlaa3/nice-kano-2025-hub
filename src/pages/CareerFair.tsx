@@ -6,18 +6,23 @@ import { Badge } from "@/components/ui/badge";
 import { SUPPORT_CONTACTS, whatsappLink, CONFERENCE_EMAIL } from "@/config/contacts";
 import { CONFERENCE } from "@/config/conference";
 import flyer from "@/assets/Graduate_Career_fair.png.asset.json";
-import citibim from "@/assets/career-fair/citibim.png.asset.json";
-import lspwc from "@/assets/lspwc-logo.png";
+import citibim from "@/assets/career-fair/citibim-supplied.jpeg.asset.json";
+import lspwc from "@/assets/career-fair/lspwc-supplied.png.asset.json";
+import planover from "@/assets/career-fair/planover.jpeg.asset.json";
+import hooluc from "@/assets/career-fair/hooluc.png.asset.json";
+import soilsmart from "@/assets/career-fair/soilsmart.jpeg.asset.json";
+import godrej from "@/assets/career-fair/godrej.jpeg.asset.json";
+import vxl from "@/assets/career-fair/vxl-supplied.png.asset.json";
 
 const companies: { name: string; website?: string; logo?: string }[] = [
-  { name: "Planover Engineering Ltd.", website: "https://planoverengcol.com/" },
+  { name: "Planover Engineering Ltd.", website: "https://planoverengcol.com/", logo: planover.url },
   { name: "CitiBIM Nigeria Ltd.", website: "https://citibim.com/", logo: citibim.url },
-  { name: "Hooluc Integrated Services Ltd." },
-  { name: "Lagos State Public Works Corporation", website: "https://publicworks.lagosstate.gov.ng/", logo: lspwc },
-  { name: "Soilsmart Engineering" },
+  { name: "Hooluc Integrated Services Ltd.", website: "https://www.hooluc.com/", logo: hooluc.url },
+  { name: "Lagos State Public Works Corporation", website: "https://publicworks.lagosstate.gov.ng/", logo: lspwc.url },
+  { name: "Soilsmart Engineering", logo: soilsmart.url },
   { name: "Modehouse Projekts Ltd." },
-  { name: "Godrej Nigeria Ltd.", website: "https://www.godrejafrica.com/" },
-  { name: "VLX Nigeria Ltd." },
+  { name: "Godrej Nigeria Ltd.", website: "https://www.godrejafrica.com/", logo: godrej.url },
+  { name: "VXL Nigeria Ltd.", website: "http://vxlnigeria.com/", logo: vxl.url },
 ];
 const opportunities = [
   { icon: Users, title: "Live Interviews", desc: "Conduct on-the-spot interviews with qualified candidates." },
