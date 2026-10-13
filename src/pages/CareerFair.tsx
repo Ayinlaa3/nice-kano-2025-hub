@@ -13,6 +13,7 @@ import hooluc from "@/assets/career-fair/hooluc.png.asset.json";
 import soilsmart from "@/assets/career-fair/soilsmart.jpeg.asset.json";
 import godrej from "@/assets/career-fair/godrej.jpeg.asset.json";
 import vxl from "@/assets/career-fair/vxl-supplied.png.asset.json";
+import modehouse from "@/assets/career-fair/modehouse.png.asset.json";
 
 const companies: { name: string; website?: string; logo?: string }[] = [
   { name: "Planover Engineering Ltd.", website: "https://planoverengcol.com/", logo: planover.url },
