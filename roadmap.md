@@ -4,7 +4,7 @@
 - [x] Career Fair page and all eight confirmed organizations; verified CitiBIM and LSPWC logos and four official website links
 - [x] Replace Career Fair company placeholders with supplied Planover, CitiBIM, Hooluc, LSPWC, Soilsmart, Godrej and VXL logos; use document website links and confirmed VXL spelling
 - [x] Replace the Modehouse placeholder with the supplied Modehouse logo (trimmed to the signboard, transparent margins, CDN-hosted)
-- [ ] Soilsmart and Modehouse website links — waiting for approved links from the user; no button shown until supplied
+- [x] Add approved website links for Modehouse (modehouseprojects.com) and Soilsmart (soilsmartng.com); replace Soilsmart placeholder with the supplied wordmark, background made transparent
 - [x] Activate Innovation Challenge with flyers and application form
 - [x] Align programme and sitewide dates with uploaded schedule; explicit no-new-registration policy overrides obsolete document wording
 - [x] Final Career Fair and Innovation Challenge session timings — programme takes precedence, per user
