@@ -10,7 +10,7 @@ import citibim from "@/assets/career-fair/citibim-supplied.jpeg.asset.json";
 import lspwc from "@/assets/career-fair/lspwc-supplied.png.asset.json";
 import planover from "@/assets/career-fair/planover.jpeg.asset.json";
 import hooluc from "@/assets/career-fair/hooluc.png.asset.json";
-import soilsmart from "@/assets/career-fair/soilsmart.jpeg.asset.json";
+import soilsmart from "@/assets/career-fair/soilsmart-supplied.png.asset.json";
 import godrej from "@/assets/career-fair/godrej.jpeg.asset.json";
 import vxl from "@/assets/career-fair/vxl-supplied.png.asset.json";
 import modehouse from "@/assets/career-fair/modehouse.png.asset.json";
@@ -20,8 +20,8 @@ const companies: { name: string; website?: string; logo?: string }[] = [
   { name: "CitiBIM Nigeria Ltd.", website: "https://citibim.com/", logo: citibim.url },
   { name: "Hooluc Integrated Services Ltd.", website: "https://www.hooluc.com/", logo: hooluc.url },
   { name: "Lagos State Public Works Corporation", website: "https://publicworks.lagosstate.gov.ng/", logo: lspwc.url },
-  { name: "Soilsmart Engineering", logo: soilsmart.url },
-  { name: "Modehouse Projekts Ltd.", logo: modehouse.url },
+  { name: "Soilsmart Engineering", website: "https://www.soilsmartng.com/", logo: soilsmart.url },
+  { name: "Modehouse Projekts Ltd.", website: "https://www.modehouseprojects.com/", logo: modehouse.url },
   { name: "Godrej Nigeria Ltd.", website: "https://www.godrejafrica.com/", logo: godrej.url },
   { name: "VXL Nigeria Ltd.", website: "http://vxlnigeria.com/", logo: vxl.url },
 ];
