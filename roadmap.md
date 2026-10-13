@@ -2,7 +2,8 @@
 - [x] Replace the outdated programme with the latest uploaded PDF and align related event details; all 55 sessions and related timings verified
 - [x] Prominent registration-closing alert
 - [x] Career Fair page and all eight confirmed organizations; verified CitiBIM and LSPWC logos and four official website links
-- [ ] Remaining employer logos/websites — waiting for approved assets and identity confirmation for Planover, Hooluc, Soilsmart, Modehouse, Godrej and VLX (research found VXL, not VLX)
+- [x] Replace Career Fair company placeholders with supplied Planover, CitiBIM, Hooluc, LSPWC, Soilsmart, Godrej and VXL logos; use document website links and confirmed VXL spelling
+- [ ] Modehouse logo and remaining employer websites — waiting for an identifiable Modehouse logo and approved Soilsmart/Modehouse website links; unrelated partner logos are not assigned to employers
 - [x] Activate Innovation Challenge with flyers and application form
 - [x] Align programme and sitewide dates with uploaded schedule; explicit no-new-registration policy overrides obsolete document wording
 - [x] Final Career Fair and Innovation Challenge session timings — programme takes precedence, per user
