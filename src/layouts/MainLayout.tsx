@@ -38,7 +38,7 @@ const navigationGroups = [
   {
     label: "Attend",
     items: [
-      { to: "/registration", label: "Delegate Hub", description: "Registration closed — resources for registered delegates" },
+      { to: "/registration", label: "Register", description: "Register for the conference and access the Delegate Hub" },
       { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
       { to: "/flyer", label: "I'll Be Attending Flyer", description: "Create and share your personalised flyer" },
       { to: "/certificate", label: "Certificate Generator", description: "Download your participation certificate" },

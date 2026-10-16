@@ -141,13 +141,9 @@ function fileToBase64(file: File): Promise<string> {
 export default function Registration() {
   return (
     <>
-      <Helmet><title>Registration Closed — NICE Lagos 2026</title></Helmet>
-      <section className="container mx-auto px-4 py-16">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-block rounded-full bg-destructive/10 px-4 py-1 text-sm font-semibold text-destructive">Registration Closed</span>
-          <h1 className="mt-4 font-display text-4xl md:text-5xl">Conference registration is now closed</h1>
-          <p className="mt-4 text-lg text-muted-foreground">Thank you for the overwhelming response. Registration will not be entertained during the conference; on-site desks are for check-in of pre-registered delegates only.</p>
-        </div>
+      <Helmet><title>Register — NICE Lagos 2026</title></Helmet>
+      <RegistrationForm />
+      <section className="container mx-auto px-4 pb-16">
         <h2 className="mt-14 mb-6 text-2xl font-semibold">Delegate Hub — for registered delegates</h2>
         <DelegateHub />
       </section>
