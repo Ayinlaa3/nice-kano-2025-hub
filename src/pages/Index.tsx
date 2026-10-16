@@ -100,7 +100,6 @@ const Index = () => {
         <script type="application/ld+json">{JSON.stringify(eventJsonLd)}</script>
       </Helmet>
 
-      <EarlyBirdAlert />
 
       <Hero />
 
@@ -302,10 +301,10 @@ const Index = () => {
 
           <div className="relative max-w-2xl space-y-6">
             <div className="text-xs uppercase tracking-[0.25em] text-accent">
-              REGISTRATION CLOSES WEDNESDAY, 14 OCTOBER 2026
+              REGISTRATION IS NOW CLOSED
             </div>
             <h2 className="font-display text-4xl md:text-6xl leading-tight">
-              Your seat at Nigeria's engineering summit awaits.
+              Registered? Everything you need is here.
             </h2>
             <p className="text-lg text-muted-foreground">
               Join 3,000+ delegates from 30+ nations for three days of ideas,
@@ -314,7 +313,7 @@ const Index = () => {
             <div className="flex flex-wrap gap-4 pt-2">
               <Button asChild size="xl" className="bg-gradient-eko text-white shadow-gold hover:shadow-green group">
                 <Link to="/registration">
-                  Reserve your place
+                  Open Delegate Hub
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
