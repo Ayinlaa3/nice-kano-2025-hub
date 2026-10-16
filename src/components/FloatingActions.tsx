@@ -37,11 +37,11 @@ export default function FloatingActions() {
     >
       <Link
         to="/registration"
-        aria-label="Register Now"
+        aria-label="Delegate Hub"
         className="pointer-events-auto flex items-center gap-2 rounded-full bg-brand-primary/85 hover:bg-brand-primary text-white backdrop-blur-md shadow-lg border border-white/20 px-3 py-2.5 text-xs sm:text-sm font-semibold transition-all"
       >
         <Ticket className="h-4 w-4 shrink-0" />
-        <span className="hidden sm:inline">Register</span>
+        <span className="hidden sm:inline">Delegates</span>
       </Link>
 
       <Link

@@ -38,7 +38,7 @@ const navigationGroups = [
   {
     label: "Attend",
     items: [
-      { to: "/registration", label: "Registration", description: "Register and view conference fees" },
+      { to: "/registration", label: "Delegate Hub", description: "Registration closed — resources for registered delegates" },
       { to: "/hotels-travel", label: "Hotels & Travel", description: "Accommodation and travel info" },
       { to: "/flyer", label: "I'll Be Attending Flyer", description: "Create and share your personalised flyer" },
       { to: "/certificate", label: "Certificate Generator", description: "Download your participation certificate" },
@@ -275,7 +275,7 @@ export default function MainLayout() {
                 <li>
                   <Link to="/registration" className="flex items-center gap-2 text-white/70 hover:text-brand-gold transition-colors group">
                     <span className="w-1 h-1 bg-brand-gold rounded-full group-hover:scale-150 transition-transform"></span>
-                    Register Now
+                    Delegate Hub
                   </Link>
                 </li>
                 <li>
