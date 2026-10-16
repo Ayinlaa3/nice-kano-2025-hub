@@ -50,7 +50,7 @@ const ADD_ONS = [
 const BOOTH_OPTIONS = [
   { name: "Standard Booth (3m x 3m)=(9m²)", standard: "₦500,000", amount: 500000 },
   { name: "Premium Booth (3m x 6m)=(18m²)", standard: "₦900,000", amount: 900000 },
-  { name: "Vendor's Option (Outside The Hall)", standard: "₦70,000", amount: 70000 },
+  { name: "Vendor's Option (Outside The Hall)", standard: "₦100,000", amount: 100000 },
 ];
 
 type PresetTier = { name: string; amount: number };
