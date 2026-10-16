@@ -9,7 +9,7 @@ type Session = { time: string; title: string; venue?: string; speaker?: string; 
 
 const schedule: Record<"day1" | "day2" | "day3", Session[]> = {
   day1: [
-    { time: "All Day", title: "Delegates Arrival and Check-in", venue: "Academy Guest House & Events Halls", tags: ["Check-in"], desc: "Welcome and check-in for pre-registered conference delegates. No new registrations during the conference." },
+    { time: "All Day", title: "Delegates Arrival and Check-in", venue: "Academy Guest House & Events Halls", tags: ["Check-in"], desc: "Welcome and check-in for pre-registered conference delegates." },
     { time: "9:00 AM - 5:00 PM", title: "Arrival / Delegate Check-in", venue: "Academy Guest House & Events Halls", tags: ["Check-in"], desc: "" },
     { time: "9:00 AM - 6:00 PM", title: "Exhibition", venue: "Academy Guest House & Events Halls Exterior", tags: ["Exhibition"], desc: "" },
     { time: "9:00 AM – 2:00 PM", title: "Technical Tour", venue: "Site Event", tags: ["Tour"], desc: "Guided technical tours to engineering sites of interest: Opebi-Mende Bridge, Egan/Ayobo Bridge, VXL Nigeria Limited, LSPDC (Monday), and Airport Upgrade Construction by FAAN." },
@@ -19,7 +19,7 @@ const schedule: Record<"day1" | "day2" | "day3", Session[]> = {
   ],
 
   day2: [
-  { time: "9:00 AM – 5:00 PM", title: "Arrival of Delegates", tags: ["Check-in"], desc: "Check-in for pre-registered delegates only." },
+  { time: "9:00 AM – 5:00 PM", title: "Arrival of Delegates", tags: ["Check-in"], desc: "Check-in of delegates." },
   { time: "9:00 AM – 9:15 AM", title: "Arrival of Civil Engineers and Guests", tags: ["Arrival"], desc: "Welcoming attendees to the conference venue." },
   { time: "9:15 AM – 9:25 AM", title: "Arrival of NICE National Chairman", tags: ["Arrival"], desc: "Arrival of the National Chairman of NICE." },
   { time: "9:25 AM – 9:30 AM", title: "Arrival of Keynote Speaker", tags: ["Arrival"], desc: "Arrival of the keynote speaker." },
@@ -54,7 +54,7 @@ const schedule: Record<"day1" | "day2" | "day3", Session[]> = {
 
 
 day3: [
-  { time: "9:00 AM – 6:00 PM", title: "Check-in of Delegates", tags: ["Check-in"], desc: "On-site check-in continues for pre-registered delegates only; registration closed on 14 October." },
+  { time: "9:00 AM – 6:00 PM", title: "Check-in of Delegates", tags: ["Check-in"], desc: "On-site check-in of delegates continues." },
   { time: "9:00 AM – 9:15 AM", title: "Arrival of Civil Engineers and Guests", tags: ["Arrival"], desc: "Arrival and welcome of participants and guests." },
   { time: "9:15 AM – 9:25 AM", title: "Arrival of NICE National Chairman", tags: ["Arrival"], desc: "Arrival of the National Chairman of NICE." },
   { time: "9:25 AM – 9:30 AM", title: "National Anthem", tags: ["Ceremony"], desc: "Recitation of the national anthem." },

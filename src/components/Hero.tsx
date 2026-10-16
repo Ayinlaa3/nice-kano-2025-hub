@@ -142,7 +142,7 @@ export default function Hero() {
           <div className="flex flex-row flex-nowrap gap-3 pt-2">
             <Button asChild size="lg" className="flex-1 sm:flex-none bg-gradient-eko text-white shadow-gold hover:opacity-95 hover:shadow-green group text-sm sm:text-base px-4 sm:px-8">
               <Link to="/registration">
-                Delegate Hub
+                Register Now
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
