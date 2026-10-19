@@ -1223,6 +1223,72 @@ export type Database = {
           },
         ]
       }
+      manual_payment_approvals: {
+        Row: {
+          amount: number
+          approved_by: string
+          bank_name: string
+          bank_reference: string
+          created_at: string
+          email_sent_at: string | null
+          id: string
+          member_user_id: string
+          notes: string
+          original_payment_id: string
+          paid_at: string
+          payment_id: string
+          payment_method: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          approved_by: string
+          bank_name: string
+          bank_reference: string
+          created_at?: string
+          email_sent_at?: string | null
+          id?: string
+          member_user_id: string
+          notes: string
+          original_payment_id: string
+          paid_at: string
+          payment_id: string
+          payment_method?: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          approved_by?: string
+          bank_name?: string
+          bank_reference?: string
+          created_at?: string
+          email_sent_at?: string | null
+          id?: string
+          member_user_id?: string
+          notes?: string
+          original_payment_id?: string
+          paid_at?: string
+          payment_id?: string
+          payment_method?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "manual_payment_approvals_original_payment_id_fkey"
+            columns: ["original_payment_id"]
+            isOneToOne: true
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "manual_payment_approvals_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       member_profiles: {
         Row: {
           address: string | null
@@ -1409,6 +1475,44 @@ export type Database = {
           slug?: string
         }
         Relationships: []
+      }
+      nice_receipt_deliveries: {
+        Row: {
+          created_at: string
+          email_sent_at: string | null
+          last_error: string | null
+          payment_id: string
+          receipt_path: string | null
+          state: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email_sent_at?: string | null
+          last_error?: string | null
+          payment_id: string
+          receipt_path?: string | null
+          state?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email_sent_at?: string | null
+          last_error?: string | null
+          payment_id?: string
+          receipt_path?: string | null
+          state?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nice_receipt_deliveries_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: true
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       notification_reads: {
         Row: {
@@ -2406,6 +2510,43 @@ export type Database = {
         Args: { _member_uid: string; _portal_user_id?: string }
         Returns: Json
       }
+      approve_member_bank_transfer:
+        | {
+            Args: {
+              _actor: string
+              _amount: number
+              _bank_name: string
+              _bank_reference: string
+              _notes: string
+              _paid_at: string
+              _payment_id: string
+            }
+            Returns: Json
+          }
+        | {
+            Args: {
+              _amount: number
+              _bank_name: string
+              _bank_reference: string
+              _notes: string
+              _paid_at: string
+              _payment_id: string
+            }
+            Returns: Json
+          }
+      approve_member_pending_payment: {
+        Args: {
+          _actor: string
+          _amount: number
+          _bank_name: string
+          _bank_reference: string
+          _notes: string
+          _paid_at: string
+          _payment_id: string
+          _payment_method: string
+        }
+        Returns: Json
+      }
       checkin_anniversary_ticket: {
         Args: { _day: number; _ticket_code: string }
         Returns: Json
@@ -2418,6 +2559,19 @@ export type Database = {
         Args: { _member_uid: string; _user_id: string }
         Returns: Json
       }
+      claim_nice_receipt_delivery: {
+        Args: { _payment_id: string }
+        Returns: boolean
+      }
+      finance_check_history:
+        | {
+            Args: { _actor: string; _limit?: number; _offset?: number }
+            Returns: Json
+          }
+        | { Args: { _limit?: number; _offset?: number }; Returns: Json }
+      finance_pending_payments:
+        | { Args: { _actor: string; _offset?: number }; Returns: Json }
+        | { Args: { _offset?: number }; Returns: Json }
       find_duplicate_legacy_members: {
         Args: never
         Returns: {
