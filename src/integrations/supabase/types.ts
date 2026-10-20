@@ -2732,6 +2732,7 @@ export type Database = {
           match_score: number
           member_uid: string
           othername: string
+          outstanding_balance: number
           surname: string
         }[]
       }
