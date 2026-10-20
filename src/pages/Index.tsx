@@ -301,19 +301,18 @@ const Index = () => {
 
           <div className="relative max-w-2xl space-y-6">
             <div className="text-xs uppercase tracking-[0.25em] text-accent">
-              REGISTRATION IS OPEN
+              DELEGATE HUB
             </div>
             <h2 className="font-display text-4xl md:text-6xl leading-tight">
-              There's still time to register.
+              Registration has closed — the conference is on.
             </h2>
             <p className="text-lg text-muted-foreground">
-              Join 3,000+ delegates from 30+ nations for three days of ideas,
-              industry and culture in Lagos.
+              Registered delegates: access support, the Lagos City Tour, hotels, the Graduate Career Fair and more in the Delegate Hub.
             </p>
             <div className="flex flex-wrap gap-4 pt-2">
               <Button asChild size="xl" className="bg-gradient-eko text-white shadow-gold hover:shadow-green group">
                 <Link to="/registration">
-                  Register Now
+                  Open the Delegate Hub
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>

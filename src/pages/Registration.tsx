@@ -139,10 +139,26 @@ function fileToBase64(file: File): Promise<string> {
 }
 
 export default function Registration() {
+  const closed = CONFERENCE.registrationClosed;
   return (
     <>
-      <Helmet><title>Register — NICE Lagos 2026</title></Helmet>
-      <RegistrationForm />
+      <Helmet><title>{closed ? "Delegate Hub — NICE Lagos 2026" : "Register — NICE Lagos 2026"}</title></Helmet>
+      {closed ? (
+        <div className="container mx-auto py-12 md:py-16 max-w-3xl">
+          <Alert>
+            <Info className="h-5 w-5" />
+            <AlertTitle>Conference registration is now closed</AlertTitle>
+            <AlertDescription className="leading-relaxed">
+              Registration for the {CONFERENCE.edition} has closed. Registered
+              delegates can use the Delegate Hub below for support, the Lagos
+              City Tour, hotels, the Graduate Career Fair, the Innovation
+              Challenge and more.
+            </AlertDescription>
+          </Alert>
+        </div>
+      ) : (
+        <RegistrationForm />
+      )}
       <section className="container mx-auto px-4 pb-16">
         <h2 className="mt-14 mb-6 text-2xl font-semibold">Delegate Hub — for registered delegates</h2>
         <DelegateHub />
