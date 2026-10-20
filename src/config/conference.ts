@@ -34,6 +34,7 @@ export const CONFERENCE = {
   },
 
   registrationPath: "/registration",
+  registrationClosed: true,
   organiserUrl: "https://nicehq.org",
 
   // Host-city stats — surfaced in the hero ticker
