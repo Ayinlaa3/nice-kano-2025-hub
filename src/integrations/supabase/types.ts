@@ -2636,7 +2636,33 @@ export type Database = {
         Returns: Json
       }
       agm_grade: { Args: { _grade: string }; Returns: string }
+      agm_mark_manual_processed: {
+        Args: { _actor: string; _key: string }
+        Returns: Json
+      }
       agm_register_rows: {
+        Args: never
+        Returns: {
+          account_status: string
+          annual_balance: number
+          chapter: string
+          full_name: string
+          grade: string
+          job_id: string
+          legacy_balance: number
+          legacy_member_uid: string
+          member_key: string
+          membership_number: string
+          needs_review: boolean
+          outstanding: number
+          photo_url: string
+          portal_user_id: string
+          review_reason: string
+          valid_member: boolean
+          voting_eligible: boolean
+        }[]
+      }
+      agm_register_rows_base: {
         Args: never
         Returns: {
           account_status: string
