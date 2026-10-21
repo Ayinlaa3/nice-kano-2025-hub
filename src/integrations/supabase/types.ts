@@ -14,6 +14,122 @@ export type Database = {
   }
   public: {
     Tables: {
+      agm_activity: {
+        Row: {
+          action: string
+          actor_id: string
+          chapter: string | null
+          created_at: string
+          data: Json
+          full_name: string
+          id: string
+          job_id: string | null
+          member_key: string
+          membership_number: string | null
+          reason: string | null
+          updated_at: string
+        }
+        Insert: {
+          action: string
+          actor_id: string
+          chapter?: string | null
+          created_at?: string
+          data?: Json
+          full_name: string
+          id?: string
+          job_id?: string | null
+          member_key: string
+          membership_number?: string | null
+          reason?: string | null
+          updated_at?: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string
+          chapter?: string | null
+          created_at?: string
+          data?: Json
+          full_name?: string
+          id?: string
+          job_id?: string | null
+          member_key?: string
+          membership_number?: string | null
+          reason?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agm_activity_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "agm_card_jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agm_card_jobs: {
+        Row: {
+          balance_at_queue: number
+          chapter: string | null
+          created_at: string
+          full_name: string
+          grade: string
+          id: string
+          last_requested_at: string | null
+          legacy_member_uid: string | null
+          member_key: string
+          membership_number: string
+          photo_url: string | null
+          portal_user_id: string | null
+          print_count: number
+          printed_at: string | null
+          printed_by: string | null
+          queued_by: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          balance_at_queue: number
+          chapter?: string | null
+          created_at?: string
+          full_name: string
+          grade: string
+          id?: string
+          last_requested_at?: string | null
+          legacy_member_uid?: string | null
+          member_key: string
+          membership_number: string
+          photo_url?: string | null
+          portal_user_id?: string | null
+          print_count?: number
+          printed_at?: string | null
+          printed_by?: string | null
+          queued_by: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          balance_at_queue?: number
+          chapter?: string | null
+          created_at?: string
+          full_name?: string
+          grade?: string
+          id?: string
+          last_requested_at?: string | null
+          legacy_member_uid?: string | null
+          member_key?: string
+          membership_number?: string
+          photo_url?: string | null
+          portal_user_id?: string | null
+          print_count?: number
+          printed_at?: string | null
+          printed_by?: string | null
+          queued_by?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       anniversary_checkins: {
         Row: {
           checked_in_at: string
@@ -2508,6 +2624,53 @@ export type Database = {
       }
       admin_update_legacy_member_link: {
         Args: { _member_uid: string; _portal_user_id?: string }
+        Returns: Json
+      }
+      agm_clear_member: {
+        Args: {
+          _actor: string
+          _chapter: string
+          _key: string
+          _reason: string
+        }
+        Returns: Json
+      }
+      agm_grade: { Args: { _grade: string }; Returns: string }
+      agm_register_rows: {
+        Args: never
+        Returns: {
+          account_status: string
+          annual_balance: number
+          chapter: string
+          full_name: string
+          grade: string
+          job_id: string
+          legacy_balance: number
+          legacy_member_uid: string
+          member_key: string
+          membership_number: string
+          needs_review: boolean
+          outstanding: number
+          photo_url: string
+          portal_user_id: string
+          review_reason: string
+          valid_member: boolean
+          voting_eligible: boolean
+        }[]
+      }
+      agm_workspace: {
+        Args: {
+          _action: string
+          _actor: string
+          _chapter?: string
+          _grade?: string
+          _key?: string
+          _offset?: number
+          _photo?: string
+          _reason?: string
+          _search?: string
+          _status?: string
+        }
         Returns: Json
       }
       approve_member_bank_transfer:
