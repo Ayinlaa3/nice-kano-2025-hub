@@ -2614,6 +2614,23 @@ export type Database = {
     }
     Functions: {
       admin_delete_member: { Args: { _user_id: string }; Returns: Json }
+      admin_payment_page: { Args: { _filters?: Json }; Returns: Json }
+      admin_payment_source_rows: {
+        Args: never
+        Returns: {
+          amount: number
+          category: string
+          created_at: string
+          gateway: string
+          row_data: Json
+          search_text: string
+          source: string
+          status: string
+        }[]
+      }
+      admin_payment_summary: { Args: { _filters?: Json }; Returns: Json }
+      admin_report_options: { Args: never; Returns: Json }
+      admin_report_summary: { Args: { _filters?: Json }; Returns: Json }
       admin_set_outstanding_balance: {
         Args: { _amount: number; _member_uid: string }
         Returns: Json
