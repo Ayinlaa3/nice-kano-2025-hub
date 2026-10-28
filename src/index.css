@@ -19,6 +19,7 @@
 @layer base {
   /* ---------- Dark mode (default) — Eko Gold night ---------- */
   :root {
+    --certificate-name-ink: #0A7B34;
     --background: 0 0% 4%;              /* #0B0B0B */
     --foreground: 40 30% 96%;           /* warm off-white */
 
