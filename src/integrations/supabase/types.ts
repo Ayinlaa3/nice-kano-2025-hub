@@ -2753,6 +2753,12 @@ export type Database = {
         }
         Returns: Json
       }
+      check_certificate_eligibility: {
+        Args: { _email: string }
+        Returns: {
+          full_name: string
+        }[]
+      }
       checkin_anniversary_ticket: {
         Args: { _day: number; _ticket_code: string }
         Returns: Json
