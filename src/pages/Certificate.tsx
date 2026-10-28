@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, Download, CheckCircle, XCircle } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import certificateTemplate from "@/assets/NICE_2026_Conference_Certificate.png.asset.json";
 
 const Certificate = () => {
   const [fullName, setFullName] = useState("");
@@ -20,24 +22,12 @@ const Certificate = () => {
   };
 
   const checkEmailInCSV = async (email: string): Promise<boolean> => {
-    try {
-      // Load the CSV file from assets 
-      const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSTDPh4E0xn62YJcBgK2w3VHEvQKQZL493Qc_pupDW9o2JU-bZmtfTzU6FGTGDvuGWKJHx9XAjD6oBa/pub?output=csv');
-      if (!response.ok) {
-        throw new Error('Registration data not found');
-      }
-      
-      const csvText = await response.text();
-      const lines = csvText.split('\n');
-      
-      // Check if email exists in any line (case-insensitive)
-      return lines.some(line => 
-        line.toLowerCase().includes(email.toLowerCase())
-      );
-    } catch (error) {
-      console.error('Error loading registration data:', error);
+    const { data, error } = await (supabase as any).rpc("check_certificate_eligibility", { _email: email.trim() });
+    if (error) {
+      console.error('Error verifying registration:', error);
       throw new Error('Unable to verify registration. Please try again later.');
     }
+    return Array.isArray(data) && data.length > 0;
   };
 
   const generateCertificate = async () => {
@@ -79,7 +69,7 @@ const Certificate = () => {
       await new Promise((resolve, reject) => {
         img.onload = resolve;
         img.onerror = () => reject(new Error('Failed to load certificate template'));
-        img.src = '/certificate-template.png';
+        img.src = certificateTemplate.url;
       });
 
       // Create canvas
@@ -96,23 +86,23 @@ const Certificate = () => {
       ctx.drawImage(img, 0, 0);
 
       // Configure text styling
-      ctx.font = 'bold 60px Montserrat, sans-serif';
-      ctx.fillStyle = '#b01016';
+      const name = fullName.trim().toUpperCase();
+      let size = 64;
+      do { ctx.font = `bold ${size}px Montserrat, sans-serif`; size -= 2; }
+      while (ctx.measureText(name).width > canvas.width * 0.72 && size > 28);
+      ctx.fillStyle = '#0A7B34';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
       // Calculate name position (centered horizontally, positioned in the green area)
       const centerX = canvas.width / 2;
-      const nameY = canvas.height * 0.43; // Adjust this value based on template
+      const nameY = canvas.height * 0.47; // just above the signature line
 
       // Add shadow for better visibility
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-      ctx.shadowBlur = 4;
-      ctx.shadowOffsetX = 2;
-      ctx.shadowOffsetY = 2;
+
 
       // Draw name
-      ctx.fillText(fullName.trim(), centerX, nameY);
+      ctx.fillText(name, centerX, nameY);
 
       // Convert to blob and create URL
       canvas.toBlob((blob) => {
@@ -137,7 +127,7 @@ const Certificate = () => {
 
     const link = document.createElement('a');
     link.href = certificateUrl;
-    link.download = `NICE_2025_Certificate_${fullName.replace(/\s+/g, '_')}.png`;
+    link.download = `NICE_2026_Certificate_${fullName.replace(/\s+/g, '_')}.png`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -147,7 +137,7 @@ const Certificate = () => {
   return (
     <>
       <Helmet title="Certificate Generator | NICE Lagos 2026">
-        <meta name="description" content="Generate and download your NICE 2025 Conference Certificate of Participation" />
+        <meta name="description" content="Generate and download your NICE 2026 Conference Certificate of Participation" />
       </Helmet>
 
       <div className="min-h-screen bg-background py-12 px-4">
