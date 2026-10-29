@@ -648,6 +648,35 @@ export type Database = {
         }
         Relationships: []
       }
+      conference_certificate_generations: {
+        Row: {
+          first_generated_at: string
+          generation_count: number
+          last_generated_at: string
+          registration_id: string
+        }
+        Insert: {
+          first_generated_at?: string
+          generation_count?: number
+          last_generated_at?: string
+          registration_id: string
+        }
+        Update: {
+          first_generated_at?: string
+          generation_count?: number
+          last_generated_at?: string
+          registration_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conference_certificate_generations_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: true
+            referencedRelation: "conference_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       conference_checkins: {
         Row: {
           checked_in_at: string
