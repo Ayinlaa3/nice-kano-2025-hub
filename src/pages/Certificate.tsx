@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import certificateTemplate from "@/assets/NICE_2026_Conference_Certificate.png.asset.json";
 import niceLogo from "@/assets/nice-logo.svg";
-import nameFont from "@/assets/fonts/GreatVibes-Regular.ttf.asset.json";
+import nameFont from "@/assets/fonts/CinzelDecorative-Regular.ttf.asset.json";
 import { certificateRegistrationName } from "@/lib/certificate-name";
 
 const loadImage = (url: string): Promise<HTMLImageElement> => new Promise((resolve, reject) => {
